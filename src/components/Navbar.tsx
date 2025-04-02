@@ -38,7 +38,7 @@ const Navbar = () => {
         <div className="flex items-center">
           <a href="#" className="text-xl font-bold">
             <span className="font-display">Portfolio</span>
-            <span className="text-primary-violet">.</span>
+            <span className="text-accent">.</span>
           </a>
         </div>
 
@@ -48,7 +48,7 @@ const Navbar = () => {
             <a
               key={link.name}
               href={link.href}
-              className="text-sm font-medium hover:text-primary-violet transition-colors link-underline"
+              className="text-sm font-medium hover:text-accent transition-colors link-underline"
             >
               {link.name}
             </a>
@@ -60,7 +60,7 @@ const Navbar = () => {
             href="https://linkedin.com" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="text-gray-600 hover:text-primary-violet transition-colors"
+            className="text-gray-600 hover:text-accent transition-colors"
             aria-label="LinkedIn"
           >
             <Linkedin size={20} />
@@ -69,7 +69,7 @@ const Navbar = () => {
             href="https://behance.net" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="text-gray-600 hover:text-primary-violet transition-colors"
+            className="text-gray-600 hover:text-accent transition-colors"
             aria-label="Behance"
           >
             <ExternalLink size={20} />
@@ -94,7 +94,7 @@ const Navbar = () => {
               <a
                 key={link.name}
                 href={link.href}
-                className="text-xl font-medium hover:text-primary-violet transition-colors"
+                className="text-xl font-medium hover:text-accent transition-colors"
                 onClick={toggleMenu}
               >
                 {link.name}
@@ -106,7 +106,7 @@ const Navbar = () => {
               href="https://linkedin.com" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-gray-600 hover:text-primary-violet transition-colors"
+              className="text-gray-600 hover:text-accent transition-colors"
               aria-label="LinkedIn"
             >
               <Linkedin size={24} />
@@ -115,7 +115,7 @@ const Navbar = () => {
               href="https://behance.net" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-gray-600 hover:text-primary-violet transition-colors"
+              className="text-gray-600 hover:text-accent transition-colors"
               aria-label="Behance"
             >
               <ExternalLink size={24} />
