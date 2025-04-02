@@ -57,10 +57,10 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				violet: {
-					light: '#D6BCFA',
-					DEFAULT: '#9b87f5',
-					dark: '#7E69AB'
+				primary-violet: {
+					light: '#6263F1',
+					DEFAULT: '#3E40EF',
+					dark: '#2627C8'
 				}
 			},
 			borderRadius: {
@@ -99,7 +99,11 @@ export default {
 				},
 				"marquee": {
 					"0%": { transform: "translateX(0)" },
-					"100%": { transform: "translateX(-100%)" }
+					"100%": { transform: "translateX(-50%)" }
+				},
+				"pulse": {
+					"0%, 100%": { opacity: "1" },
+					"50%": { opacity: "0.5" }
 				}
 			},
 			animation: {
@@ -110,7 +114,8 @@ export default {
 				"slide-in": "slide-in 0.5s ease-out",
 				"slide-up": "slide-up 0.5s ease-out",
 				"scale-in": "scale-in 0.5s ease-out",
-				"marquee": "marquee 25s linear infinite"
+				"marquee": "marquee 25s linear infinite",
+				"pulse": "pulse 3s ease-in-out infinite"
 			}
 		}
 	},
