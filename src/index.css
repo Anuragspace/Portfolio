@@ -25,7 +25,7 @@
     --muted: 240 4.8% 95.9%;
     --muted-foreground: 240 3.8% 46.1%;
 
-    --accent: 226 70% 55.9%;
+    --accent: 270 70% 75%; /* Changed to soft violet */
     --accent-foreground: 0 0% 98%;
 
     --destructive: 0 84.2% 60.2%;
@@ -132,4 +132,89 @@
 .dot-pattern {
   background-image: radial-gradient(circle, #e5e7eb 1px, transparent 1px);
   background-size: 20px 20px;
+}
+
+/* Ripple animation for photo background */
+.ripple-loader {
+  --size: 250px;
+  --duration: 2s;
+  --background: linear-gradient(
+    0deg,
+    rgba(185, 167, 252, 0.2) 0%,
+    rgba(185, 167, 252, 0.3) 100%
+  );
+  height: var(--size);
+  aspect-ratio: 1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+}
+
+.ripple-loader .box {
+  position: absolute;
+  background: rgba(185, 167, 252, 0.15);
+  background: var(--background);
+  border-radius: 50%;
+  border-top: 1px solid rgba(185, 167, 252, 0.8);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 10px -0px;
+  backdrop-filter: blur(5px);
+  animation: ripple var(--duration) infinite ease-in-out;
+}
+
+.ripple-loader .box:nth-child(1) {
+  inset: 40%;
+}
+
+.ripple-loader .box:nth-child(2) {
+  inset: 30%;
+  border-color: rgba(185, 167, 252, 0.8);
+  animation-delay: 0.2s;
+}
+
+.ripple-loader .box:nth-child(3) {
+  inset: 20%;
+  border-color: rgba(185, 167, 252, 0.6);
+  animation-delay: 0.4s;
+}
+
+.ripple-loader .box:nth-child(4) {
+  inset: 10%;
+  border-color: rgba(185, 167, 252, 0.4);
+  animation-delay: 0.6s;
+}
+
+.ripple-loader .box:nth-child(5) {
+  inset: 0%;
+  border-color: rgba(185, 167, 252, 0.2);
+  animation-delay: 0.8s;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(1);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 10px -0px;
+  }
+  50% {
+    transform: scale(1.3);
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 30px 20px -0px;
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 10px -0px;
+  }
+}
+
+/* Fixed timeline styles for Experience section */
+@media (min-width: 768px) {
+  .timeline-container::before {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .timeline-dot {
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
 }

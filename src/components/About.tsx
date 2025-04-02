@@ -1,5 +1,6 @@
 
 import React from "react";
+import RippleAnimation from "./RippleAnimation";
 
 const About = () => {
   return (
@@ -13,12 +14,13 @@ const About = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-5">
             <div className="relative">
-              <div className="bg-gray-100 rounded-2xl overflow-hidden">
+              <div className="bg-gray-100 rounded-2xl overflow-hidden z-10 relative">
                 <img 
-                  src="/placeholder.svg" 
+                  src="/lovable-uploads/1777892e-debe-48e7-b9a6-4e35347f6790.png" 
                   alt="Portrait" 
                   className="w-full object-cover aspect-[4/5]" 
                 />
+                <RippleAnimation />
               </div>
               <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-accent/10 rounded-full blur-2xl -z-10"></div>
               <div className="absolute -top-6 -left-6 w-48 h-48 bg-accent/5 rounded-full blur-2xl -z-10"></div>

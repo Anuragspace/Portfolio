@@ -26,24 +26,25 @@ const Hero = () => {
             </div>
           </div>
           <div className="lg:col-span-5 relative z-10">
-            <div className="relative rounded-2xl overflow-hidden bg-gray-100 aspect-square shadow-lg animate-scale-in">
-              <div className="absolute inset-0 bg-gradient-to-br from-accent/20 to-transparent mix-blend-overlay"></div>
-              <img 
-                src="/placeholder.svg" 
-                alt="Designer at work" 
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/60 to-transparent">
-                <p className="text-white font-medium">Turning vision into reality</p>
+            <div className="relative rounded-full overflow-hidden aspect-square shadow-lg animate-scale-in bg-white p-2">
+              <div className="absolute inset-0 bg-gradient-to-br from-accent/20 to-transparent mix-blend-overlay rounded-full"></div>
+              <div className="rounded-full overflow-hidden">
+                <img 
+                  src="/lovable-uploads/cef5b0d2-053e-49c3-9055-565d1923d9af.png" 
+                  alt="Designer portrait" 
+                  className="w-full h-full object-cover aspect-square"
+                />
               </div>
+              <div className="absolute -z-10 inset-0 rounded-full blur-sm bg-accent/20"></div>
             </div>
+            <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-accent/5 rounded-full blur-3xl -z-10"></div>
           </div>
         </div>
         
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex justify-center">
           <a
             href="#about"
-            className="text-gray-500 hover:text-accent animate-bounce transition-colors"
+            className="text-accent hover:text-accent/70 animate-bounce transition-colors"
             aria-label="Scroll down"
           >
             <ArrowDownCircle size={32} />

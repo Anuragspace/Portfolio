@@ -56,25 +56,27 @@ const Experience = () => {
         <div className="mb-16">
           <h2 className="mb-4">Work Experience</h2>
           <div className="w-24 h-1 bg-accent"></div>
+          <p className="mt-4 text-gray-600 max-w-2xl">My professional journey through design leadership and innovation</p>
         </div>
         
         <div className="timeline-container pl-12 md:pl-0">
           {experiences.map((exp, index) => (
             <div 
               key={exp.id} 
-              className={`relative mb-16 md:pl-12 md:ml-12 ${
-                index % 2 === 0 ? 'md:ml-0 md:mr-12 md:pl-0 md:pr-12 md:text-right' : ''
+              className={`relative mb-16 ${
+                index % 2 === 0 
+                  ? 'md:ml-0 md:mr-auto md:pr-12 md:pl-0 md:text-right md:w-1/2' 
+                  : 'md:ml-auto md:mr-0 md:pl-12 md:pr-0 md:text-left md:w-1/2'
               }`}
             >
               {/* Timeline dot */}
-              <div className="hidden md:block absolute w-6 h-6 bg-accent rounded-full top-0 transform -translate-y-1/2 z-10 
-                            border-4 border-white left-[-15px] md:left-[-3px] 
-                            md:left-auto md:right-auto
-                            md:left-[-12px]">
+              <div className="absolute w-6 h-6 bg-accent rounded-full top-0 transform -translate-y-1/2 z-10 
+                             border-4 border-white timeline-dot
+                             left-[-15px] md:left-[-12px]">
               </div>
               
               {/* Card */}
-              <div className="bg-white rounded-xl p-6 shadow-sm md:w-[calc(100%-24px)]">
+              <div className="bg-white rounded-xl p-6 shadow-md">
                 <div className="inline-flex items-center bg-accent/10 text-accent rounded-full px-3 py-1 text-sm font-medium mb-4">
                   <Calendar size={14} className="mr-1" />
                   <span>{exp.period}</span>
@@ -83,10 +85,10 @@ const Experience = () => {
                 <h3 className="text-xl font-bold mb-1">{exp.role}</h3>
                 <p className="text-accent font-medium mb-4">{exp.company}</p>
                 
-                <ul className="space-y-2">
+                <ul className={`space-y-2 ${index % 2 === 0 ? 'md:text-right' : 'md:text-left'}`}>
                   {exp.description.map((item, i) => (
-                    <li key={i} className="flex items-start">
-                      <div className="min-w-5 mt-1 mr-2">
+                    <li key={i} className={`flex items-start ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
+                      <div className={`min-w-5 mt-1 ${index % 2 === 0 ? 'md:ml-2' : 'mr-2'}`}>
                         <div className="w-1.5 h-1.5 bg-accent rounded-full"></div>
                       </div>
                       <span className="text-gray-600">{item}</span>
