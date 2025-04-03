@@ -26,31 +26,55 @@ const Hero = () => {
               </div>
             </div>
           </div>
+          
           <div className="lg:col-span-5 relative z-10">
-            <div className="relative aspect-square w-full max-w-md mx-auto">
-              {/* Ripple animation behind the logo */}
-              <div className="ripple-loader">
-                <div className="box"></div>
-                <div className="box"></div>
-                <div className="box"></div>
-                <div className="box"></div>
-                <div className="box"></div>
+            <div className="relative mx-auto">
+              {/* Rectangular image container with rounded corners */}
+              <div className="relative rounded-[2rem] overflow-hidden bg-gradient-to-br from-blue-400 to-blue-600 w-full max-w-md aspect-[4/5] mx-auto shadow-xl">
+                {/* Background wave animation */}
+                <div className="absolute inset-0 wave-animation opacity-50 z-0"></div>
+                
+                {/* Overlay gradient */}
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-400/40 to-[#3E40EF]/30 z-10 mix-blend-overlay"></div>
+                
+                {/* Profile image */}
+                <img 
+                  src="/lovable-uploads/cc66957f-7e86-4b8a-ba75-8395bbeed544.png" 
+                  alt="Designer portrait" 
+                  className="w-full h-full object-cover z-20 relative"
+                />
+                
+                {/* Username badge like in the reference */}
+                <div className="absolute bottom-6 left-0 transform -translate-x-1/4 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg z-30 flex items-center gap-3 animate-slide-in" style={{ animationDelay: "0.4s" }}>
+                  <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-[#3E40EF]/20">
+                    <img 
+                      src="/lovable-uploads/cc66957f-7e86-4b8a-ba75-8395bbeed544.png" 
+                      alt="Avatar" 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="text-left">
+                    <p className="font-bold text-gray-800">Designer</p>
+                    <p className="text-xs text-gray-500">@portfolio</p>
+                  </div>
+                </div>
+                
+                {/* Expert badge like in the reference */}
+                <div className="absolute top-6 right-0 transform translate-x-1/4 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg z-30 flex items-center gap-2 animate-slide-in" style={{ animationDelay: "0.5s" }}>
+                  <div className="w-8 h-8 rounded-full bg-[#3E40EF] flex items-center justify-center">
+                    <Sparkles className="h-4 w-4 text-white" />
+                  </div>
+                  <div className="text-left">
+                    <p className="font-bold text-gray-800">Expert</p>
+                    <p className="text-xs text-[#3E40EF]">UI/UX Design</p>
+                  </div>
+                </div>
               </div>
               
-              {/* Logo in circular frame */}
-              <div className="absolute inset-0 rounded-full overflow-hidden shadow-lg animate-scale-in bg-white p-2">
-                <div className="absolute inset-0 bg-gradient-to-br from-[#3E40EF]/20 to-transparent mix-blend-overlay rounded-full"></div>
-                <div className="rounded-full overflow-hidden">
-                  <img 
-                    src="/lovable-uploads/606277e8-7fd3-46d2-8ea6-ef9914f23908.png" 
-                    alt="Designer portrait" 
-                    className="w-full h-full object-cover aspect-square"
-                  />
-                </div>
-                <div className="absolute -z-10 inset-0 rounded-full blur-sm bg-[#3E40EF]/20"></div>
-              </div>
+              {/* Background blob */}
+              <div className="absolute -z-10 -bottom-10 -right-10 w-64 h-64 bg-[#3E40EF]/10 rounded-full blur-3xl"></div>
+              <div className="absolute -z-10 -top-10 -left-10 w-64 h-64 bg-[#3E40EF]/5 rounded-full blur-3xl"></div>
             </div>
-            <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-[#3E40EF]/5 rounded-full blur-3xl -z-10"></div>
           </div>
         </div>
         
