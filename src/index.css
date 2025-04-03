@@ -25,7 +25,7 @@
     --muted: 240 4.8% 95.9%;
     --muted-foreground: 240 3.8% 46.1%;
 
-    --accent: 270 70% 75%; /* Changed to soft violet */
+    --accent: 239 89% 59%; /* Pure violet #3E40EF */
     --accent-foreground: 0 0% 98%;
 
     --destructive: 0 84.2% 60.2%;
@@ -64,7 +64,11 @@
 
 @layer components {
   .container-custom {
-    @apply container mx-auto px-4 md:px-8 max-w-[1200px];
+    @apply container mx-auto px-4 md:px-8;
+  }
+
+  .container-custom {
+    max-width: 1200px;
   }
 
   .section-padding {
@@ -72,7 +76,16 @@
   }
 
   .link-underline {
-    @apply relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-accent after:transition-transform after:duration-300 hover:after:origin-bottom-left hover:after:scale-x-100;
+    @apply relative;
+  }
+
+  .link-underline::after {
+    @apply absolute bottom-0 left-0 h-[2px] w-full origin-bottom-right scale-x-0 bg-[#3E40EF] transition-transform duration-300;
+    content: '';
+  }
+
+  .link-underline:hover::after {
+    @apply origin-bottom-left scale-x-100;
   }
 
   .card-hover {
@@ -88,7 +101,7 @@
   }
 
   .btn-outline {
-    @apply inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50;
+    @apply inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-sm transition-colors hover:bg-[#3E40EF] hover:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50;
   }
 }
 
@@ -126,7 +139,7 @@
   bottom: 0;
   left: 20px;
   width: 2px;
-  background-color: hsl(var(--accent));
+  background-color: #3E40EF;
 }
 
 .dot-pattern {
@@ -136,12 +149,12 @@
 
 /* Ripple animation for photo background */
 .ripple-loader {
-  --size: 250px;
-  --duration: 2s;
+  --size: 300px;
+  --duration: 3s;
   --background: linear-gradient(
     0deg,
-    rgba(185, 167, 252, 0.2) 0%,
-    rgba(185, 167, 252, 0.3) 100%
+    rgba(62, 64, 239, 0.1) 0%,
+    rgba(62, 64, 239, 0.2) 100%
   );
   height: var(--size);
   aspect-ratio: 1;
@@ -154,10 +167,10 @@
 
 .ripple-loader .box {
   position: absolute;
-  background: rgba(185, 167, 252, 0.15);
+  background: rgba(62, 64, 239, 0.05);
   background: var(--background);
   border-radius: 50%;
-  border-top: 1px solid rgba(185, 167, 252, 0.8);
+  border-top: 1px solid rgba(62, 64, 239, 0.4);
   box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 10px -0px;
   backdrop-filter: blur(5px);
   animation: ripple var(--duration) infinite ease-in-out;
@@ -169,26 +182,26 @@
 
 .ripple-loader .box:nth-child(2) {
   inset: 30%;
-  border-color: rgba(185, 167, 252, 0.8);
-  animation-delay: 0.2s;
+  border-color: rgba(62, 64, 239, 0.5);
+  animation-delay: 0.3s;
 }
 
 .ripple-loader .box:nth-child(3) {
   inset: 20%;
-  border-color: rgba(185, 167, 252, 0.6);
-  animation-delay: 0.4s;
+  border-color: rgba(62, 64, 239, 0.4);
+  animation-delay: 0.6s;
 }
 
 .ripple-loader .box:nth-child(4) {
   inset: 10%;
-  border-color: rgba(185, 167, 252, 0.4);
-  animation-delay: 0.6s;
+  border-color: rgba(62, 64, 239, 0.3);
+  animation-delay: 0.9s;
 }
 
 .ripple-loader .box:nth-child(5) {
   inset: 0%;
-  border-color: rgba(185, 167, 252, 0.2);
-  animation-delay: 0.8s;
+  border-color: rgba(62, 64, 239, 0.2);
+  animation-delay: 1.2s;
 }
 
 @keyframes ripple {
@@ -217,4 +230,20 @@
     left: 50% !important;
     transform: translateX(-50%) !important;
   }
+}
+
+/* Marquee animation for skills logos */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  white-space: nowrap;
+  animation: marquee 30s linear infinite;
+  display: flex;
 }
