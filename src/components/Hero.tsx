@@ -1,28 +1,25 @@
 
 import React from "react";
-import { ArrowDown } from "lucide-react";
+import { ArrowDownCircle, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 
 const Hero = () => {
   return (
-    <section className="min-h-screen pt-28 pb-16 flex items-center relative overflow-hidden">
+    <section className="min-h-screen pt-24 pb-16 flex items-center relative overflow-hidden">
       <div className="container-custom">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-7 z-10">
             <div className="space-y-6 max-w-3xl">
-              <Badge className="bg-[#3E40EF]/10 text-[#3E40EF] hover:bg-[#3E40EF]/20 font-medium px-4 py-1.5 text-sm border-0 animate-fade-in">
+              <div className="inline-block px-3 py-1 bg-[#3E40EF]/10 text-[#3E40EF] rounded-full text-sm font-medium mb-2 animate-fade-in">
+                <Sparkles className="inline-block mr-2 h-4 w-4" />
                 UI/UX Designer & Product Designer
-              </Badge>
-              
+              </div>
               <h1 className="animate-slide-in" style={{ animationDelay: "0.1s" }}>
                 Crafting Digital Experiences That <span className="text-[#3E40EF]">Inspire</span>
               </h1>
-              
               <p className="text-lg text-gray-600 animate-slide-in" style={{ animationDelay: "0.2s" }}>
                 I transform complex problems into elegant, intuitive designs that delight users and drive business growth.
               </p>
-              
               <div className="flex flex-col sm:flex-row gap-4 pt-4 animate-slide-in" style={{ animationDelay: "0.3s" }}>
                 <Button className="bg-[#3E40EF] hover:bg-[#3E40EF]/90">View Projects</Button>
                 <Button variant="outline" className="border-[#3E40EF] text-[#3E40EF] hover:bg-[#3E40EF]/10">Contact Me</Button>
@@ -33,35 +30,25 @@ const Hero = () => {
           <div className="lg:col-span-5 relative z-10">
             <div className="relative mx-auto">
               {/* Rectangular image container with rounded corners */}
-              <div className="relative rounded-[2rem] overflow-hidden bg-gradient-to-br from-blue-400 to-[#3E40EF] w-full max-w-[380px] aspect-[4/5] mx-auto shadow-xl">
-                {/* Rotating background elements */}
-                <div className="absolute inset-0 z-0">
-                  <div className="absolute w-[150%] h-[150%] -top-1/4 -left-1/4 opacity-30 animate-spin-slow">
-                    <div className="absolute top-1/2 left-1/2 w-full h-0.5 bg-white/30 -translate-x-1/2 -translate-y-1/2 rotate-45"></div>
-                    <div className="absolute top-1/2 left-1/2 w-full h-0.5 bg-white/30 -translate-x-1/2 -translate-y-1/2 -rotate-45"></div>
-                    <div className="absolute top-1/2 left-1/2 w-24 h-24 rounded-full border border-white/20 -translate-x-1/2 -translate-y-1/2"></div>
-                    <div className="absolute top-1/2 left-1/2 w-48 h-48 rounded-full border border-white/10 -translate-x-1/2 -translate-y-1/2"></div>
-                  </div>
-                </div>
-                
-                {/* Wave animation in background */}
-                <div className="absolute inset-0 wave-animation opacity-40 z-0"></div>
+              <div className="relative rounded-[2rem] overflow-hidden bg-gradient-to-br from-blue-400 to-blue-600 w-full max-w-md aspect-[4/5] mx-auto shadow-xl">
+                {/* Background wave animation */}
+                <div className="absolute inset-0 wave-animation opacity-50 z-0"></div>
                 
                 {/* Overlay gradient */}
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-400/30 to-[#3E40EF]/20 z-10 mix-blend-overlay"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-400/40 to-[#3E40EF]/30 z-10 mix-blend-overlay"></div>
                 
                 {/* Profile image */}
                 <img 
-                  src="/lovable-uploads/d5a91165-0502-4c76-a278-ac4e9bf09ad2.png" 
+                  src="/lovable-uploads/cc66957f-7e86-4b8a-ba75-8395bbeed544.png" 
                   alt="Designer portrait" 
                   className="w-full h-full object-cover z-20 relative"
                 />
                 
-                {/* Username badge - partially outside the image container */}
-                <div className="absolute bottom-6 -left-5 transform bg-white/95 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg z-30 flex items-center gap-3 animate-float" style={{ animationDelay: "0.4s" }}>
+                {/* Username badge like in the reference */}
+                <div className="absolute bottom-6 left-0 transform -translate-x-1/4 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg z-30 flex items-center gap-3 animate-slide-in" style={{ animationDelay: "0.4s" }}>
                   <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-[#3E40EF]/20">
                     <img 
-                      src="/lovable-uploads/d5a91165-0502-4c76-a278-ac4e9bf09ad2.png" 
+                      src="/lovable-uploads/cc66957f-7e86-4b8a-ba75-8395bbeed544.png" 
                       alt="Avatar" 
                       className="w-full h-full object-cover"
                     />
@@ -72,12 +59,10 @@ const Hero = () => {
                   </div>
                 </div>
                 
-                {/* Expert badge - partially outside the image container */}
-                <div className="absolute top-6 -right-5 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg z-30 flex items-center gap-2 animate-float" style={{ animationDelay: "0.5s", animationDuration: "8s" }}>
-                  <div className="w-8 h-8 rounded-full bg-[#3E40EF] flex items-center justify-center animate-pulse">
-                    <svg className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-                    </svg>
+                {/* Expert badge like in the reference */}
+                <div className="absolute top-6 right-0 transform translate-x-1/4 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg z-30 flex items-center gap-2 animate-slide-in" style={{ animationDelay: "0.5s" }}>
+                  <div className="w-8 h-8 rounded-full bg-[#3E40EF] flex items-center justify-center">
+                    <Sparkles className="h-4 w-4 text-white" />
                   </div>
                   <div className="text-left">
                     <p className="font-bold text-gray-800">Expert</p>
@@ -86,21 +71,20 @@ const Hero = () => {
                 </div>
               </div>
               
-              {/* Background effect blobs */}
+              {/* Background blob */}
               <div className="absolute -z-10 -bottom-10 -right-10 w-64 h-64 bg-[#3E40EF]/10 rounded-full blur-3xl"></div>
               <div className="absolute -z-10 -top-10 -left-10 w-64 h-64 bg-[#3E40EF]/5 rounded-full blur-3xl"></div>
             </div>
           </div>
         </div>
         
-        {/* Modern thin arrow down */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex justify-center">
           <a
             href="#about"
-            className="text-gray-600 hover:text-[#3E40EF] transition-colors"
+            className="text-[#3E40EF] hover:text-[#3E40EF]/70 animate-bounce transition-colors"
             aria-label="Scroll down"
           >
-            <ArrowDown size={24} className="animate-bounce" />
+            <ArrowDownCircle size={32} />
           </a>
         </div>
       </div>
