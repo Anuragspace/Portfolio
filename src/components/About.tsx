@@ -1,6 +1,7 @@
 
 import React from "react";
 import RippleAnimation from "./RippleAnimation";
+import { Award } from "lucide-react";
 
 const About = () => {
   return (
@@ -8,7 +9,7 @@ const About = () => {
       <div className="container-custom">
         <div className="mb-16">
           <h2 className="mb-4">About Me</h2>
-          <div className="w-24 h-1 bg-accent"></div>
+          <div className="w-24 h-1 bg-[#3E40EF]"></div>
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -20,16 +21,16 @@ const About = () => {
                   alt="Portrait" 
                   className="w-full object-cover aspect-[4/5]" 
                 />
-                <RippleAnimation />
               </div>
-              <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-accent/10 rounded-full blur-2xl -z-10"></div>
-              <div className="absolute -top-6 -left-6 w-48 h-48 bg-accent/5 rounded-full blur-2xl -z-10"></div>
+              <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-[#3E40EF]/10 rounded-full blur-2xl -z-10"></div>
+              <div className="absolute -top-6 -left-6 w-48 h-48 bg-[#3E40EF]/5 rounded-full blur-2xl -z-10"></div>
             </div>
           </div>
           
           <div className="lg:col-span-7">
             <div className="space-y-6">
-              <div className="inline-block px-3 py-1 bg-accent/10 text-accent rounded-full text-sm font-medium">
+              <div className="inline-block px-3 py-1 bg-[#3E40EF]/10 text-[#3E40EF] rounded-full text-sm font-medium">
+                <Award className="inline-block mr-2 h-4 w-4" />
                 Nice to meet you
               </div>
               
@@ -44,13 +45,13 @@ const About = () => {
               </p>
               
               <div className="pt-4 grid grid-cols-2 gap-8">
-                <div>
-                  <h4 className="text-lg font-bold mb-2">Education</h4>
+                <div className="p-4 rounded-lg bg-gray-50 hover:shadow-md transition-all duration-300 hover:bg-white">
+                  <h4 className="text-lg font-bold mb-2 text-[#3E40EF]">Education</h4>
                   <p className="text-gray-600">Bachelor's in Design<br />
                   University of Design, 2018-2022</p>
                 </div>
-                <div>
-                  <h4 className="text-lg font-bold mb-2">Location</h4>
+                <div className="p-4 rounded-lg bg-gray-50 hover:shadow-md transition-all duration-300 hover:bg-white">
+                  <h4 className="text-lg font-bold mb-2 text-[#3E40EF]">Location</h4>
                   <p className="text-gray-600">Based in New York<br />
                   Available for remote work</p>
                 </div>
