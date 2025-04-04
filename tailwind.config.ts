@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -22,6 +21,7 @@ export default {
 			fontFamily: {
 				sans: ['Inter', 'sans-serif'],
 				display: ['Manrope', 'sans-serif'],
+				mono: ['Menlo', 'Monaco', 'Consolas', 'monospace'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
@@ -100,6 +100,18 @@ export default {
 				"marquee": {
 					"0%": { transform: "translateX(0)" },
 					"100%": { transform: "translateX(-100%)" }
+				},
+				"spin-slow": {
+					"0%": { transform: "rotate(0deg)" },
+					"100%": { transform: "rotate(360deg)" }
+				},
+				"spin-slow-reverse": {
+					"0%": { transform: "rotate(0deg)" },
+					"100%": { transform: "rotate(-360deg)" }
+				},
+				"highlight": {
+					"0%": { width: "0" },
+					"100%": { width: "100%" }
 				}
 			},
 			animation: {
@@ -110,7 +122,10 @@ export default {
 				"slide-in": "slide-in 0.5s ease-out",
 				"slide-up": "slide-up 0.5s ease-out",
 				"scale-in": "scale-in 0.5s ease-out",
-				"marquee": "marquee 25s linear infinite"
+				"marquee": "marquee 25s linear infinite",
+				"spin-slow": "spin-slow 20s linear infinite",
+				"spin-slow-reverse": "spin-slow-reverse 15s linear infinite",
+				"highlight": "highlight 1s ease-out forwards"
 			}
 		}
 	},
