@@ -1,4 +1,3 @@
-
 import React from "react";
 import { ArrowDown, Sparkles, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -15,7 +14,7 @@ const Hero = () => {
                 <Sparkles className="inline-block mr-2 h-4 w-4" />
                 UI/UX Designer & Product Designer
               </div>
-              <h1 className="animate-slide-in" style={{ animationDelay: "0.1s" }}>
+              <h1 className="animate-slide-in font-black"  style={{ animationDelay: "0.1s" }}>
                 Crafting Digital Experiences That <span className="text-[#3E40EF]">Inspire</span>
               </h1>
               <p className="text-lg text-gray-600 animate-slide-in" style={{ animationDelay: "0.2s" }}>
@@ -30,7 +29,7 @@ const Hero = () => {
           
           <div className="lg:col-span-5 relative z-10">
             <div className="relative mx-auto">
-              {/* Rectangular image container with rounded corners - REDUCED SIZE */}
+              {/* Rectangular image container with rounded corners */}
               <div className="relative rounded-[2rem] overflow-hidden bg-gradient-to-br from-blue-400 to-blue-600 w-full max-w-sm aspect-[4/5] mx-auto shadow-xl">
                 {/* Background rotation element */}
                 <div className="absolute inset-0 w-[150%] h-[150%] left-[-25%] top-[-25%] rotate-animation opacity-10 z-0">
@@ -46,38 +45,34 @@ const Hero = () => {
                   alt="Designer portrait" 
                   className="w-full h-full object-cover z-20 relative"
                 />
-                
-                {/* Username badge - WIDER and FLOATING OUTSIDE */}
-                <div className="absolute bottom-6 left-0 transform -translate-x-1/3 bg-white/90 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg z-30 flex items-center gap-3 animate-float" style={{ animationDelay: "0.4s" }}>
-                  <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-[#3E40EF]/20">
-                    <Avatar>
-                      <AvatarImage src="/lovable-uploads/cc66957f-7e86-4b8a-ba75-8395bbeed544.png" alt="Avatar" />
-                      <AvatarFallback>
-                        <User className="h-6 w-6 text-[#3E40EF]" />
-                      </AvatarFallback>
-                    </Avatar>
-                  </div>
-                  <div className="text-left">
-                    <p className="font-bold text-gray-800">Designer</p>
-                    <p className="text-xs text-gray-500">@portfolio</p>
-                  </div>
+              </div>
+              
+              {/* Username badge - Positioned outside the image */}
+              <div className="absolute bottom-[30px] left-[-60px] bg-white/90 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg z-30 flex items-center gap-3 animate-float" style={{ animationDelay: "0.4s" }}>
+                <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-[#3E40EF]/20">
+                  <Avatar>
+                    <AvatarImage src=".png" alt="Avatar" />
+                    <AvatarFallback>
+                      <User className="h-6 w-6 text-[#3E40EF]" />
+                    </AvatarFallback>
+                  </Avatar>
                 </div>
-                
-                {/* Expert badge - WIDER and FLOATING OUTSIDE with ICON instead of image */}
-                <div className="absolute top-6 right-0 transform translate-x-1/3 bg-white/90 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg z-30 flex items-center gap-3 animate-float-reverse" style={{ animationDelay: "0.5s" }}>
-                  <div className="w-10 h-10 rounded-full bg-[#3E40EF] flex items-center justify-center">
-                    <Sparkles className="h-5 w-5 text-white" />
-                  </div>
-                  <div className="text-left">
-                    <p className="font-bold text-gray-800">Expert</p>
-                    <p className="text-xs text-[#3E40EF]">UI/UX Design</p>
-                  </div>
+                <div className="text-left">
+                  <p className="font-bold text-gray-800">Anurag Adarsh</p>
+                  <p className="text-xs text-gray-500">Engineering Student</p>
                 </div>
               </div>
               
-              {/* Background blob */}
-              <div className="absolute -z-10 -bottom-10 -right-10 w-64 h-64 bg-[#3E40EF]/10 rounded-full blur-3xl"></div>
-              <div className="absolute -z-10 -top-10 -left-10 w-64 h-64 bg-[#3E40EF]/5 rounded-full blur-3xl"></div>
+              {/* Expert badge - Positioned outside the image */}
+              <div className="absolute top-[40px] right-[-30px] bg-white/50 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg z-30 flex items-center gap-3 animate-float" style={{ animationDelay: "0.5s" }}>
+                <div className="w-10 h-10 rounded-full bg-[#3E40EF] flex items-center justify-center">
+                  <Sparkles className="h-5 w-5 text-white" />
+                </div>
+                <div className="text-left">
+                  <p className="font-bold text-gray-800">Expert</p>
+                  <p className="text-xs text-[#3E40EF]">UI/UX Design</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -108,23 +103,7 @@ const Hero = () => {
       
       <div className="absolute inset-0 dot-pattern opacity-30 z-0"></div>
       
-      <style jsx>{`
-        @keyframes rotate {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-        .rotate-animation {
-          animation: rotate 20s linear infinite;
-        }
-        @keyframes float-reverse {
-          0% { transform: translate(33%, 0); }
-          50% { transform: translate(33%, -10px); }
-          100% { transform: translate(33%, 0); }
-        }
-        .animate-float-reverse {
-          animation: float-reverse 5s ease-in-out infinite;
-        }
-      `}</style>
+      
     </section>
   );
 };
