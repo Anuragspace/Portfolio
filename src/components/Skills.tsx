@@ -77,7 +77,7 @@ const Skills = () => {
             
             <div className="relative z-10">
               <div className="bg-accent/10 w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:bg-accent/20 transition-all duration-300">
-                <PaintBrush className="text-accent h-8 w-8" />
+                <Paintbrush className="text-accent h-8 w-8" />
               </div>
               <h3 className="text-2xl font-bold mb-6">UI/UX Design</h3>
               <p className="text-gray-600 mb-8">Creating intuitive and visually appealing interfaces that enhance user experience and achieve business goals.</p>
@@ -185,3 +185,4 @@ const Skills = () => {
 };
 
 export default Skills;
+
