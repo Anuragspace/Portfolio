@@ -67,31 +67,31 @@ const Skills = () => {
           <div className="absolute right-0 top-0 h-full w-[15%] bg-gradient-to-l from-gray-50 to-transparent z-10"></div>
         </div>
         
-        {/* Bento Grid Layout - New design matching reference */}
+        {/* Bento Grid Layout - Redesigned with new color scheme */}
         <div className="grid grid-cols-12 gap-5">
-          {/* UI/UX Design - Tall left box */}
-          <div className="col-span-12 md:col-span-5 bg-white rounded-2xl shadow-md p-8 flex flex-col h-full transform hover:scale-[1.02] transition-all duration-300 hover:shadow-lg group relative overflow-hidden">
+          {/* UI/UX Design - Full height left box */}
+          <div className="col-span-12 md:col-span-5 bg-violet rounded-2xl shadow-md p-8 flex flex-col h-full transform hover:scale-[1.02] transition-all duration-300 hover:shadow-lg group relative overflow-hidden">
             {/* Background gradient circles */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-accent/5 rounded-full -mr-32 -mt-32 group-hover:bg-accent/10 transition-all duration-500"></div>
-            <div className="absolute bottom-0 left-0 w-48 h-48 bg-accent/5 rounded-full -ml-24 -mb-24 group-hover:bg-accent/10 transition-all duration-500"></div>
+            <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mt-32 group-hover:bg-white/10 transition-all duration-500"></div>
+            <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full -ml-24 -mb-24 group-hover:bg-white/10 transition-all duration-500"></div>
             
             <div className="relative z-10">
-              <div className="bg-accent/10 w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:bg-accent/20 transition-all duration-300">
-                <Paintbrush className="text-accent h-8 w-8" />
+              <div className="bg-white/10 w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:bg-white/20 transition-all duration-300">
+                <Paintbrush className="text-white h-8 w-8" />
               </div>
-              <h3 className="text-2xl font-bold mb-6">UI/UX Design</h3>
-              <p className="text-gray-600 mb-8">Creating intuitive and visually appealing interfaces that enhance user experience and achieve business goals.</p>
+              <h3 className="text-2xl font-bold mb-6 text-white">UI/UX Design</h3>
+              <p className="text-white/90 mb-8">Creating intuitive and visually appealing interfaces that enhance user experience and achieve business goals.</p>
               
               <div className="space-y-6 mt-auto">
                 {designSkills.slice(0, 3).map((skill) => (
                   <div key={skill.name}>
                     <div className="flex justify-between mb-2">
-                      <span className="font-medium">{skill.name}</span>
-                      <span className="text-gray-500">{skill.level}%</span>
+                      <span className="font-medium text-white">{skill.name}</span>
+                      <span className="text-white/70">{skill.level}%</span>
                     </div>
-                    <div className="w-full bg-gray-100 rounded-full h-2.5">
+                    <div className="w-full bg-white/10 rounded-full h-2.5">
                       <div
-                        className="bg-accent h-2.5 rounded-full transition-all duration-700"
+                        className="bg-white h-2.5 rounded-full transition-all duration-700"
                         style={{ width: `${skill.level}%` }}
                       ></div>
                     </div>
@@ -102,78 +102,84 @@ const Skills = () => {
               {/* Pattern decoration */}
               <div className="absolute bottom-6 right-6 grid grid-cols-3 gap-1 opacity-20">
                 {[...Array(9)].map((_, i) => (
-                  <div key={i} className="w-1.5 h-1.5 rounded-full bg-accent"></div>
+                  <div key={i} className="w-1.5 h-1.5 rounded-full bg-white"></div>
                 ))}
               </div>
             </div>
           </div>
           
-          {/* Interaction Design - Top right box */}
-          <div className="col-span-12 md:col-span-7 bg-white rounded-2xl shadow-md p-8 transform hover:scale-[1.02] transition-all duration-300 hover:shadow-lg group relative overflow-hidden">
-            <div className="absolute -top-20 -right-20 w-40 h-40 bg-accent/5 rounded-full group-hover:bg-accent/10 transition-all duration-500"></div>
-            
-            <div className="relative z-10">
-              <div className="bg-accent/10 w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:bg-accent/20 transition-all duration-300">
-                <MousePointerClick className="text-accent h-8 w-8" />
-              </div>
-              <h3 className="text-2xl font-bold mb-4">Interaction Design</h3>
-              <p className="text-gray-600 mb-6">Creating intuitive interfaces with smooth transitions and meaningful animations that enhance user experience.</p>
-              <div className="mt-2 flex flex-wrap gap-3">
-                {["Micro-interactions", "Motion Design", "User Flows", "Site Mapping"].map((skill) => (
-                  <span 
-                    key={skill}
-                    className="px-4 py-2 bg-accent/5 rounded-full text-sm font-medium group-hover:bg-accent/10 transition-all duration-300 text-gray-700"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-          
-          {/* Prototyping - Bottom left of the right column */}
-          <div className="col-span-12 md:col-span-4 lg:col-span-3.5 bg-white rounded-2xl shadow-md p-8 transform hover:scale-[1.02] transition-all duration-300 hover:shadow-lg group relative overflow-hidden">
-            <div className="absolute -top-10 -left-10 w-20 h-20 bg-accent/5 rounded-full group-hover:bg-accent/10 transition-all duration-500"></div>
-            
-            <div className="relative z-10">
-              <div className="bg-accent/10 w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:bg-accent/20 transition-all duration-300">
-                <Layers className="text-accent h-8 w-8" />
-              </div>
-              <h3 className="text-2xl font-bold mb-4">Prototyping</h3>
-              <p className="text-gray-600 mb-4">Building interactive prototypes to test and validate design solutions.</p>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {["High-fidelity", "Low-fidelity", "Interactive", "User Testing"].map((skill, index) => (
-                  <span 
-                    key={skill}
-                    className="px-3 py-1.5 bg-accent/5 rounded-full text-xs font-medium group-hover:bg-accent/10 transition-all duration-300 text-gray-700"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-          
-          {/* Wireframing - Bottom right */}
-          <div className="col-span-12 md:col-span-4 lg:col-span-3.5 bg-white rounded-2xl shadow-md p-8 transform hover:scale-[1.02] transition-all duration-300 hover:shadow-lg group relative overflow-hidden">
-            <div className="absolute -bottom-10 -right-10 w-20 h-20 bg-accent/5 rounded-full group-hover:bg-accent/10 transition-all duration-500"></div>
-            
-            <div className="relative z-10">
-              <div className="bg-accent/10 w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:bg-accent/20 transition-all duration-300">
-                <PenTool className="text-accent h-8 w-8" />
-              </div>
-              <h3 className="text-2xl font-bold mb-4">Wireframing</h3>
-              <p className="text-gray-600 mb-4">Creating structural blueprints to establish hierarchy and layout.</p>
-              <div className="mt-6 pt-2">
-                <div className="w-full bg-gray-100 rounded-full h-2.5 mb-3">
-                  <div
-                    className="bg-accent h-2.5 rounded-full transition-all duration-700"
-                    style={{ width: "95%" }}
-                  ></div>
+          {/* Right column container */}
+          <div className="col-span-12 md:col-span-7 grid grid-rows-2 gap-5">
+            {/* Interaction Design - Top right box */}
+            <div className="bg-violet rounded-2xl shadow-md p-8 transform hover:scale-[1.02] transition-all duration-300 hover:shadow-lg group relative overflow-hidden">
+              <div className="absolute -top-20 -right-20 w-40 h-40 bg-white/5 rounded-full group-hover:bg-white/10 transition-all duration-500"></div>
+              
+              <div className="relative z-10">
+                <div className="bg-white/10 w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:bg-white/20 transition-all duration-300">
+                  <MousePointerClick className="text-white h-8 w-8" />
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-xs text-gray-500">Beginner</span>
-                  <span className="text-xs font-medium text-accent">Expert</span>
+                <h3 className="text-2xl font-bold mb-4 text-white">Interaction Design</h3>
+                <p className="text-white/90 mb-6">Creating intuitive interfaces with smooth transitions and meaningful animations that enhance user experience.</p>
+                <div className="mt-2 flex flex-wrap gap-3">
+                  {["Micro-interactions", "Motion Design", "User Flows", "Site Mapping"].map((skill) => (
+                    <span 
+                      key={skill}
+                      className="px-4 py-2 bg-white/10 rounded-full text-sm font-medium group-hover:bg-white/15 transition-all duration-300 text-white"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+            
+            {/* Bottom right container for Prototyping and Wireframing */}
+            <div className="grid grid-cols-2 gap-5">
+              {/* Prototyping - Bottom left of the right column */}
+              <div className="bg-violet rounded-2xl shadow-md p-8 transform hover:scale-[1.02] transition-all duration-300 hover:shadow-lg group relative overflow-hidden">
+                <div className="absolute -top-10 -left-10 w-20 h-20 bg-white/5 rounded-full group-hover:bg-white/10 transition-all duration-500"></div>
+                
+                <div className="relative z-10">
+                  <div className="bg-white/10 w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:bg-white/20 transition-all duration-300">
+                    <Layers className="text-white h-8 w-8" />
+                  </div>
+                  <h3 className="text-2xl font-bold mb-4 text-white">Prototyping</h3>
+                  <p className="text-white/90 mb-4">Building interactive prototypes to test and validate design solutions.</p>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {["High-fidelity", "Low-fidelity", "Interactive", "User Testing"].map((skill, index) => (
+                      <span 
+                        key={skill}
+                        className="px-3 py-1.5 bg-white/10 rounded-full text-xs font-medium group-hover:bg-white/15 transition-all duration-300 text-white"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              
+              {/* Wireframing - Bottom right */}
+              <div className="bg-violet rounded-2xl shadow-md p-8 transform hover:scale-[1.02] transition-all duration-300 hover:shadow-lg group relative overflow-hidden">
+                <div className="absolute -bottom-10 -right-10 w-20 h-20 bg-white/5 rounded-full group-hover:bg-white/10 transition-all duration-500"></div>
+                
+                <div className="relative z-10">
+                  <div className="bg-white/10 w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:bg-white/20 transition-all duration-300">
+                    <PenTool className="text-white h-8 w-8" />
+                  </div>
+                  <h3 className="text-2xl font-bold mb-4 text-white">Wireframing</h3>
+                  <p className="text-white/90 mb-4">Creating structural blueprints to establish hierarchy and layout.</p>
+                  <div className="mt-6 pt-2">
+                    <div className="w-full bg-white/10 rounded-full h-2.5 mb-3">
+                      <div
+                        className="bg-white h-2.5 rounded-full transition-all duration-700"
+                        style={{ width: "95%" }}
+                      ></div>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-xs text-white/70">Beginner</span>
+                      <span className="text-xs font-medium text-white">Expert</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -185,4 +191,3 @@ const Skills = () => {
 };
 
 export default Skills;
-
