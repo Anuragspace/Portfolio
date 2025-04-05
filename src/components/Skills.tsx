@@ -1,7 +1,7 @@
 
 import React from "react";
 import { 
-  PaintBrush, 
+  Paintbrush, 
   PenTool,
   MousePointerClick,
   Layers,
@@ -29,7 +29,7 @@ const Skills = () => {
     { name: "Adobe XD", icon: <PenSquare className="h-5 w-5" /> },
     { name: "Sketch", icon: <PenTool className="h-5 w-5" /> },
     { name: "Adobe Photoshop", icon: <Layers className="h-5 w-5" /> },
-    { name: "Adobe Illustrator", icon: <PaintBrush className="h-5 w-5" /> },
+    { name: "Adobe Illustrator", icon: <Paintbrush className="h-5 w-5" /> },
     { name: "HTML/CSS", icon: <Code className="h-5 w-5" /> },
     { name: "JavaScript", icon: <Lightbulb className="h-5 w-5" /> },
     { name: "React", icon: <LayoutGrid className="h-5 w-5" /> },
