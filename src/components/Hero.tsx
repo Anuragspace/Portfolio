@@ -1,4 +1,3 @@
-
 import React from "react";
 import { ArrowDown, Sparkles, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -52,17 +51,13 @@ const Hero = () => {
           
           <div className="lg:col-span-5 relative z-10">
             <div className="relative mx-auto">
-              {/* Rectangular image container with rounded corners */}
               <div className="relative rounded-[2rem] overflow-hidden bg-gradient-to-br from-blue-400 to-blue-600 w-full max-w-sm aspect-[4/5] mx-auto shadow-xl">
-                {/* Background rotation element */}
                 <div className="absolute inset-0 w-[150%] h-[150%] left-[-25%] top-[-25%] rotate-animation opacity-10 z-0">
                   <div className="w-full h-full border-[30px] border-[#3E40EF]/20 rounded-full"></div>
                 </div>
                 
-                {/* Overlay gradient */}
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-400/40 to-[#3E40EF]/30 z-10 mix-blend-overlay"></div>
                 
-                {/* Profile image */}
                 <img 
                   src="/lovable-uploads/cc66957f-7e86-4b8a-ba75-8395bbeed544.png" 
                   alt="Designer portrait" 
@@ -70,7 +65,6 @@ const Hero = () => {
                 />
               </div>
               
-              {/* Username badge - Positioned outside the image */}
               <div className="absolute bottom-[30px] left-[-60px] bg-white/90 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg z-30 flex items-center gap-3 animate-float" style={{ animationDelay: "0.4s" }}>
                 <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-[#3E40EF]/20">
                   <Avatar>
@@ -86,7 +80,6 @@ const Hero = () => {
                 </div>
               </div>
               
-              {/* Expert badge - Positioned outside the image */}
               <div className="absolute top-[40px] right-[-30px] bg-white/50 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg z-30 flex items-center gap-3 animate-float" style={{ animationDelay: "0.5s" }}>
                 <div className="w-10 h-10 rounded-full bg-[#3E40EF] flex items-center justify-center">
                   <Sparkles className="h-5 w-5 text-white" />
@@ -111,11 +104,9 @@ const Hero = () => {
         </div>
       </div>
       
-      {/* Background elements */}
       <div className="absolute -top-24 -right-24 w-96 h-96 bg-[#3E40EF]/10 rounded-full blur-3xl"></div>
       <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-[#3E40EF]/5 rounded-full blur-3xl"></div>
       
-      {/* Interactive particles */}
       <div className="particles-container absolute inset-0 pointer-events-none">
         <div className="particle animate-float" style={{ top: '15%', left: '10%', animationDelay: '0s' }}></div>
         <div className="particle animate-float" style={{ top: '25%', left: '80%', animationDelay: '0.5s' }}></div>

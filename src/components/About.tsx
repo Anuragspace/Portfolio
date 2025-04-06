@@ -3,11 +3,15 @@ import React, { useEffect, useState, useRef } from "react";
 import RippleAnimation from "./RippleAnimation";
 import { Award, MapPin, Sparkles, BookOpen } from "lucide-react";
 import { Globe } from "@/components/Globe";
+import TextReveal from "./TextReveal";
+import SpinningText from "./SpinningText";
 
 
 const About = () => {
   const [isHighlighted, setIsHighlighted] = useState(false);
+  const [showSpinText, setShowSpinText] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -45,18 +49,36 @@ const About = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Left Column: Image */}
           <div className="lg:col-span-5">
-            <div className="relative h-[430px]">
+            <div 
+              ref={imageRef} 
+              className="relative h-[430px]"
+              onMouseEnter={() => setShowSpinText(true)}
+              onMouseLeave={() => setShowSpinText(false)}
+            >
               <div className="bg-[#3E40EF] rounded-2xl overflow-hidden z-10 relative h-full">
-              <div className="absolute -top-20 -left-20 w-60 h-60 bg-white/10 rounded-full group-hover:bg-white/10 transition-all duration-500"></div>
+                <div className="absolute -top-20 -left-20 w-60 h-60 bg-white/10 rounded-full group-hover:bg-white/10 transition-all duration-500"></div>
 
                 <div className="flex-1 w-full flex items-center justify-center relative ">
                   <Globe className="scale-[1.1] translate-y-[30%] -z-10" />
-                 </div>
+                </div>
                 <img 
                   src="/lovable-uploads/1777892e-debe-48e7-b9a6-4e35347f6790.png" 
                   alt="Portrait" 
                   className="w-full h-full object-cover translate-y-[7%]"
                 />
+                
+                {showSpinText && (
+                  <div className="absolute inset-0 flex items-center justify-center z-20 cursor-none">
+                    <div className="w-40 h-40 rounded-full border-2 border-white/50 flex items-center justify-center">
+                      <SpinningText 
+                        children="ANURAG ADARSH • DESIGNER • DEVELOPER •" 
+                        className="text-white" 
+                        duration={15}
+                        radius={4.5}
+                      />
+                    </div>
+                  </div>
+                )}
               </div>
               <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-[#3E40EF]/10 rounded-full blur-2xl -z-10"></div>
               <div className="absolute -top-6 -left-6 w-48 h-48 bg-[#3E40EF]/5 rounded-full blur-2xl -z-10"></div>
@@ -77,15 +99,13 @@ const About = () => {
               
               <div className="relative py-1">
                 <h3 className="text-2xl md:text-3xl font-bold leading-snug">
-                  I'm a <span className="relative inline-block">
-                    <span className="relative z-10 text-[#3E40EF]">UI/UX Designer</span>
-                    <span 
-                      className={`absolute bottom-0 left-0 h-[40%] bg-[#3E40EF]/20 rounded transition-all duration-1000 ease-in-out ${
-                        isHighlighted ? 'w-full' : 'w-0'
-                      }`}
-                    ></span>
-                  </span> with a passion for creating user-centered digital experiences
+                  I'm a <span className="text-[#3E40EF]">UI/UX Designer</span>
                 </h3>
+                <div className="mt-2">
+                  <TextReveal className="text-lg">
+                    with a passion for creating user-centered digital experiences
+                  </TextReveal>
+                </div>
               </div>
               
               <div className="bg-white rounded-lg border border-gray-200 p-6 relative shadow-md">
