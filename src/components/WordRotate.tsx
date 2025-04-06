@@ -22,6 +22,12 @@ export function WordRotate({
   className,
 }: WordRotateProps) {
   const [index, setIndex] = useState(0);
+  
+  // Find the longest word to set fixed width
+  const longestWord = words.reduce(
+    (longest, current) => (current.length > longest.length ? current : longest),
+    ""
+  );
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -33,16 +39,18 @@ export function WordRotate({
   }, [words, duration]);
 
   return (
-    <div className="overflow-hidden py-1">
+    <div className="overflow-hidden py-1 relative" style={{ minWidth: `${longestWord.length}ch` }}>
       <AnimatePresence mode="wait">
         <motion.span
           key={words[index]}
-          className={cn(className)}
+          className={cn(className, "absolute left-0")}
           {...motionProps}
         >
           {words[index]}
         </motion.span>
       </AnimatePresence>
+      {/* Invisible text to maintain consistent width */}
+      <span className="opacity-0">{longestWord}</span>
     </div>
   );
 }

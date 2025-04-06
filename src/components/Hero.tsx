@@ -1,9 +1,22 @@
+
 import React from "react";
 import { ArrowDown, Sparkles, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { RainbowButton } from "@/components/RainbowButton";
+import { ConfettiButton } from "@/components/Confetti";
+import confetti from "canvas-confetti";
 
 const Hero = () => {
+  const triggerConfetti = () => {
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.2 },
+      colors: ['#3E40EF', '#6366F1', '#818CF8', '#BFDBFE', '#FFFFFF']
+    });
+  };
+
   return (
     <section className="min-h-screen pt-24 pb-16 flex items-center relative overflow-hidden">
       <div className="container-custom">
@@ -21,8 +34,12 @@ const Hero = () => {
                 I transform complex problems into elegant, intuitive designs that delight users and drive business growth.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-4 animate-slide-in" style={{ animationDelay: "0.3s" }}>
-                <Button className="bg-[#3E40EF] hover:bg-[#3E40EF]/90">View Projects</Button>
-                <Button variant="outline" className="border-[#3E40EF] text-[#3E40EF] hover:bg-[#3E40EF]/10">Contact Me</Button>
+                <RainbowButton onClick={triggerConfetti}>
+                  View Projects
+                </RainbowButton>
+                <Button variant="outline" className="border-[#3E40EF] text-[#3E40EF] hover:bg-[#3E40EF]/10">
+                  Click Me
+                </Button>
               </div>
             </div>
           </div>
@@ -102,8 +119,6 @@ const Hero = () => {
       </div>
       
       <div className="absolute inset-0 dot-pattern opacity-30 z-0"></div>
-      
-      
     </section>
   );
 };

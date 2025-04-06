@@ -35,6 +35,13 @@
     --ring: 240 5.9% 10%;
 
     --radius: 0.75rem;
+
+    /* Rainbow button colors */
+    --color-1: 0 93% 63%;
+    --color-2: 230 100% 60%;
+    --color-3: 142 71% 45%;
+    --color-4: 56 100% 50%;
+    --color-5: 326 100% 60%;
   }
 
   * {
@@ -419,4 +426,21 @@
 
 .animate-highlight {
   animation: highlight 1s ease-out forwards;
+}
+
+/* Rainbow button animation */
+@keyframes rainbow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-rainbow {
+  animation: rainbow 8s linear infinite;
 }
