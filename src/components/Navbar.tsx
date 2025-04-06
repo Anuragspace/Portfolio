@@ -57,22 +57,21 @@ const Navbar = () => {
       <div className="container-custom flex items-center justify-between">
         <div className="flex items-center">
           <a href="#" className="text-xl font-bold group flex items-center gap-1">
-            <span className="font-display">Portfolio</span>
+            <span className="font-display">
+              <WordRotate 
+                words={["Portfolio", "Anurag Adarsh", "Designer", "Developer"]} 
+                className="text-inherit inline-block"
+                motionProps={{
+                  initial: { opacity: 0, y: 8 },
+                  animate: { opacity: 1, y: 0 },
+                  exit: { opacity: 0, y: -8 },
+                  transition: { duration: 0.3, ease: "easeOut" },
+                }}
+              />
+            </span>
             <span className="text-[#3E40EF] group-hover:rotate-12 transition-transform duration-300">.</span>
             <Sparkles className="h-4 w-4 text-[#3E40EF] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </a>
-          <div className="ml-2 text-xl font-medium">
-            <WordRotate 
-              words={["Anurag Adarsh", "Designer", "Developer"]} 
-              className="text-[#3E40EF] font-display"
-              motionProps={{
-                initial: { opacity: 0, y: 8 },
-                animate: { opacity: 1, y: 0 },
-                exit: { opacity: 0, y: -8 },
-                transition: { duration: 0.3, ease: "easeOut" },
-              }}
-            />
-          </div>
         </div>
 
         {/* Desktop Navigation */}
