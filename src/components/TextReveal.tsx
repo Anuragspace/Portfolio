@@ -1,5 +1,6 @@
+"use client";
 
-import { motion, MotionValue, useScroll, useTransform } from "motion/react";
+import { motion, MotionValue, useScroll, useTransform } from "framer-motion";
 import { ComponentPropsWithoutRef, FC, ReactNode, useRef } from "react";
 import { cn } from "@/lib/utils";
 
@@ -11,7 +12,7 @@ export const TextReveal: FC<TextRevealProps> = ({ children, className }) => {
   const targetRef = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
-    offset: ["start 0.9", "start 0.3"]
+    offset: ["start 0.9", "start 0.4"], // Adjusted for faster animation
   });
 
   if (typeof children !== "string") {
@@ -23,9 +24,7 @@ export const TextReveal: FC<TextRevealProps> = ({ children, className }) => {
   return (
     <div ref={targetRef} className={cn("relative z-0", className)}>
       <div className="mx-auto flex items-center bg-transparent">
-        <span
-          className="flex flex-wrap text-xl font-bold text-black/20 dark:text-white/20"
-        >
+        <span className="flex flex-wrap text-2xl md:text-3xl font-bold text-gray-400">
           {words.map((word, i) => {
             const start = i / words.length;
             const end = start + 1 / words.length;
@@ -48,13 +47,14 @@ interface WordProps {
 }
 
 const Word: FC<WordProps> = ({ children, progress, range }) => {
-  const opacity = useTransform(progress, range, [0, 1]);
+  const opacity = useTransform(progress, range, [0.2, 1]); // Fade-in effect
+  const color = useTransform(progress, range, ["#9ca3af", "#000000"]); // Light gray to black
+
   return (
     <span className="relative mx-1">
-      <span className="absolute opacity-30">{children}</span>
       <motion.span
-        style={{ opacity: opacity }}
-        className="text-[#3E40EF] font-semibold"
+        style={{ opacity, color }}
+        className="font-semibold transition-colors duration-500"
       >
         {children}
       </motion.span>

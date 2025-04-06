@@ -1,9 +1,8 @@
-
 import React, { useEffect, useState, useRef } from "react";
 import RippleAnimation from "./RippleAnimation";
 import { Award, MapPin, Sparkles, BookOpen } from "lucide-react";
 import { Globe } from "@/components/Globe";
-import TextReveal from "./TextReveal";
+import { TextReveal } from "./TextReveal";
 import SpinningText from "./SpinningText";
 
 
@@ -51,14 +50,14 @@ const About = () => {
           <div className="lg:col-span-5">
             <div 
               ref={imageRef} 
-              className="relative h-[430px] cursor-none"
+              className="relative h-[430px] cursor-none group"
               onMouseEnter={() => setShowSpinText(true)}
               onMouseLeave={() => setShowSpinText(false)}
             >
               <div className="bg-[#3E40EF] rounded-2xl overflow-hidden z-10 relative h-full">
                 <div className="absolute -top-20 -left-20 w-60 h-60 bg-white/10 rounded-full group-hover:bg-white/10 transition-all duration-500"></div>
 
-                <div className="flex-1 w-full flex items-center justify-center relative ">
+                <div className="flex-1 w-full flex items-center justify-center relative">
                   <Globe className="scale-[1.1] translate-y-[30%] -z-10" />
                 </div>
                 <img 
@@ -66,15 +65,19 @@ const About = () => {
                   alt="Portrait" 
                   className="w-full h-full object-cover translate-y-[7%]"
                 />
-                
+
+                {/* Spinning Text - Top Right */}
                 {showSpinText && (
-                  <div className="absolute inset-0 flex items-center justify-center z-20 cursor-none">
-                    <div className="w-40 h-40 rounded-full border-2 border-white/50 flex items-center justify-center">
+                  <div className="absolute top-7 right-7 flex -z-20 cursor-none">
+                    <div 
+                      className="w-28 h-28 rounded-full border-2 border-white/50 flex items-center justify-center"
+                      style={{ boxSizing: "border-box" }} // Ensures the border is included in the element's dimensions
+                    >
                       <SpinningText 
-                        children="ANURAG ADARSH • DESIGNER • DEVELOPER •" 
+                        children="ANURAG ADARSH • DESIGNER • UI/UX •" 
                         className="text-white" 
                         duration={15}
-                        radius={4.5}
+                        radius={4} // Adjust radius to match the reduced size
                         followCursor={true}
                       />
                     </div>
@@ -100,13 +103,16 @@ const About = () => {
               
               <div className="relative py-1">
                 <h3 className="text-2xl md:text-3xl font-bold leading-snug">
-                  I'm a <span className="text-[#3E40EF]">UI/UX Designer</span>
-                </h3>
-                <div className="mt-4 mb-6">
-                  <TextReveal className="text-lg md:text-xl leading-relaxed">
-                    with a passion for creating user-centered digital experiences
+                  <TextReveal className="text-gray-400">
+                    I'm a UI/UX Designer with a passion for
                   </TextReveal>
-                </div>
+                </h3>
+              
+                <h3 className="mt-">
+                  <TextReveal className="text-gray-400">
+                    creating user-centered digital experiences
+                  </TextReveal>
+                </h3>
               </div>
               
               <div className="bg-white rounded-lg border border-gray-200 p-6 relative shadow-md">
