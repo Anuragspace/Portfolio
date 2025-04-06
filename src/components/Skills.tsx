@@ -168,18 +168,17 @@ const Skills = () => {
                     <PenTool className="text-white h-6 w-6" />
                   </div>
                   <h3 className="text-xl font-bold mb-2 text-white">Wireframing</h3>
-                  <p className="text-white/90 mb-1">Creating structural blueprints to establish hierarchy and layout.</p>
+                  <p className="text-white/90 mb-3">Creating structural blueprints to establish hierarchy and layout.</p>
                   
-                  {/* Globe visualization */}
-                  <div className="relative h-32 mt-2 mb-1 overflow-hidden">
-                    <Globe className="scale-[0.8] -mt-20" />
-                    <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-[#3E40EF] to-transparent z-10"></div>
-                    <div className="absolute bottom-0 left-0 w-full text-center text-white text-xs font-medium z-20">
+                  {/* Globe visualization properly positioned */}
+                  <div className="relative h-32 overflow-hidden rounded-lg bg-white/5">
+                    <Globe className="scale-[0.8]" />
+                    <div className="absolute bottom-0 left-0 w-full text-center text-white text-xs font-medium py-1 bg-black/30">
                       Wireframe
                     </div>
                   </div>
                   
-                  <div className="mt-1">
+                  <div className="mt-3">
                     <div className="w-full bg-white/10 rounded-full h-2.5 mb-2">
                       <div
                         className="bg-white h-2.5 rounded-full transition-all duration-700"
