@@ -19,9 +19,9 @@ const Skills = () => {
     { name: "UI Design", level: 95 },
     { name: "UX Design", level: 90 },
     { name: "Interaction Design", level: 85 },
-    { name: "Information Architecture", level: 80 },
-    { name: "Wireframing", level: 95 },
-    { name: "Prototyping", level: 90 },
+    { name: "Development", level: 88 },
+    { name: "AI Tools", level: 92 },
+    { name: "React", level: 87 },
   ];
 
   const technicalSkills = [
@@ -67,10 +67,10 @@ const Skills = () => {
           <div className="absolute right-0 top-0 h-full w-[15%] bg-gradient-to-l from-gray-50 to-transparent z-10"></div>
         </div>
         
-        {/* Bento Grid Layout - Redesigned with new color scheme */}
+        {/* Bento Grid Layout with new website violet color */}
         <div className="grid grid-cols-12 gap-5">
-          {/* UI/UX Design - Full height left box */}
-          <div className="col-span-12 md:col-span-5 bg-violet rounded-2xl shadow-md p-8 flex flex-col h-full transform hover:scale-[1.02] transition-all duration-300 hover:shadow-lg group relative overflow-hidden">
+          {/* Design & Development Skills - Full height left box */}
+          <div className="col-span-12 md:col-span-5 bg-[#3E40EF] rounded-2xl shadow-md p-8 flex flex-col h-full transform hover:scale-[1.02] transition-all duration-300 hover:shadow-lg group relative overflow-hidden">
             {/* Background gradient circles */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mt-32 group-hover:bg-white/10 transition-all duration-500"></div>
             <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full -ml-24 -mb-24 group-hover:bg-white/10 transition-all duration-500"></div>
@@ -79,11 +79,11 @@ const Skills = () => {
               <div className="bg-white/10 w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:bg-white/20 transition-all duration-300">
                 <Paintbrush className="text-white h-8 w-8" />
               </div>
-              <h3 className="text-2xl font-bold mb-6 text-white">UI/UX Design</h3>
-              <p className="text-white/90 mb-8">Creating intuitive and visually appealing interfaces that enhance user experience and achieve business goals.</p>
+              <h3 className="text-2xl font-bold mb-6 text-white">Design & Development</h3>
+              <p className="text-white/90 mb-8">Creating intuitive interfaces and efficient applications, combining design expertise with technical development skills.</p>
               
-              <div className="space-y-6 mt-auto">
-                {designSkills.slice(0, 3).map((skill) => (
+              <div className="space-y-5 mt-auto">
+                {designSkills.map((skill) => (
                   <div key={skill.name}>
                     <div className="flex justify-between mb-2">
                       <span className="font-medium text-white">{skill.name}</span>
@@ -110,16 +110,16 @@ const Skills = () => {
           
           {/* Right column container */}
           <div className="col-span-12 md:col-span-7 grid grid-rows-2 gap-5">
-            {/* Interaction Design - Top right box */}
-            <div className="bg-violet rounded-2xl shadow-md p-8 transform hover:scale-[1.02] transition-all duration-300 hover:shadow-lg group relative overflow-hidden">
+            {/* Interaction Design - Top right box with reduced height */}
+            <div className="bg-[#3E40EF] rounded-2xl shadow-md p-7 transform hover:scale-[1.02] transition-all duration-300 hover:shadow-lg group relative overflow-hidden">
               <div className="absolute -top-20 -right-20 w-40 h-40 bg-white/5 rounded-full group-hover:bg-white/10 transition-all duration-500"></div>
               
               <div className="relative z-10">
-                <div className="bg-white/10 w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:bg-white/20 transition-all duration-300">
-                  <MousePointerClick className="text-white h-8 w-8" />
+                <div className="bg-white/10 w-14 h-14 rounded-xl flex items-center justify-center mb-4 group-hover:bg-white/20 transition-all duration-300">
+                  <MousePointerClick className="text-white h-7 w-7" />
                 </div>
-                <h3 className="text-2xl font-bold mb-4 text-white">Interaction Design</h3>
-                <p className="text-white/90 mb-6">Creating intuitive interfaces with smooth transitions and meaningful animations that enhance user experience.</p>
+                <h3 className="text-2xl font-bold mb-3 text-white">Interaction Design</h3>
+                <p className="text-white/90 mb-5">Creating intuitive interfaces with smooth transitions and meaningful animations that enhance user experience.</p>
                 <div className="mt-2 flex flex-wrap gap-3">
                   {["Micro-interactions", "Motion Design", "User Flows", "Site Mapping"].map((skill) => (
                     <span 
@@ -136,16 +136,16 @@ const Skills = () => {
             {/* Bottom right container for Prototyping and Wireframing */}
             <div className="grid grid-cols-2 gap-5">
               {/* Prototyping - Bottom left of the right column */}
-              <div className="bg-violet rounded-2xl shadow-md p-8 transform hover:scale-[1.02] transition-all duration-300 hover:shadow-lg group relative overflow-hidden">
+              <div className="bg-[#3E40EF] rounded-2xl shadow-md p-7 transform hover:scale-[1.02] transition-all duration-300 hover:shadow-lg group relative overflow-hidden">
                 <div className="absolute -top-10 -left-10 w-20 h-20 bg-white/5 rounded-full group-hover:bg-white/10 transition-all duration-500"></div>
                 
                 <div className="relative z-10">
-                  <div className="bg-white/10 w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:bg-white/20 transition-all duration-300">
-                    <Layers className="text-white h-8 w-8" />
+                  <div className="bg-white/10 w-14 h-14 rounded-xl flex items-center justify-center mb-4 group-hover:bg-white/20 transition-all duration-300">
+                    <Layers className="text-white h-7 w-7" />
                   </div>
-                  <h3 className="text-2xl font-bold mb-4 text-white">Prototyping</h3>
+                  <h3 className="text-2xl font-bold mb-3 text-white">Prototyping</h3>
                   <p className="text-white/90 mb-4">Building interactive prototypes to test and validate design solutions.</p>
-                  <div className="mt-4 flex flex-wrap gap-2">
+                  <div className="mt-3 flex flex-wrap gap-2">
                     {["High-fidelity", "Low-fidelity", "Interactive", "User Testing"].map((skill, index) => (
                       <span 
                         key={skill}
@@ -159,16 +159,16 @@ const Skills = () => {
               </div>
               
               {/* Wireframing - Bottom right */}
-              <div className="bg-violet rounded-2xl shadow-md p-8 transform hover:scale-[1.02] transition-all duration-300 hover:shadow-lg group relative overflow-hidden">
+              <div className="bg-[#3E40EF] rounded-2xl shadow-md p-7 transform hover:scale-[1.02] transition-all duration-300 hover:shadow-lg group relative overflow-hidden">
                 <div className="absolute -bottom-10 -right-10 w-20 h-20 bg-white/5 rounded-full group-hover:bg-white/10 transition-all duration-500"></div>
                 
                 <div className="relative z-10">
-                  <div className="bg-white/10 w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:bg-white/20 transition-all duration-300">
-                    <PenTool className="text-white h-8 w-8" />
+                  <div className="bg-white/10 w-14 h-14 rounded-xl flex items-center justify-center mb-4 group-hover:bg-white/20 transition-all duration-300">
+                    <PenTool className="text-white h-7 w-7" />
                   </div>
-                  <h3 className="text-2xl font-bold mb-4 text-white">Wireframing</h3>
+                  <h3 className="text-2xl font-bold mb-3 text-white">Wireframing</h3>
                   <p className="text-white/90 mb-4">Creating structural blueprints to establish hierarchy and layout.</p>
-                  <div className="mt-6 pt-2">
+                  <div className="mt-4">
                     <div className="w-full bg-white/10 rounded-full h-2.5 mb-3">
                       <div
                         className="bg-white h-2.5 rounded-full transition-all duration-700"
