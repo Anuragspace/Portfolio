@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { RainbowButton } from "@/components/RainbowButton";
 import { ConfettiButton } from "@/components/Confetti";
+import { ShinyButton } from "@/components/ShinyButton";
 import confetti from "canvas-confetti";
 
 const Hero = () => {
@@ -13,7 +14,7 @@ const Hero = () => {
       particleCount: 100,
       spread: 70,
       origin: { y: 0.2 },
-      colors: ['#3E40EF', '#6366F1', '#818CF8', '#BFDBFE', '#FFFFFF']
+      colors: ['#9b87f5', '#6366F1', '#818CF8', '#BFDBFE', '#FFFFFF']
     });
   };
 
@@ -34,12 +35,17 @@ const Hero = () => {
                 I transform complex problems into elegant, intuitive designs that delight users and drive business growth.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-4 animate-slide-in" style={{ animationDelay: "0.3s" }}>
-                <RainbowButton onClick={triggerConfetti}>
-                  View Projects
-                </RainbowButton>
-                <Button variant="outline" className="border-[#3E40EF] text-[#3E40EF] hover:bg-[#3E40EF]/10">
+                <a href="#projects">
+                  <RainbowButton>
+                    View Projects
+                  </RainbowButton>
+                </a>
+                <ShinyButton 
+                  onClick={triggerConfetti} 
+                  className="h-11 bg-white dark:bg-transparent"
+                >
                   Click Me
-                </Button>
+                </ShinyButton>
               </div>
             </div>
           </div>
