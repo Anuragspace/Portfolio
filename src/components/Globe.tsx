@@ -7,8 +7,31 @@ import { cn } from "@/lib/utils";
 
 const MOVEMENT_DAMPING = 1400;
 
-// Define the Globe configuration
-const GLOBE_CONFIG = {
+// Define types to match cobe's expected structure
+type CobeMarker = {
+  location: [number, number];
+  size: number;
+};
+
+type CobeOptions = {
+  width: number;
+  height: number;
+  onRender: (state: any) => void;
+  devicePixelRatio: number;
+  phi: number;
+  theta: number;
+  dark: number;
+  diffuse: number;
+  mapSamples: number;
+  mapBrightness: number;
+  baseColor: [number, number, number];
+  markerColor: [number, number, number];
+  glowColor: [number, number, number];
+  markers: CobeMarker[];
+};
+
+// Define the Globe configuration with proper types
+const GLOBE_CONFIG: CobeOptions = {
   width: 800,
   height: 800,
   onRender: () => {},
@@ -36,7 +59,7 @@ const GLOBE_CONFIG = {
   ],
 };
 
-// Define types for the Globe
+// Define types for the Globe state
 type GlobeState = {
   phi: number;
   width: number;
