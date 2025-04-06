@@ -2,6 +2,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import RippleAnimation from "./RippleAnimation";
 import { Award, MapPin, Sparkles, BookOpen } from "lucide-react";
+import { Globe } from "@/components/Globe";
+
 
 const About = () => {
   const [isHighlighted, setIsHighlighted] = useState(false);
@@ -44,11 +46,16 @@ const About = () => {
           {/* Left Column: Image */}
           <div className="lg:col-span-5">
             <div className="relative h-[430px]">
-              <div className="bg-gray-100 rounded-2xl overflow-hidden z-10 relative h-full">
+              <div className="bg-[#3E40EF] rounded-2xl overflow-hidden z-10 relative h-full">
+              <div className="absolute -top-20 -left-20 w-60 h-60 bg-white/10 rounded-full group-hover:bg-white/10 transition-all duration-500"></div>
+
+                <div className="flex-1 w-full flex items-center justify-center relative ">
+                  <Globe className="scale-[1.1] translate-y-[30%] -z-10" />
+                 </div>
                 <img 
                   src="/lovable-uploads/1777892e-debe-48e7-b9a6-4e35347f6790.png" 
                   alt="Portrait" 
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover translate-y-[7%]"
                 />
               </div>
               <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-[#3E40EF]/10 rounded-full blur-2xl -z-10"></div>

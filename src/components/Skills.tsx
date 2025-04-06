@@ -1,4 +1,3 @@
-
 import React from "react";
 import { 
   Paintbrush, 
@@ -161,20 +160,17 @@ const Skills = () => {
               
               {/* Wireframing - Bottom right - Redesigned */}
               <div className="bg-[#3E40EF] rounded-2xl shadow-md p-6 transform hover:scale-[1.02] transition-all duration-300 hover:shadow-lg group relative overflow-hidden">
-                <div className="absolute -bottom-10 -right-10 w-20 h-20 bg-white/5 rounded-full group-hover:bg-white/10 transition-all duration-500"></div>
+                <div className="absolute -top-20 -left-20 w-40 h-40 bg-white/5 rounded-full group-hover:bg-white/10 transition-all duration-500"></div>
                 
                 <div className="relative z-10 h-full flex flex-col items-center text-center">
+                  
+                  <p className="text-white/90 mb-2">Creating structural blueprints to establish hierarchy and layout.</p>
                   <h3 className="text-xl font-bold mb-2 text-white">Wireframing</h3>
-                  <p className="text-white/90 mb-4">Creating structural blueprints to establish hierarchy and layout.</p>
-                  
-                  {/* Globe visualization full-size in the center */}
-                  <div className="flex-1 w-full flex items-center justify-center">
-                    <Globe className="scale-[1.1]" />
+                  {/* Adjusted Globe position */}
+                  <div className="flex-1 w-full flex items-center justify-center relative ">
+                    <Globe className="scale-[1.25] translate-y-[4%]" />
                   </div>
                   
-                  <div className="mt-2 w-full text-center text-white text-sm font-medium">
-                    Wireframe
-                  </div>
                 </div>
               </div>
             </div>
