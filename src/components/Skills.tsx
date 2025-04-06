@@ -70,13 +70,13 @@ const Skills = () => {
         
         {/* Bento Grid Layout with website violet color */}
         <div className="grid grid-cols-12 gap-5">
-          {/* Design & Development Skills - Full height left box */}
+          {/* Design & Development Skills - Left box */}
           <div className="col-span-12 md:col-span-5 bg-[#3E40EF] rounded-2xl shadow-md p-7 flex flex-col transform hover:scale-[1.02] transition-all duration-300 hover:shadow-lg group relative overflow-hidden">
             {/* Background gradient circles */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mt-32 group-hover:bg-white/10 transition-all duration-500"></div>
             <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full -ml-24 -mb-24 group-hover:bg-white/10 transition-all duration-500"></div>
             
-            <div className="relative z-10">
+            <div className="relative z-10 h-full flex flex-col">
               <div className="bg-white/10 w-14 h-14 rounded-xl flex items-center justify-center mb-5 group-hover:bg-white/20 transition-all duration-300">
                 <Paintbrush className="text-white h-7 w-7" />
               </div>
@@ -111,17 +111,17 @@ const Skills = () => {
           
           {/* Right column container */}
           <div className="col-span-12 md:col-span-7 grid grid-rows-2 gap-5">
-            {/* Interaction Design - Top right box with reduced height */}
+            {/* Interaction Design - Top right box */}
             <div className="bg-[#3E40EF] rounded-2xl shadow-md p-6 transform hover:scale-[1.02] transition-all duration-300 hover:shadow-lg group relative overflow-hidden">
               <div className="absolute -top-20 -right-20 w-40 h-40 bg-white/5 rounded-full group-hover:bg-white/10 transition-all duration-500"></div>
               
-              <div className="relative z-10">
+              <div className="relative z-10 flex flex-col h-full">
                 <div className="bg-white/10 w-14 h-14 rounded-xl flex items-center justify-center mb-4 group-hover:bg-white/20 transition-all duration-300">
                   <MousePointerClick className="text-white h-7 w-7" />
                 </div>
                 <h3 className="text-2xl font-bold mb-3 text-white">Interaction Design</h3>
                 <p className="text-white/90 mb-4">Creating intuitive interfaces with smooth transitions and meaningful animations that enhance user experience.</p>
-                <div className="mt-2 flex flex-wrap gap-3">
+                <div className="mt-auto flex flex-wrap gap-3">
                   {["Micro-interactions", "Motion Design", "User Flows", "Site Mapping"].map((skill) => (
                     <span 
                       key={skill}
@@ -140,13 +140,13 @@ const Skills = () => {
               <div className="bg-[#3E40EF] rounded-2xl shadow-md p-6 transform hover:scale-[1.02] transition-all duration-300 hover:shadow-lg group relative overflow-hidden">
                 <div className="absolute -top-10 -left-10 w-20 h-20 bg-white/5 rounded-full group-hover:bg-white/10 transition-all duration-500"></div>
                 
-                <div className="relative z-10">
+                <div className="relative z-10 h-full flex flex-col">
                   <div className="bg-white/10 w-12 h-12 rounded-xl flex items-center justify-center mb-3 group-hover:bg-white/20 transition-all duration-300">
                     <Layers className="text-white h-6 w-6" />
                   </div>
                   <h3 className="text-xl font-bold mb-2 text-white">Prototyping</h3>
                   <p className="text-white/90 mb-3">Building interactive prototypes to test and validate design solutions.</p>
-                  <div className="mt-2 flex flex-wrap gap-2">
+                  <div className="mt-auto flex flex-wrap gap-2">
                     {["High-fidelity", "Low-fidelity", "Interactive", "User Testing"].map((skill, index) => (
                       <span 
                         key={skill}
@@ -159,36 +159,21 @@ const Skills = () => {
                 </div>
               </div>
               
-              {/* Wireframing - Bottom right */}
+              {/* Wireframing - Bottom right - Redesigned */}
               <div className="bg-[#3E40EF] rounded-2xl shadow-md p-6 transform hover:scale-[1.02] transition-all duration-300 hover:shadow-lg group relative overflow-hidden">
                 <div className="absolute -bottom-10 -right-10 w-20 h-20 bg-white/5 rounded-full group-hover:bg-white/10 transition-all duration-500"></div>
                 
-                <div className="relative z-10">
-                  <div className="bg-white/10 w-12 h-12 rounded-xl flex items-center justify-center mb-3 group-hover:bg-white/20 transition-all duration-300">
-                    <PenTool className="text-white h-6 w-6" />
-                  </div>
+                <div className="relative z-10 h-full flex flex-col items-center text-center">
                   <h3 className="text-xl font-bold mb-2 text-white">Wireframing</h3>
-                  <p className="text-white/90 mb-3">Creating structural blueprints to establish hierarchy and layout.</p>
+                  <p className="text-white/90 mb-4">Creating structural blueprints to establish hierarchy and layout.</p>
                   
-                  {/* Globe visualization properly positioned */}
-                  <div className="relative h-32 overflow-hidden rounded-lg bg-white/5">
-                    <Globe className="scale-[0.8]" />
-                    <div className="absolute bottom-0 left-0 w-full text-center text-white text-xs font-medium py-1 bg-black/30">
-                      Wireframe
-                    </div>
+                  {/* Globe visualization full-size in the center */}
+                  <div className="flex-1 w-full flex items-center justify-center">
+                    <Globe className="scale-[1.1]" />
                   </div>
                   
-                  <div className="mt-3">
-                    <div className="w-full bg-white/10 rounded-full h-2.5 mb-2">
-                      <div
-                        className="bg-white h-2.5 rounded-full transition-all duration-700"
-                        style={{ width: "95%" }}
-                      ></div>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-xs text-white/70">Beginner</span>
-                      <span className="text-xs font-medium text-white">Expert</span>
-                    </div>
+                  <div className="mt-2 w-full text-center text-white text-sm font-medium">
+                    Wireframe
                   </div>
                 </div>
               </div>
