@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { Menu, X, Linkedin, ExternalLink, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { WordRotate } from "@/components/WordRotate";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -60,6 +61,18 @@ const Navbar = () => {
             <span className="text-[#3E40EF] group-hover:rotate-12 transition-transform duration-300">.</span>
             <Sparkles className="h-4 w-4 text-[#3E40EF] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </a>
+          <div className="ml-2 text-xl font-medium">
+            <WordRotate 
+              words={["Anurag Adarsh", "Designer", "Developer"]} 
+              className="text-[#3E40EF] font-display"
+              motionProps={{
+                initial: { opacity: 0, y: 8 },
+                animate: { opacity: 1, y: 0 },
+                exit: { opacity: 0, y: -8 },
+                transition: { duration: 0.3, ease: "easeOut" },
+              }}
+            />
+          </div>
         </div>
 
         {/* Desktop Navigation */}
