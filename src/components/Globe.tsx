@@ -2,13 +2,8 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { useMotionValue, useSpring } from "motion/react";
+import { useMotionValue, useSpring } from "framer-motion";
 import { cn } from "@/lib/utils";
-
-// Since we can't get proper TypeScript types for cobe, we'll use a dynamic import
-// This is a workaround for the TypeScript error
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const createGlobe = (await import('cobe')).default as any;
 
 const MOVEMENT_DAMPING = 1400;
 
@@ -92,31 +87,50 @@ export function Globe({ className, config = GLOBE_CONFIG }: GlobeProps) {
     window.addEventListener("resize", onResize);
     onResize();
 
-    if (!canvasRef.current) return;
+    // Dynamically import cobe to avoid issues with server-side rendering
+    const loadGlobe = async () => {
+      if (!canvasRef.current) return;
+      
+      try {
+        const cobeModule = await import('cobe');
+        const createGlobe = cobeModule.default;
+        
+        // Create the globe with our canvas reference
+        const globe = createGlobe(canvasRef.current, {
+          ...config,
+          width: width * 2,
+          height: width * 2,
+          onRender: (state: GlobeState) => {
+            if (!pointerInteracting.current) phi += 0.005;
+            state.phi = phi + rs.get();
+            state.width = width * 2;
+            state.height = width * 2;
+          },
+        });
 
-    // Create the globe with our canvas reference
-    const globe = createGlobe(canvasRef.current, {
-      ...config,
-      width: width * 2,
-      height: width * 2,
-      onRender: (state: GlobeState) => {
-        if (!pointerInteracting.current) phi += 0.005;
-        state.phi = phi + rs.get();
-        state.width = width * 2;
-        state.height = width * 2;
-      },
-    });
-
-    // Fade in the globe
-    setTimeout(() => {
-      if (canvasRef.current) {
-        canvasRef.current.style.opacity = "1";
+        // Fade in the globe
+        setTimeout(() => {
+          if (canvasRef.current) {
+            canvasRef.current.style.opacity = "1";
+          }
+        }, 0);
+        
+        return globe;
+      } catch (error) {
+        console.error("Failed to load globe:", error);
+        return null;
       }
-    }, 0);
+    };
+
+    // Load the globe
+    let globe: any = null;
+    loadGlobe().then(g => {
+      globe = g;
+    });
     
     // Clean up function
     return () => {
-      globe.destroy();
+      if (globe) globe.destroy();
       window.removeEventListener("resize", onResize);
     };
   }, [rs, config]);
