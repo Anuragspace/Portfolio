@@ -46,6 +46,7 @@
     "cobe": "^0.6.3",
     "date-fns": "^3.6.0",
     "embla-carousel-react": "^8.3.0",
+    "framer-motion": "^12.6.3",
     "input-otp": "^1.2.4",
     "lucide-react": "^0.462.0",
     "motion": "^10.18.0",

@@ -2,7 +2,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { useMotionValue, useSpring } from "framer-motion";
+import { useMotionValue, useSpring, motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 const MOVEMENT_DAMPING = 1400;
