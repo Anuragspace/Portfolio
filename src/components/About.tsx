@@ -51,7 +51,7 @@ const About = () => {
           <div className="lg:col-span-5">
             <div 
               ref={imageRef} 
-              className="relative h-[430px]"
+              className="relative h-[430px] cursor-none"
               onMouseEnter={() => setShowSpinText(true)}
               onMouseLeave={() => setShowSpinText(false)}
             >
@@ -75,6 +75,7 @@ const About = () => {
                         className="text-white" 
                         duration={15}
                         radius={4.5}
+                        followCursor={true}
                       />
                     </div>
                   </div>
@@ -101,8 +102,8 @@ const About = () => {
                 <h3 className="text-2xl md:text-3xl font-bold leading-snug">
                   I'm a <span className="text-[#3E40EF]">UI/UX Designer</span>
                 </h3>
-                <div className="mt-2">
-                  <TextReveal className="text-lg">
+                <div className="mt-4 mb-6">
+                  <TextReveal className="text-lg md:text-xl leading-relaxed">
                     with a passion for creating user-centered digital experiences
                   </TextReveal>
                 </div>

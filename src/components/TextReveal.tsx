@@ -11,6 +11,7 @@ export const TextReveal: FC<TextRevealProps> = ({ children, className }) => {
   const targetRef = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
+    offset: ["start 0.9", "start 0.3"]
   });
 
   if (typeof children !== "string") {
@@ -53,7 +54,7 @@ const Word: FC<WordProps> = ({ children, progress, range }) => {
       <span className="absolute opacity-30">{children}</span>
       <motion.span
         style={{ opacity: opacity }}
-        className="text-black dark:text-white"
+        className="text-[#3E40EF] font-semibold"
       >
         {children}
       </motion.span>
