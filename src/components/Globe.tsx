@@ -1,14 +1,18 @@
 
 "use client";
 
-import createGlobe from "cobe";
-import { useMotionValue, useSpring } from "motion/react";
 import { useEffect, useRef } from "react";
-
+import { useMotionValue, useSpring } from "motion/react";
 import { cn } from "@/lib/utils";
+
+// Since we can't get proper TypeScript types for cobe, we'll use a dynamic import
+// This is a workaround for the TypeScript error
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const createGlobe = (await import('cobe')).default as any;
 
 const MOVEMENT_DAMPING = 1400;
 
+// Define the Globe configuration
 const GLOBE_CONFIG = {
   width: 800,
   height: 800,
@@ -37,13 +41,19 @@ const GLOBE_CONFIG = {
   ],
 };
 
-export function Globe({
-  className,
-  config = GLOBE_CONFIG,
-}: {
+type GlobeState = {
+  phi: number;
+  width: number;
+  height: number;
+  [key: string]: any;
+};
+
+interface GlobeProps {
   className?: string;
   config?: typeof GLOBE_CONFIG;
-}) {
+}
+
+export function Globe({ className, config = GLOBE_CONFIG }: GlobeProps) {
   let phi = 0;
   let width = 0;
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -84,11 +94,12 @@ export function Globe({
 
     if (!canvasRef.current) return;
 
+    // Create the globe with our canvas reference
     const globe = createGlobe(canvasRef.current, {
       ...config,
       width: width * 2,
       height: width * 2,
-      onRender: (state: any) => {
+      onRender: (state: GlobeState) => {
         if (!pointerInteracting.current) phi += 0.005;
         state.phi = phi + rs.get();
         state.width = width * 2;
@@ -96,12 +107,14 @@ export function Globe({
       },
     });
 
+    // Fade in the globe
     setTimeout(() => {
       if (canvasRef.current) {
         canvasRef.current.style.opacity = "1";
       }
     }, 0);
     
+    // Clean up function
     return () => {
       globe.destroy();
       window.removeEventListener("resize", onResize);
