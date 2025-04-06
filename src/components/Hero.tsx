@@ -1,4 +1,3 @@
-
 import React from "react";
 import { ArrowDown, Sparkles, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -6,7 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const Hero = () => {
   return (
-    <section id="home" className="min-h-screen pt-24 pb-16 flex items-center relative overflow-hidden">
+    <section className="min-h-screen pt-24 pb-16 flex items-center relative overflow-hidden">
       <div className="container-custom">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-7 z-10">
