@@ -1,7 +1,7 @@
 
 "use client";
 
-import createGlobe, { COBEOptions } from "cobe";
+import createGlobe from "cobe";
 import { useMotionValue, useSpring } from "motion/react";
 import { useEffect, useRef } from "react";
 
@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 
 const MOVEMENT_DAMPING = 1400;
 
-const GLOBE_CONFIG: COBEOptions = {
+const GLOBE_CONFIG = {
   width: 800,
   height: 800,
   onRender: () => {},
@@ -42,7 +42,7 @@ export function Globe({
   config = GLOBE_CONFIG,
 }: {
   className?: string;
-  config?: COBEOptions;
+  config?: typeof GLOBE_CONFIG;
 }) {
   let phi = 0;
   let width = 0;
@@ -88,7 +88,7 @@ export function Globe({
       ...config,
       width: width * 2,
       height: width * 2,
-      onRender: (state) => {
+      onRender: (state: any) => {
         if (!pointerInteracting.current) phi += 0.005;
         state.phi = phi + rs.get();
         state.width = width * 2;
