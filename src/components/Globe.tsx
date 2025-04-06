@@ -36,6 +36,7 @@ const GLOBE_CONFIG = {
   ],
 };
 
+// Define types for the Globe
 type GlobeState = {
   phi: number;
   width: number;
@@ -92,8 +93,9 @@ export function Globe({ className, config = GLOBE_CONFIG }: GlobeProps) {
       if (!canvasRef.current) return;
       
       try {
-        const cobeModule = await import('cobe');
-        const createGlobe = cobeModule.default;
+        // Import the package properly
+        const cobe = await import('cobe');
+        const createGlobe = cobe.default;
         
         // Create the globe with our canvas reference
         const globe = createGlobe(canvasRef.current, {
