@@ -7,7 +7,6 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
-  const [showAltText, setShowAltText] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,17 +30,8 @@ const Navbar = () => {
       setActiveSection(currentSection);
     };
     
-    // Flip animation interval
-    const flipInterval = setInterval(() => {
-      setShowAltText(prev => !prev);
-    }, 4000);
-    
     window.addEventListener("scroll", handleScroll);
-    
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      clearInterval(flipInterval);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const toggleMenu = () => {
@@ -57,8 +47,6 @@ const Navbar = () => {
     { name: "Contact", href: "#contact" },
   ];
 
-  const isPastHero = isScrolled && activeSection !== "home";
-
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -66,39 +54,17 @@ const Navbar = () => {
       }`}
     >
       <div className="container-custom flex items-center justify-between">
-        {/* Logo & Title Area - Only visible when not past hero or on mobile */}
-        <div className={`flex items-center ${isPastHero ? "md:hidden" : ""}`}>
-          <div className="relative h-10 overflow-hidden">
-            <a href="#" className="text-2xl font-bold group flex items-center gap-1">
-              <div className="relative h-10 overflow-hidden">
-                <span 
-                  className={`font-display absolute transition-transform duration-700 ${
-                    showAltText 
-                      ? "translate-y-full opacity-0" 
-                      : "translate-y-0 opacity-100"
-                  }`}
-                >
-                  Portfolio
-                </span>
-                <span 
-                  className={`font-display absolute transition-transform duration-700 ${
-                    showAltText 
-                      ? "translate-y-0 opacity-100" 
-                      : "-translate-y-full opacity-0"
-                  }`}
-                >
-                  ANURAG ADARSH
-                </span>
-              </div>
-              <span className="text-[#3E40EF] group-hover:rotate-12 transition-transform duration-300">.</span>
-              <Sparkles className="h-4 w-4 text-[#3E40EF] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            </a>
-          </div>
+        <div className="flex items-center">
+          <a href="#" className="text-xl font-bold group flex items-center gap-1">
+            <span className="font-display">Portfolio</span>
+            <span className="text-[#3E40EF] group-hover:rotate-12 transition-transform duration-300">.</span>
+            <Sparkles className="h-4 w-4 text-[#3E40EF] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          </a>
         </div>
 
-        {/* Central Navigation - Always visible when scrolled on desktop */}
-        <nav className={`hidden md:flex items-center ${isPastHero ? "mx-auto" : ""}`}>
-          <div className={`bg-white/50 backdrop-blur-sm shadow-sm rounded-full px-2 py-1 flex items-center gap-1 ${isPastHero ? "shadow-[0_2px_8px_rgba(62,64,239,0.2)]" : ""}`}>
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center">
+          <div className="bg-white/50 backdrop-blur-sm shadow-sm rounded-full px-2 py-1 flex items-center gap-1">
             {navLinks.map((link) => (
               <a
                 key={link.name}
@@ -115,8 +81,7 @@ const Navbar = () => {
           </div>
         </nav>
 
-        {/* Social Links & Resume Button - Only visible when not past hero or on mobile */}
-        <div className={`hidden md:flex items-center space-x-4 ${isPastHero ? "md:hidden" : ""}`}>
+        <div className="hidden md:flex items-center space-x-4">
           <a 
             href="https://linkedin.com" 
             target="_blank" 
