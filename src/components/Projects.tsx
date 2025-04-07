@@ -64,18 +64,18 @@ const Projects = () => {
           <div className="mx-auto mt-4 h-1 w-24 bg-[#3E40EF]"></div>
         </div>
         
-        <div className="grid grid-cols-1 gap-12">
+        <div className="grid grid-cols-1 gap-16">
           {projects.map((project, index) => (
             <div 
               key={project.id} 
-              className="overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-5 bg-white"
+              className="group overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 bg-white"
             >
               <div className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
                 {/* Text Content Section - 40% */}
                 <div 
-                  className={`w-full md:w-[40%] p-8 flex flex-col justify-between rounded-xl ${
+                  className={`relative w-full md:w-[40%] p-8 flex flex-col justify-between rounded-xl overflow-hidden ${
                     index % 2 === 0 
-                      ? 'bg-[#eee] text-gray-800' 
+                      ? 'bg-[#f9f9f9] text-gray-800' 
                       : 'bg-[#3E40EF] text-white'
                   }`}
                 >
@@ -88,21 +88,21 @@ const Projects = () => {
                       >
                         {project.year}
                       </span>
-                      <h3 className="text-xl font-bold md:text-2xl">{project.title}</h3>
+                      <h3 className="text-xl font-bold md:text-2xl group-hover:translate-y-[-2px] transition-transform duration-300">{project.title}</h3>
                     </div>
                     
-                    <p className={`mb-6 ${index % 2 === 0 ? 'text-gray-600' : 'text-blue-100'}`}>
+                    <p className={`mb-6 ${index % 2 === 0 ? 'text-gray-600' : 'text-blue-100'} group-hover:translate-y-[-2px] transition-transform duration-300 delay-75`}>
                       {project.description}
                     </p>
                     
-                    <div className="mb-6 flex flex-wrap gap-2">
+                    <div className="mb-6 flex flex-wrap gap-2 group-hover:translate-y-[-2px] transition-transform duration-300 delay-100">
                       {project.tags.map((tag, i) => (
                         <span 
                           key={i} 
-                          className={`rounded-full px-3 py-1 text-xs font-medium ${
+                          className={`rounded-full px-3 py-1 text-xs font-medium transition-all duration-300 ${
                             index % 2 === 0 
-                              ? 'bg-gray-100 text-gray-700' 
-                              : 'bg-blue-100/20 text-white'
+                              ? 'bg-gray-100 text-gray-700 group-hover:bg-gray-200' 
+                              : 'bg-blue-100/20 text-white group-hover:bg-blue-100/30'
                           }`}
                         >
                           {tag}
@@ -113,7 +113,7 @@ const Projects = () => {
                   
                   <Button 
                     variant={index % 2 === 0 ? "default" : "outline"}
-                    className={`w-fit mt-auto group ${
+                    className={`w-fit mt-auto group-hover:translate-y-[-2px] transition-all duration-300 delay-150 ${
                       index % 2 === 0 
                         ? 'bg-[#3E40EF] hover:bg-[#3030C0] text-white' 
                         : 'border-white text-white hover:bg-white hover:text-[#3E40EF]'
@@ -125,14 +125,21 @@ const Projects = () => {
                       <ArrowRight size={16} className="ml-2 transition-transform duration-300 group-hover:translate-x-1" />
                     </a>
                   </Button>
+                  
+                  {/* Animated circular element */}
+                  <div 
+                    className={`absolute -bottom-16 -right-16 w-40 h-40 rounded-full opacity-0 group-hover:opacity-10 transition-all duration-500 transform scale-0 group-hover:scale-100 ${
+                      index % 2 === 0 ? 'bg-[#3E40EF]' : 'bg-white'
+                    }`}
+                  />
                 </div>
                 
                 {/* Image Section - 60% */}
-                <div className="w-full md:w-[60%] h-full overflow-hidden rounded-xl ml-0 md:ml-4 mt-4 md:mt-0">
+                <div className="w-full md:w-[60%] h-full overflow-hidden rounded-xl ml-0 md:ml-4 mt-4 md:mt-0 order-first md:order-none">
                   <img 
                     src={project.image} 
                     alt={project.title} 
-                    className="h-full w-full object-cover transition-transform duration-700 hover:scale-105 rounded-xl" 
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 rounded-xl" 
                   />
                 </div>
               </div>
