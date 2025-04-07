@@ -29,7 +29,7 @@ export const ScrollTrigger: React.FC<ScrollTriggerProps> = ({
   // Using type assertion to ensure framer-motion accepts our margin
   const isInView = useInView(ref, { 
     once, 
-    margin: rootMargin as any, // Using type assertion to fix the type error
+    margin: rootMargin, 
     amount: threshold 
   });
 
