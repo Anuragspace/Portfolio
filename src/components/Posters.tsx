@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { BlurFade } from "./BlurFade";
 import {
@@ -19,6 +19,9 @@ interface Poster {
 }
 
 const Posters = () => {
+  const prevButtonRef = useRef<HTMLButtonElement>(null);
+  const nextButtonRef = useRef<HTMLButtonElement>(null);
+  
   const posters: Poster[] = [
     {
       id: 1,
@@ -58,6 +61,18 @@ const Posters = () => {
     }
   ];
 
+  const handlePrevClick = () => {
+    if (prevButtonRef.current) {
+      prevButtonRef.current.click();
+    }
+  };
+
+  const handleNextClick = () => {
+    if (nextButtonRef.current) {
+      nextButtonRef.current.click();
+    }
+  };
+
   return (
     <section id="posters" className="section-padding bg-white">
       <div className="container-custom">
@@ -77,14 +92,14 @@ const Posters = () => {
               </p>
               <div className="hidden md:flex space-x-3 mt-8">
                 <button 
-                  onClick={() => document.querySelector('[data-carousel-prev]')?.click()}
+                  onClick={handlePrevClick}
                   className="w-10 h-10 rounded-full bg-white border border-gray-200 shadow-sm flex items-center justify-center transition-colors hover:bg-gray-50"
                   aria-label="Previous slide"
                 >
                   <ChevronLeft size={18} className="text-accent" />
                 </button>
                 <button 
-                  onClick={() => document.querySelector('[data-carousel-next]')?.click()}
+                  onClick={handleNextClick}
                   className="w-10 h-10 rounded-full bg-white border border-gray-200 shadow-sm flex items-center justify-center transition-colors hover:bg-gray-50"
                   aria-label="Next slide"
                 >
@@ -132,10 +147,12 @@ const Posters = () => {
                   ))}
                 </CarouselContent>
                 <CarouselPrevious 
+                  ref={prevButtonRef}
                   data-carousel-prev
                   className="hidden"
                 />
                 <CarouselNext 
+                  ref={nextButtonRef}
                   data-carousel-next
                   className="hidden"
                 />
@@ -145,14 +162,14 @@ const Posters = () => {
             {/* Mobile navigation buttons */}
             <div className="flex md:hidden justify-center space-x-3 mt-6">
               <button 
-                onClick={() => document.querySelector('[data-carousel-prev]')?.click()}
+                onClick={handlePrevClick}
                 className="w-10 h-10 rounded-full bg-white border border-gray-200 shadow-sm flex items-center justify-center transition-colors hover:bg-gray-50"
                 aria-label="Previous slide"
               >
                 <ChevronLeft size={18} className="text-accent" />
               </button>
               <button 
-                onClick={() => document.querySelector('[data-carousel-next]')?.click()}
+                onClick={handleNextClick}
                 className="w-10 h-10 rounded-full bg-white border border-gray-200 shadow-sm flex items-center justify-center transition-colors hover:bg-gray-50"
                 aria-label="Next slide"
               >
