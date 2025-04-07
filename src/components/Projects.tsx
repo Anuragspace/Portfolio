@@ -65,39 +65,46 @@ const Projects = () => {
           <div className="mx-auto mt-4 h-1 w-24 bg-[#3E40EF]"></div>
         </div>
         
-        <div className="grid grid-cols-1 gap-8 md:gap-12">
+        <div className="grid grid-cols-1 gap-10">
           {projects.map((project, index) => (
-            <Card 
+            <div 
               key={project.id} 
-              className="overflow-hidden border bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300"
+              className="overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300"
             >
-              <div className={`grid grid-cols-1 md:grid-cols-2 ${index % 2 !== 0 ? 'md:grid-flow-dense' : ''}`}>
-                {/* Image Section */}
-                <div className={`w-full h-full overflow-hidden ${index % 2 !== 0 ? 'md:col-start-1' : 'md:col-start-2'}`}>
-                  <div className="aspect-[4/3] h-full">
-                    <img 
-                      src={project.image} 
-                      alt={project.title} 
-                      className="h-full w-full object-cover transition-transform duration-700 hover:scale-105" 
-                    />
-                  </div>
-                </div>
-                
-                {/* Content Section */}
-                <div className={`w-full flex flex-col justify-between p-6 bg-[#3E40EF] text-white ${index % 2 !== 0 ? 'md:col-start-2' : 'md:col-start-1'}`}>
+              <div className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+                {/* Text Content Section - 35% */}
+                <div 
+                  className={`w-full md:w-[35%] p-8 flex flex-col justify-between ${
+                    index % 2 === 0 
+                      ? 'bg-white text-gray-800' 
+                      : 'bg-[#3E40EF] text-white'
+                  }`}
+                >
                   <div>
                     <div className="mb-4">
-                      <span className="block text-sm text-blue-100 mb-1">CSED WEBSITE</span>
+                      <span 
+                        className={`block text-sm mb-1 font-medium ${
+                          index % 2 === 0 ? 'text-[#3E40EF]' : 'text-blue-100'
+                        }`}
+                      >
+                        CSED WEBSITE
+                      </span>
                       <h3 className="text-xl font-bold md:text-2xl">{project.title}</h3>
                     </div>
                     
-                    <p className="mb-6 text-blue-100">{project.description}</p>
+                    <p className={`mb-6 ${index % 2 === 0 ? 'text-gray-600' : 'text-blue-100'}`}>
+                      {project.description}
+                    </p>
                     
                     <div className="mb-6 flex flex-wrap gap-2">
                       {project.tags.map((tag, i) => (
                         <span 
                           key={i} 
-                          className="rounded-full bg-blue-100/20 px-3 py-1 text-xs font-medium text-white"
+                          className={`rounded-full px-3 py-1 text-xs font-medium ${
+                            index % 2 === 0 
+                              ? 'bg-gray-100 text-gray-700' 
+                              : 'bg-blue-100/20 text-white'
+                          }`}
                         >
                           {tag}
                         </span>
@@ -106,8 +113,12 @@ const Projects = () => {
                   </div>
                   
                   <Button 
-                    variant="outline" 
-                    className="w-fit mt-auto border-white text-white hover:bg-white hover:text-[#3E40EF] group"
+                    variant={index % 2 === 0 ? "default" : "outline"}
+                    className={`w-fit mt-auto group ${
+                      index % 2 === 0 
+                        ? 'bg-[#3E40EF] hover:bg-[#3030C0] text-white' 
+                        : 'border-white text-white hover:bg-white hover:text-[#3E40EF]'
+                    }`}
                     asChild
                   >
                     <a href={project.link} className="flex items-center">
@@ -116,8 +127,19 @@ const Projects = () => {
                     </a>
                   </Button>
                 </div>
+                
+                {/* Image Section - 65% */}
+                <div className="w-full md:w-[65%] h-full overflow-hidden">
+                  <div className="h-full">
+                    <img 
+                      src={project.image} 
+                      alt={project.title} 
+                      className="h-full w-full object-cover transition-transform duration-700 hover:scale-105" 
+                    />
+                  </div>
+                </div>
               </div>
-            </Card>
+            </div>
           ))}
         </div>
       </div>
