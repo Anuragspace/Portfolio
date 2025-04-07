@@ -1,5 +1,6 @@
 
 import React, { useEffect } from "react";
+import { useSmoothScroll } from "@/components/LenisProvider";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -11,6 +12,8 @@ import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
 const Index = () => {
+  const { lenis } = useSmoothScroll();
+
   useEffect(() => {
     // Smooth scroll to anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -23,10 +26,20 @@ const Index = () => {
         const targetElement = document.querySelector(href);
         if (!targetElement) return;
         
-        window.scrollTo({
-          top: targetElement.offsetTop - 80, // Adjust for header height
-          behavior: 'smooth'
-        });
+        if (lenis) {
+          // Use Lenis for smooth scrolling
+          lenis.scrollTo(targetElement, { 
+            offset: -80, // Adjust for header height
+            duration: 1.2,
+            easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+          });
+        } else {
+          // Fallback to native scrolling
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
       });
     });
 
@@ -35,7 +48,16 @@ const Index = () => {
         anchor.removeEventListener('click', () => {});
       });
     };
-  }, []);
+  }, [lenis]);
+
+  // Force Lenis to recalculate on page load
+  useEffect(() => {
+    if (lenis) {
+      setTimeout(() => {
+        lenis.resize();
+      }, 500);
+    }
+  }, [lenis]);
 
   return (
     <div className="min-h-screen bg-white">
