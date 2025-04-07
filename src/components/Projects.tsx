@@ -70,12 +70,12 @@ const Projects = () => {
               key={project.id} 
               className="group overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 bg-white"
             >
-              <div className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+              <div className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-5`}>
                 {/* Text Content Section - 40% */}
                 <div 
                   className={`relative w-full md:w-[40%] p-8 flex flex-col justify-between rounded-xl overflow-hidden ${
                     index % 2 === 0 
-                      ? 'bg-[#f9f9f9] text-gray-800' 
+                      ? 'bg-[#fafafa] text-gray-800' 
                       : 'bg-[#3E40EF] text-white'
                   }`}
                 >
@@ -121,7 +121,7 @@ const Projects = () => {
                     asChild
                   >
                     <a href={project.link} className="flex items-center">
-                      {index % 2 === 0 ? 'View Project' : 'Show Case'}
+                      {index % 2 === 0 ? 'View Project' : 'View Project'}
                       <ArrowRight size={16} className="ml-2 transition-transform duration-300 group-hover:translate-x-1" />
                     </a>
                   </Button>
@@ -135,7 +135,7 @@ const Projects = () => {
                 </div>
                 
                 {/* Image Section - 60% */}
-                <div className="w-full md:w-[60%] h-full overflow-hidden rounded-xl ml-0 md:ml-4 mt-4 md:mt-0 order-first md:order-none">
+                <div className="w-full md:w-[60%] h-full overflow-hidden rounded-xl md:mx-0 mt-5 md:mt-0 order-first md:order-none">
                   <img 
                     src={project.image} 
                     alt={project.title} 
