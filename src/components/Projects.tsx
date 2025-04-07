@@ -1,7 +1,6 @@
 
 import React from "react";
 import { ArrowRight } from "lucide-react";
-import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
 interface Project {
@@ -65,18 +64,18 @@ const Projects = () => {
           <div className="mx-auto mt-4 h-1 w-24 bg-[#3E40EF]"></div>
         </div>
         
-        <div className="grid grid-cols-1 gap-10">
+        <div className="grid grid-cols-1 gap-12">
           {projects.map((project, index) => (
             <div 
               key={project.id} 
-              className="overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300"
+              className="overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-5 bg-white"
             >
               <div className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
-                {/* Text Content Section - 35% */}
+                {/* Text Content Section - 40% */}
                 <div 
-                  className={`w-full md:w-[35%] p-8 flex flex-col justify-between ${
+                  className={`w-full md:w-[40%] p-8 flex flex-col justify-between rounded-xl ${
                     index % 2 === 0 
-                      ? 'bg-white text-gray-800' 
+                      ? 'bg-[#eee] text-gray-800' 
                       : 'bg-[#3E40EF] text-white'
                   }`}
                 >
@@ -87,7 +86,7 @@ const Projects = () => {
                           index % 2 === 0 ? 'text-[#3E40EF]' : 'text-blue-100'
                         }`}
                       >
-                        CSED WEBSITE
+                        {project.year}
                       </span>
                       <h3 className="text-xl font-bold md:text-2xl">{project.title}</h3>
                     </div>
@@ -122,21 +121,19 @@ const Projects = () => {
                     asChild
                   >
                     <a href={project.link} className="flex items-center">
-                      View Project
+                      {index % 2 === 0 ? 'View Project' : 'Show Case'}
                       <ArrowRight size={16} className="ml-2 transition-transform duration-300 group-hover:translate-x-1" />
                     </a>
                   </Button>
                 </div>
                 
-                {/* Image Section - 65% */}
-                <div className="w-full md:w-[65%] h-full overflow-hidden">
-                  <div className="h-full">
-                    <img 
-                      src={project.image} 
-                      alt={project.title} 
-                      className="h-full w-full object-cover transition-transform duration-700 hover:scale-105" 
-                    />
-                  </div>
+                {/* Image Section - 60% */}
+                <div className="w-full md:w-[60%] h-full overflow-hidden rounded-xl ml-0 md:ml-4 mt-4 md:mt-0">
+                  <img 
+                    src={project.image} 
+                    alt={project.title} 
+                    className="h-full w-full object-cover transition-transform duration-700 hover:scale-105 rounded-xl" 
+                  />
                 </div>
               </div>
             </div>
