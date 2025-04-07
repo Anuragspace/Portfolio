@@ -2,6 +2,9 @@
 import React from "react";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { BlurFade } from "@/components/BlurFade";
+import { BorderBeam } from "@/components/BorderBeam";
+import { RainbowButton } from "@/components/RainbowButton";
 
 interface Project {
   id: number;
@@ -54,7 +57,7 @@ const Projects = () => {
   ];
 
   return (
-    <section id="projects" className="section-padding py-20 bg-gray-50">
+    <section id="projects" className="section-padding py-20 bg-gray-50 relative">
       <div className="container-custom">
         <div className="mb-16 text-center">
           <h2 className="mb-4">My Design Work That Stands Out</h2>
@@ -66,84 +69,109 @@ const Projects = () => {
         
         <div className="grid grid-cols-1 gap-16">
           {projects.map((project, index) => (
-            <div 
-              key={project.id} 
-              className="group overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 bg-white"
+            <BlurFade 
+              key={project.id}
+              direction={index % 2 === 0 ? "left" : "right"}
+              duration={0.5}
+              delay={index * 0.1}
+              className="w-full"
+              inViewMargin="-100px"
             >
-              <div className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-5`}>
-                {/* Text Content Section - 40% */}
-                <div 
-                  className={`relative w-full md:w-[40%] p-8 flex flex-col justify-between rounded-xl overflow-hidden ${
-                    index % 2 === 0 
-                      ? 'bg-[#fafafa] text-gray-800' 
-                      : 'bg-[#3E40EF] text-white'
-                  }`}
-                >
-                  <div>
-                    <div className="mb-4">
-                      <span 
-                        className={`block text-sm mb-1 font-medium ${
-                          index % 2 === 0 ? 'text-[#3E40EF]' : 'text-blue-100'
-                        }`}
-                      >
-                        {project.year}
-                      </span>
-                      <h3 className="text-xl font-bold md:text-2xl group-hover:translate-y-[-2px] transition-transform duration-300">{project.title}</h3>
-                    </div>
-                    
-                    <p className={`mb-6 ${index % 2 === 0 ? 'text-gray-600' : 'text-blue-100'} group-hover:translate-y-[-2px] transition-transform duration-300 delay-75`}>
-                      {project.description}
-                    </p>
-                    
-                    <div className="mb-6 flex flex-wrap gap-2 group-hover:translate-y-[-2px] transition-transform duration-300 delay-100">
-                      {project.tags.map((tag, i) => (
+              <div 
+                className="group overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 bg-white relative"
+              >
+                <div className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-5`}>
+                  {/* Text Content Section - 40% */}
+                  <div 
+                    className={`relative w-full md:w-[40%] p-8 flex flex-col justify-between rounded-xl overflow-hidden ${
+                      index % 2 === 0 
+                        ? 'bg-[#fafafa] text-gray-800' 
+                        : 'bg-[#3E40EF] text-white'
+                    }`}
+                  >
+                    <div>
+                      <div className="mb-4 transform transition-transform duration-300 group-hover:translate-y-[-2px]">
                         <span 
-                          key={i} 
-                          className={`rounded-full px-3 py-1 text-xs font-medium transition-all duration-300 ${
-                            index % 2 === 0 
-                              ? 'bg-gray-100 text-gray-700 group-hover:bg-gray-200' 
-                              : 'bg-blue-100/20 text-white group-hover:bg-blue-100/30'
+                          className={`block text-sm mb-1 font-medium ${
+                            index % 2 === 0 ? 'text-[#3E40EF]' : 'text-blue-100'
                           }`}
                         >
-                          {tag}
+                          {project.year}
                         </span>
-                      ))}
+                        <h3 className="text-xl font-bold md:text-2xl group-hover:translate-y-[-2px] transition-transform duration-300">{project.title}</h3>
+                      </div>
+                      
+                      <p className={`mb-6 ${index % 2 === 0 ? 'text-gray-600' : 'text-blue-100'} group-hover:translate-y-[-2px] transition-transform duration-300 delay-75`}>
+                        {project.description}
+                      </p>
+                      
+                      <div className="mb-6 flex flex-wrap gap-2 group-hover:translate-y-[-2px] transition-transform duration-300 delay-100">
+                        {project.tags.map((tag, i) => (
+                          <span 
+                            key={i} 
+                            className={`rounded-full px-3 py-1 text-xs font-medium transition-all duration-300 ${
+                              index % 2 === 0 
+                                ? 'bg-gray-100 text-gray-700 group-hover:bg-gray-200' 
+                                : 'bg-blue-100/20 text-white group-hover:bg-blue-100/30'
+                            }`}
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
                     </div>
+                    
+                    {index % 2 === 0 ? (
+                      <Button 
+                        variant="default"
+                        className="w-fit mt-auto group-hover:translate-y-[-2px] transition-all duration-300 delay-150 bg-[#3E40EF] hover:bg-[#3030C0] text-white"
+                        asChild
+                      >
+                        <a href={project.link} className="flex items-center">
+                          View Project
+                          <ArrowRight size={16} className="ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+                        </a>
+                      </Button>
+                    ) : (
+                      <div className="relative w-fit">
+                        <RainbowButton className="mt-auto">
+                          <a href={project.link} className="flex items-center">
+                            View Project
+                            <ArrowRight size={16} className="ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+                          </a>
+                        </RainbowButton>
+                      </div>
+                    )}
+                    
+                    {/* Animated circular element */}
+                    <div 
+                      className={`absolute -bottom-16 -right-16 w-40 h-40 rounded-full opacity-0 group-hover:opacity-10 transition-all duration-500 transform scale-0 group-hover:scale-100 ${
+                        index % 2 === 0 ? 'bg-[#3E40EF]' : 'bg-white'
+                      }`}
+                    />
+
+                    {/* Border Beam Effect */}
+                    <BorderBeam 
+                      colorFrom={index % 2 === 0 ? "#3E40EF" : "#ffffff"} 
+                      colorTo={index % 2 === 0 ? "#6366F1" : "#D6BCFA"} 
+                      size={40} 
+                      duration={8}
+                      delay={index * 0.5}
+                      reverse={index % 2 !== 0}
+                    />
                   </div>
                   
-                  <Button 
-                    variant={index % 2 === 0 ? "default" : "outline"}
-                    className={`w-fit mt-auto group-hover:translate-y-[-2px] transition-all duration-300 delay-150 ${
-                      index % 2 === 0 
-                        ? 'bg-[#3E40EF] hover:bg-[#3030C0] text-white' 
-                        : 'border-white text-white hover:bg-white hover:text-[#3E40EF]'
-                    }`}
-                    asChild
-                  >
-                    <a href={project.link} className="flex items-center">
-                      {index % 2 === 0 ? 'View Project' : 'View Project'}
-                      <ArrowRight size={16} className="ml-2 transition-transform duration-300 group-hover:translate-x-1" />
-                    </a>
-                  </Button>
-                  
-                  {/* Animated circular element */}
-                  <div 
-                    className={`absolute -bottom-16 -right-16 w-40 h-40 rounded-full opacity-0 group-hover:opacity-10 transition-all duration-500 transform scale-0 group-hover:scale-100 ${
-                      index % 2 === 0 ? 'bg-[#3E40EF]' : 'bg-white'
-                    }`}
-                  />
-                </div>
-                
-                {/* Image Section - 60% */}
-                <div className="w-full md:w-[60%] h-full overflow-hidden rounded-xl md:mx-0 mt-5 md:mt-0 order-first md:order-none">
-                  <img 
-                    src={project.image} 
-                    alt={project.title} 
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 rounded-xl" 
-                  />
+                  {/* Image Section - 60% */}
+                  <div className="w-full md:w-[60%] h-full overflow-hidden rounded-xl md:mx-0 mt-5 md:mt-0 order-first md:order-none">
+                    <img 
+                      src={project.image} 
+                      alt={project.title} 
+                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 rounded-xl" 
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
+            </BlurFade>
           ))}
         </div>
       </div>
