@@ -26,11 +26,12 @@ export const ScrollTrigger: React.FC<ScrollTriggerProps> = ({
   const { lenis } = useSmoothScroll();
   const [hasEntered, setHasEntered] = useState(false);
   
-  // Using type assertion to ensure framer-motion accepts our margin
+  // Use only threshold and once which are properly typed
+  // Add 'as any' to rootMargin to fix type error
   const isInView = useInView(ref, { 
     once, 
-    margin: rootMargin, 
-    amount: threshold 
+    amount: threshold,
+    margin: rootMargin as any, // Type assertion to fix TypeScript error
   });
 
   useEffect(() => {
