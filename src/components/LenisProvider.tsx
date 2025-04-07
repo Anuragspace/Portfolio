@@ -21,7 +21,7 @@ interface LenisProviderProps {
     wheelMultiplier?: number;
     touchMultiplier?: number;
     // Only use options supported by Lenis
-    smoothTouch?: boolean;
+    smooth?: boolean; // Replace smoothTouch with smooth which is the correct property
   };
 }
 
@@ -33,7 +33,7 @@ export const LenisProvider = ({
     smoothWheel: true,
     wheelMultiplier: 1.2,
     touchMultiplier: 1.5,
-    smoothTouch: false, // Only enable on mobile if needed
+    smooth: true, // Using smooth instead of smoothTouch
   }
 }: LenisProviderProps) => {
   const [lenis, setLenis] = useState<Lenis | null>(null);
@@ -61,7 +61,7 @@ export const LenisProvider = ({
       wheelMultiplier: options.wheelMultiplier,
       touchMultiplier: options.touchMultiplier,
       smoothWheel: options.smoothWheel,
-      smoothTouch: options.smoothTouch,
+      smooth: options.smooth, // Using smooth instead of smoothTouch
     });
 
     function raf(time: number) {
@@ -78,7 +78,7 @@ export const LenisProvider = ({
       document.documentElement.style.scrollbarWidth = '';
       document.body.style.overflow = '';
     };
-  }, [options.duration, options.easing, options.smoothWheel, options.wheelMultiplier, options.touchMultiplier, options.smoothTouch]); // Update dependencies
+  }, [options.duration, options.easing, options.smoothWheel, options.wheelMultiplier, options.touchMultiplier, options.smooth]); // Update dependencies
 
   return (
     <SmoothScrollContext.Provider value={{ lenis }}>
