@@ -31,7 +31,8 @@ const Index = () => {
       const targetElement = document.querySelector(href);
       if (!targetElement) return;
       
-      lenis.scrollTo(targetElement, { 
+      // Cast targetElement to HTMLElement since Lenis requires it
+      lenis.scrollTo(targetElement as HTMLElement, { 
         offset: -80,
         duration: 1.5,
         easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t))

@@ -6,7 +6,7 @@ import { useSmoothScroll } from './LenisProvider';
 interface ScrollTriggerProps {
   children: ReactNode;
   threshold?: number;
-  rootMargin?: number | string;
+  rootMargin?: string; // Changed to only accept string
   onEnter?: () => void;
   onLeave?: () => void;
   once?: boolean;
@@ -27,7 +27,7 @@ export const ScrollTrigger: React.FC<ScrollTriggerProps> = ({
   const [hasEntered, setHasEntered] = useState(false);
   const isInView = useInView(ref, { 
     once, 
-    margin: rootMargin,
+    margin: rootMargin, // This is now only a string
     amount: threshold 
   });
 
