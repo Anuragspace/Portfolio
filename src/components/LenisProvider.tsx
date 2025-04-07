@@ -20,19 +20,19 @@ interface LenisProviderProps {
     smoothWheel?: boolean;
     wheelMultiplier?: number;
     touchMultiplier?: number;
-    smoothTouch?: boolean;
+    smooth?: boolean;
   };
 }
 
 export const LenisProvider = ({ 
   children,
   options = {
-    duration: 1.2,
+    duration: 1.5,
     easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     smoothWheel: true,
-    wheelMultiplier: 1,
+    wheelMultiplier: 1.2,
     touchMultiplier: 1.5,
-    smoothTouch: false,
+    smooth: true,
   }
 }: LenisProviderProps) => {
   const [lenis, setLenis] = useState<Lenis | null>(null);
@@ -40,12 +40,15 @@ export const LenisProvider = ({
   useEffect(() => {
     // Hide scrollbar with CSS
     document.documentElement.style.scrollbarWidth = 'none'; // Firefox
-    document.documentElement.style.msOverflowStyle = 'none'; // IE/Edge
-    document.body.style.overflow = 'auto';
     const style = document.createElement('style');
     style.textContent = `
-      body::-webkit-scrollbar {
+      ::-webkit-scrollbar {
         display: none;
+      }
+      html, body {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        overflow-y: auto;
       }
     `;
     document.head.appendChild(style);
@@ -54,10 +57,9 @@ export const LenisProvider = ({
     const lenisInstance = new Lenis({
       duration: options.duration,
       easing: options.easing,
-      smoothWheel: options.smoothWheel,
+      smooth: options.smooth,
       wheelMultiplier: options.wheelMultiplier,
       touchMultiplier: options.touchMultiplier,
-      smoothTouch: options.smoothTouch,
     });
 
     function raf(time: number) {
@@ -72,7 +74,6 @@ export const LenisProvider = ({
       lenisInstance.destroy();
       document.head.removeChild(style);
       document.documentElement.style.scrollbarWidth = '';
-      document.documentElement.style.msOverflowStyle = '';
       document.body.style.overflow = '';
     };
   }, [options]);

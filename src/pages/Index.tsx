@@ -14,49 +14,57 @@ import Footer from "@/components/Footer";
 const Index = () => {
   const { lenis } = useSmoothScroll();
 
+  // Set up smooth anchor scrolling
   useEffect(() => {
-    // Smooth scroll to anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        
-        const href = this.getAttribute('href');
-        if (!href) return;
-        
-        const targetElement = document.querySelector(href);
-        if (!targetElement) return;
-        
-        if (lenis) {
-          // Use Lenis for smooth scrolling
-          lenis.scrollTo(targetElement, { 
-            offset: -80, // Adjust for header height
-            duration: 1.2,
-            easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
-          });
-        } else {
-          // Fallback to native scrolling
-          window.scrollTo({
-            top: targetElement.offsetTop - 80,
-            behavior: 'smooth'
-          });
-        }
+    if (!lenis) return;
+    
+    const handleLinkClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const anchor = target.closest('a[href^="#"]');
+      
+      if (!anchor) return;
+      
+      e.preventDefault();
+      const href = anchor.getAttribute('href');
+      if (!href) return;
+      
+      const targetElement = document.querySelector(href);
+      if (!targetElement) return;
+      
+      lenis.scrollTo(targetElement, { 
+        offset: -80,
+        duration: 1.5,
+        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
       });
-    });
+    };
 
+    // Add event listener to the document for all anchor links
+    document.addEventListener('click', handleLinkClick);
+    
     return () => {
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.removeEventListener('click', () => {});
-      });
+      document.removeEventListener('click', handleLinkClick);
     };
   }, [lenis]);
 
-  // Force Lenis to recalculate on page load
+  // Force Lenis to recalculate on page load and resize
   useEffect(() => {
-    if (lenis) {
-      setTimeout(() => {
-        lenis.resize();
-      }, 500);
-    }
+    if (!lenis) return;
+    
+    const handleResize = () => {
+      lenis.resize();
+    };
+    
+    // Initial resize
+    setTimeout(() => {
+      lenis.resize();
+    }, 500);
+    
+    // Listen for window resize events
+    window.addEventListener('resize', handleResize);
+    
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
   }, [lenis]);
 
   return (

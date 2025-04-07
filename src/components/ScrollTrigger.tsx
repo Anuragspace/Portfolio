@@ -6,7 +6,7 @@ import { useSmoothScroll } from './LenisProvider';
 interface ScrollTriggerProps {
   children: ReactNode;
   threshold?: number;
-  rootMargin?: string;
+  rootMargin?: number | string;
   onEnter?: () => void;
   onLeave?: () => void;
   once?: boolean;
