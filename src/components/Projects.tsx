@@ -1,7 +1,7 @@
 
 import React from "react";
-import { ArrowRight, ExternalLink } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+import { ArrowRight } from "lucide-react";
+import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
 interface Project {
@@ -55,7 +55,7 @@ const Projects = () => {
   ];
 
   return (
-    <section id="projects" className="section-padding py-20">
+    <section id="projects" className="section-padding py-20 bg-gray-50">
       <div className="container-custom">
         <div className="mb-16 text-center">
           <h2 className="mb-4">My Design Work That Stands Out</h2>
@@ -65,16 +65,16 @@ const Projects = () => {
           <div className="mx-auto mt-4 h-1 w-24 bg-[#3E40EF]"></div>
         </div>
         
-        <div className="flex flex-col gap-16">
+        <div className="grid grid-cols-1 gap-8 md:gap-12">
           {projects.map((project, index) => (
             <Card 
               key={project.id} 
-              className="overflow-hidden border-none bg-transparent shadow-none"
+              className="overflow-hidden border bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300"
             >
-              <div className={`flex flex-col gap-8 rounded-xl p-0 md:flex-row ${index % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}>
-                {/* Image Section (65% on desktop) */}
-                <div className="relative w-full overflow-hidden rounded-xl md:w-[65%]">
-                  <div className="aspect-[16/9] overflow-hidden rounded-xl">
+              <div className={`grid grid-cols-1 md:grid-cols-2 ${index % 2 !== 0 ? 'md:grid-flow-dense' : ''}`}>
+                {/* Image Section */}
+                <div className={`w-full h-full overflow-hidden ${index % 2 !== 0 ? 'md:col-start-1' : 'md:col-start-2'}`}>
+                  <div className="aspect-[4/3] h-full">
                     <img 
                       src={project.image} 
                       alt={project.title} 
@@ -83,34 +83,36 @@ const Projects = () => {
                   </div>
                 </div>
                 
-                {/* Content Section (35% on desktop) */}
-                <div className="flex w-full flex-col justify-center p-4 md:w-[35%] md:p-0">
-                  <div className="mb-4 flex items-center gap-3">
-                    <h3 className="text-xl font-bold md:text-2xl">{project.title}</h3>
-                    <span className="text-sm text-gray-500">— {project.year}</span>
-                  </div>
-                  
-                  <p className="mb-6 text-gray-600">{project.description}</p>
-                  
-                  <div className="mb-6 flex flex-wrap gap-2">
-                    {project.tags.map((tag, i) => (
-                      <span 
-                        key={i} 
-                        className="rounded-full bg-[#3E40EF]/10 px-3 py-1 text-xs font-medium text-[#3E40EF]"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+                {/* Content Section */}
+                <div className={`w-full flex flex-col justify-between p-6 bg-[#3E40EF] text-white ${index % 2 !== 0 ? 'md:col-start-2' : 'md:col-start-1'}`}>
+                  <div>
+                    <div className="mb-4">
+                      <span className="block text-sm text-blue-100 mb-1">CSED WEBSITE</span>
+                      <h3 className="text-xl font-bold md:text-2xl">{project.title}</h3>
+                    </div>
+                    
+                    <p className="mb-6 text-blue-100">{project.description}</p>
+                    
+                    <div className="mb-6 flex flex-wrap gap-2">
+                      {project.tags.map((tag, i) => (
+                        <span 
+                          key={i} 
+                          className="rounded-full bg-blue-100/20 px-3 py-1 text-xs font-medium text-white"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                   
                   <Button 
                     variant="outline" 
-                    className="group w-fit border-[#3E40EF] text-[#3E40EF] hover:bg-[#3E40EF] hover:text-white"
+                    className="w-fit mt-auto border-white text-white hover:bg-white hover:text-[#3E40EF] group"
                     asChild
                   >
-                    <a href={project.link}>
-                      Show Case
-                      <ArrowRight size={16} className="ml-1 transition-transform duration-300 group-hover:translate-x-1" />
+                    <a href={project.link} className="flex items-center">
+                      View Project
+                      <ArrowRight size={16} className="ml-2 transition-transform duration-300 group-hover:translate-x-1" />
                     </a>
                   </Button>
                 </div>
