@@ -1,6 +1,15 @@
 
-import React, { useRef } from "react";
+import React from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { BlurFade } from "./BlurFade";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import { cn } from "@/lib/utils";
 
 interface Poster {
   id: number;
@@ -10,8 +19,6 @@ interface Poster {
 }
 
 const Posters = () => {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  
   const posters: Poster[] = [
     {
       id: 1,
@@ -48,99 +55,110 @@ const Posters = () => {
       title: "Sustainability Initiative",
       description: "Campaign promoting environmental awareness",
       image: "/placeholder.svg",
-    },
-    {
-      id: 7,
-      title: "Brand Identity",
-      description: "Visual system for emerging tech startup",
-      image: "/placeholder.svg",
-    },
-    {
-      id: 8,
-      title: "Digital Art Exhibition",
-      description: "Promotional material for virtual gallery",
-      image: "/placeholder.svg",
-    },
-    {
-      id: 9,
-      title: "Workshop Series",
-      description: "Educational poster series with consistent theme",
-      image: "/placeholder.svg",
-    },
-    {
-      id: 10,
-      title: "App Launch",
-      description: "Visual assets for mobile application release",
-      image: "/placeholder.svg",
-    },
+    }
   ];
 
-  const scroll = (direction: 'left' | 'right') => {
-    if (scrollRef.current) {
-      const { current } = scrollRef;
-      const scrollAmount = direction === 'left' ? -400 : 400;
-      current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-    }
-  };
-
   return (
-    <section id="posters" className="section-padding bg-gray-50">
+    <section id="posters" className="section-padding bg-white">
       <div className="container-custom">
-        <div className="mb-16">
-          <h2 className="mb-4">Posters Showcase</h2>
-          <div className="w-24 h-1 bg-accent"></div>
-          <p className="mt-4 text-gray-600 max-w-2xl">A collection of my best design work across various mediums and clients</p>
-        </div>
-        
-        <div className="relative">
-          {/* Navigation buttons */}
-          <div className="hidden md:flex justify-between absolute top-1/2 left-4 right-4 -mt-6 z-10 pointer-events-none">
-            <button 
-              onClick={() => scroll('left')}
-              className="w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center pointer-events-auto hover:bg-gray-50 transition-colors"
-              aria-label="Scroll left"
-            >
-              <ChevronLeft size={24} className="text-accent" />
-            </button>
-            <button 
-              onClick={() => scroll('right')}
-              className="w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center pointer-events-auto hover:bg-gray-50 transition-colors"
-              aria-label="Scroll right"
-            >
-              <ChevronRight size={24} className="text-accent" />
-            </button>
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
+          {/* Left side content */}
+          <div className="md:col-span-4">
+            <BlurFade direction="right" duration={0.6}>
+              <h2 className="mb-4 text-3xl md:text-4xl">Graphic Design Skills</h2>
+              <div className="w-20 h-1 bg-accent mb-6"></div>
+              <p className="text-gray-600 mb-4">
+                Showcasing visual storytelling through diverse design projects that 
+                combine aesthetics with strategic communication.
+              </p>
+              <p className="text-gray-600 mb-6">
+                Each piece demonstrates my approach to color, composition, and typography
+                to create impactful visual experiences.
+              </p>
+              <div className="hidden md:flex space-x-3 mt-8">
+                <button 
+                  onClick={() => document.querySelector('[data-carousel-prev]')?.click()}
+                  className="w-10 h-10 rounded-full bg-white border border-gray-200 shadow-sm flex items-center justify-center transition-colors hover:bg-gray-50"
+                  aria-label="Previous slide"
+                >
+                  <ChevronLeft size={18} className="text-accent" />
+                </button>
+                <button 
+                  onClick={() => document.querySelector('[data-carousel-next]')?.click()}
+                  className="w-10 h-10 rounded-full bg-white border border-gray-200 shadow-sm flex items-center justify-center transition-colors hover:bg-gray-50"
+                  aria-label="Next slide"
+                >
+                  <ChevronRight size={18} className="text-accent" />
+                </button>
+              </div>
+            </BlurFade>
           </div>
           
-          {/* Horizontal scroll container */}
-          <div 
-            ref={scrollRef}
-            className="flex overflow-x-auto gap-6 pb-8 pt-4 horizontal-scroll gradient-blur snap-x snap-mandatory"
-            style={{scrollPaddingLeft: '1rem', scrollPaddingRight: '1rem'}}
-          >
-            {posters.map((poster) => (
-              <div 
-                key={poster.id} 
-                className="min-w-[280px] md:min-w-[350px] lg:min-w-[400px] flex-shrink-0 rounded-xl overflow-hidden shadow-md border border-gray-100 card-hover snap-start"
+          {/* Right side carousel */}
+          <div className="md:col-span-8">
+            <BlurFade direction="left" duration={0.6} delay={0.2}>
+              <Carousel
+                opts={{
+                  align: "start",
+                  loop: true,
+                }}
+                className="w-full"
               >
-                <div className="aspect-[3/4] overflow-hidden relative bg-white">
-                  <img 
-                    src={poster.image} 
-                    alt={poster.title} 
-                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end">
-                    <div className="p-6 text-white">
-                      <h4 className="font-bold text-lg">{poster.title}</h4>
-                      <p className="text-white/80 text-sm">{poster.description}</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="p-4 bg-white">
-                  <h3 className="font-bold text-lg mb-1">{poster.title}</h3>
-                  <p className="text-gray-600 text-sm">{poster.description}</p>
-                </div>
-              </div>
-            ))}
+                <CarouselContent className="-ml-4">
+                  {posters.map((poster) => (
+                    <CarouselItem key={poster.id} className="pl-4 md:basis-1/2 lg:basis-1/3">
+                      <div className="group relative overflow-hidden rounded-xl shadow-md transition-all duration-300 hover:shadow-lg h-[280px] md:h-[340px]">
+                        <img
+                          src={poster.image}
+                          alt={poster.title}
+                          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                        <div 
+                          className={cn(
+                            "absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent",
+                            "opacity-0 group-hover:opacity-100 transition-opacity duration-300",
+                            "flex flex-col justify-end p-6"
+                          )}
+                        >
+                          <h4 className="font-medium text-white text-lg mb-1 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                            {poster.title}
+                          </h4>
+                          <p className="text-white/90 text-sm transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 delay-75">
+                            {poster.description}
+                          </p>
+                        </div>
+                      </div>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselPrevious 
+                  data-carousel-prev
+                  className="hidden"
+                />
+                <CarouselNext 
+                  data-carousel-next
+                  className="hidden"
+                />
+              </Carousel>
+            </BlurFade>
+            
+            {/* Mobile navigation buttons */}
+            <div className="flex md:hidden justify-center space-x-3 mt-6">
+              <button 
+                onClick={() => document.querySelector('[data-carousel-prev]')?.click()}
+                className="w-10 h-10 rounded-full bg-white border border-gray-200 shadow-sm flex items-center justify-center transition-colors hover:bg-gray-50"
+                aria-label="Previous slide"
+              >
+                <ChevronLeft size={18} className="text-accent" />
+              </button>
+              <button 
+                onClick={() => document.querySelector('[data-carousel-next]')?.click()}
+                className="w-10 h-10 rounded-full bg-white border border-gray-200 shadow-sm flex items-center justify-center transition-colors hover:bg-gray-50"
+                aria-label="Next slide"
+              >
+                <ChevronRight size={18} className="text-accent" />
+              </button>
+            </div>
           </div>
         </div>
       </div>
