@@ -1,6 +1,5 @@
 
 import React, { useEffect } from "react";
-import { useSmoothScroll } from "@/components/LenisProvider";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -12,61 +11,31 @@ import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
 const Index = () => {
-  const { lenis } = useSmoothScroll();
-
-  // Set up smooth anchor scrolling
   useEffect(() => {
-    if (!lenis) return;
-    
-    const handleLinkClick = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      const anchor = target.closest('a[href^="#"]');
-      
-      if (!anchor) return;
-      
-      e.preventDefault();
-      const href = anchor.getAttribute('href');
-      if (!href) return;
-      
-      const targetElement = document.querySelector(href);
-      if (!targetElement) return;
-      
-      // Cast targetElement to HTMLElement since Lenis requires it
-      lenis.scrollTo(targetElement as HTMLElement, { 
-        offset: -80,
-        duration: 1.5,
-        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+    // Smooth scroll to anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        const href = this.getAttribute('href');
+        if (!href) return;
+        
+        const targetElement = document.querySelector(href);
+        if (!targetElement) return;
+        
+        window.scrollTo({
+          top: targetElement.offsetTop - 80, // Adjust for header height
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    return () => {
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.removeEventListener('click', () => {});
       });
     };
-
-    // Add event listener to the document for all anchor links
-    document.addEventListener('click', handleLinkClick);
-    
-    return () => {
-      document.removeEventListener('click', handleLinkClick);
-    };
-  }, [lenis]);
-
-  // Force Lenis to recalculate on page load and resize
-  useEffect(() => {
-    if (!lenis) return;
-    
-    const handleResize = () => {
-      lenis.resize();
-    };
-    
-    // Initial resize
-    setTimeout(() => {
-      lenis.resize();
-    }, 500);
-    
-    // Listen for window resize events
-    window.addEventListener('resize', handleResize);
-    
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [lenis]);
+  }, []);
 
   return (
     <div className="min-h-screen bg-white">
