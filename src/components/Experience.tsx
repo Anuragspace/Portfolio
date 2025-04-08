@@ -50,7 +50,7 @@ const Experience = () => {
   ];
 
   return (
-    <section id="experience" className="section-padding bg-gray-50">
+    <section id="experience" className="section-padding bg-violet-50">
       <div className="container-custom max-w-4xl">
         <div className="mb-16">
           <h2 className="mb-4">Work Experience</h2>
@@ -58,15 +58,15 @@ const Experience = () => {
           <p className="mt-4 text-gray-600">My professional journey through design leadership and innovation</p>
         </div>
         
-        <div className="timeline-container relative">
-          {/* Timeline vertical line */}
-          <div className="absolute left-[15px] top-0 bottom-0 w-0.5 bg-accent/80 md:left-[20px]"></div>
+        <div className="timeline-container relative pl-0 md:pl-0">
+          {/* Timeline vertical line - moved more to the left */}
+          <div className="absolute left-[10px] top-0 bottom-0 w-0.5 bg-accent/80 md:left-[10px]"></div>
           
           {experiences.map((exp, index) => (
             <div key={exp.id} className="relative mb-20">
-              {/* Timeline dot */}
-              <div className="absolute left-[15px] w-[14px] h-[14px] bg-accent rounded-full transform -translate-x-1/2 z-10 
-                             border-2 border-white shadow-md md:left-[20px] md:w-[18px] md:h-[18px]">
+              {/* Timeline dot - moved more to the left */}
+              <div className="absolute left-[10px] w-[14px] h-[14px] bg-accent rounded-full transform -translate-x-1/2 z-10 
+                             border-2 border-white shadow-md md:left-[10px] md:w-[18px] md:h-[18px]">
               </div>
               
               {/* Experience card */}
@@ -74,7 +74,7 @@ const Experience = () => {
                 direction="right"
                 duration={0.6}
                 delay={index * 0.2}
-                className="ml-10 md:ml-16"
+                className="ml-8 md:ml-12"
               >
                 <Card className="overflow-hidden border-0 shadow-md hover:shadow-lg transition-all duration-300 group">
                   <CardContent className="p-0">
