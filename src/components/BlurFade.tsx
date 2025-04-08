@@ -7,7 +7,8 @@ import {
   Variants,
   MotionProps,
 } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
+import { useLocomotiveScroll } from "@/hooks/use-locomotive-scroll";
 
 type MarginType = UseInViewOptions["margin"];
 
@@ -41,8 +42,40 @@ export function BlurFade({
   ...props
 }: BlurFadeProps) {
   const ref = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
   const inViewResult = useInView(ref, { once: true, margin: inViewMargin });
-  const isInView = !inView || inViewResult;
+  const { scroll } = useLocomotiveScroll();
+  
+  // Combine standard inView with locomotive scroll visibility
+  const isInView = (!inView || inViewResult || isVisible);
+  
+  useEffect(() => {
+    // If the Locomotive Scroll instance exists
+    if (scroll && ref.current) {
+      // Set up scroll trigger for the element
+      scroll.on("call", (value: string, way: string, obj: { id: string }) => {
+        if (value === "inView" && obj.id === (ref.current as any)?.id) {
+          if (way === "enter") {
+            setIsVisible(true);
+          }
+        }
+      });
+      
+      // Generate a unique ID for this element
+      const uniqueId = `blur-fade-${Math.random().toString(36).substr(2, 9)}`;
+      (ref.current as any).id = uniqueId;
+      
+      // Add data attributes for locomotive scroll
+      (ref.current as any).setAttribute("data-scroll", "");
+      (ref.current as any).setAttribute("data-scroll-id", uniqueId);
+      (ref.current as any).setAttribute("data-scroll-call", "inView");
+      (ref.current as any).setAttribute("data-scroll-offset", "15%");
+      
+      // Update Locomotive Scroll
+      scroll.update();
+    }
+  }, [scroll]);
+  
   const defaultVariants: Variants = {
     hidden: {
       [direction === "left" || direction === "right" ? "x" : "y"]:
@@ -56,7 +89,9 @@ export function BlurFade({
       filter: `blur(0px)`,
     },
   };
+  
   const combinedVariants = variant || defaultVariants;
+  
   return (
     <AnimatePresence>
       <motion.div

@@ -4,6 +4,80 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Locomotive Scroll Styles */
+html.has-scroll-smooth {
+  overflow: hidden;
+}
+
+.viewport {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
+html.has-scroll-dragging {
+  user-select: none;
+}
+
+.has-scroll-smooth body {
+  overflow: hidden;
+}
+
+.has-scroll-smooth [data-scroll-container] {
+  min-height: 100vh;
+}
+
+[data-scroll-direction="horizontal"] [data-scroll-container] {
+  height: 100vh;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+[data-scroll-direction="horizontal"] [data-scroll-section] {
+  display: inline-block;
+  vertical-align: top;
+  white-space: nowrap;
+  height: 100%;
+}
+
+.c-scrollbar {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 11px;
+  height: 100%;
+  transform-origin: center right;
+  transition: transform 0.3s, opacity 0.3s;
+  opacity: 0;
+}
+
+.c-scrollbar:hover {
+  transform: scaleX(1.45);
+}
+
+.c-scrollbar:hover, .has-scroll-scrolling .c-scrollbar, .has-scroll-dragging .c-scrollbar {
+  opacity: 1;
+}
+
+.c-scrollbar_thumb {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: hsl(var(--accent));
+  opacity: 0.5;
+  width: 7px;
+  border-radius: 10px;
+  margin: 2px;
+  cursor: grab;
+}
+
+.has-scroll-dragging .c-scrollbar_thumb {
+  cursor: grabbing;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -266,6 +340,55 @@
 
 .animate-float {
   animation: float 3s ease-in-out infinite;
+}
+
+/* New poster section styles */
+.poster-item {
+  transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.poster-item.active {
+  transform: scale(1.05);
+  z-index: 10;
+}
+
+.poster-item:not(.active) {
+  transform: scale(0.85);
+  opacity: 0.7;
+  filter: blur(1px);
+}
+
+.poster-nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  z-index: 20;
+}
+
+.poster-nav-button:hover {
+  transform: translateY(-50%) scale(1.1);
+  background: hsl(var(--accent));
+  color: white;
+}
+
+.poster-nav-button.prev {
+  left: 0;
+  transform: translateY(-50%) translateX(-50%);
+}
+
+.poster-nav-button.next {
+  right: 0;
+  transform: translateY(-50%) translateX(50%);
 }
 
 /* New animations */

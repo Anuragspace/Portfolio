@@ -1,5 +1,5 @@
 
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { BlurFade } from "./BlurFade";
 import {
@@ -10,6 +10,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { cn } from "@/lib/utils";
+import { useLocomotiveScroll } from "@/hooks/use-locomotive-scroll";
 
 interface Poster {
   id: number;
@@ -21,6 +22,9 @@ interface Poster {
 const Posters = () => {
   const prevButtonRef = useRef<HTMLButtonElement>(null);
   const nextButtonRef = useRef<HTMLButtonElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const { scroll } = useLocomotiveScroll();
   
   const posters: Poster[] = [
     {
@@ -61,24 +65,38 @@ const Posters = () => {
     }
   ];
 
+  useEffect(() => {
+    // Update locomotive scroll when component mounts
+    if (scroll) {
+      scroll.update();
+    }
+  }, [scroll]);
+
   const handlePrevClick = () => {
     if (prevButtonRef.current) {
       prevButtonRef.current.click();
+      setActiveIndex(prev => (prev === 0 ? posters.length - 1 : prev - 1));
     }
   };
 
   const handleNextClick = () => {
     if (nextButtonRef.current) {
       nextButtonRef.current.click();
+      setActiveIndex(prev => (prev === posters.length - 1 ? 0 : prev + 1));
     }
   };
 
   return (
-    <section id="posters" className="section-padding bg-white">
+    <section 
+      id="posters" 
+      ref={sectionRef} 
+      className="section-padding bg-white overflow-hidden relative"
+      data-scroll-section
+    >
       <div className="container-custom">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
           {/* Left side content */}
-          <div className="md:col-span-4">
+          <div className="md:col-span-4" data-scroll data-scroll-speed="0.2">
             <BlurFade direction="right" duration={0.6}>
               <h2 className="mb-4 text-3xl md:text-4xl">Graphic Design Skills</h2>
               <div className="w-20 h-1 bg-accent mb-6"></div>
@@ -90,92 +108,101 @@ const Posters = () => {
                 Each piece demonstrates my approach to color, composition, and typography
                 to create impactful visual experiences.
               </p>
-              <div className="hidden md:flex space-x-3 mt-8">
-                <button 
-                  onClick={handlePrevClick}
-                  className="w-10 h-10 rounded-full bg-white border border-gray-200 shadow-sm flex items-center justify-center transition-colors hover:bg-gray-50"
-                  aria-label="Previous slide"
-                >
-                  <ChevronLeft size={18} className="text-accent" />
-                </button>
-                <button 
-                  onClick={handleNextClick}
-                  className="w-10 h-10 rounded-full bg-white border border-gray-200 shadow-sm flex items-center justify-center transition-colors hover:bg-gray-50"
-                  aria-label="Next slide"
-                >
-                  <ChevronRight size={18} className="text-accent" />
-                </button>
-              </div>
             </BlurFade>
           </div>
           
           {/* Right side carousel */}
-          <div className="md:col-span-8">
+          <div className="md:col-span-8 relative" data-scroll data-scroll-speed="0.1">
             <BlurFade direction="left" duration={0.6} delay={0.2}>
-              <Carousel
-                opts={{
-                  align: "start",
-                  loop: true,
-                }}
-                className="w-full"
-              >
-                <CarouselContent className="-ml-4">
-                  {posters.map((poster) => (
-                    <CarouselItem key={poster.id} className="pl-4 md:basis-1/2 lg:basis-1/3">
-                      <div className="group relative overflow-hidden rounded-xl shadow-md transition-all duration-300 hover:shadow-lg h-[280px] md:h-[340px]">
-                        <img
-                          src={poster.image}
-                          alt={poster.title}
-                          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        />
+              <div className="relative">
+                <Carousel
+                  opts={{
+                    align: "center",
+                    loop: true,
+                  }}
+                  className="w-full"
+                  onSelect={(api) => {
+                    if (api) {
+                      setActiveIndex(api.selectedScrollSnap());
+                    }
+                  }}
+                >
+                  <CarouselContent className="-ml-4">
+                    {posters.map((poster, index) => (
+                      <CarouselItem 
+                        key={poster.id} 
+                        className="pl-4 md:basis-1/2 lg:basis-2/5 transition-all duration-300"
+                      >
                         <div 
                           className={cn(
-                            "absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent",
-                            "opacity-0 group-hover:opacity-100 transition-opacity duration-300",
-                            "flex flex-col justify-end p-6"
+                            "group relative overflow-hidden rounded-xl shadow-lg transition-all duration-500",
+                            "h-[480px] md:h-[580px]", // Taller posters for 1080x1350 aspect ratio
+                            activeIndex === index 
+                              ? "scale-[1.05] z-10" 
+                              : "scale-[0.85] opacity-70 blur-[1px]"
                           )}
                         >
-                          <h4 className="font-medium text-white text-lg mb-1 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                            {poster.title}
-                          </h4>
-                          <p className="text-white/90 text-sm transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 delay-75">
-                            {poster.description}
-                          </p>
+                          <img
+                            src={poster.image}
+                            alt={poster.title}
+                            className={cn(
+                              "h-full w-full object-cover transition-transform duration-700",
+                              "group-hover:scale-105"
+                            )}
+                          />
+                          <div 
+                            className={cn(
+                              "absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent",
+                              "opacity-0 group-hover:opacity-100 transition-opacity duration-300",
+                              "flex flex-col justify-end p-8"
+                            )}
+                          >
+                            <h4 className="font-medium text-white text-xl mb-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                              {poster.title}
+                            </h4>
+                            <p className="text-white/90 text-base transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">
+                              {poster.description}
+                            </p>
+                          </div>
                         </div>
-                      </div>
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-                <CarouselPrevious 
-                  ref={prevButtonRef}
-                  data-carousel-prev
-                  className="hidden"
-                />
-                <CarouselNext 
-                  ref={nextButtonRef}
-                  data-carousel-next
-                  className="hidden"
-                />
-              </Carousel>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  <CarouselPrevious 
+                    ref={prevButtonRef}
+                    data-carousel-prev
+                    className="hidden"
+                  />
+                  <CarouselNext 
+                    ref={nextButtonRef}
+                    data-carousel-next
+                    className="hidden"
+                  />
+                </Carousel>
+                
+                {/* Custom navigation buttons at edges */}
+                <button 
+                  onClick={handlePrevClick}
+                  className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 z-20 w-14 h-14 rounded-full
+                           bg-white/90 backdrop-blur-sm border border-gray-200 shadow-xl
+                           flex items-center justify-center transition-all duration-200
+                           hover:bg-accent hover:text-white hover:scale-110"
+                  aria-label="Previous slide"
+                >
+                  <ChevronLeft size={24} className="text-current" />
+                </button>
+                <button 
+                  onClick={handleNextClick}
+                  className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-20 w-14 h-14 rounded-full
+                           bg-white/90 backdrop-blur-sm border border-gray-200 shadow-xl
+                           flex items-center justify-center transition-all duration-200
+                           hover:bg-accent hover:text-white hover:scale-110"
+                  aria-label="Next slide"
+                >
+                  <ChevronRight size={24} className="text-current" />
+                </button>
+              </div>
             </BlurFade>
-            
-            {/* Mobile navigation buttons */}
-            <div className="flex md:hidden justify-center space-x-3 mt-6">
-              <button 
-                onClick={handlePrevClick}
-                className="w-10 h-10 rounded-full bg-white border border-gray-200 shadow-sm flex items-center justify-center transition-colors hover:bg-gray-50"
-                aria-label="Previous slide"
-              >
-                <ChevronLeft size={18} className="text-accent" />
-              </button>
-              <button 
-                onClick={handleNextClick}
-                className="w-10 h-10 rounded-full bg-white border border-gray-200 shadow-sm flex items-center justify-center transition-colors hover:bg-gray-50"
-                aria-label="Next slide"
-              >
-                <ChevronRight size={18} className="text-accent" />
-              </button>
-            </div>
           </div>
         </div>
       </div>
