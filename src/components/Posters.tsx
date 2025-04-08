@@ -1,15 +1,7 @@
-
-import React, { useRef } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { BlurFade } from "./BlurFade";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import { cn } from "@/lib/utils";
+import useEmblaCarousel from "embla-carousel-react";
+import { motion } from "framer-motion";
 
 interface Poster {
   id: number;
@@ -19,164 +11,141 @@ interface Poster {
 }
 
 const Posters = () => {
-  const prevButtonRef = useRef<HTMLButtonElement>(null);
-  const nextButtonRef = useRef<HTMLButtonElement>(null);
-  
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: true,
+    align: "center",
+    skipSnaps: false,
+    dragFree: false,
+    containScroll: "trimSnaps",
+    startIndex: 1,
+    duration: 32, 
+  });
+
+  const [activeIndex, setActiveIndex] = useState(1); // Initialize with 1 (second poster)
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+
+  useEffect(() => {
+    if (emblaApi) {
+      // Set initial active index
+      setActiveIndex(emblaApi.selectedScrollSnap());
+      
+      // Update active index when selection changes
+      const onSelect = () => {
+        setActiveIndex(emblaApi.selectedScrollSnap());
+      };
+      
+      emblaApi.on("select", onSelect);
+      
+      return () => {
+        emblaApi.off("select", onSelect);
+      };
+    }
+  }, [emblaApi]);
+
   const posters: Poster[] = [
     {
       id: 1,
       title: "Tech Conference 2023",
       description: "Event poster design with modern typographic layout",
-      image: "/placeholder.svg",
+      image: "/public/lovable-uploads/1.jpg",
     },
     {
       id: 2,
       title: "Summer Music Festival",
       description: "Vibrant poster design for annual music event",
-      image: "/placeholder.svg",
+      image: "/public/lovable-uploads/3.jpg",
     },
     {
       id: 3,
       title: "Product Launch",
       description: "Minimalist design highlighting new product features",
-      image: "/placeholder.svg",
+      image: "/public/lovable-uploads/im3.jpg",
     },
     {
       id: 4,
       title: "Social Media Campaign",
       description: "Series of coordinated visuals for digital campaign",
-      image: "/placeholder.svg",
+      image: "/public/lovable-uploads/accept letter.png",
     },
     {
       id: 5,
       title: "Annual Report",
       description: "Corporate visual design with data visualization",
-      image: "/placeholder.svg",
+      image: "/public/lovable-uploads/IMG2.png",
     },
     {
       id: 6,
       title: "Sustainability Initiative",
       description: "Campaign promoting environmental awareness",
-      image: "/placeholder.svg",
-    }
+      image: "public/lovable-uploads/Instagram post - 5.png",
+    },
   ];
 
-  const handlePrevClick = () => {
-    if (prevButtonRef.current) {
-      prevButtonRef.current.click();
-    }
-  };
-
-  const handleNextClick = () => {
-    if (nextButtonRef.current) {
-      nextButtonRef.current.click();
-    }
-  };
-
   return (
-    <section id="posters" className="section-padding bg-white">
-      <div className="container-custom">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
-          {/* Left side content */}
-          <div className="md:col-span-4">
-            <BlurFade direction="right" duration={0.6}>
-              <h2 className="mb-4 text-3xl md:text-4xl">Graphic Design Skills</h2>
-              <div className="w-20 h-1 bg-accent mb-6"></div>
-              <p className="text-gray-600 mb-4">
-                Showcasing visual storytelling through diverse design projects that 
-                combine aesthetics with strategic communication.
-              </p>
-              <p className="text-gray-600 mb-6">
-                Each piece demonstrates my approach to color, composition, and typography
-                to create impactful visual experiences.
-              </p>
-              <div className="hidden md:flex space-x-3 mt-8">
-                <button 
-                  onClick={handlePrevClick}
-                  className="w-10 h-10 rounded-full bg-white border border-gray-200 shadow-sm flex items-center justify-center transition-colors hover:bg-gray-50"
-                  aria-label="Previous slide"
+    <section className="relative bg-gradient-to-b from-white to-gray-50/50 py-8 md:py-16 overflow-hidden">
+      {/* Blur effects - adjusted for mobile */}
+      <div className="absolute left-0 top-0 w-[80px] md:w-[150px] h-full bg-gradient-to-r from-white via-white/90 to-transparent z-10" />
+      <div className="absolute right-0 top-0 w-[80px] md:w-[150px] h-full bg-gradient-to-l from-white via-white/90 to-transparent z-10" />
+
+      <div className="container mx-auto px-3 md:px-4 max-w-7xl">
+        <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4">Graphic Design Skills</h2>
+          <div className="w-16 md:w-20 h-1 bg-accent mx-auto mb-4 md:mb-6"></div>
+          <p className="text-sm md:text-base text-gray-600">
+            Showcasing visual storytelling through diverse design projects that
+            combine aesthetics with strategic communication.
+          </p>
+        </div>
+
+        <div className="relative">
+          <div className="embla overflow-hidden" ref={emblaRef}>
+            <div className="embla__container flex gap-4 md:gap-8 px-2 md:px-4">
+              {posters.map((poster, index) => (
+                <motion.div
+                  key={index}
+                  className={`embla__slide flex-[0_0_80%] sm:flex-[0_0_70%] md:flex-[0_0_38%] lg:flex-[0_0_28%] px-1 md:px-2`}
+                  initial={{ scale: 0.9, opacity: 0.5 }}
+                  animate={{
+                    scale: activeIndex === index ? 1 : 0.9,
+                    opacity: activeIndex === index ? 1 : 0.5,
+                  }}
+                  transition={{ duration: 0.4 }}
                 >
-                  <ChevronLeft size={18} className="text-accent" />
-                </button>
-                <button 
-                  onClick={handleNextClick}
-                  className="w-10 h-10 rounded-full bg-white border border-gray-200 shadow-sm flex items-center justify-center transition-colors hover:bg-gray-50"
-                  aria-label="Next slide"
-                >
-                  <ChevronRight size={18} className="text-accent" />
-                </button>
-              </div>
-            </BlurFade>
-          </div>
-          
-          {/* Right side carousel */}
-          <div className="md:col-span-8">
-            <BlurFade direction="left" duration={0.6} delay={0.2}>
-              <Carousel
-                opts={{
-                  align: "start",
-                  loop: true,
-                }}
-                className="w-full"
-              >
-                <CarouselContent className="-ml-4">
-                  {posters.map((poster) => (
-                    <CarouselItem key={poster.id} className="pl-4 md:basis-1/2 lg:basis-1/3">
-                      <div className="group relative overflow-hidden rounded-xl shadow-md transition-all duration-300 hover:shadow-lg h-[280px] md:h-[340px]">
-                        <img
-                          src={poster.image}
-                          alt={poster.title}
-                          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        />
-                        <div 
-                          className={cn(
-                            "absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent",
-                            "opacity-0 group-hover:opacity-100 transition-opacity duration-300",
-                            "flex flex-col justify-end p-6"
-                          )}
-                        >
-                          <h4 className="font-medium text-white text-lg mb-1 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                            {poster.title}
-                          </h4>
-                          <p className="text-white/90 text-sm transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 delay-75">
-                            {poster.description}
-                          </p>
-                        </div>
+                  <div className="group relative aspect-[3/4] rounded-lg md:rounded-xl overflow-hidden bg-white shadow-md hover:shadow-lg transition-all duration-500 mx-0.5 md:mx-1">
+                    <img
+                      src={poster.image}
+                      alt={poster.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4">
+                        <h4 className="font-semibold text-white text-base md:text-lg mb-1 md:mb-2">
+                          {poster.title}
+                        </h4>
+                        <p className="text-white/80 text-xs md:text-sm">{poster.description}</p>
                       </div>
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-                <CarouselPrevious 
-                  ref={prevButtonRef}
-                  data-carousel-prev
-                  className="hidden"
-                />
-                <CarouselNext 
-                  ref={nextButtonRef}
-                  data-carousel-next
-                  className="hidden"
-                />
-              </Carousel>
-            </BlurFade>
-            
-            {/* Mobile navigation buttons */}
-            <div className="flex md:hidden justify-center space-x-3 mt-6">
-              <button 
-                onClick={handlePrevClick}
-                className="w-10 h-10 rounded-full bg-white border border-gray-200 shadow-sm flex items-center justify-center transition-colors hover:bg-gray-50"
-                aria-label="Previous slide"
-              >
-                <ChevronLeft size={18} className="text-accent" />
-              </button>
-              <button 
-                onClick={handleNextClick}
-                className="w-10 h-10 rounded-full bg-white border border-gray-200 shadow-sm flex items-center justify-center transition-colors hover:bg-gray-50"
-                aria-label="Next slide"
-              >
-                <ChevronRight size={18} className="text-accent" />
-              </button>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </div>
+
+          {/* Navigation buttons - Responsive sizing */}
+          <button
+            onClick={() => emblaApi?.scrollPrev()}
+            className="absolute left-1 sm:left-2 md:left-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-black/80 shadow-lg flex items-center justify-center z-20 hover:bg-black transition-colors duration-300 backdrop-blur-sm"
+            aria-label="Previous slide"
+          >
+            <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-white" />
+          </button>
+          <button
+            onClick={() => emblaApi?.scrollNext()}
+            className="absolute right-1 sm:right-2 md:right-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-black/80 shadow-lg flex items-center justify-center z-20 hover:bg-black transition-colors duration-300 backdrop-blur-sm"
+            aria-label="Next slide"
+          >
+            <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-white" />
+          </button>
         </div>
       </div>
     </section>
