@@ -1,10 +1,8 @@
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Briefcase, Calendar } from "lucide-react";
 import { BlurFade } from "./BlurFade";
-import { BorderBeam } from "./BorderBeam";
-import { WordRotate } from "./WordRotate";
-import { Separator } from "./ui/separator";
+
 import { Card, CardContent } from "./ui/card";
 
 interface Experience {
@@ -18,6 +16,24 @@ interface Experience {
 }
 
 const Experience = () => {
+  const [isMobile, setIsMobile] = useState(false);
+  
+  // Check if we're on mobile on component mount and window resize
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    // Initial check
+    checkMobile();
+    
+    // Add resize listener
+    window.addEventListener('resize', checkMobile);
+    
+    // Cleanup
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const experiences: Experience[] = [
     {
       id: 1,
@@ -59,13 +75,13 @@ const Experience = () => {
         </div>
         
         <div className="timeline-container relative pl-8 md:pl-12">
-          {/* Timeline vertical line */}
-          <div className="absolute left-[13px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-accent/10 via-accent to-accent/10"></div>
+          {/* Single responsive timeline vertical line */}
+          <div className={`absolute ${isMobile ? 'left-[13px]' : 'left-[13px]'} top-0 bottom-0 w-[2px] bg-gradient-to-b from-accent/10 via-accent to-accent/10`}></div>
           
           {experiences.map((exp, index) => (
             <div key={exp.id} className="relative mb-8">
-              {/* Timeline dot with pulse effect */}
-              <div className="absolute -left-[42px] top-1">
+              {/* Timeline dot with pulse effect - positioned based on screen size */}
+              <div className={`absolute ${isMobile ? '-left-[42px]' : '-left-[42px]'} top-1`}>
                 <div className="relative w-4 h-4 bg-accent rounded-full ring-2 ring-white shadow-md 
                               hover:scale-110 transition-transform duration-300">
                   <div className="absolute inset-0 animate-ping bg-accent rounded-full opacity-20"></div>

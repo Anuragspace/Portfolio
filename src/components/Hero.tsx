@@ -72,8 +72,9 @@ const Hero = () => {
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-400/40 to-[#3E40EF]/30 z-10 mix-blend-overlay"></div>
                 
                 <img 
-                  src="/lovable-uploads/cc66957f-7e86-4b8a-ba75-8395bbeed544.png" 
+                  src="/lovable-uploads/anurag.webp" 
                   alt="Designer portrait" 
+                  rel="preload"
                   className="w-full h-full object-cover z-20 relative"
                 />
               </div>

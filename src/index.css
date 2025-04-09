@@ -152,7 +152,7 @@
   bottom: 0;
   left: 20px;
   width: 2px;
-  background-color: #3E40EF;
+  background-color: transparent;
 }
 
 .dot-pattern {
@@ -460,12 +460,17 @@
 ::-webkit-scrollbar-thumb {
   background: #3E40EF;
   border-radius: 50px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
 }
 
-::-webkit-scrollbar-button:single-button {
-  height: 0;
-  width: 0;
-  background-color: transparent;
+::-webkit-scrollbar-thumb:hover {
+  background: #2f30b3;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-button {
   display: none;
 }
 
