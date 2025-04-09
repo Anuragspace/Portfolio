@@ -4,7 +4,11 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BlurFade } from "@/components/BlurFade";
 import { BorderBeam } from "@/components/BorderBeam";
+import { AnimatedGridPattern } from "@/components/AnimatedGridPattern";
+
 import { RainbowButton } from "@/components/RainbowButton";
+
+import { Link } from "react-router-dom";
 
 interface Project {
   id: number;
@@ -57,7 +61,26 @@ const Projects = () => {
   ];
 
   return (
-    <section id="projects" className="section-padding py-20 bg-gray-50 relative">
+    <section id="projects" className="section-padding py-20 bg-gray-50 relative overflow-hidden">
+      {/* Add AnimatedGridPattern at the top right */}
+      <AnimatedGridPattern
+        numSquares={30}
+        maxOpacity={0.1}
+        duration={3}
+        repeatDelay={1}
+        className="absolute inset-x-[-20%] inset-y-[0%] w-[60%] h-[60%] skew-y-12 text-[#3E40EF]/100 [mask-image:radial-gradient(600px_circle_at_center,white,transparent)]"
+      />
+
+      <AnimatedGridPattern
+        numSquares={30}
+        maxOpacity={0.1}
+        duration={3}
+        repeatDelay={1}
+        className="absolute inset-x-[42%] inset-y-[50%] h-[60%] -skew-y-12 text-[#3E40EF]/100 [mask-image:radial-gradient(600px_circle_at_center,white,transparent)]"
+      />
+
+      
+
       <div className="container-custom">
         <div className="mb-16 text-center">
           <h2 className="mb-4">My Design Work That Stands Out</h2>
@@ -121,24 +144,25 @@ const Projects = () => {
                       </div>
                     </div>
                     
+                    // Find the button sections and replace them with:
                     {index % 2 === 0 ? (
                       <Button 
                         variant="default"
                         className="w-fit mt-auto group-hover:translate-y-[-2px] transition-all duration-300 delay-150 bg-[#3E40EF] hover:bg-[#3030C0] text-white"
                         asChild
                       >
-                        <a href={project.link} className="flex items-center">
+                        <Link to={`/projects/${project.id}`} className="flex items-center">
                           View Project
                           <ArrowRight size={16} className="ml-2 transition-transform duration-300 group-hover:translate-x-1" />
-                        </a>
+                        </Link>
                       </Button>
                     ) : (
                       <div className="relative w-fit">
                         <RainbowButton className="mt-auto">
-                          <a href={project.link} className="flex items-center">
+                          <Link to={`/projects/${project.id}`} className="flex items-center">
                             View Project
                             <ArrowRight size={16} className="ml-2 transition-transform duration-300 group-hover:translate-x-1" />
-                          </a>
+                          </Link>
                         </RainbowButton>
                       </div>
                     )}

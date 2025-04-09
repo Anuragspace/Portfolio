@@ -3,22 +3,35 @@ import { ArrowDown, Sparkles, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { RainbowButton } from "@/components/RainbowButton";
-import { ConfettiButton } from "@/components/Confetti";
+// Remove unused import since ConfettiButton is not used in the component
 import { ShinyButton } from "@/components/ShinyButton";
+import { AnimatedGridPattern } from "@/components/AnimatedGridPattern";
 import confetti from "canvas-confetti";
 
 const Hero = () => {
   const triggerConfetti = () => {
     confetti({
-      particleCount: 100,
+      particleCount: 80,
       spread: 70,
-      origin: { y: 0.2 },
-      colors: ['#9b87f5', '#6366F1', '#818CF8', '#BFDBFE', '#FFFFFF']
+      origin: { y: 0.3 },
+      colors: ['#FF0000', '#FF9900', '#FFFF00', '#00FF00', '#00FFFF', '#0000FF', '#FF00FF']
     });
   };
 
   return (
     <section className="min-h-screen pt-24 pb-16 flex items-center relative overflow-hidden">
+      {/* Add the AnimatedGridPattern with mask and skew effect */}
+      <AnimatedGridPattern
+        numSquares={30}
+        maxOpacity={0.1}
+        duration={3}
+        repeatDelay={1}
+        className="absolute inset-x-[-42%] inset-y-[-5%] h-[100%] skew-y-12 text-[#3E40EF]/100 [mask-image:radial-gradient(500px_circle_at_center,white,transparent)]"
+      />
+
+
+
+
       <div className="container-custom">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-7 z-10">
@@ -33,15 +46,15 @@ const Hero = () => {
               <p className="text-lg text-gray-600 animate-slide-in" style={{ animationDelay: "0.2s" }}>
                 I transform complex problems into elegant, intuitive designs that delight users and drive business growth.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 pt-4 animate-slide-in" style={{ animationDelay: "0.3s" }}>
-                <a href="#projects">
-                  <RainbowButton>
+              <div className="flex flex-row gap-5 sm:pl-2 pt-4 animate-slide-in" style={{ animationDelay: "0.3s" }}>
+                <a href="#projects" className="flex-1 max-w-[180px]">
+                  <RainbowButton className="w-full">
                     View Projects
                   </RainbowButton>
                 </a>
                 <ShinyButton 
                   onClick={triggerConfetti} 
-                  className="h-11 bg-white dark:bg-transparent"
+                  className="h-11 bg-white text-black shadow w-[180px]"
                 >
                   Click Me
                 </ShinyButton>
@@ -65,22 +78,16 @@ const Hero = () => {
                 />
               </div>
               
-              <div className="absolute bottom-[30px] left-[-60px] bg-white/90 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg z-30 flex items-center gap-3 animate-float" style={{ animationDelay: "0.4s" }}>
-                <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-[#3E40EF]/20">
-                  <Avatar>
-                    <AvatarImage src=".png" alt="Avatar" />
-                    <AvatarFallback>
-                      <User className="h-6 w-6 text-[#3E40EF]" />
-                    </AvatarFallback>
-                  </Avatar>
-                </div>
+              <div className="absolute bottom-[30px] left-[-60px] bg-white/90 backdrop-blur-sm px-5 py-3 rounded-full shadow-lg z-30 flex items-center gap-4 animate-float" style={{ animationDelay: "0.4s" }}>
+                  <span className="text-3xl" role="img" aria-label="waving hand">👋</span>
+                
                 <div className="text-left">
                   <p className="font-bold text-gray-800">Anurag Adarsh</p>
                   <p className="text-xs text-gray-500">Engineering Student</p>
                 </div>
               </div>
               
-              <div className="absolute top-[40px] right-[-30px] bg-white/50 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg z-30 flex items-center gap-3 animate-float" style={{ animationDelay: "0.5s" }}>
+              <div className="absolute top-[40px] right-[-30px] bg-white/50 backdrop-blur-sm px-4 py-3 rounded-full shadow-lg z-30 flex items-center gap-4 animate-float" style={{ animationDelay: "0.5s" }}>
                 <div className="w-10 h-10 rounded-full bg-[#3E40EF] flex items-center justify-center">
                   <Sparkles className="h-5 w-5 text-white" />
                 </div>

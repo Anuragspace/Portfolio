@@ -50,14 +50,20 @@ const Navbar = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white/90 backdrop-blur-md shadow-sm py-3" : "bg-transparent py-5"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        isScrolled ? "py-5" : " py-5" 
       }`}
     >
       <div className="container-custom flex items-center justify-between">
-        <div className="flex items-center">
+        {/* Logo */}
+        <div className={`flex items-center transition-all duration-300 ${
+          isScrolled ? "opacity-0 invisible" : "opacity-100 visible"
+        }`}>
           <a href="#" className="text-xl font-bold group flex items-center gap-1">
+          <Sparkles className="h-4 w-4 text-[#3E40EF] mr-2" />
+
             <span className="font-display">
+              
               <WordRotate 
                 words={["Portfolio", "Anurag Adarsh", "Designer", "Developer"]} 
                 className="text-inherit inline-block"
@@ -69,14 +75,14 @@ const Navbar = () => {
                 }}
               />
             </span>
-            <span className="text-[#3E40EF] group-hover:rotate-12 transition-transform duration-300">.</span>
-            <Sparkles className="h-4 w-4 text-[#3E40EF] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </a>
         </div>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center">
-          <div className="bg-white/50 backdrop-blur-sm shadow-sm rounded-full px-2 py-1 flex items-center gap-1">
+        <nav className={`hidden md:flex items-center transition-all duration-300 ${
+          isScrolled ? "absolute left-1/2 -translate-x-1/2" : ""
+        }`}>
+          <div className="bg-white shadow-sm rounded-full px-2 py-1 flex items-center gap-1">
             {navLinks.map((link) => (
               <a
                 key={link.name}
@@ -93,7 +99,10 @@ const Navbar = () => {
           </div>
         </nav>
 
-        <div className="hidden md:flex items-center space-x-4">
+        {/* Social Links */}
+        <div className={`hidden md:flex items-center space-x-4 transition-all duration-300 ${
+          isScrolled ? "opacity-0 invisible" : "opacity-100 visible"
+        }`}>
           <a 
             href="https://linkedin.com" 
             target="_blank" 

@@ -47,7 +47,6 @@ const Index = () => {
       <Experience />
       <Posters />
       <Contact />
-      <Footer />
     </div>
   );
 };

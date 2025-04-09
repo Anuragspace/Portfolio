@@ -446,3 +446,31 @@
 .animate-rainbow {
   animation: rainbow 8s linear infinite;
 }
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3E40EF;
+  border-radius: 50px;
+}
+
+::-webkit-scrollbar-button:single-button {
+  height: 0;
+  width: 0;
+  background-color: transparent;
+  display: none;
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #3E40EF transparent;
+}

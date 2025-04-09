@@ -48,15 +48,9 @@ const Contact = () => {
   };
   
   return (
-    <section id="contact" className="py-20 bg-gradient-to-b from-white to-gray-50/80">
+    <section id="contact" className="py-12 bg-gradient-to-b from-white to-gray-50/80">
       <div className="container mx-auto px-4 max-w-6xl">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
+        <motion.div className="text-center mb-10">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">Get In Touch</h2>
           <div className="w-24 h-1 bg-accent mx-auto mb-6"></div>
           <p className="text-gray-600 max-w-2xl mx-auto">
@@ -65,22 +59,17 @@ const Contact = () => {
           </p>
         </motion.div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          {/* Contact Information Card */}
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            viewport={{ once: true }}
-            className="lg:col-span-5 space-y-6"
-          >
-            <div className="bg-white rounded-2xl shadow-sm p-8 border border-gray-100">
-              <h3 className="text-2xl font-bold mb-6 text-gray-800">Contact Information</h3>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <motion.div className="lg:col-span-5 space-y-4">
+            {/* Contact Information Card */}
+            <div className="bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
+              <h3 className="text-xl font-bold mb-4 text-gray-800">Contact Information</h3>
               
-              <div className="space-y-6">
+              <div className="space-y-4">
+                {/* Contact info items */}
                 <div className="flex items-start group">
-                  <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center mr-4 shrink-0 group-hover:bg-accent/20 transition-colors duration-300">
-                    <Mail className="text-accent" size={20} />
+                  <div className="w-10 h-10 bg-accent/10 rounded-full flex items-center justify-center mr-3 shrink-0">
+                    <Mail className="text-accent" size={18} />
                   </div>
                   <div>
                     <p className="font-medium text-gray-500">Email Address</p>
@@ -114,7 +103,8 @@ const Contact = () => {
               </div>
             </div>
             
-            <div className="bg-[#3E40EF] rounded-2xl shadow-md p-8 border border-[#3E40EF]/20 text-white">
+            {/* Available For Card */}
+            <div className="bg-[#3E40EF] rounded-2xl shadow-md p-6 border border-[#3E40EF]/20 text-white">
               <div className="flex items-center justify-between mb-4">
                 <h4 className="text-xl font-bold text-white">Available For</h4>
                 <div className="flex items-center bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full">
@@ -152,133 +142,129 @@ const Contact = () => {
           </motion.div>
           
           {/* Contact Form Card */}
-          <motion.div 
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="lg:col-span-7"
-          >
-            <div className="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-gray-100 h-full flex flex-col relative overflow-hidden">
-              {/* Shine Border Effect */}
+          <motion.div className="lg:col-span-7 h-full">
+            <div className="bg-white p-5 md:p-6 rounded-2xl shadow-sm border border-gray-100 relative overflow-hidden h-full flex flex-col">
               <ShineBorder 
-                borderWidth={2} 
+                borderWidth={1.1} 
                 duration={10} 
                 shineColor={["#3E40EF", "#6366F1", "#818CF8"]} 
+                className="z-0"
               />
               
-              <h3 className="text-2xl font-bold mb-4 text-gray-800 relative z-10">Send a Message</h3>
-              
-              {isSubmitted ? (
-                <div className="flex-grow flex flex-col items-center justify-center text-center py-8">
-                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
-                    <CheckCircle className="text-green-500" size={32} />
+              <div className="relative z-10 flex flex-col flex-grow">
+                <h3 className="text-2xl font-bold mb-4 text-gray-800">Send a Message</h3>
+                
+                {isSubmitted ? (
+                  <div className="flex-grow flex flex-col items-center justify-center text-center py-8">
+                    <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                      <CheckCircle className="text-green-500" size={32} />
+                    </div>
+                    <h4 className="text-xl font-bold text-gray-800 mb-2">Message Sent!</h4>
+                    <p className="text-gray-600 max-w-md">
+                      Thank you for reaching out. I'll get back to you as soon as possible.
+                    </p>
                   </div>
-                  <h4 className="text-xl font-bold text-gray-800 mb-2">Message Sent!</h4>
-                  <p className="text-gray-600 max-w-md">
-                    Thank you for reaching out. I'll get back to you as soon as possible.
-                  </p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-5 flex-grow flex flex-col justify-between relative z-10">
-                  <div className="space-y-5 flex-grow">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                      <div className="relative">
-                        <div className={`absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none transition-opacity duration-300 ${formState.name ? 'opacity-100' : 'opacity-70'}`}>
-                          <User className={`w-5 h-5 ${focusedField === 'name' ? 'text-accent' : 'text-gray-400'}`} />
+                ) : (
+                  <form onSubmit={handleSubmit} className="space-y-4 flex flex-col flex-grow">
+                    <div className="space-y-4 flex-grow">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="relative">
+                          <div className={`absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none transition-opacity duration-300 ${formState.name ? 'opacity-100' : 'opacity-70'}`}>
+                            <User className={`w-5 h-5 ${focusedField === 'name' ? 'text-accent' : 'text-gray-400'}`} />
+                          </div>
+                          <input
+                            type="text"
+                            id="name"
+                            value={formState.name}
+                            onChange={handleChange}
+                            onFocus={() => setFocusedField('name')}
+                            onBlur={() => setFocusedField(null)}
+                            className={`w-full pl-11 pr-4 py-3 bg-gray-50/50 border ${focusedField === 'name' ? 'border-accent' : 'border-gray-200'} rounded-xl focus:outline-none focus:ring-2 focus:ring-accent/30 transition-all duration-300`}
+                            placeholder="Your Name"
+                            required
+                          />
+                          <div className={`absolute bottom-0 left-0 h-0.5 bg-accent transition-all duration-300 ${focusedField === 'name' ? 'w-full' : 'w-0'}`}></div>
                         </div>
-                        <input
-                          type="text"
-                          id="name"
-                          value={formState.name}
-                          onChange={handleChange}
-                          onFocus={() => setFocusedField('name')}
-                          onBlur={() => setFocusedField(null)}
-                          className={`w-full pl-11 pr-4 py-3 bg-gray-50/50 border ${focusedField === 'name' ? 'border-accent' : 'border-gray-200'} rounded-xl focus:outline-none focus:ring-2 focus:ring-accent/30 transition-all duration-300`}
-                          placeholder="Your Name"
-                          required
-                        />
-                        <div className={`absolute bottom-0 left-0 h-0.5 bg-accent transition-all duration-300 ${focusedField === 'name' ? 'w-full' : 'w-0'}`}></div>
+                        
+                        <div className="relative">
+                          <div className={`absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none transition-opacity duration-300 ${formState.email ? 'opacity-100' : 'opacity-70'}`}>
+                            <AtSign className={`w-5 h-5 ${focusedField === 'email' ? 'text-accent' : 'text-gray-400'}`} />
+                          </div>
+                          <input
+                            type="email"
+                            id="email"
+                            value={formState.email}
+                            onChange={handleChange}
+                            onFocus={() => setFocusedField('email')}
+                            onBlur={() => setFocusedField(null)}
+                            className={`w-full pl-11 pr-4 py-3 bg-gray-50/50 border ${focusedField === 'email' ? 'border-accent' : 'border-gray-200'} rounded-xl focus:outline-none focus:ring-2 focus:ring-accent/30 transition-all duration-300`}
+                            placeholder="Email Address"
+                            required
+                          />
+                          <div className={`absolute bottom-0 left-0 h-0.5 bg-accent transition-all duration-300 ${focusedField === 'email' ? 'w-full' : 'w-0'}`}></div>
+                        </div>
                       </div>
                       
                       <div className="relative">
-                        <div className={`absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none transition-opacity duration-300 ${formState.email ? 'opacity-100' : 'opacity-70'}`}>
-                          <AtSign className={`w-5 h-5 ${focusedField === 'email' ? 'text-accent' : 'text-gray-400'}`} />
+                        <div className={`absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none transition-opacity duration-300 ${formState.subject ? 'opacity-100' : 'opacity-70'}`}>
+                          <FileText className={`w-5 h-5 ${focusedField === 'subject' ? 'text-accent' : 'text-gray-400'}`} />
                         </div>
                         <input
-                          type="email"
-                          id="email"
-                          value={formState.email}
+                          type="text"
+                          id="subject"
+                          value={formState.subject}
                           onChange={handleChange}
-                          onFocus={() => setFocusedField('email')}
+                          onFocus={() => setFocusedField('subject')}
                           onBlur={() => setFocusedField(null)}
-                          className={`w-full pl-11 pr-4 py-3 bg-gray-50/50 border ${focusedField === 'email' ? 'border-accent' : 'border-gray-200'} rounded-xl focus:outline-none focus:ring-2 focus:ring-accent/30 transition-all duration-300`}
-                          placeholder="Email Address"
+                          className={`w-full pl-11 pr-4 py-3 bg-gray-50/50 border ${focusedField === 'subject' ? 'border-accent' : 'border-gray-200'} rounded-xl focus:outline-none focus:ring-2 focus:ring-accent/30 transition-all duration-300`}
+                          placeholder="Subject"
                           required
                         />
-                        <div className={`absolute bottom-0 left-0 h-0.5 bg-accent transition-all duration-300 ${focusedField === 'email' ? 'w-full' : 'w-0'}`}></div>
+                        <div className={`absolute bottom-0 left-0 h-0.5 bg-accent transition-all duration-300 ${focusedField === 'subject' ? 'w-full' : 'w-0'}`}></div>
+                      </div>
+                      
+                      <div className="relative">
+                        <div className={`absolute top-3.5 left-0 flex items-start pl-3.5 pointer-events-none transition-opacity duration-300 ${formState.message ? 'opacity-100' : 'opacity-70'}`}>
+                          <MessageSquare className={`w-5 h-5 ${focusedField === 'message' ? 'text-accent' : 'text-gray-400'}`} />
+                        </div>
+                        <textarea
+                          id="message"
+                          value={formState.message}
+                          onChange={handleChange}
+                          onFocus={() => setFocusedField('message')}
+                          onBlur={() => setFocusedField(null)}
+                          rows={4}
+                          className={`w-full pl-11 pr-4 py-3 bg-gray-50/50 border ${focusedField === 'message' ? 'border-accent' : 'border-gray-200'} rounded-xl focus:outline-none focus:ring-2 focus:ring-accent/30 transition-all duration-300 resize-none`}
+                          placeholder="Your Message"
+                          required
+                        ></textarea>
+                        <div className={`absolute bottom-0 left-0 h-0.5 bg-accent transition-all mb-8 duration-300 ${focusedField === 'message' ? 'w-full' : 'w-0'}`}></div>
                       </div>
                     </div>
                     
-                    <div className="relative">
-                      <div className={`absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none transition-opacity duration-300 ${formState.subject ? 'opacity-100' : 'opacity-70'}`}>
-                        <FileText className={`w-5 h-5 ${focusedField === 'subject' ? 'text-accent' : 'text-gray-400'}`} />
-                      </div>
-                      <input
-                        type="text"
-                        id="subject"
-                        value={formState.subject}
-                        onChange={handleChange}
-                        onFocus={() => setFocusedField('subject')}
-                        onBlur={() => setFocusedField(null)}
-                        className={`w-full pl-11 pr-4 py-3 bg-gray-50/50 border ${focusedField === 'subject' ? 'border-accent' : 'border-gray-200'} rounded-xl focus:outline-none focus:ring-2 focus:ring-accent/30 transition-all duration-300`}
-                        placeholder="Subject"
-                        required
-                      />
-                      <div className={`absolute bottom-0 left-0 h-0.5 bg-accent transition-all duration-300 ${focusedField === 'subject' ? 'w-full' : 'w-0'}`}></div>
-                    </div>
-                    
-                    <div className="relative">
-                      <div className={`absolute top-3.5 left-0 flex items-start pl-3.5 pointer-events-none transition-opacity duration-300 ${formState.message ? 'opacity-100' : 'opacity-70'}`}>
-                        <MessageSquare className={`w-5 h-5 ${focusedField === 'message' ? 'text-accent' : 'text-gray-400'}`} />
-                      </div>
-                      <textarea
-                        id="message"
-                        value={formState.message}
-                        onChange={handleChange}
-                        onFocus={() => setFocusedField('message')}
-                        onBlur={() => setFocusedField(null)}
-                        rows={4}
-                        className={`w-full pl-11 pr-4 py-3 bg-gray-50/50 border ${focusedField === 'message' ? 'border-accent' : 'border-gray-200'} rounded-xl focus:outline-none focus:ring-2 focus:ring-accent/30 transition-all duration-300 resize-none`}
-                        placeholder="Your Message"
-                        required
-                      ></textarea>
-                      <div className={`absolute bottom-0 left-0 h-0.5 bg-accent transition-all duration-300 ${focusedField === 'message' ? 'w-full' : 'w-0'}`}></div>
-                    </div>
-                  </div>
-                  
-                  <Button 
-                    type="submit" 
-                    disabled={isSubmitting}
-                    className="w-full bg-accent hover:bg-accent/90 text-white py-3 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg mt-2 relative overflow-hidden group"
-                  >
-                    <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-accent via-accent/80 to-accent bg-[length:200%_100%] group-hover:animate-shimmer"></span>
-                    <span className="relative flex items-center justify-center">
-                      {isSubmitting ? (
-                        <>
-                          <div className="h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
-                          <span>Sending...</span>
-                        </>
-                      ) : (
-                        <>
-                          <Send size={16} className="mr-2" />
-                          <span>Send Message</span>
-                        </>
-                      )}
-                    </span>
-                  </Button>
-                </form>
-              )}
+                    <Button 
+                      type="submit" 
+                      disabled={isSubmitting}
+                      className="w-full bg-accent hover:bg-accent/90 text-white py-3 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg mt-auto relative overflow-hidden group"
+                    >
+                      <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-accent via-accent/80 to-accent bg-[length:200%_100%] group-hover:animate-shimmer"></span>
+                      <span className="relative flex items-center justify-center">
+                        {isSubmitting ? (
+                          <>
+                            <div className="h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
+                            <span>Sending...</span>
+                          </>
+                        ) : (
+                          <>
+                            <Send size={16} className="mr-2" />
+                            <span>Send Message</span>
+                          </>
+                        )}
+                      </span>
+                    </Button>
+                  </form>
+                )}
+              </div>
               
               {/* Background pattern */}
               <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full -mr-16 -mt-16 z-0"></div>
