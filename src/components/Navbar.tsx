@@ -79,7 +79,7 @@ const Navbar = () => {
             <a href="#" className="text-xl font-bold group flex items-center gap-1">
               <Sparkles className="h-4 w-4 text-[#3E40EF] mr-2" />
               <span className="font-display">
-                {!isMenuOpen && (
+                <div className={isMenuOpen ? 'hidden' : 'block'}>
                   <WordRotate 
                     words={["Portfolio", "Anurag Adarsh", "Designer", "Developer"]} 
                     className="text-inherit inline-block"
@@ -90,7 +90,7 @@ const Navbar = () => {
                       transition: { duration: 0.3, ease: "easeOut" },
                     }}
                   />
-                )}
+                </div>
               </span>
             </a>
           </div>
@@ -148,18 +148,24 @@ const Navbar = () => {
             }}
           >
             <div className="w-6 h-6 flex items-center justify-center">
-              <div className={`relative w-6 h-6 transition-all duration-300`}>
-                <span className={`absolute h-[2px] w-5 rounded-full bg-[#3E40EF] transition-all duration-300 ease-out ${
-                  isMenuOpen ? "rotate-45 top-1/2" : "top-1.5"
-                }`} style={{ left: 0, transform: isMenuOpen ? 'translateY(-50%) rotate(45deg)' : 'translateY(0)' }}></span>
+              <div className="relative w-5 h-5 flex items-center justify-center">
+                <span 
+                  className={`absolute h-[2px] w-5 rounded-full bg-[#3E40EF] transition-all duration-300 ease-out ${
+                    isMenuOpen ? "rotate-45" : "translate-y-[-4px]"
+                  }`}
+                ></span>
                 
-                <span className={`absolute h-[2px] w-5 rounded-full bg-[#3E40EF] transition-all duration-300 ease-out ${
-                  isMenuOpen ? "-rotate-45 top-1/2" : "top-1/2"
-                }`} style={{ left: 0, transform: isMenuOpen ? 'translateY(-50%) rotate(-45deg)' : 'translateY(-50%)' }}></span>
+                <span 
+                  className={`absolute h-[2px] w-5 rounded-full bg-[#3E40EF] transition-all duration-300 ease-out ${
+                    isMenuOpen ? "opacity-0" : "opacity-100"
+                  }`}
+                ></span>
                 
-                <span className={`absolute h-[2px] w-5 rounded-full bg-[#3E40EF] transition-all duration-300 ease-out ${
-                  isMenuOpen ? "opacity-0" : "bottom-1.5"
-                }`} style={{ left: 0, transform: isMenuOpen ? 'translateY(0)' : 'translateY(0)' }}></span>
+                <span 
+                  className={`absolute h-[2px] w-5 rounded-full bg-[#3E40EF] transition-all duration-300 ease-out ${
+                    isMenuOpen ? "-rotate-45" : "translate-y-[4px]"
+                  }`}
+                ></span>
               </div>
             </div>
           </button>
@@ -175,6 +181,7 @@ const Navbar = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             className="md:hidden fixed inset-0 z-40 flex flex-col"
+            style={{ zIndex: 45 }}
           >
             {/* Backdrop with blur effect */}
             <motion.div 

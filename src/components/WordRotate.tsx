@@ -41,7 +41,7 @@ export function WordRotate({
     return () => clearInterval(interval);
   }, [words, duration, isVisible]);
 
-  // Use effect to track visibility
+  // Use effect to track visibility and check menu state
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -55,10 +55,29 @@ export function WordRotate({
       observer.observe(element);
     }
     
+    // Additional check for menu state
+    const checkMenuState = () => {
+      // If there's an open mobile menu, pause rotation
+      const mobileMenuOpen = document.body.style.overflow === 'hidden';
+      if (mobileMenuOpen) {
+        setIsVisible(false);
+      } else if (element?.isConnected) {
+        setIsVisible(true);
+      }
+    };
+    
+    // Run initial check
+    checkMenuState();
+    
+    // Also check when body style changes (menu opens/closes)
+    const bodyObserver = new MutationObserver(checkMenuState);
+    bodyObserver.observe(document.body, { attributes: true, attributeFilter: ['style'] });
+    
     return () => {
       if (element) {
         observer.unobserve(element);
       }
+      bodyObserver.disconnect();
     };
   }, []);
 

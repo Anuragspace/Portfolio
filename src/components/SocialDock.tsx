@@ -61,14 +61,31 @@ export function SocialDock() {
   const { setTheme } = useTheme();
   const [visible, setVisible] = React.useState(true);
   const [prevScrollPos, setPrevScrollPos] = React.useState(0);
+  const [menuOpen, setMenuOpen] = React.useState(false);
+  
+  // Check if menu is open by monitoring body style
+  React.useEffect(() => {
+    const checkMenuState = () => {
+      setMenuOpen(document.body.style.overflow === 'hidden');
+    };
+    
+    // Run initial check
+    checkMenuState();
+    
+    // Monitor body style changes (which happen when menu opens/closes)
+    const bodyObserver = new MutationObserver(checkMenuState);
+    bodyObserver.observe(document.body, { attributes: true, attributeFilter: ['style'] });
+    
+    return () => bodyObserver.disconnect();
+  }, []);
 
   React.useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
-      const isScrollingDown = currentScrollPos > prevScrollPos;
+      // Only display dock in hero section
       const isInHeroSection = currentScrollPos < window.innerHeight - 100;
       
-      setVisible(isInHeroSection || !isScrollingDown);
+      setVisible(isInHeroSection);
       setPrevScrollPos(currentScrollPos);
     };
     
@@ -77,12 +94,12 @@ export function SocialDock() {
   }, [prevScrollPos]);
 
   return (
-    <div className={`fixed bottom-4 md:bottom-6 left-1/2 transform -translate-x-1/2 z-40 transition-all duration-300 ${
-      visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+    <div className={`fixed bottom-4 md:bottom-6 left-1/2 transform -translate-x-1/2 z-30 transition-all duration-300 ${
+      visible && !menuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8 pointer-events-none'
     }`}>
       <Dock 
         direction="middle" 
-        className="h-12 px-4 py-2 bg-white border border-gray-100 shadow-md rounded-xl mx-4"
+        className="h-10 px-4 py-1.5 bg-white border border-gray-100 shadow-md rounded-xl mx-auto w-[90%] max-w-md"
       >
         <DockIcon>
           <Button
