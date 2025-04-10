@@ -61,20 +61,20 @@ export function SocialDock() {
   const { setTheme } = useTheme();
 
   return (
-    <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-50">
+    <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-50">
       <Dock 
         direction="middle" 
-        className="h-14 px-4 py-2 bg-white border border-gray-100 shadow-md rounded-2xl"
+        className="h-14 px-4 py-2 bg-white border border-gray-100 shadow-md rounded-xl light"
       >
         <DockIcon>
           <Button
             onClick={() => setTheme("light")}
             variant="ghost"
             size="icon"
-            className="w-9 h-9 text-gray-700 flex items-center justify-center hover:bg-gray-100 transition-all"
+            className="w-9 h-9 text-gray-700 flex items-center justify-center hover:bg-gray-100 transition-all !bg-white"
             aria-label="Light theme"
           >
-            <Moon className="h-5 w-5" />
+            <Sun className="h-5 w-5" />
           </Button>
         </DockIcon>
 
@@ -84,7 +84,7 @@ export function SocialDock() {
           <Button
             variant="ghost"
             size="icon"
-            className="w-9 h-9 text-gray-700 flex items-center justify-center hover:bg-gray-100 transition-all"
+            className="w-9 h-9 text-gray-700 flex items-center justify-center hover:bg-gray-100 transition-all !bg-white"
             asChild
           >
             <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub">

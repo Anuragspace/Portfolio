@@ -8,7 +8,7 @@ import { ThemeProvider } from 'next-themes';
 
 function App() {
   return (
-    <ThemeProvider attribute="class" defaultTheme="light">
+    <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} forcedTheme="light">
       <Router>
         <div className="flex flex-col min-h-screen">
           <Navbar />
