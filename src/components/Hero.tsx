@@ -101,7 +101,9 @@ const Hero = () => {
           </div>
         </div>
         
-        <SocialDock />
+        <div className="relative z-50">
+          <SocialDock />
+        </div>
       </div>
       
       <div className="absolute -top-24 -right-24 w-96 h-96 bg-[#3E40EF]/10 rounded-full blur-3xl"></div>

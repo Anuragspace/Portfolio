@@ -68,7 +68,7 @@ export function SocialDock() {
 
   return (
     <TooltipProvider>
-      <Dock direction="middle" className="absolute bottom-8 left-1/2 transform -translate-x-1/2 px-4 dark:bg-gray-800/40 dark:border-gray-700/30">
+      <Dock direction="middle" className="absolute bottom-12 left-1/2 transform -translate-x-1/2 px-3 py-1 z-50 dark:bg-gray-800 dark:border-gray-700">
         <DockIcon>
           <Tooltip>
             <TooltipTrigger asChild>
@@ -76,13 +76,13 @@ export function SocialDock() {
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
                 variant="ghost"
                 size="icon"
-                className="rounded-full w-10 h-10 text-gray-700 dark:text-gray-200"
+                className="w-8 h-8 text-black dark:text-white flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
                 aria-label="Toggle theme"
               >
                 {theme === "dark" ? (
-                  <Sun className="h-5 w-5" />
+                  <Sun className="h-4 w-4" />
                 ) : (
-                  <Moon className="h-5 w-5" />
+                  <Moon className="h-4 w-4" />
                 )}
               </Button>
             </TooltipTrigger>
@@ -92,19 +92,19 @@ export function SocialDock() {
           </Tooltip>
         </DockIcon>
 
-        <Separator orientation="vertical" className="h-8 bg-gray-300/50 dark:bg-gray-600/50" />
+        <Separator orientation="vertical" className="h-6 bg-gray-200 dark:bg-gray-700 mx-0.5" />
 
         <DockIcon>
           <Tooltip>
             <TooltipTrigger asChild>
               <Button
                 variant="ghost"
-                size="icon"
-                className="rounded-full w-10 h-10 text-gray-700 dark:text-gray-200"
+                size="icon" 
+                className="w-8 h-8 text-black dark:text-white flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
                 asChild
               >
                 <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                  <Icons.github className="h-5 w-5" />
+                  <Icons.github className="h-4 w-4" />
                 </a>
               </Button>
             </TooltipTrigger>
@@ -124,7 +124,7 @@ export function SocialDock() {
                 asChild
               >
                 <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                  <Icons.linkedin className="h-5 w-5" />
+                  <Icons.linkedin className="h-4 w-4" />
                 </a>
               </Button>
             </TooltipTrigger>
@@ -144,7 +144,7 @@ export function SocialDock() {
                 asChild
               >
                 <a href="https://x.com" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
-                  <Icons.x className="h-5 w-5" />
+                  <Icons.x className="h-4 w-4" />
                 </a>
               </Button>
             </TooltipTrigger>
@@ -164,7 +164,7 @@ export function SocialDock() {
                 asChild
               >
                 <a href="https://behance.net" target="_blank" rel="noopener noreferrer" aria-label="Behance">
-                  <Icons.behance className="h-5 w-5" />
+                  <Icons.behance className="h-4 w-4" />
                 </a>
               </Button>
             </TooltipTrigger>
@@ -186,7 +186,7 @@ export function SocialDock() {
                 asChild
               >
                 <a href="#about" aria-label="Scroll down">
-                  <ArrowDown className="h-5 w-5" />
+                  <ArrowDown className="h-4 w-4" />
                 </a>
               </Button>
             </TooltipTrigger>

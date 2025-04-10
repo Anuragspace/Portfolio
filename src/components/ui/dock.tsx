@@ -35,7 +35,7 @@ function useDockHoverAnimation(mouseX: MotionValue<number>, ref: React.RefObject
       distance.set(distanceValue);
       
       // We set the size based on the distance
-      const sizeValue = Math.max(1, 1.8 - distanceValue / 150);
+      const sizeValue = Math.max(1, 1.3 - distanceValue / 200);
       size.set(sizeValue);
     };
 
@@ -76,7 +76,7 @@ export function Dock({ direction = "middle", children, className }: DockProps) {
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         className={cn(
-          "flex h-16 items-end gap-1 rounded-full bg-white/30 backdrop-blur-xl p-2.5 border border-white/20 shadow-lg",
+          "flex h-12 items-center gap-1 rounded-3xl bg-white dark:bg-gray-800 backdrop-blur-sm p-2 border border-gray-100 dark:border-gray-700 shadow-md z-50 hover:shadow-lg transition-shadow",
           justifyContent,
           className
         )}
@@ -98,13 +98,13 @@ export function DockIcon({ children, className }: DockIconProps) {
   const { mouseX } = context;
   const { size } = useDockHoverAnimation(mouseX, ref);
   const height = useSpring(size, { stiffness: 300, damping: 20 });
-  const y = useTransform(height, [1, 1.8], [0, -12]);
+  const y = useTransform(height, [1, 1.3], [0, -8]);
 
   return (
     <motion.div
       ref={ref}
       style={{ y, scale: height }}
-      className={cn("flex items-center justify-center px-1", className)}
+      className={cn("flex items-center justify-center px-2", className)}
     >
       {children}
     </motion.div>
