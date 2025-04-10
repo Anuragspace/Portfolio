@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Sparkles, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -19,7 +20,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="min-h-screen pt-24 pb-16 flex items-center relative overflow-hidden">
+    <section className="min-h-screen pt-24 pb-28 flex items-center relative overflow-hidden">
       {/* Add the AnimatedGridPattern with mask and skew effect */}
       <AnimatedGridPattern
         numSquares={30}
@@ -29,9 +30,6 @@ const Hero = () => {
         className="absolute inset-x-[-42%] inset-y-[-5%] h-[100%] skew-y-12 text-[#3E40EF]/100 [mask-image:radial-gradient(500px_circle_at_center,white,transparent)]"
       />
 
-
-
-
       <div className="container-custom">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-7 z-10">
@@ -40,7 +38,7 @@ const Hero = () => {
                 <Sparkles className="inline-block mr-2 h-4 w-4" />
                 UI/UX Designer & Product Designer
               </div>
-              <h1 className="animate-slide-in font-black"  style={{ animationDelay: "0.1s" }}>
+              <h1 className="animate-slide-in font-black" style={{ animationDelay: "0.1s" }}>
                 Crafting Digital Experiences That <span className="text-[#3E40EF]">Inspire</span>
               </h1>
               <p className="text-lg text-gray-600 animate-slide-in" style={{ animationDelay: "0.2s" }}>
@@ -100,11 +98,10 @@ const Hero = () => {
             </div>
           </div>
         </div>
-        
-        <div className="relative z-50">
-          <SocialDock />
-        </div>
       </div>
+      
+      {/* The Social Dock */}
+      <SocialDock />
       
       <div className="absolute -top-24 -right-24 w-96 h-96 bg-[#3E40EF]/10 rounded-full blur-3xl"></div>
       <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-[#3E40EF]/5 rounded-full blur-3xl"></div>
