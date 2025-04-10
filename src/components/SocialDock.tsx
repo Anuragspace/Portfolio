@@ -99,7 +99,7 @@ export function SocialDock() {
     }`}>
       <Dock 
         direction="middle" 
-        className="h-10 px-4 py-1.5 bg-white border border-gray-100 shadow-md rounded-xl mx-auto w-[90%] max-w-md"
+        className="h-12 px-4 py-1.5 bg-white border border-gray-100 shadow-md rounded-xl mx-auto w-[85%] max-w-md"
       >
         <DockIcon>
           <Button
