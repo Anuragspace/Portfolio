@@ -1,10 +1,11 @@
 
 import React, { useState, useEffect } from "react";
-import { Menu, X, Linkedin, ExternalLink, Sparkles } from "lucide-react";
+import { Menu, X, Linkedin, ExternalLink, Github, Instagram, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { WordRotate } from "@/components/WordRotate";
 import { BorderBeam } from "@/components/BorderBeam";
 import { motion, AnimatePresence } from "framer-motion";
+import { RainbowButton } from "@/components/RainbowButton";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -120,31 +121,15 @@ const Navbar = () => {
           </div>
         </nav>
 
-        {/* Social Links */}
-        <div className={`hidden md:flex items-center space-x-4 transition-all duration-300 ${
+        {/* Resume Button only for desktop */}
+        <div className={`hidden md:flex items-center transition-all duration-300 ${
           isScrolled ? "opacity-0 invisible" : "opacity-100 visible"
         }`}>
-          <a 
-            href="https://linkedin.com" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="p-2 rounded-full hover:bg-gray-100 text-gray-600 hover:text-[#3E40EF] transition-colors duration-300"
-            aria-label="LinkedIn"
-          >
-            <Linkedin size={20} />
-          </a>
-          <a 
-            href="https://behance.net" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="p-2 rounded-full hover:bg-gray-100 text-gray-600 hover:text-[#3E40EF] transition-colors duration-300"
-            aria-label="Behance"
-          >
-            <ExternalLink size={20} />
-          </a>
-          <Button size="sm" className="bg-[#3E40EF] hover:bg-[#3E40EF]/90 ml-2">
-            Resume
-          </Button>
+          <div className="ml-2">
+            <RainbowButton className="text-sm px-4 py-1.5">
+              Resume
+            </RainbowButton>
+          </div>
         </div>
 
         {/* Enhanced Mobile Menu Button with modern UI */}
@@ -254,19 +239,28 @@ const Navbar = () => {
                         <Linkedin size={20} />
                       </a>
                       <a 
-                        href="https://behance.net" 
+                        href="https://github.com" 
                         target="_blank" 
                         rel="noopener noreferrer"
                         className="p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
-                        aria-label="Behance"
+                        aria-label="GitHub"
                       >
-                        <ExternalLink size={20} />
+                        <Github size={20} />
+                      </a>
+                      <a 
+                        href="https://instagram.com" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
+                        aria-label="Instagram"
+                      >
+                        <Instagram size={20} />
                       </a>
                     </div>
                     
-                    <Button className="bg-white text-[#3E40EF] hover:bg-white/90">
+                    <RainbowButton className="bg-white text-[#3E40EF] hover:bg-white/90">
                       Resume
-                    </Button>
+                    </RainbowButton>
                   </div>
                   
                   

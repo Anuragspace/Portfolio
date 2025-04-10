@@ -44,15 +44,15 @@ const Hero = () => {
               <p className="text-lg text-gray-600 animate-slide-in" style={{ animationDelay: "0.2s" }}>
                 I transform complex problems into elegant, intuitive designs that delight users and drive business growth.
               </p>
-              <div className="flex flex-row gap-5 sm:pl-2 pt-4 animate-slide-in" style={{ animationDelay: "0.3s" }}>
-                <a href="#projects" className="flex-1 max-w-[180px]">
-                  <RainbowButton className="w-full">
+              <div className="flex flex-row sm:gap-5 gap-3 sm:pl-2 pt-4 animate-slide-in" style={{ animationDelay: "0.3s" }}>
+                <a href="#projects" className="w-full max-w-[180px]">
+                  <RainbowButton className="w-full whitespace-nowrap">
                     View Projects
                   </RainbowButton>
                 </a>
                 <ShinyButton 
                   onClick={triggerConfetti} 
-                  className="h-11 bg-white text-black shadow w-[180px]"
+                  className="h-11 bg-white text-black shadow w-full max-w-[180px]"
                 >
                   Click Me
                 </ShinyButton>
@@ -77,7 +77,7 @@ const Hero = () => {
                 />
               </div>
               
-              <div className="absolute bottom-[30px] left-[-60px] bg-white/90 backdrop-blur-sm px-5 py-3 rounded-full shadow-lg z-30 flex items-center gap-4 animate-float" style={{ animationDelay: "0.4s" }}>
+              <div className="absolute bottom-[30px] sm:left-[-60px] left-[-10px] bg-white/90 backdrop-blur-sm px-5 py-3 rounded-full shadow-lg z-30 flex items-center gap-4 animate-float" style={{ animationDelay: "0.4s" }}>
                   <span className="text-3xl" role="img" aria-label="waving hand">👋</span>
                 
                 <div className="text-left">
@@ -86,7 +86,7 @@ const Hero = () => {
                 </div>
               </div>
               
-              <div className="absolute top-[40px] right-[-30px] bg-white/50 backdrop-blur-sm px-4 py-3 rounded-full shadow-lg z-30 flex items-center gap-4 animate-float" style={{ animationDelay: "0.5s" }}>
+              <div className="absolute top-[40px] sm:right-[-30px] right-[-10px] bg-white/50 backdrop-blur-sm px-4 py-3 rounded-full shadow-lg z-30 flex items-center gap-4 animate-float" style={{ animationDelay: "0.5s" }}>
                 <div className="w-10 h-10 rounded-full bg-[#3E40EF] flex items-center justify-center">
                   <Sparkles className="h-5 w-5 text-white" />
                 </div>

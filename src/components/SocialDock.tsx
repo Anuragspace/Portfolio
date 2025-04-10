@@ -59,12 +59,30 @@ const Icons = {
 
 export function SocialDock() {
   const { setTheme } = useTheme();
+  const [visible, setVisible] = React.useState(true);
+  const [prevScrollPos, setPrevScrollPos] = React.useState(0);
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollPos = window.scrollY;
+      const isScrollingDown = currentScrollPos > prevScrollPos;
+      const isInHeroSection = currentScrollPos < window.innerHeight - 100;
+      
+      setVisible(isInHeroSection || !isScrollingDown);
+      setPrevScrollPos(currentScrollPos);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [prevScrollPos]);
 
   return (
-    <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-50">
+    <div className={`fixed bottom-4 md:bottom-6 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-300 ${
+      visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+    }`}>
       <Dock 
         direction="middle" 
-        className="h-16 px-4 py-2 bg-white border border-gray-100 shadow-md rounded-xl"
+        className="h-14 px-4 py-2 bg-white border border-gray-100 shadow-md rounded-xl"
       >
         <DockIcon>
           <Button
