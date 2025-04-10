@@ -101,49 +101,49 @@ const About = () => {
               </div>
               
               <div className="relative py-1">
-                <div className="text-2xl md:text-3xl font-bold leading-snug">
+                <h3 className="text-2xl md:text-3xl font-bold leading-snug">
                   <TextReveal className="text-gray-400">
-                    I'm a UI/UX Designer with a passion for creating user-centered digital experiences that bridge the gap between aesthetics and functionality.
+                    I'm a UI/UX Designer with a passion for
                   </TextReveal>
-                </div>
+                </h3>
+              
+                <h3 className="mt-1">
+                  <TextReveal className="text-gray-400">
+                    creating user-centered digital experiences
+                  </TextReveal>
+                </h3>
               </div>
               
-              <div className="bg-[#ffffff] rounded-lg border border-gray-350 p-6 relative shadow-xl group hover:shadow-2xl transition-all duration-300">
+              <div className="bg-[#ffffff] rounded-lg border border-gray-350 p-6 relative shadow-xl">
                 {/* Terminal Header */}
                 <div className="absolute top-0 left-0 right-0 h-10 bg-[#121212] rounded-t-lg border-b border-gray-350 flex items-center px-4">
                   <div className="flex gap-2">
-                    <div className="h-3 w-3 rounded-full bg-[#FF5F56] hover:brightness-110 transition-all cursor-pointer"></div>
-                    <div className="h-3 w-3 rounded-full bg-[#FFBD2E] hover:brightness-110 transition-all cursor-pointer"></div>
-                    <div className="h-3 w-3 rounded-full bg-[#27C93F] hover:brightness-110 transition-all cursor-pointer"></div>
+                    <div className="h-3 w-3 rounded-full bg-[#FF5F56]"></div>
+                    <div className="h-3 w-3 rounded-full bg-[#FFBD2E]"></div>
+                    <div className="h-3 w-3 rounded-full bg-[#27C93F]"></div>
                   </div>
-                  <div className="absolute left-1/2 -translate-x-1/2 text-white/60 text-sm font-mono group-hover:text-white/90 transition-colors">
+                  <div className="absolute left-1/2 -translate-x-1/2 text-white/60 text-sm font-mono">
                     about.txt
                   </div>
                 </div>
 
                 {/* Terminal Content */}
-                <div className="mt-6 overflow-hidden">
-                  <div className="flex items-center mb-3 animate-fade-in">
-                    <span className="text-[#424242] font-mono text-sm mr-2">
-                      {'$'}
-                    </span>
-                    <p className="text-[#424242] font-mono text-sm type-animation after:content-['|'] after:ml-1 after:animate-cursor-blink">
-                      {'cat about.txt'}
-                    </p>
-                  </div>
-                  <div className="space-y-4 text-[#7e7e7e] font-display text-base leading-relaxed terminal-content opacity-0 animate-terminal-reveal">
-                    <p className="reveal-line">
+                <div className="mt-6">
+                  <p className="text-[#424242] font-mono text-sm mb-2">
+                    {'// <hello world />'}
+                  </p>
+                  <div className="space-y-4 text-[#7e7e7e] font-display text-base leading-relaxed">
+                    <p>
                       With over 5 years of experience in UI/UX design, I've had the privilege of working on a diverse range of projects, from innovative startups to established enterprises. My design philosophy revolves around understanding user needs and business goals to create solutions that are both beautiful and functional.
                     </p>
                     
-                    <p className="reveal-line animation-delay-300">
+                    <p>
                       I currently serve as Chief Product Officer at <span className="text-black font-semibold">Imaginum</span>, where I lead the design and strategy of our digital products. Previously, I spearheaded design initiatives as Tech & Design Head at <span className="text-black font-semibold">CSED</span>.
                     </p>
                   </div>
                 </div>
 
-                {/* Glowing effect on hover */}
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-lg blur opacity-0 group-hover:opacity-10 transition duration-500 group-hover:duration-200"></div>
+                
               </div>
             </div>
           </div>
