@@ -6,6 +6,7 @@ import { WordRotate } from "@/components/WordRotate";
 import { BorderBeam } from "@/components/BorderBeam";
 import { motion, AnimatePresence } from "framer-motion";
 import { RainbowButton } from "@/components/RainbowButton";
+import { WhiteRainbowButton } from "@/components/WhiteRainbowButton";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -69,99 +70,100 @@ const Navbar = () => {
         isScrolled ? "py-5" : "py-5" 
       }`}
     >
-      <div className="container-custom flex items-center justify-between">
-        {/* Logo */}
-        <div className={`flex items-center transition-all duration-300 ${
-          isScrolled ? "opacity-0 invisible" : "opacity-100 visible"
-        }`}>
-          <a href="#" className="text-xl font-bold group flex items-center gap-1">
-            <Sparkles className="h-4 w-4 text-[#3E40EF] mr-2" />
-            <span className="font-display">
-              {!isMenuOpen && (
-                <WordRotate 
-                  words={["Portfolio", "Anurag Adarsh", "Designer", "Developer"]} 
-                  className="text-inherit inline-block"
-                  motionProps={{
-                    initial: { opacity: 0, y: 8 },
-                    animate: { opacity: 1, y: 0 },
-                    exit: { opacity: 0, y: -8 },
-                    transition: { duration: 0.3, ease: "easeOut" },
-                  }}
-                />
-              )}
-            </span>
-          </a>
-        </div>
-
-        {/* Desktop Navigation */}
-        <nav className={`hidden md:flex items-center ${
-          isScrolled ? "fixed left-1/2 -translate-x-1/2 mt-4" : ""
-        }`}>
-          <div className="relative bg-white shadow-sm rounded-full px-2 py-2.5 flex items-center gap-1">
-            <BorderBeam 
-              colorFrom="#3E40EF"
-              colorTo="#6366F1"
-              size={70}
-              duration={7}
-              className="opacity-70"
-            />
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className={`relative z-10 text-sm font-medium px-4 py-2.5 rounded-full transition-all duration-300 hover:text-[#3E40EF] ${
-                  activeSection === link.href.substring(1) 
-                    ? "bg-[#3E40EF]/10 text-[#3E40EF]" 
-                    : "text-gray-700 hover:bg-gray-100"
-                }`}
-              >
-                {link.name}
-              </a>
-            ))}
-          </div>
-        </nav>
-
-        {/* Resume Button only for desktop */}
-        <div className={`hidden md:flex items-center transition-all duration-300 ${
-          isScrolled ? "opacity-0 invisible" : "opacity-100 visible"
-        }`}>
-          <div className="ml-2">
-            <RainbowButton className="text-sm px-4 py-1.5">
-              Resume
-            </RainbowButton>
-          </div>
-        </div>
-
-        {/* Enhanced Mobile Menu Button with modern UI */}
-        {/* Mobile Menu Button - Refined Design */}
-        <button
-          className={`md:hidden relative z-50 p-3 rounded-full bg-white flex items-center justify-center transition-all duration-300 ${
+      <div className="container-custom flex items-center justify-center">
+        <div className="w-full flex items-center justify-between">
+          {/* Logo */}
+          <div className={`flex items-center transition-all duration-300 ${
             isScrolled ? "opacity-0 invisible" : "opacity-100 visible"
-          }`}
-          onClick={toggleMenu}
-          aria-label="Toggle menu"
-          style={{
-            boxShadow: isMenuOpen 
-              ? '0 0 0 2px rgba(62, 64, 239, 0.2), 0 2px 8px rgba(62, 64, 239, 0.1)' 
-              : '0 2px 8px rgba(0, 0, 0, 0.05)'
-          }}
-        >
-          <div className="w-6 h-6 flex items-center justify-center overflow-hidden">
-            <div className={`relative w-6 h-6 transition-all duration-300`}>
-              <span className={`absolute h-[2px] w-5 rounded-full bg-[#3E40EF] transition-all duration-300 ease-out ${
-                isMenuOpen ? "rotate-45 top-1/2" : "top-1"
-              }`} style={{ left: 0, transform: isMenuOpen ? 'translateY(-50%) rotate(45deg)' : 'translateY(0)' }}></span>
-              
-              <span className={`absolute h-[2.5px] w-5 rounded-full bg-[#3E40EF] transition-all duration-300 ease-out ${
-                isMenuOpen ? "-rotate-45 top-1/2" : "top-1/2"
-              }`} style={{ left: 0, transform: isMenuOpen ? 'translateY(-50%) rotate(-45deg)' : 'translateY(-50%)' }}></span>
-              
-              <span className={`absolute h-[2.5px] w-5 rounded-full bg-[#3E40EF] transition-all duration-300 ease-out ${
-                isMenuOpen ? "opacity-0" : "bottom-1"
-              }`} style={{ left: 0, transform: isMenuOpen ? 'translateY(0)' : 'translateY(0)' }}></span>
+          }`}>
+            <a href="#" className="text-xl font-bold group flex items-center gap-1">
+              <Sparkles className="h-4 w-4 text-[#3E40EF] mr-2" />
+              <span className="font-display">
+                {!isMenuOpen && (
+                  <WordRotate 
+                    words={["Portfolio", "Anurag Adarsh", "Designer", "Developer"]} 
+                    className="text-inherit inline-block"
+                    motionProps={{
+                      initial: { opacity: 0, y: 8 },
+                      animate: { opacity: 1, y: 0 },
+                      exit: { opacity: 0, y: -8 },
+                      transition: { duration: 0.3, ease: "easeOut" },
+                    }}
+                  />
+                )}
+              </span>
+            </a>
+          </div>
+
+          {/* Desktop Navigation */}
+          <nav className={`hidden md:flex items-center ${
+            isScrolled ? "fixed left-1/2 -translate-x-1/2 mt-4" : ""
+          }`}>
+            <div className="relative bg-white shadow-sm rounded-full px-2 py-2.5 flex items-center gap-1">
+              <BorderBeam 
+                colorFrom="#3E40EF"
+                colorTo="#6366F1"
+                size={70}
+                duration={7}
+                className="opacity-70"
+              />
+              {navLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className={`relative z-10 text-sm font-medium px-4 py-2.5 rounded-full transition-all duration-300 hover:text-[#3E40EF] ${
+                    activeSection === link.href.substring(1) 
+                      ? "bg-[#3E40EF]/10 text-[#3E40EF]" 
+                      : "text-gray-700 hover:bg-gray-100"
+                  }`}
+                >
+                  {link.name}
+                </a>
+              ))}
+            </div>
+          </nav>
+
+          {/* Resume Button only for desktop */}
+          <div className={`hidden md:flex items-center transition-all duration-300 ${
+            isScrolled ? "opacity-0 invisible" : "opacity-100 visible"
+          }`}>
+            <div className="ml-2">
+              <RainbowButton className="text-sm px-4 py-1.5">
+                Resume
+              </RainbowButton>
             </div>
           </div>
-        </button>
+
+          {/* Enhanced Mobile Menu Button with modern UI */}
+          <button
+            className={`md:hidden relative z-50 p-2 rounded-full bg-white flex items-center justify-center transition-all duration-300 ${
+              isScrolled ? "opacity-0 invisible" : "opacity-100 visible"
+            }`}
+            onClick={toggleMenu}
+            aria-label="Toggle menu"
+            style={{
+              boxShadow: isMenuOpen 
+                ? '0 0 0 2px rgba(62, 64, 239, 0.3), 0 2px 8px rgba(62, 64, 239, 0.2)' 
+                : '0 2px 8px rgba(0, 0, 0, 0.05)'
+            }}
+          >
+            <div className="w-6 h-6 flex items-center justify-center">
+              <div className={`relative w-6 h-6 transition-all duration-300`}>
+                <span className={`absolute h-[2px] w-5 rounded-full bg-[#3E40EF] transition-all duration-300 ease-out ${
+                  isMenuOpen ? "rotate-45 top-1/2" : "top-1.5"
+                }`} style={{ left: 0, transform: isMenuOpen ? 'translateY(-50%) rotate(45deg)' : 'translateY(0)' }}></span>
+                
+                <span className={`absolute h-[2px] w-5 rounded-full bg-[#3E40EF] transition-all duration-300 ease-out ${
+                  isMenuOpen ? "-rotate-45 top-1/2" : "top-1/2"
+                }`} style={{ left: 0, transform: isMenuOpen ? 'translateY(-50%) rotate(-45deg)' : 'translateY(-50%)' }}></span>
+                
+                <span className={`absolute h-[2px] w-5 rounded-full bg-[#3E40EF] transition-all duration-300 ease-out ${
+                  isMenuOpen ? "opacity-0" : "bottom-1.5"
+                }`} style={{ left: 0, transform: isMenuOpen ? 'translateY(0)' : 'translateY(0)' }}></span>
+              </div>
+            </div>
+          </button>
+        </div>
       </div>
 
       {/* Mobile Navigation - Simplified animations */}
@@ -258,12 +260,10 @@ const Navbar = () => {
                       </a>
                     </div>
                     
-                    <RainbowButton className="bg-white text-[#3E40EF] hover:bg-white/90">
+                    <WhiteRainbowButton className="px-4 py-1.5 h-auto">
                       Resume
-                    </RainbowButton>
+                    </WhiteRainbowButton>
                   </div>
-                  
-                  
                   
                   <p className="text-sm text-white/60">© 2023 Anurag Adarsh. All rights reserved.</p>
                 </div>

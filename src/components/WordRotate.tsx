@@ -22,6 +22,7 @@ export function WordRotate({
   className,
 }: WordRotateProps) {
   const [index, setIndex] = useState(0);
+  const [isVisible, setIsVisible] = useState(true);
 
   // Define longestWord to set fixed width
   const longestWord = words.reduce(
@@ -30,15 +31,39 @@ export function WordRotate({
   );
 
   useEffect(() => {
+    // Only set up the interval if the component is visible in the UI
+    if (!isVisible) return;
+    
     const interval = setInterval(() => {
       setIndex((prevIndex) => (prevIndex + 1) % words.length);
     }, duration);
 
     return () => clearInterval(interval);
-  }, [words, duration]);
+  }, [words, duration, isVisible]);
+
+  // Use effect to track visibility
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+    
+    const element = document.querySelector('.word-rotate-container');
+    if (element) {
+      observer.observe(element);
+    }
+    
+    return () => {
+      if (element) {
+        observer.unobserve(element);
+      }
+    };
+  }, []);
 
   return (
-    <div className="overflow-hidden py-1 relative" style={{ minWidth: `${longestWord.length}ch` }}>
+    <div className="word-rotate-container overflow-hidden py-1 relative" style={{ minWidth: `${longestWord.length}ch` }}>
       <AnimatePresence mode="wait" initial={false}>
         <motion.span
           key={words[index]}

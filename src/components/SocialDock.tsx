@@ -77,36 +77,36 @@ export function SocialDock() {
   }, [prevScrollPos]);
 
   return (
-    <div className={`fixed bottom-4 md:bottom-6 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-300 ${
+    <div className={`fixed bottom-4 md:bottom-6 left-1/2 transform -translate-x-1/2 z-40 transition-all duration-300 ${
       visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
     }`}>
       <Dock 
         direction="middle" 
-        className="h-14 px-4 py-2 bg-white border border-gray-100 shadow-md rounded-xl"
+        className="h-12 px-4 py-2 bg-white border border-gray-100 shadow-md rounded-xl mx-4"
       >
         <DockIcon>
           <Button
             onClick={() => setTheme("light")}
             variant="ghost"
             size="icon"
-            className="w-10 h-10 text-gray-700 flex items-center justify-center hover:bg-gray-100 transition-all"
+            className="w-8 h-8 text-gray-700 flex items-center justify-center hover:bg-gray-100 transition-all"
             aria-label="Light theme"
           >
-            <Moon className="h-5 w-5" />
+            <Moon className="h-4 w-4" />
           </Button>
         </DockIcon>
 
-        <Separator orientation="vertical" className="h-8 bg-gray-200 mx-1" />
+        <Separator orientation="vertical" className="h-6 bg-gray-200 mx-1" />
 
         <DockIcon>
           <Button
             variant="ghost"
             size="icon"
-            className="w-10 h-10 text-gray-700 flex items-center justify-center hover:bg-gray-100 transition-all"
+            className="w-8 h-8 text-gray-700 flex items-center justify-center hover:bg-gray-100 transition-all"
             asChild
           >
             <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-              <Icons.github className="h-5 w-5" />
+              <Icons.github className="h-4 w-4" />
             </a>
           </Button>
         </DockIcon>
@@ -115,11 +115,11 @@ export function SocialDock() {
           <Button
             variant="ghost"
             size="icon"
-            className="w-10 h-10 text-gray-700 flex items-center justify-center hover:bg-gray-100 transition-all"
+            className="w-8 h-8 text-gray-700 flex items-center justify-center hover:bg-gray-100 transition-all"
             asChild
           >
             <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <Icons.linkedin className="h-5 w-5" />
+              <Icons.linkedin className="h-4 w-4" />
             </a>
           </Button>
         </DockIcon>
@@ -128,11 +128,11 @@ export function SocialDock() {
           <Button
             variant="ghost"
             size="icon"
-            className="w-10 h-10 text-gray-700 flex items-center justify-center hover:bg-gray-100 transition-all"
+            className="w-8 h-8 text-gray-700 flex items-center justify-center hover:bg-gray-100 transition-all"
             asChild
           >
             <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <Icons.instagram className="h-5 w-5" />
+              <Icons.instagram className="h-4 w-4" />
             </a>
           </Button>
         </DockIcon>
@@ -141,26 +141,26 @@ export function SocialDock() {
           <Button
             variant="ghost"
             size="icon"
-            className="w-10 h-10 text-gray-700 flex items-center justify-center hover:bg-gray-100 transition-all"
+            className="w-8 h-8 text-gray-700 flex items-center justify-center hover:bg-gray-100 transition-all"
             asChild
           >
             <a href="https://behance.net" target="_blank" rel="noopener noreferrer" aria-label="Behance">
-              <Icons.behance className="h-5 w-5" />
+              <Icons.behance className="h-4 w-4" />
             </a>
           </Button>
         </DockIcon>
 
-        <Separator orientation="vertical" className="h-8 bg-gray-200 mx-1" />
+        <Separator orientation="vertical" className="h-6 bg-gray-200 mx-1" />
 
         <DockIcon>
           <Button
             variant="ghost"
             size="icon"
-            className="w-10 h-10 text-gray-700 flex items-center justify-center hover:bg-gray-100 transition-all"
+            className="w-8 h-8 text-gray-700 flex items-center justify-center hover:bg-gray-100 transition-all"
             asChild
           >
             <a href="#about" aria-label="Scroll down">
-              <ArrowDown className="h-5 w-5" />
+              <ArrowDown className="h-4 w-4" />
             </a>
           </Button>
         </DockIcon>
