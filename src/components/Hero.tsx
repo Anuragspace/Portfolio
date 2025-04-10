@@ -44,18 +44,20 @@ const Hero = () => {
               <p className="text-lg text-gray-600 animate-slide-in" style={{ animationDelay: "0.2s" }}>
                 I transform complex problems into elegant, intuitive designs that delight users and drive business growth.
               </p>
-              <div className="flex flex-row gap-5 sm:pl-2 pt-4 animate-slide-in" style={{ animationDelay: "0.3s" }}>
-                <a href="#projects" className="flex-1 max-w-[180px]">
+              <div className="flex flex-row gap-3 sm:gap-5 pt-4 animate-slide-in w-full" style={{ animationDelay: "0.3s" }}>
+                <a href="#projects" className="flex-1">
                   <RainbowButton className="w-full">
                     View Projects
                   </RainbowButton>
                 </a>
-                <ShinyButton 
-                  onClick={triggerConfetti} 
-                  className="h-11 bg-white text-black shadow w-[180px]"
-                >
-                  Click Me
-                </ShinyButton>
+                <div className="flex-1">
+                  <ShinyButton 
+                    onClick={triggerConfetti} 
+                    className="h-11 bg-white text-black shadow w-full"
+                  >
+                    Click Me
+                  </ShinyButton>
+                </div>
               </div>
             </div>
           </div>
@@ -77,21 +79,21 @@ const Hero = () => {
                 />
               </div>
               
-              <div className="absolute bottom-[30px] left-[-60px] bg-white/90 backdrop-blur-sm px-5 py-3 rounded-full shadow-lg z-30 flex items-center gap-4 animate-float" style={{ animationDelay: "0.4s" }}>
-                  <span className="text-3xl" role="img" aria-label="waving hand">👋</span>
+              <div className="absolute bottom-[30px] left-[-20px] sm:left-[-40px] md:left-[-60px] bg-white/90 backdrop-blur-sm px-4 py-2 sm:px-5 sm:py-3 rounded-full shadow-lg z-30 flex items-center gap-3 sm:gap-4 animate-float" style={{ animationDelay: "0.4s" }}>
+                  <span className="text-2xl sm:text-3xl" role="img" aria-label="waving hand">👋</span>
                 
                 <div className="text-left">
-                  <p className="font-bold text-gray-800">Anurag Adarsh</p>
+                  <p className="font-bold text-sm sm:text-base text-gray-800">Anurag Adarsh</p>
                   <p className="text-xs text-gray-500">Engineering Student</p>
                 </div>
               </div>
               
-              <div className="absolute top-[40px] right-[-30px] bg-white/50 backdrop-blur-sm px-4 py-3 rounded-full shadow-lg z-30 flex items-center gap-4 animate-float" style={{ animationDelay: "0.5s" }}>
-                <div className="w-10 h-10 rounded-full bg-[#3E40EF] flex items-center justify-center">
-                  <Sparkles className="h-5 w-5 text-white" />
+              <div className="absolute top-[40px] right-[-10px] sm:right-[-20px] md:right-[-30px] bg-white/50 backdrop-blur-sm px-3 py-2 sm:px-4 sm:py-3 rounded-full shadow-lg z-30 flex items-center gap-3 sm:gap-4 animate-float" style={{ animationDelay: "0.5s" }}>
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#3E40EF] flex items-center justify-center">
+                  <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                 </div>
                 <div className="text-left">
-                  <p className="font-bold text-gray-800">Expert</p>
+                  <p className="font-bold text-sm sm:text-base text-gray-800">Expert</p>
                   <p className="text-xs text-[#3E40EF]">UI/UX Design</p>
                 </div>
               </div>
