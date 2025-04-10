@@ -61,17 +61,17 @@ export function SocialDock() {
   const { setTheme } = useTheme();
 
   return (
-    <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-50">
+    <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-50">
       <Dock 
         direction="middle" 
-        className="h-14 px-4 py-2 bg-white border border-gray-100 shadow-md rounded-2xl"
+        className="h-16 px-4 py-2 bg-white border border-gray-100 shadow-md rounded-xl"
       >
         <DockIcon>
           <Button
             onClick={() => setTheme("light")}
             variant="ghost"
             size="icon"
-            className="w-9 h-9 text-gray-700 flex items-center justify-center hover:bg-gray-100 transition-all"
+            className="w-10 h-10 text-gray-700 flex items-center justify-center hover:bg-gray-100 transition-all"
             aria-label="Light theme"
           >
             <Moon className="h-5 w-5" />
@@ -84,7 +84,7 @@ export function SocialDock() {
           <Button
             variant="ghost"
             size="icon"
-            className="w-9 h-9 text-gray-700 flex items-center justify-center hover:bg-gray-100 transition-all"
+            className="w-10 h-10 text-gray-700 flex items-center justify-center hover:bg-gray-100 transition-all"
             asChild
           >
             <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
@@ -97,7 +97,7 @@ export function SocialDock() {
           <Button
             variant="ghost"
             size="icon"
-            className="w-9 h-9 text-gray-700 flex items-center justify-center hover:bg-gray-100 transition-all"
+            className="w-10 h-10 text-gray-700 flex items-center justify-center hover:bg-gray-100 transition-all"
             asChild
           >
             <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
@@ -110,7 +110,7 @@ export function SocialDock() {
           <Button
             variant="ghost"
             size="icon"
-            className="w-9 h-9 text-gray-700 flex items-center justify-center hover:bg-gray-100 transition-all"
+            className="w-10 h-10 text-gray-700 flex items-center justify-center hover:bg-gray-100 transition-all"
             asChild
           >
             <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
@@ -123,7 +123,7 @@ export function SocialDock() {
           <Button
             variant="ghost"
             size="icon"
-            className="w-9 h-9 text-gray-700 flex items-center justify-center hover:bg-gray-100 transition-all"
+            className="w-10 h-10 text-gray-700 flex items-center justify-center hover:bg-gray-100 transition-all"
             asChild
           >
             <a href="https://behance.net" target="_blank" rel="noopener noreferrer" aria-label="Behance">
@@ -138,7 +138,7 @@ export function SocialDock() {
           <Button
             variant="ghost"
             size="icon"
-            className="w-9 h-9 text-gray-700 flex items-center justify-center hover:bg-gray-100 transition-all"
+            className="w-10 h-10 text-gray-700 flex items-center justify-center hover:bg-gray-100 transition-all"
             asChild
           >
             <a href="#about" aria-label="Scroll down">
