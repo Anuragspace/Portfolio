@@ -76,7 +76,7 @@ export function Dock({ direction = "middle", children, className }: DockProps) {
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         className={cn(
-          "flex h-12 items-center gap-1 rounded-xl bg-white backdrop-blur-sm p-2 border border-gray-100 shadow-md z-40 hover:shadow-lg transition-shadow",
+          "flex h-10 items-center gap-1 rounded-xl bg-white backdrop-blur-sm p-2 border border-gray-100 shadow-md z-40 hover:shadow-lg transition-shadow",
           justifyContent,
           className
         )}

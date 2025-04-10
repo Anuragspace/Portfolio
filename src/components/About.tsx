@@ -114,53 +114,36 @@ const About = () => {
                 </h3>
               </div>
               
-              <div className="bg-[#ffffff] rounded-lg border border-gray-350 p-6 relative shadow-xl group hover:shadow-2xl transition-all duration-300">
+              <div className="bg-[#ffffff] rounded-lg border border-gray-350 p-6 relative shadow-xl">
                 {/* Terminal Header */}
                 <div className="absolute top-0 left-0 right-0 h-10 bg-[#121212] rounded-t-lg border-b border-gray-350 flex items-center px-4">
                   <div className="flex gap-2">
-                    <div className="h-3 w-3 rounded-full bg-[#FF5F56] cursor-pointer hover:opacity-80 transition-opacity" 
-                         onClick={() => window.open('https://github.com', '_blank')}
-                         title="Visit GitHub"></div>
-                    <div className="h-3 w-3 rounded-full bg-[#FFBD2E] cursor-pointer hover:opacity-80 transition-opacity"
-                         onClick={() => window.open('https://linkedin.com', '_blank')}
-                         title="Visit LinkedIn"></div>
-                    <div className="h-3 w-3 rounded-full bg-[#27C93F] cursor-pointer hover:opacity-80 transition-opacity"
-                         onClick={() => window.open('https://instagram.com', '_blank')}
-                         title="Visit Instagram"></div>
+                    <div className="h-3 w-3 rounded-full bg-[#FF5F56]"></div>
+                    <div className="h-3 w-3 rounded-full bg-[#FFBD2E]"></div>
+                    <div className="h-3 w-3 rounded-full bg-[#27C93F]"></div>
                   </div>
-                  <div className="absolute left-1/2 -translate-x-1/2 text-white/60 text-sm font-mono group-hover:text-white/90 transition-all">
+                  <div className="absolute left-1/2 -translate-x-1/2 text-white/60 text-sm font-mono">
                     about.txt
                   </div>
                 </div>
 
                 {/* Terminal Content */}
                 <div className="mt-6">
-                  <div className="flex items-center">
-                    <p className="text-[#424242] font-mono text-sm mb-2 flex items-center group-hover:text-[#3E40EF] transition-colors duration-300">
-                      <span className="opacity-0 group-hover:opacity-100 mr-1 transition-opacity">$</span>
-                      {'// <hello world />'}
-                    </p>
-                    <div className="hidden group-hover:block ml-1 h-4 w-0.5 bg-[#3E40EF] animate-pulse"></div>
-                  </div>
-                  
+                  <p className="text-[#424242] font-mono text-sm mb-2">
+                    {'// <hello world />'}
+                  </p>
                   <div className="space-y-4 text-[#7e7e7e] font-display text-base leading-relaxed">
-                    <p className="group-hover:translate-x-1 transition-transform duration-300">
+                    <p>
                       With over 5 years of experience in UI/UX design, I've had the privilege of working on a diverse range of projects, from innovative startups to established enterprises. My design philosophy revolves around understanding user needs and business goals to create solutions that are both beautiful and functional.
                     </p>
                     
-                    <p className="group-hover:translate-x-1 transition-transform duration-500 delay-75">
-                      I currently serve as Chief Product Officer at <span className="text-black font-semibold hover:text-[#3E40EF] transition-colors">Imaginum</span>, where I lead the design and strategy of our digital products. Previously, I spearheaded design initiatives as Tech & Design Head at <span className="text-black font-semibold hover:text-[#3E40EF] transition-colors">CSED</span>.
+                    <p>
+                      I currently serve as Chief Product Officer at <span className="text-black font-semibold">Imaginum</span>, where I lead the design and strategy of our digital products. Previously, I spearheaded design initiatives as Tech & Design Head at <span className="text-black font-semibold">CSED</span>.
                     </p>
                   </div>
                 </div>
 
-                {/* Typing cursor animation that appears on hover */}
-                <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <span className="font-mono text-gray-400 text-xs flex items-center">
-                    <span className="mr-1.5">_</span>
-                    <span className="h-2 w-2 bg-[#3E40EF] rounded-full animate-pulse"></span>
-                  </span>
-                </div>
+                
               </div>
             </div>
           </div>

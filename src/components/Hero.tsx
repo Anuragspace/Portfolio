@@ -47,13 +47,13 @@ const Hero = () => {
               <div className="flex flex-row sm:gap-5 gap-3 sm:pl-2 pt-4 animate-slide-in" style={{ animationDelay: "0.3s" }}>
                 <div className="flex flex-row w-full max-w-[360px] sm:gap-4 gap-2">
                   <a href="#projects" className="flex-1">
-                    <RainbowButton className="w-full whitespace-nowrap h-11 text-sm sm:text-base text-center flex items-center justify-center">
+                    <RainbowButton className="w-full whitespace-nowrap h-11 text-sm sm:text-base">
                       View Projects
                     </RainbowButton>
                   </a>
                   <ShinyButton 
                     onClick={triggerConfetti} 
-                    className="h-11 bg-white text-black shadow w-full flex-1 text-sm sm:text-base text-center flex items-center justify-center"
+                    className="h-11 bg-white text-black shadow w-full flex-1 text-sm sm:text-base"
                   >
                     Click Me
                   </ShinyButton>
