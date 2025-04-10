@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useCallback } from "react";
+
+import React, { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
 import { motion } from "framer-motion";
@@ -22,7 +23,6 @@ const Posters = () => {
   });
 
   const [activeIndex, setActiveIndex] = useState(1); // Initialize with 1 (second poster)
-  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
 
   useEffect(() => {
     if (emblaApi) {

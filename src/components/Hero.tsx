@@ -1,11 +1,11 @@
 import React from "react";
-import { ArrowDown, Sparkles, User } from "lucide-react";
+import { Sparkles, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { RainbowButton } from "@/components/RainbowButton";
-// Remove unused import since ConfettiButton is not used in the component
 import { ShinyButton } from "@/components/ShinyButton";
 import { AnimatedGridPattern } from "@/components/AnimatedGridPattern";
+import { SocialDock } from "@/components/SocialDock";
 import confetti from "canvas-confetti";
 
 const Hero = () => {
@@ -101,15 +101,7 @@ const Hero = () => {
           </div>
         </div>
         
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex justify-center">
-          <a
-            href="#about"
-            className="text-gray-700 hover:text-[#3E40EF] transition-colors"
-            aria-label="Scroll down"
-          >
-            <ArrowDown size={24} className="animate-bounce" />
-          </a>
-        </div>
+        <SocialDock />
       </div>
       
       <div className="absolute -top-24 -right-24 w-96 h-96 bg-[#3E40EF]/10 rounded-full blur-3xl"></div>
