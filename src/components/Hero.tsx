@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Sparkles, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -29,6 +28,9 @@ const Hero = () => {
         repeatDelay={1}
         className="absolute inset-x-[-42%] inset-y-[-5%] h-[100%] skew-y-12 text-[#3E40EF]/100 [mask-image:radial-gradient(500px_circle_at_center,white,transparent)]"
       />
+
+
+
 
       <div className="container-custom">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -98,10 +100,11 @@ const Hero = () => {
             </div>
           </div>
         </div>
+        
+        <div className="relative z-50">
+          <SocialDock />
+        </div>
       </div>
-      
-      {/* Social Dock positioned at bottom of hero section */}
-      <SocialDock />
       
       <div className="absolute -top-24 -right-24 w-96 h-96 bg-[#3E40EF]/10 rounded-full blur-3xl"></div>
       <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-[#3E40EF]/5 rounded-full blur-3xl"></div>

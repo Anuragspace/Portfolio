@@ -1,8 +1,14 @@
 
 import React from "react";
-import { ArrowDown, Moon, Sun } from "lucide-react";
+import { ArrowDown, Github, Linkedin, Mail, Moon, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dock, DockIcon } from "@/components/ui/dock";
+import { 
+  Tooltip, 
+  TooltipContent, 
+  TooltipProvider, 
+  TooltipTrigger 
+} from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import { useTheme } from "next-themes";
 import { Separator } from "@/components/ui/separator";
@@ -58,95 +64,138 @@ const Icons = {
 };
 
 export function SocialDock() {
-  const { setTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
 
   return (
-    <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-50">
-      <Dock 
-        direction="middle" 
-        className="h-14 px-4 py-2 bg-white border border-gray-100 shadow-md rounded-xl light"
-      >
+    <TooltipProvider>
+      <Dock direction="middle" className="absolute bottom-12 left-1/2 transform -translate-x-1/2 px-3 py-1 z-50 dark:bg-gray-800 dark:border-gray-700">
         <DockIcon>
-          <Button
-            onClick={() => setTheme("light")}
-            variant="ghost"
-            size="icon"
-            className="w-9 h-9 text-gray-700 flex items-center justify-center hover:bg-gray-100 transition-all !bg-white"
-            aria-label="Light theme"
-          >
-            <Sun className="h-5 w-5" />
-          </Button>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                variant="ghost"
+                size="icon"
+                className="w-8 h-8 text-black dark:text-white flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                aria-label="Toggle theme"
+              >
+                {theme === "dark" ? (
+                  <Sun className="h-4 w-4" />
+                ) : (
+                  <Moon className="h-4 w-4" />
+                )}
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Toggle theme</p>
+            </TooltipContent>
+          </Tooltip>
         </DockIcon>
 
-        <Separator orientation="vertical" className="h-8 bg-gray-200 mx-1" />
+        <Separator orientation="vertical" className="h-6 bg-gray-200 dark:bg-gray-700 mx-0.5" />
 
         <DockIcon>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="w-9 h-9 text-gray-700 flex items-center justify-center hover:bg-gray-100 transition-all !bg-white"
-            asChild
-          >
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-              <Icons.github className="h-5 w-5" />
-            </a>
-          </Button>
-        </DockIcon>
-
-        <DockIcon>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="w-9 h-9 text-gray-700 flex items-center justify-center hover:bg-gray-100 transition-all"
-            asChild
-          >
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <Icons.linkedin className="h-5 w-5" />
-            </a>
-          </Button>
-        </DockIcon>
-
-        <DockIcon>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="w-9 h-9 text-gray-700 flex items-center justify-center hover:bg-gray-100 transition-all"
-            asChild
-          >
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <Icons.instagram className="h-5 w-5" />
-            </a>
-          </Button>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon" 
+                className="w-8 h-8 text-black dark:text-white flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                asChild
+              >
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                  <Icons.github className="h-4 w-4" />
+                </a>
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>GitHub</p>
+            </TooltipContent>
+          </Tooltip>
         </DockIcon>
 
         <DockIcon>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="w-9 h-9 text-gray-700 flex items-center justify-center hover:bg-gray-100 transition-all"
-            asChild
-          >
-            <a href="https://behance.net" target="_blank" rel="noopener noreferrer" aria-label="Behance">
-              <Icons.behance className="h-5 w-5" />
-            </a>
-          </Button>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="rounded-full w-10 h-10 text-gray-700 dark:text-gray-200"
+                asChild
+              >
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                  <Icons.linkedin className="h-4 w-4" />
+                </a>
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>LinkedIn</p>
+            </TooltipContent>
+          </Tooltip>
         </DockIcon>
 
-        <Separator orientation="vertical" className="h-8 bg-gray-200 mx-1" />
+        <DockIcon>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="rounded-full w-10 h-10 text-gray-700 dark:text-gray-200"
+                asChild
+              >
+                <a href="https://x.com" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+                  <Icons.x className="h-4 w-4" />
+                </a>
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>X</p>
+            </TooltipContent>
+          </Tooltip>
+        </DockIcon>
 
         <DockIcon>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="w-9 h-9 text-gray-700 flex items-center justify-center hover:bg-gray-100 transition-all"
-            asChild
-          >
-            <a href="#about" aria-label="Scroll down">
-              <ArrowDown className="h-5 w-5" />
-            </a>
-          </Button>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="rounded-full w-10 h-10 text-gray-700 dark:text-gray-200"
+                asChild
+              >
+                <a href="https://behance.net" target="_blank" rel="noopener noreferrer" aria-label="Behance">
+                  <Icons.behance className="h-4 w-4" />
+                </a>
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Behance</p>
+            </TooltipContent>
+          </Tooltip>
+        </DockIcon>
+
+        <Separator orientation="vertical" className="h-8 bg-gray-300/50 dark:bg-gray-600/50" />
+
+        <DockIcon>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="rounded-full w-10 h-10 text-gray-700 dark:text-gray-200"
+                asChild
+              >
+                <a href="#about" aria-label="Scroll down">
+                  <ArrowDown className="h-4 w-4" />
+                </a>
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Scroll Down</p>
+            </TooltipContent>
+          </Tooltip>
         </DockIcon>
       </Dock>
-    </div>
+    </TooltipProvider>
   );
 }
