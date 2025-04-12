@@ -9,10 +9,14 @@ const About = () => {
   const [isHighlighted, setIsHighlighted] = useState(false);
   const [showSpinText, setShowSpinText] = useState(false);
   const [showTerminalMessage, setShowTerminalMessage] = useState(false);
+  const [typingMessage, setTypingMessage] = useState("");
   const sectionRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const terminalInputRef = useRef<HTMLDivElement>(null);
 
+  // For typing animation
+  const messageToType = "Seems you're interested! Let's discuss further on LinkedIn or Instagram.";
+  
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -31,25 +35,26 @@ const About = () => {
       observer.observe(sectionRef.current);
     }
 
-    // Add event listener for terminal interaction
-    const handleInteraction = () => {
-      setShowTerminalMessage(true);
-    };
-
-    if (terminalInputRef.current) {
-      terminalInputRef.current.addEventListener('click', handleInteraction);
-      terminalInputRef.current.addEventListener('keydown', handleInteraction);
-    }
+    // Add custom style for typing animation
+    const style = document.createElement('style');
+    style.innerHTML = `
+      @keyframes typing {
+        from { width: 0 }
+        to { width: 100% }
+      }
+      .typing-animation {
+        display: inline-block;
+        overflow: hidden;
+        animation: typing 1.5s steps(40, end);
+      }
+    `;
+    document.head.appendChild(style);
 
     return () => {
       if (sectionRef.current) {
         observer.unobserve(sectionRef.current);
       }
-      
-      if (terminalInputRef.current) {
-        terminalInputRef.current.removeEventListener('click', handleInteraction);
-        terminalInputRef.current.removeEventListener('keydown', handleInteraction);
-      }
+      document.head.removeChild(style);
     };
   }, []);
 
@@ -61,36 +66,19 @@ const About = () => {
           <div className="w-24 h-1 bg-[#3E40EF]"></div>
         </div>
         
-        {/* Full-width designer introduction with TextReveal covering entire section width */}
+        {/* Full-width designer introduction with a single TextReveal component for natural text flow */}
         <div className="mb-12 relative w-full">
           <div className="relative py-1 w-full">
-            <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight">
+            <div className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight">
               <TextReveal 
                 className="text-gray-400 w-full" 
-                direction="left-to-right" 
+                direction="left-to-right"
                 lineByLine={true}
+                earlierStart={true}
               >
-                I'm a passionate UI/UX Designer focused on crafting intuitive, user-centered digital experiences.
+                I'm a passionate UI/UX Designer focused on crafting intuitive, user-centered digital experiences. I blend creativity with strategy to design products that are both functional and visually engaging. From concept to final interaction, I aim to solve real problems through clean and modern design.
               </TextReveal>
-            </h3>
-            <h3 className="mt-2 md:mt-3">
-              <TextReveal 
-                className="text-gray-400 w-full" 
-                direction="left-to-right" 
-                lineByLine={true}
-              >
-                I blend creativity with strategy to design products that are both functional and visually engaging.
-              </TextReveal>
-            </h3>
-            <h3 className="mt-2 md:mt-3">
-              <TextReveal 
-                className="text-gray-400 w-full" 
-                direction="left-to-right" 
-                lineByLine={true}
-              >
-                From concept to final interaction, I aim to solve real problems through clean and modern design.
-              </TextReveal>
-            </h3>
+            </div>
           </div>
         </div>
         
@@ -104,7 +92,7 @@ const About = () => {
               onMouseEnter={() => setShowSpinText(true)}
               onMouseLeave={() => setShowSpinText(false)}
             >
-              <div className="bg-[#3E40EF] rounded-2xl overflow-hidden z-10 relative h-full min-h-[250px] sm:min-h-[270px] lg:min-h-[300px]">
+              <div className="bg-[#3E40EF] rounded-2xl overflow-hidden z-10 relative h-full min-h-[220px] sm:min-h-[230px] lg:min-h-[250px]">
                 <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full group-hover:bg-white/10 transition-all duration-500"></div>
 
                 <div className="flex-1 w-full flex items-center justify-center relative">
@@ -151,7 +139,7 @@ const About = () => {
                 Nice to meet you
               </div>
               
-              <div className="flex-grow bg-[#ffffff] rounded-lg border border-gray-200 p-6 relative shadow-xl transition-all duration-300 hover:border-[#3E40EF]/20 group" style={{ minHeight: '250px', maxHeight: '300px' }}>
+              <div className="flex-grow bg-[#ffffff] rounded-lg border border-gray-200 p-6 relative shadow-xl transition-all duration-300 hover:border-[#3E40EF]/20 group" style={{ minHeight: '220px', maxHeight: '250px' }}>
                 {/* Terminal Header with interactive buttons */}
                 <div className="absolute top-0 left-0 right-0 h-10 bg-[#121212] rounded-t-lg border-b border-gray-200 flex items-center px-4">
                   <div className="flex gap-2">
@@ -193,22 +181,52 @@ const About = () => {
                       .
                     </p>
                     
-                    {/* Interactive terminal section with blinking cursor - always visible */}
-                    <div 
-                      ref={terminalInputRef}
-                      className="flex items-center text-[#424242] font-mono text-sm mt-4 cursor-text"
-                      tabIndex={0}
-                    >
-                      <span className="text-[#3E40EF] mr-2">$</span>
-                      <span className="inline-block w-2 h-4 bg-[#3E40EF] animate-pulse"></span>
-                    </div>
-                    
-                    {/* Message when user interacts - hidden by default */}
-                    {showTerminalMessage && (
-                      <div className="mt-2 p-2 rounded-md bg-[#0a2f1a] text-[#92d9a7] text-sm font-mono animate-fade-in">
-                        Seems you're interested! Let's discuss further - reach out to me through the contact section.
+                    {/* Interactive terminal section with typing capability */}
+                    <div className="relative">
+                      <div 
+                        ref={terminalInputRef}
+                        className="flex items-center text-[#424242] font-mono text-sm mt-4 cursor-text group"
+                        tabIndex={0}
+                        onClick={() => {
+                          // Focus the input when clicking anywhere in the terminal
+                          const input = document.getElementById('terminal-input');
+                          if (input) input.focus();
+                        }}
+                      >
+                        <span className="text-[#3E40EF] mr-2">$</span>
+                        <input 
+                          id="terminal-input"
+                          type="text" 
+                          className="bg-transparent outline-none border-none w-full font-mono text-sm text-[#424242] caret-[#3E40EF]"
+                          onKeyDown={(e) => {
+                            // Show message after user types something and presses Enter
+                            if (e.key === 'Enter') {
+                              setShowTerminalMessage(true);
+                            }
+                          }}
+                          onChange={(e) => {
+                            // Also show message after user types a few characters
+                            if (e.target.value.length > 5 && !showTerminalMessage) {
+                              setTimeout(() => setShowTerminalMessage(true), 500);
+                            }
+                          }}
+                          placeholder="Type something and press Enter..."
+                        />
+                        <span className="inline-block w-2 h-4 bg-[#3E40EF] animate-pulse ml-0.5 group-hover:opacity-100 opacity-80"></span>
                       </div>
-                    )}
+                      
+                      {/* Message when user interacts - hidden by default */}
+                      {showTerminalMessage && (
+                        <div className="mt-2 p-2 rounded-md bg-[#0a2f1a] text-[#92d9a7] text-sm font-mono animate-fade-in">
+                          <span className="typing-animation">
+                            Seems you're interested! Let's discuss further on 
+                            <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" className="text-[#a9e5bc] hover:underline mx-1">LinkedIn</a> 
+                            or 
+                            <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" className="text-[#a9e5bc] hover:underline mx-1">Instagram</a>.
+                          </span>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
