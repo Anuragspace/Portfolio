@@ -1,0 +1,51 @@
+
+/* Performance optimizations for modern browsers */
+
+/* Enable native smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Optimize animations with will-change */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
+/* Force hardware acceleration for smooth animations */
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Optimize images */
+img, video {
+  content-visibility: auto;
+}
+
+/* Lazy load animations */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Prevent layout shifts */
+.prevent-layout-shift {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 500px;
+  contain: content;
+}
+
+/* Optimize scroll-triggered animations */
+.optimize-scroll-animation {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}

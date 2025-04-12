@@ -1,5 +1,6 @@
 
 import React, { useEffect, useCallback } from "react";
+import { Events, scrollSpy, scroller } from "react-scroll";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -12,37 +13,27 @@ import Footer from "@/components/Footer";
 import MetaHead from "@/components/MetaHead";
 
 const Index = () => {
-  // Define the scroll handler as a callback to prevent recreation on each render
-  const handleSmoothScroll = useCallback((e: Event) => {
-    e.preventDefault();
-    
-    const target = e.currentTarget as HTMLAnchorElement;
-    const href = target.getAttribute('href');
-    if (!href) return;
-    
-    const targetElement = document.querySelector(href);
-    if (!targetElement) return;
-    
-    window.scrollTo({
-      top: (targetElement as HTMLElement).offsetTop - 80, // Adjust for header height
-      behavior: 'smooth'
-    });
-  }, []);
-
+  // Optimize scrolling with react-scroll
   useEffect(() => {
-    // Smooth scroll to anchor links
-    const anchors = document.querySelectorAll('a[href^="#"]');
+    // Add smooth scrolling behavior to the document
+    document.documentElement.style.scrollBehavior = "smooth";
     
-    anchors.forEach(anchor => {
-      anchor.addEventListener('click', handleSmoothScroll);
-    });
+    // Initialize scrollSpy for detecting active sections
+    Events.scrollEvent.register('begin', () => {});
+    Events.scrollEvent.register('end', () => {});
+    scrollSpy.update();
 
+    // Register for scroll events with passive: true for performance
+    window.addEventListener('scroll', scrollSpy.update, { passive: true });
+    
     return () => {
-      anchors.forEach(anchor => {
-        anchor.removeEventListener('click', handleSmoothScroll);
-      });
+      // Clean up scroll events when component unmounts
+      Events.scrollEvent.remove('begin');
+      Events.scrollEvent.remove('end');
+      window.removeEventListener('scroll', scrollSpy.update);
+      document.documentElement.style.removeProperty("scroll-behavior");
     };
-  }, [handleSmoothScroll]);
+  }, []);
 
   return (
     <div className="min-h-screen bg-white">

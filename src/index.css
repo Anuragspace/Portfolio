@@ -138,9 +138,11 @@
 }
 
 .animate-marquee {
-  animation: marquee 15s linear infinite;
+  animation: marquee 12s linear infinite; /* Faster speed */
   will-change: transform; /* Performance optimization */
-  touch-action: pan-y; /* Better touch handling */
+  backface-visibility: hidden; /* Reduce composite layers */
+  transform: translateZ(0); /* Force GPU acceleration */
+  touch-action: pan-x pan-y; /* Better touch handling */
 }
 
 /* Pause animation on hover or when being dragged */
