@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { 
   Paintbrush, 
   PenTool,
@@ -15,6 +15,106 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Globe } from "@/components/Globe";
 
 const Skills = () => {
+  // References for interactive scrolling
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const isDraggingRef = useRef(false);
+  const startXRef = useRef(0);
+  const scrollLeftRef = useRef(0);
+  
+  useEffect(() => {
+    const slider = sliderRef.current;
+    const prevBtn = document.getElementById('skills-prev');
+    const nextBtn = document.getElementById('skills-next');
+    
+    if (!slider || !prevBtn || !nextBtn) return;
+    
+    // Manual scroll button handlers
+    const handlePrevClick = () => {
+      if (!slider) return;
+      slider.scrollBy({ left: -300, behavior: 'smooth' });
+    };
+    
+    const handleNextClick = () => {
+      if (!slider) return;
+      slider.scrollBy({ left: 300, behavior: 'smooth' });
+    };
+    
+    // Mouse drag handlers
+    const handleMouseDown = (e: MouseEvent) => {
+      if (!slider) return;
+      isDraggingRef.current = true;
+      startXRef.current = e.pageX - slider.offsetLeft;
+      scrollLeftRef.current = slider.scrollLeft;
+      slider.classList.add('dragging');
+    };
+    
+    const handleMouseUp = () => {
+      isDraggingRef.current = false;
+      if (slider) slider.classList.remove('dragging');
+    };
+    
+    const handleMouseLeave = () => {
+      isDraggingRef.current = false;
+      if (slider) slider.classList.remove('dragging');
+    };
+    
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isDraggingRef.current || !slider) return;
+      e.preventDefault();
+      const x = e.pageX - slider.offsetLeft;
+      const walk = (x - startXRef.current) * 2; // Adjust scrolling speed
+      slider.scrollLeft = scrollLeftRef.current - walk;
+    };
+    
+    // Touch handlers for mobile
+    const handleTouchStart = (e: TouchEvent) => {
+      if (!slider || e.touches.length !== 1) return;
+      isDraggingRef.current = true;
+      startXRef.current = e.touches[0].pageX - slider.offsetLeft;
+      scrollLeftRef.current = slider.scrollLeft;
+      slider.classList.add('dragging');
+    };
+    
+    const handleTouchEnd = () => {
+      isDraggingRef.current = false;
+      if (slider) slider.classList.remove('dragging');
+    };
+    
+    const handleTouchMove = (e: TouchEvent) => {
+      if (!isDraggingRef.current || !slider || e.touches.length !== 1) return;
+      const x = e.touches[0].pageX - slider.offsetLeft;
+      const walk = (x - startXRef.current) * 2;
+      slider.scrollLeft = scrollLeftRef.current - walk;
+    };
+    
+    // Add all event listeners
+    prevBtn.addEventListener('click', handlePrevClick);
+    nextBtn.addEventListener('click', handleNextClick);
+    
+    slider.addEventListener('mousedown', handleMouseDown);
+    slider.addEventListener('mouseup', handleMouseUp);
+    slider.addEventListener('mouseleave', handleMouseLeave);
+    slider.addEventListener('mousemove', handleMouseMove);
+    
+    slider.addEventListener('touchstart', handleTouchStart);
+    slider.addEventListener('touchend', handleTouchEnd);
+    slider.addEventListener('touchmove', handleTouchMove);
+    
+    // Cleanup event listeners on unmount
+    return () => {
+      prevBtn.removeEventListener('click', handlePrevClick);
+      nextBtn.removeEventListener('click', handleNextClick);
+      
+      slider.removeEventListener('mousedown', handleMouseDown);
+      slider.removeEventListener('mouseup', handleMouseUp);
+      slider.removeEventListener('mouseleave', handleMouseLeave);
+      slider.removeEventListener('mousemove', handleMouseMove);
+      
+      slider.removeEventListener('touchstart', handleTouchStart);
+      slider.removeEventListener('touchend', handleTouchEnd);
+      slider.removeEventListener('touchmove', handleTouchMove);
+    };
+  }, []);
   const designSkills = [
     { name: "UI Design", level: 95 },
     { name: "UX Design", level: 90 },
@@ -46,13 +146,17 @@ const Skills = () => {
         </div>
         
         {/* Scrolling Technical Skills */}
-        <div className="relative mb-12 py-6 overflow-hidden">
+        <div className="relative mb-12 py-6 overflow-hidden group" id="skills-carousel">
           {/* Gradient overlay left */}
           <div className="absolute left-0 top-0 h-full w-[15%] bg-gradient-to-r from-gray-50 to-transparent z-10"></div>
           
           {/* Scrolling content */}
-          <div className="flex gap-6 animate-marquee whitespace-nowrap">
-            {technicalSkills.concat(technicalSkills).map((skill, index) => (
+          <div 
+            ref={sliderRef}
+            className="flex gap-6 animate-marquee whitespace-nowrap cursor-grab active:cursor-grabbing skills-scroll-container"
+            id="skills-slider"
+          >
+            {technicalSkills.concat(technicalSkills).concat(technicalSkills).map((skill, index) => (
               <div 
                 key={`${skill.name}-${index}`}
                 className="px-6 py-3 bg-white rounded-full shadow-md flex items-center gap-3 border border-gray-100 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
@@ -65,6 +169,27 @@ const Skills = () => {
           
           {/* Gradient overlay right */}
           <div className="absolute right-0 top-0 h-full w-[15%] bg-gradient-to-l from-gray-50 to-transparent z-10"></div>
+          
+          {/* Navigation buttons */}
+          <button 
+            aria-label="Scroll left"
+            className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 hover:bg-white rounded-full shadow-md flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            id="skills-prev"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="text-[#3E40EF]">
+              <path d="m15 18-6-6 6-6"/>
+            </svg>
+          </button>
+          
+          <button 
+            aria-label="Scroll right"
+            className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 hover:bg-white rounded-full shadow-md flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            id="skills-next"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="text-[#3E40EF]">
+              <path d="m9 18 6-6-6-6"/>
+            </svg>
+          </button>
         </div>
         
         {/* Bento Grid Layout with website violet color */}

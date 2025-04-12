@@ -138,7 +138,17 @@
 }
 
 .animate-marquee {
-  animation: marquee 25s linear infinite;
+  animation: marquee 15s linear infinite;
+}
+
+/* Pause animation on hover or when being dragged */
+.skills-scroll-container.dragging {
+  animation-play-state: paused;
+  cursor: grabbing;
+}
+
+.skills-scroll-container:hover {
+  animation-play-state: paused;
 }
 
 /* Timeline styles */
