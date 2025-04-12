@@ -183,7 +183,6 @@ const Contact = () => {
                             placeholder="Your Name"
                             required
                           />
-                          <div className={`absolute bottom-0 left-0 h-0.5 bg-accent transition-all duration-300 ${focusedField === 'name' ? 'w-full' : 'w-0'}`}></div>
                         </div>
                         
                         <div className="relative">
@@ -201,7 +200,6 @@ const Contact = () => {
                             placeholder="Email Address"
                             required
                           />
-                          <div className={`absolute bottom-0 left-0 h-0.5 bg-accent transition-all duration-300 ${focusedField === 'email' ? 'w-full' : 'w-0'}`}></div>
                         </div>
                       </div>
                       
@@ -220,7 +218,6 @@ const Contact = () => {
                           placeholder="Subject"
                           required
                         />
-                        <div className={`absolute bottom-0 left-0 h-0.5 bg-accent transition-all duration-300 ${focusedField === 'subject' ? 'w-full' : 'w-0'}`}></div>
                       </div>
                       
                       <div className="relative">
@@ -238,7 +235,6 @@ const Contact = () => {
                           placeholder="Your Message"
                           required
                         ></textarea>
-                        <div className={`absolute bottom-0 left-0 h-0.5 bg-accent transition-all mb-8 duration-300 ${focusedField === 'message' ? 'w-full' : 'w-0'}`}></div>
                       </div>
                     </div>
                     

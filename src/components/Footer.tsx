@@ -1,15 +1,24 @@
 
 import React, { useState } from "react";
-import { Linkedin, Instagram, Twitter, Github, Heart, Share2, ArrowUp, Dribbble, ExternalLink } from "lucide-react";
+import { Linkedin, Instagram, Twitter, Github, Heart, Share2, ArrowUp, Dribbble, ExternalLink, Link, Globe as GlobeIcon } from "lucide-react";
 import { Globe } from "@/components/Globe";
+import BubblingHearts from "./BubblingHearts";
 
 const Footer = () => {
   const year = new Date().getFullYear();
   const [isHeartAnimating, setIsHeartAnimating] = useState(false);
+  const [showShareTooltip, setShowShareTooltip] = useState(false);
   
   const handleHeartClick = () => {
     setIsHeartAnimating(true);
-    setTimeout(() => setIsHeartAnimating(false), 1000);
+    setTimeout(() => setIsHeartAnimating(false), 2000);
+  };
+  
+  const handleShareClick = () => {
+    // Copy to clipboard and show tooltip
+    navigator.clipboard.writeText("https://anuragadarsh.in");
+    setShowShareTooltip(true);
+    setTimeout(() => setShowShareTooltip(false), 3000);
   };
   
   const navLinks = [
@@ -65,29 +74,45 @@ const Footer = () => {
               <div className="flex flex-wrap gap-4 pb-12">
                 <a 
                   href="#contact"
-                  className="inline-flex items-center justify-center px-5 py-2.5 bg-black text-white rounded-full font-medium hover:bg-gray-900 transition-colors"
+                  className="inline-flex items-center justify-center w-36 px-5 py-2.5 bg-black text-white rounded-full font-medium hover:bg-gray-900 transition-colors"
                 >
                   Let's Talk <ArrowUp className="ml-2 rotate-45" size={16} />
                 </a>
                 
-                <button className="px-5 py-2.5 rounded-full bg-white/10 text-sm flex items-center text-white hover:bg-white/20 transition-colors">
-                  <Share2 size={16} className="mr-2" />
-                  Share Portfolio
-                </button>
+                <div className="relative">
+                  <button 
+                    onClick={handleShareClick}
+                    className="inline-flex items-center justify-center w-36 px-5 py-2.5 rounded-full bg-white/10 text-sm text-white hover:bg-white/20 transition-colors"
+                  >
+                    <Share2 size={16} className="mr-2" />
+                    Share Portfolio
+                  </button>
+                  
+                  {/* Tooltip for share confirmation */}
+                  {showShareTooltip && (
+                    <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-black text-white text-xs py-2 px-4 rounded-lg shadow-lg">
+                      <div className="flex items-center space-x-1">
+                        <GlobeIcon size={12} />
+                        <span>anuragadarsh.in copied!</span>
+                      </div>
+                      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 rotate-45 w-2 h-2 bg-black"></div>
+                    </div>
+                  )}
+                </div>
               </div>
               
-              {/* Social links above the line */}
-              <div className="flex flex-wrap gap-5 pt-12">
+              {/* Social links with improved design */}
+              <div className="flex flex-wrap gap-4 pt-12">
                 {socialLinks.map((social) => (
                   <a 
                     key={social.name}
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-3 py-2 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors text-sm"
+                    className="px-4 py-2.5 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 hover:scale-105 transition-all duration-300 text-sm shadow-sm hover:shadow-md backdrop-blur-sm"
                     aria-label={social.name}
                   >
-                    <social.icon size={16} className="mr-1.5" />
+                    <social.icon size={16} className="mr-2" strokeWidth={2.5} />
                     {social.name}
                   </a>
                 ))}
@@ -119,8 +144,10 @@ const Footer = () => {
                 <span className="inline-block mx-1.5 relative">
                   <Heart 
                     size={18} 
-                    className={`text-red-400 fill-red-400 transition-all duration-300 ${isHeartAnimating ? 'scale-150' : 'group-hover:scale-125'}`} 
+                    className={`text-red-500 fill-red-500 transition-all duration-300 ${isHeartAnimating ? 'scale-150' : 'group-hover:scale-125'}`} 
                   />
+                  {/* Bubbling hearts animation */}
+                  <BubblingHearts isAnimating={isHeartAnimating} />
                 </span> 
                 by Anurag
               </div>

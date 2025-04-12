@@ -12,34 +12,49 @@ interface Poster {
 }
 
 const Posters = () => {
+  // Optimized carousel settings for better performance
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: true,
     align: "center",
     skipSnaps: false,
-    dragFree: false,
-    containScroll: "trimSnaps",
+    dragFree: true, // Enable drag-free scrolling for smoother interaction
+    containScroll: "keepSnaps",
     startIndex: 1,
-    duration: 32, 
+    duration: 20, // Faster animation for more responsive feel
+    watchDrag: true, // Improve touch responsiveness
   });
 
-  const [activeIndex, setActiveIndex] = useState(1); // Initialize with 1 (second poster)
+  const [activeIndex, setActiveIndex] = useState(1);
+  const [pointerDown, setPointerDown] = useState(false);
 
+  // Handle pointer events for better interaction
+  const handlePointerDown = () => setPointerDown(true);
+  const handlePointerUp = () => setPointerDown(false);
+
+  // Handle active index and optimize loop behavior
   useEffect(() => {
-    if (emblaApi) {
-      // Set initial active index
+    if (!emblaApi) return;
+    
+    // Set initial active index
+    setActiveIndex(emblaApi.selectedScrollSnap());
+    
+    // Update active index when selection changes
+    const onSelect = () => {
       setActiveIndex(emblaApi.selectedScrollSnap());
-      
-      // Update active index when selection changes
-      const onSelect = () => {
-        setActiveIndex(emblaApi.selectedScrollSnap());
-      };
-      
-      emblaApi.on("select", onSelect);
-      
-      return () => {
-        emblaApi.off("select", onSelect);
-      };
-    }
+    };
+    
+    // Set up event listeners
+    emblaApi.on("select", onSelect);
+    
+    // Force loop when user reaches either end
+    emblaApi.on("reInit", onSelect);
+    emblaApi.on("destroy", onSelect);
+    
+    return () => {
+      emblaApi.off("select", onSelect);
+      emblaApi.off("reInit", onSelect);
+      emblaApi.off("destroy", onSelect);
+    };
   }, [emblaApi]);
 
   const posters: Poster[] = [
@@ -81,11 +96,35 @@ const Posters = () => {
     },
   ];
 
+  // Update embla carousel configuration for smoother looping
+  useEffect(() => {
+    if (emblaApi) {
+      // Setup auto scroll every 4 seconds
+      const autoScrollInterval = setInterval(() => {
+        if (!emblaApi.canScrollNext()) {
+          emblaApi.scrollTo(0); // Force loop if at the end
+        } else {
+          emblaApi.scrollNext();
+        }
+      }, 4000);
+      
+      // Pause auto scroll when user is interacting with carousel
+      const handlePointerDown = () => clearInterval(autoScrollInterval);
+      const rootNode = emblaApi.rootNode();
+      rootNode.addEventListener('pointerdown', handlePointerDown);
+      
+      return () => {
+        clearInterval(autoScrollInterval);
+        rootNode?.removeEventListener('pointerdown', handlePointerDown);
+      };
+    }
+  }, [emblaApi]);
+  
   return (
     <section className="relative bg-gradient-to-b from-white to-gray-50/50 py-8 md:py-16 overflow-hidden">
-      {/* Blur effects - adjusted for mobile */}
-      <div className="absolute left-0 top-0 w-[80px] md:w-[150px] h-full bg-gradient-to-r from-white via-white/90 to-transparent z-10" />
-      <div className="absolute right-0 top-0 w-[80px] md:w-[150px] h-full bg-gradient-to-l from-white via-white/90 to-transparent z-10" />
+      {/* Blur effects - reduced height to just affect posters */}
+      <div className="absolute left-0 top-1/4 bottom-1/4 w-[50px] md:w-[80px] bg-gradient-to-r from-white via-white/90 to-transparent z-10" />
+      <div className="absolute right-0 top-1/4 bottom-1/4 w-[50px] md:w-[80px] bg-gradient-to-l from-white via-white/90 to-transparent z-10" />
 
       <div className="container mx-auto px-3 md:px-4 max-w-7xl">
         <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12">

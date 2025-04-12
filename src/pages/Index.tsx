@@ -1,5 +1,5 @@
 
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect, useCallback, memo } from "react";
 import { Events, scrollSpy, scroller } from "react-scroll";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
@@ -11,8 +11,19 @@ import Posters from "@/components/Posters";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import MetaHead from "@/components/MetaHead";
+import { usePerformanceOptimizations } from "@/hooks/use-performance-optimizations";
+import { LazyMotion, domAnimation } from "framer-motion";
+
+// Memoize components for better performance
+const MemoizedExperience = memo(Experience);
+const MemoizedPosters = memo(Posters);
+const MemoizedContact = memo(Contact);
+const MemoizedFooter = memo(Footer);
 
 const Index = () => {
+  // Apply performance optimizations
+  const { isOptimized } = usePerformanceOptimizations();
+  
   // Optimize scrolling with react-scroll
   useEffect(() => {
     // Add smooth scrolling behavior to the document
@@ -23,7 +34,7 @@ const Index = () => {
     Events.scrollEvent.register('end', () => {});
     scrollSpy.update();
 
-    // Register for scroll events with passive: true for performance
+    // Register for scroll events with passive: true for better performance
     window.addEventListener('scroll', scrollSpy.update, { passive: true });
     
     return () => {
@@ -34,20 +45,35 @@ const Index = () => {
       document.documentElement.style.removeProperty("scroll-behavior");
     };
   }, []);
+  
+  // Pre-connect to external domains for faster loading
+  useEffect(() => {
+    const linkEl = document.createElement('link');
+    linkEl.rel = 'preconnect';
+    linkEl.href = 'https://fonts.gstatic.com';
+    linkEl.crossOrigin = 'anonymous';
+    document.head.appendChild(linkEl);
+    
+    return () => {
+      document.head.removeChild(linkEl);
+    };
+  }, []);
 
   return (
-    <div className="min-h-screen bg-white">
-      <MetaHead />
-      <Navbar />
-      <Hero />
-      <About />
-      <Skills />
-      <Projects />
-      <Experience />
-      <Posters />
-      <Contact />
-      <Footer />
-    </div>
+    <LazyMotion features={domAnimation}>
+      <div className="min-h-screen bg-white">
+        <MetaHead />
+        <Navbar />
+        <Hero />
+        <About />
+        <Skills />
+        <Projects />
+        <MemoizedExperience />
+        <MemoizedPosters />
+        <MemoizedContact />
+        <MemoizedFooter />
+      </div>
+    </LazyMotion>
   );
 };
 
