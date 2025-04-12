@@ -8,6 +8,8 @@ import { ShinyButton } from "@/components/ShinyButton";
 import { AnimatedGridPattern } from "@/components/AnimatedGridPattern";
 import { SocialDock } from "@/components/SocialDock";
 import confetti from "canvas-confetti";
+import ScrollReveal from "@/components/ScrollReveal";
+import ParallaxSection from "@/components/ParallaxSection";
 
 const Hero = () => {
   const triggerConfetti = () => {
@@ -20,7 +22,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="min-h-screen pt-24 pb-16 flex items-center relative overflow-hidden">
+    <section id="home" className="min-h-screen pt-24 pb-16 flex items-center relative overflow-hidden" data-scroll-section>
       {/* Add the AnimatedGridPattern with mask and skew effect */}
       <AnimatedGridPattern
         numSquares={30}
@@ -30,77 +32,92 @@ const Hero = () => {
         className="absolute inset-x-[-42%] inset-y-[-5%] h-[100%] skew-y-12 text-[#3E40EF]/100 [mask-image:radial-gradient(500px_circle_at_center,white,transparent)]"
       />
 
-      <div className="container-custom">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-7 z-10">
-            <div className="space-y-6 max-w-3xl">
-              <div className="inline-block px-3 py-1 bg-[#3E40EF]/10 text-[#3E40EF] rounded-full text-sm font-medium mb-2 animate-fade-in">
-                <Sparkles className="inline-block mr-2 h-4 w-4" />
-                UI/UX Designer & Product Designer
-              </div>
-              <h1 className="animate-slide-in font-black"  style={{ animationDelay: "0.1s" }}>
-                Crafting Digital Experiences That <span className="text-[#3E40EF]">Inspire</span>
-              </h1>
-              <p className="text-lg text-gray-600 animate-slide-in" style={{ animationDelay: "0.2s" }}>
-                I transform complex problems into elegant, intuitive designs that delight users and drive business growth.
-              </p>
-              <div className="flex flex-row sm:gap-5 gap-3 sm:pl-2 pt-4 animate-slide-in" style={{ animationDelay: "0.3s" }}>
-                <div className="flex flex-row w-full max-w-[360px] sm:gap-4 gap-2">
-                  <a href="#projects" className="flex-1">
-                    <RainbowButton className="w-full whitespace-nowrap h-11 text-sm sm:text-base">
-                      View Projects
-                    </RainbowButton>
-                  </a>
-                  <ShinyButton 
-                    onClick={triggerConfetti} 
-                    className="h-11 bg-white text-black shadow w-full flex-1 text-sm sm:text-base"
-                  >
-                    Click Me
-                  </ShinyButton>
-                </div>
+      <ParallaxSection speed={-0.2}>
+        <div className="container-custom">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div className="lg:col-span-7 z-10">
+              <div className="space-y-6 max-w-3xl">
+                <ScrollReveal animation="fade-up">
+                  <div className="inline-block px-3 py-1 bg-[#3E40EF]/10 text-[#3E40EF] rounded-full text-sm font-medium mb-2">
+                    <Sparkles className="inline-block mr-2 h-4 w-4" />
+                    UI/UX Designer & Product Designer
+                  </div>
+                </ScrollReveal>
+                
+                <ScrollReveal animation="fade-up" delay={0.2}>
+                  <h1 className="font-black">
+                    Crafting Digital Experiences That <span className="text-[#3E40EF]">Inspire</span>
+                  </h1>
+                </ScrollReveal>
+                
+                <ScrollReveal animation="fade-up" delay={0.3}>
+                  <p className="text-lg text-gray-600">
+                    I transform complex problems into elegant, intuitive designs that delight users and drive business growth.
+                  </p>
+                </ScrollReveal>
+                
+                <ScrollReveal animation="fade-up" delay={0.4}>
+                  <div className="flex flex-row sm:gap-5 gap-3 sm:pl-2 pt-4">
+                    <div className="flex flex-row w-full max-w-[360px] sm:gap-4 gap-2">
+                      <a href="#projects" className="flex-1">
+                        <RainbowButton className="w-full whitespace-nowrap h-11 text-sm sm:text-base">
+                          View Projects
+                        </RainbowButton>
+                      </a>
+                      <ShinyButton 
+                        onClick={triggerConfetti} 
+                        className="h-11 bg-white text-black shadow w-full flex-1 text-sm sm:text-base"
+                      >
+                        Click Me
+                      </ShinyButton>
+                    </div>
+                  </div>
+                </ScrollReveal>
               </div>
             </div>
-          </div>
-          
-          <div className="lg:col-span-5 relative z-10">
-            <div className="relative mx-auto">
-              <div className="relative rounded-[2rem] overflow-hidden bg-gradient-to-br from-blue-400 to-blue-600 w-full max-w-sm aspect-[4/5] mx-auto shadow-xl">
-                <div className="absolute inset-0 w-[150%] h-[150%] left-[-25%] top-[-25%] rotate-animation opacity-10 z-0">
-                  <div className="w-full h-full border-[30px] border-[#3E40EF]/20 rounded-full"></div>
+            
+            <div className="lg:col-span-5 relative z-10">
+              <ScrollReveal animation="scale" delay={0.3}>
+                <div className="relative mx-auto">
+                  <div className="relative rounded-[2rem] overflow-hidden bg-gradient-to-br from-blue-400 to-blue-600 w-full max-w-sm aspect-[4/5] mx-auto shadow-xl">
+                    <div className="absolute inset-0 w-[150%] h-[150%] left-[-25%] top-[-25%] rotate-animation opacity-10 z-0">
+                      <div className="w-full h-full border-[30px] border-[#3E40EF]/20 rounded-full"></div>
+                    </div>
+                    
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-400/40 to-[#3E40EF]/30 z-10 mix-blend-overlay"></div>
+                    
+                    <img 
+                      src="/lovable-uploads/anurag.webp" 
+                      alt="Designer portrait" 
+                      rel="preload"
+                      className="w-full h-full object-cover z-20 relative"
+                    />
+                  </div>
+                  
+                  <div className="absolute bottom-[30px] sm:left-[-60px] left-[0px] bg-white/90 backdrop-blur-sm px-5 py-3 rounded-full shadow-lg z-30 flex items-center gap-4 animate-float" style={{ animationDelay: "0.4s" }}>
+                      <span className="text-3xl" role="img" aria-label="waving hand">👋</span>
+                    
+                    <div className="text-left">
+                      <p className="font-bold text-gray-800">Anurag Adarsh</p>
+                      <p className="text-xs text-gray-500">Engineering Student</p>
+                    </div>
+                  </div>
+                  
+                  <div className="absolute top-[40px] sm:right-[-30px] right-[0px] bg-white/50 backdrop-blur-sm px-4 py-3 rounded-full shadow-lg z-30 flex items-center gap-4 animate-float" style={{ animationDelay: "0.5s" }}>
+                    <div className="w-10 h-10 rounded-full bg-[#3E40EF] flex items-center justify-center">
+                      <Sparkles className="h-5 w-5 text-white" />
+                    </div>
+                    <div className="text-left">
+                      <p className="font-bold text-gray-800">Expert</p>
+                      <p className="text-xs text-[#3E40EF]">UI/UX Design</p>
+                    </div>
+                  </div>
                 </div>
-                
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-400/40 to-[#3E40EF]/30 z-10 mix-blend-overlay"></div>
-                
-                <img 
-                  src="/lovable-uploads/anurag.webp" 
-                  alt="Designer portrait" 
-                  rel="preload"
-                  className="w-full h-full object-cover z-20 relative"
-                />
-              </div>
-              
-              <div className="absolute bottom-[30px] sm:left-[-60px] left-[0px] bg-white/90 backdrop-blur-sm px-5 py-3 rounded-full shadow-lg z-30 flex items-center gap-4 animate-float" style={{ animationDelay: "0.4s" }}>
-                  <span className="text-3xl" role="img" aria-label="waving hand">👋</span>
-                
-                <div className="text-left">
-                  <p className="font-bold text-gray-800">Anurag Adarsh</p>
-                  <p className="text-xs text-gray-500">Engineering Student</p>
-                </div>
-              </div>
-              
-              <div className="absolute top-[40px] sm:right-[-30px] right-[0px] bg-white/50 backdrop-blur-sm px-4 py-3 rounded-full shadow-lg z-30 flex items-center gap-4 animate-float" style={{ animationDelay: "0.5s" }}>
-                <div className="w-10 h-10 rounded-full bg-[#3E40EF] flex items-center justify-center">
-                  <Sparkles className="h-5 w-5 text-white" />
-                </div>
-                <div className="text-left">
-                  <p className="font-bold text-gray-800">Expert</p>
-                  <p className="text-xs text-[#3E40EF]">UI/UX Design</p>
-                </div>
-              </div>
+              </ScrollReveal>
             </div>
           </div>
         </div>
-      </div>
+      </ParallaxSection>
       
       {/* Social Dock positioned at bottom of hero section */}
       <SocialDock />
