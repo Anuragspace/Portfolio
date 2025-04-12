@@ -42,10 +42,28 @@ const About = () => {
         from { width: 0 }
         to { width: 100% }
       }
+      
+      @keyframes blink-caret {
+        from, to { border-color: transparent }
+        50% { border-color: #3E40EF }
+      }
+      
       .typing-animation {
         display: inline-block;
         overflow: hidden;
+        white-space: nowrap;
         animation: typing 1.5s steps(40, end);
+      }
+      
+      .typing-effect {
+        overflow: hidden;
+        border-right: 2px solid transparent;
+        white-space: nowrap;
+        animation: 
+          typing 2.5s steps(40, end),
+          blink-caret .75s step-end infinite;
+        max-width: 100%;
+        display: inline-block;
       }
     `;
     document.head.appendChild(style);
@@ -67,11 +85,11 @@ const About = () => {
         </div>
         
         {/* Full-width designer introduction with a single TextReveal component for natural text flow */}
-        <div className="mb-12 relative w-full">
+        <div className="mb-12 relative w-full overflow-visible">
           <div className="relative py-1 w-full">
-            <div className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight">
+            <div className="w-full">
               <TextReveal 
-                className="text-gray-400 w-full" 
+                className="w-full text-gray-400" 
                 direction="left-to-right"
                 lineByLine={true}
                 earlierStart={true}
@@ -92,7 +110,7 @@ const About = () => {
               onMouseEnter={() => setShowSpinText(true)}
               onMouseLeave={() => setShowSpinText(false)}
             >
-              <div className="bg-[#3E40EF] rounded-2xl overflow-hidden z-10 relative h-full min-h-[220px] sm:min-h-[230px] lg:min-h-[250px]">
+              <div className="bg-[#3E40EF] rounded-2xl overflow-hidden z-10 relative h-full min-h-[280px] sm:min-h-[280px] lg:min-h-[280px]">
                 <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full group-hover:bg-white/10 transition-all duration-500"></div>
 
                 <div className="flex-1 w-full flex items-center justify-center relative">
@@ -139,7 +157,7 @@ const About = () => {
                 Nice to meet you
               </div>
               
-              <div className="flex-grow bg-[#ffffff] rounded-lg border border-gray-200 p-6 relative shadow-xl transition-all duration-300 hover:border-[#3E40EF]/20 group" style={{ minHeight: '220px', maxHeight: '250px' }}>
+              <div className="flex-grow bg-[#ffffff] rounded-lg border border-gray-200 p-6 relative shadow-xl transition-all duration-300 hover:border-[#3E40EF]/20 group" style={{ minHeight: '280px', maxHeight: '320px' }}>
                 {/* Terminal Header with interactive buttons */}
                 <div className="absolute top-0 left-0 right-0 h-10 bg-[#121212] rounded-t-lg border-b border-gray-200 flex items-center px-4">
                   <div className="flex gap-2">
@@ -153,14 +171,14 @@ const About = () => {
                 </div>
 
                 {/* Terminal Content with typing animation */}
-                <div className="mt-6">
+                <div className="mt-6 pb-4 overflow-auto" style={{ maxHeight: "calc(100% - 3rem)" }}>
                   <div className="flex items-center text-[#424242] font-mono text-sm mb-3 opacity-80 transition-opacity">
                     <span className="text-[#3E40EF] mr-2">$</span>
                     <span className="inline-block">cat about.txt</span>
                     <span className="inline-block w-2 h-4 bg-[#3E40EF] animate-pulse ml-2"></span>
                   </div>
                   
-                  <div className="space-y-4 text-[#7e7e7e] font-display text-sm leading-relaxed relative overflow-hidden">
+                  <div className="space-y-4 text-[#7e7e7e] font-display text-sm leading-relaxed relative">
                     {/* First paragraph with no hover effects */}
                     <p className="text-[#5f5f5f] transition-colors relative">
                       With over 5 years of experience in UI/UX design, I've had the privilege of working on a diverse range of projects, from innovative startups to established enterprises. My design philosophy revolves around understanding user needs and business goals to create solutions that are both beautiful and functional.
@@ -182,10 +200,10 @@ const About = () => {
                     </p>
                     
                     {/* Interactive terminal section with typing capability */}
-                    <div className="relative">
+                    <div className="relative mt-6 border-t border-gray-200 pt-4">
                       <div 
                         ref={terminalInputRef}
-                        className="flex items-center text-[#424242] font-mono text-sm mt-4 cursor-text group"
+                        className="flex items-center text-[#424242] font-mono text-sm cursor-text relative group"
                         tabIndex={0}
                         onClick={() => {
                           // Focus the input when clicking anywhere in the terminal
@@ -198,34 +216,58 @@ const About = () => {
                           id="terminal-input"
                           type="text" 
                           className="bg-transparent outline-none border-none w-full font-mono text-sm text-[#424242] caret-[#3E40EF]"
+                          autoFocus
                           onKeyDown={(e) => {
                             // Show message after user types something and presses Enter
-                            if (e.key === 'Enter') {
+                            if (e.key === 'Enter' && e.currentTarget.value.trim() !== '') {
+                              e.preventDefault();
                               setShowTerminalMessage(true);
+                              
+                              // Create typed command element
+                              const commandEl = document.createElement('div');
+                              commandEl.className = "flex items-center text-[#424242] font-mono text-sm mt-2";
+                              commandEl.innerHTML = `<span class="text-[#3E40EF] mr-2">$</span><span>${e.currentTarget.value}</span>`;
+                              
+                              // Add typed command to terminal
+                              const terminal = document.getElementById('terminal-output');
+                              if (terminal) {
+                                terminal.appendChild(commandEl);
+                                // Clear the input
+                                e.currentTarget.value = '';
+                                
+                                // Scroll to bottom of terminal
+                                setTimeout(() => {
+                                  if (terminal.parentElement) {
+                                    terminal.parentElement.scrollTop = terminal.parentElement.scrollHeight;
+                                  }
+                                }, 50);
+                              }
                             }
                           }}
-                          onChange={(e) => {
-                            // Also show message after user types a few characters
-                            if (e.target.value.length > 5 && !showTerminalMessage) {
-                              setTimeout(() => setShowTerminalMessage(true), 500);
-                            }
-                          }}
-                          placeholder="Type something and press Enter..."
+                          placeholder="Type a message and press Enter..."
                         />
-                        <span className="inline-block w-2 h-4 bg-[#3E40EF] animate-pulse ml-0.5 group-hover:opacity-100 opacity-80"></span>
+                        <span className="inline-block w-2 h-4 bg-[#3E40EF] animate-pulse ml-0.5"></span>
+                        
+                        {/* Interactive tooltip */}
+                        <div className="absolute -top-10 left-0 right-0 bg-[#3E40EF] text-white text-xs py-2 px-3 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                          Click here and type a message
+                        </div>
                       </div>
                       
-                      {/* Message when user interacts - hidden by default */}
-                      {showTerminalMessage && (
-                        <div className="mt-2 p-2 rounded-md bg-[#0a2f1a] text-[#92d9a7] text-sm font-mono animate-fade-in">
-                          <span className="typing-animation">
-                            Seems you're interested! Let's discuss further on 
-                            <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" className="text-[#a9e5bc] hover:underline mx-1">LinkedIn</a> 
-                            or 
-                            <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" className="text-[#a9e5bc] hover:underline mx-1">Instagram</a>.
-                          </span>
-                        </div>
-                      )}
+                      {/* Container for terminal output */}
+                      <div id="terminal-output" className="mt-2">
+                        {/* Message when user interacts */}
+                        {showTerminalMessage && (
+                          <div className="mt-3 text-sm font-mono">
+                            <div className="typing-effect text-[#3E40EF]">
+                              Seems you're interested! Let's discuss further on{' '}
+                              <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" className="text-[#3E40EF] hover:underline">LinkedIn</a>{' '}
+                              or{' '}
+                              <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" className="text-[#3E40EF] hover:underline">Instagram</a>.
+                            </div>
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
