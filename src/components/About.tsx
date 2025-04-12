@@ -66,38 +66,29 @@ const About = () => {
           <div className="relative py-1 w-full">
             <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight">
               <TextReveal 
-                className="text-gray-400" 
+                className="text-gray-400 w-full" 
                 direction="left-to-right" 
                 lineByLine={true}
               >
-                I am a UI/UX Designer crafting 
+                I'm a passionate UI/UX Designer focused on crafting intuitive, user-centered digital experiences.
               </TextReveal>
             </h3>
             <h3 className="mt-2 md:mt-3">
               <TextReveal 
-                className="text-gray-400" 
+                className="text-gray-400 w-full" 
                 direction="left-to-right" 
                 lineByLine={true}
               >
-                delightful digital experiences with
+                I blend creativity with strategy to design products that are both functional and visually engaging.
               </TextReveal>
             </h3>
             <h3 className="mt-2 md:mt-3">
               <TextReveal 
-                className="text-gray-400" 
+                className="text-gray-400 w-full" 
                 direction="left-to-right" 
                 lineByLine={true}
               >
-                a focus on user-centered design principles
-              </TextReveal>
-            </h3>
-            <h3 className="mt-2 md:mt-3">
-              <TextReveal 
-                className="text-gray-400" 
-                direction="left-to-right" 
-                lineByLine={true}
-              >
-                that prioritize accessibility and usability
+                From concept to final interaction, I aim to solve real problems through clean and modern design.
               </TextReveal>
             </h3>
           </div>
@@ -113,7 +104,7 @@ const About = () => {
               onMouseEnter={() => setShowSpinText(true)}
               onMouseLeave={() => setShowSpinText(false)}
             >
-              <div className="bg-[#3E40EF] rounded-2xl overflow-hidden z-10 relative h-full min-h-[300px] sm:min-h-[320px] lg:min-h-[380px]">
+              <div className="bg-[#3E40EF] rounded-2xl overflow-hidden z-10 relative h-full min-h-[250px] sm:min-h-[270px] lg:min-h-[300px]">
                 <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full group-hover:bg-white/10 transition-all duration-500"></div>
 
                 <div className="flex-1 w-full flex items-center justify-center relative">
@@ -160,7 +151,7 @@ const About = () => {
                 Nice to meet you
               </div>
               
-              <div className="flex-grow bg-[#ffffff] rounded-lg border border-gray-200 p-6 relative shadow-xl transition-all duration-300 hover:shadow-2xl hover:border-[#3E40EF]/20 group" style={{ minHeight: '300px', maxHeight: '380px' }}>
+              <div className="flex-grow bg-[#ffffff] rounded-lg border border-gray-200 p-6 relative shadow-xl transition-all duration-300 hover:border-[#3E40EF]/20 group" style={{ minHeight: '250px', maxHeight: '300px' }}>
                 {/* Terminal Header with interactive buttons */}
                 <div className="absolute top-0 left-0 right-0 h-10 bg-[#121212] rounded-t-lg border-b border-gray-200 flex items-center px-4">
                   <div className="flex gap-2">
@@ -175,14 +166,14 @@ const About = () => {
 
                 {/* Terminal Content with typing animation */}
                 <div className="mt-6">
-                  <div className="flex items-center text-[#424242] font-mono text-sm mb-3 opacity-80 group-hover:opacity-100 transition-opacity">
+                  <div className="flex items-center text-[#424242] font-mono text-sm mb-3 opacity-80 transition-opacity">
                     <span className="text-[#3E40EF] mr-2">$</span>
                     <span className="inline-block">cat about.txt</span>
                     <span className="inline-block w-2 h-4 bg-[#3E40EF] animate-pulse ml-2"></span>
                   </div>
                   
-                  <div className="space-y-4 text-[#7e7e7e] font-display text-base leading-relaxed relative overflow-hidden">
-                    {/* First paragraph with underline effect only */}
+                  <div className="space-y-4 text-[#7e7e7e] font-display text-sm leading-relaxed relative overflow-hidden">
+                    {/* First paragraph with no hover effects */}
                     <p className="text-[#5f5f5f] transition-colors relative">
                       With over 5 years of experience in UI/UX design, I've had the privilege of working on a diverse range of projects, from innovative startups to established enterprises. My design philosophy revolves around understanding user needs and business goals to create solutions that are both beautiful and functional.
                     </p>
@@ -190,19 +181,19 @@ const About = () => {
                     {/* Second paragraph with underline effect on key terms only */}
                     <p className="text-[#5f5f5f] transition-colors relative">
                       I currently serve as Chief Product Officer at{" "}
-                      <span className="text-black font-semibold relative inline-block group-hover:text-[#3E40EF] transition-colors duration-300">
+                      <span className="text-black font-semibold relative inline-block transition-colors duration-300">
                         Imaginum
-                        <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#3E40EF] group-hover:w-full transition-all duration-500"></span>
+                        <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#3E40EF] hover:w-full transition-all duration-500"></span>
                       </span>
                       , where I lead the design and strategy of our digital products. Previously, I spearheaded design initiatives as Tech & Design Head at{" "}
-                      <span className="text-black font-semibold relative inline-block group-hover:text-[#3E40EF] transition-colors duration-300">
+                      <span className="text-black font-semibold relative inline-block transition-colors duration-300">
                         CSED
-                        <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#3E40EF] group-hover:w-full transition-all duration-500"></span>
+                        <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#3E40EF] hover:w-full transition-all duration-500"></span>
                       </span>
                       .
                     </p>
                     
-                    {/* Interactive terminal section with blinking cursor */}
+                    {/* Interactive terminal section with blinking cursor - always visible */}
                     <div 
                       ref={terminalInputRef}
                       className="flex items-center text-[#424242] font-mono text-sm mt-4 cursor-text"
@@ -226,9 +217,9 @@ const About = () => {
         </div>
         
         {/* Lower Boxes: Education, Location, Experience - moved below the photo and terminal */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6 mt-8">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6 mt-6">
           {/* Education Box */}
-          <div className="p-5 rounded-lg bg-white border border-gray-200 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-[#3E40EF]/30 hover:translate-y-[-5px] group">
+          <div className="p-5 rounded-lg bg-white border border-gray-200 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-[#3E40EF]/30 group">
             <div className="flex items-start gap-4">
               <div className="p-2.5 rounded-lg bg-[#3E40EF]/10 text-[#3E40EF] group-hover:bg-[#3E40EF] group-hover:text-white transition-colors duration-300">
                 <BookOpen className="h-6 w-6" />
@@ -244,7 +235,7 @@ const About = () => {
           </div>
 
           {/* Location Box */}
-          <div className="p-5 rounded-lg bg-white border border-gray-200 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-[#3E40EF]/30 hover:translate-y-[-5px] group">
+          <div className="p-5 rounded-lg bg-white border border-gray-200 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-[#3E40EF]/30 group">
             <div className="flex items-start gap-4">
               <div className="p-2.5 rounded-lg bg-[#3E40EF]/10 text-[#3E40EF] group-hover:bg-[#3E40EF] group-hover:text-white transition-colors duration-300">
                 <MapPin className="h-6 w-6" />
@@ -260,7 +251,7 @@ const About = () => {
           </div>
 
           {/* Experience Box */}
-          <div className="p-5 rounded-lg bg-white border border-gray-200 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-[#3E40EF]/30 hover:translate-y-[-5px] group">
+          <div className="p-5 rounded-lg bg-white border border-gray-200 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-[#3E40EF]/30 group">
             <div className="flex items-start gap-4">
               <div className="p-2.5 rounded-lg bg-[#3E40EF]/10 text-[#3E40EF] group-hover:bg-[#3E40EF] group-hover:text-white transition-colors duration-300">
                 <Sparkles className="h-6 w-6" />

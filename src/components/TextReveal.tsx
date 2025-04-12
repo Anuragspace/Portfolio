@@ -1,3 +1,4 @@
+
 "use client";
 
 import { motion, MotionValue, useScroll, useTransform } from "framer-motion";
@@ -31,7 +32,7 @@ export const TextReveal: FC<TextRevealProps> = ({
   
   return (
     <div ref={targetRef} className={cn("relative z-0 overflow-hidden", className)}>
-      <div className="mx-auto flex flex-col bg-transparent">
+      <div className="mx-auto flex flex-col bg-transparent w-full">
         {lines.map((line, lineIndex) => {
           const words = line.trim().split(" ");
           // Calculate delay based on line number for line-by-line animation
@@ -40,7 +41,7 @@ export const TextReveal: FC<TextRevealProps> = ({
           return (
             <div 
               key={lineIndex} 
-              className="flex flex-wrap items-start text-2xl md:text-3xl font-bold overflow-hidden"
+              className="flex flex-wrap items-start text-2xl md:text-3xl font-bold overflow-hidden w-full"
             >
               {words.map((word, i) => {
                 // Calculate progression range differently based on direction
@@ -98,20 +99,17 @@ interface WordProps {
 }
 
 const Word: FC<WordProps> = ({ children, progress, range, delay = 0, direction = "left-to-right" }) => {
+  // Only transform opacity, not position
   const opacity = useTransform(progress, range, [0.15, 1]); // Fade-in effect with lower initial opacity
   const color = useTransform(progress, range, ["#9ca3af", "#000000"]); // Light gray to black
   
-  // Calculate x-transform based on direction
-  const xInitial = direction === "left-to-right" ? -20 : 20;
-  const x = useTransform(progress, range, [xInitial, 0]);
-
   return (
     <span className="relative mx-1 overflow-hidden">
+      <span className="absolute opacity-20">{children}</span>
       <motion.span
         style={{ 
           opacity, 
-          color, 
-          x
+          color
         }}
         transition={{
           delay: delay,
