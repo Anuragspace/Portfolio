@@ -98,7 +98,7 @@ interface WordProps {
 }
 
 const Word: FC<WordProps> = ({ children, progress, range, delay = 0, direction = "left-to-right" }) => {
-  const opacity = useTransform(progress, range, [0.2, 1]); // Fade-in effect
+  const opacity = useTransform(progress, range, [0.15, 1]); // Fade-in effect with lower initial opacity
   const color = useTransform(progress, range, ["#9ca3af", "#000000"]); // Light gray to black
   
   // Calculate x-transform based on direction

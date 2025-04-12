@@ -1,15 +1,17 @@
+
 import { useEffect, useState, useRef } from "react";
 import { MapPin, Sparkles, BookOpen } from "lucide-react";
 import { Globe } from "@/components/Globe";
 import { TextReveal } from "./TextReveal";
 import SpinningText from "./SpinningText";
 
-
 const About = () => {
   const [isHighlighted, setIsHighlighted] = useState(false);
   const [showSpinText, setShowSpinText] = useState(false);
+  const [showTerminalMessage, setShowTerminalMessage] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
+  const terminalInputRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -29,9 +31,24 @@ const About = () => {
       observer.observe(sectionRef.current);
     }
 
+    // Add event listener for terminal interaction
+    const handleInteraction = () => {
+      setShowTerminalMessage(true);
+    };
+
+    if (terminalInputRef.current) {
+      terminalInputRef.current.addEventListener('click', handleInteraction);
+      terminalInputRef.current.addEventListener('keydown', handleInteraction);
+    }
+
     return () => {
       if (sectionRef.current) {
         observer.unobserve(sectionRef.current);
+      }
+      
+      if (terminalInputRef.current) {
+        terminalInputRef.current.removeEventListener('click', handleInteraction);
+        terminalInputRef.current.removeEventListener('keydown', handleInteraction);
       }
     };
   }, []);
@@ -44,9 +61,9 @@ const About = () => {
           <div className="w-24 h-1 bg-[#3E40EF]"></div>
         </div>
         
-        {/* Added full-width designer introduction with TextReveal that spans across the entire section */}
-        <div className="mb-10 relative">
-          <div className="relative py-1 max-w-5xl">
+        {/* Full-width designer introduction with TextReveal covering entire section width */}
+        <div className="mb-12 relative w-full">
+          <div className="relative py-1 w-full">
             <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight">
               <TextReveal 
                 className="text-gray-400" 
@@ -71,7 +88,16 @@ const About = () => {
                 direction="left-to-right" 
                 lineByLine={true}
               >
-                a focus on user-centered design
+                a focus on user-centered design principles
+              </TextReveal>
+            </h3>
+            <h3 className="mt-2 md:mt-3">
+              <TextReveal 
+                className="text-gray-400" 
+                direction="left-to-right" 
+                lineByLine={true}
+              >
+                that prioritize accessibility and usability
               </TextReveal>
             </h3>
           </div>
@@ -79,7 +105,7 @@ const About = () => {
         
         {/* Main content area with equal height columns */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
-          {/* Left Column: Image - adjusted for equal height */}
+          {/* Left Column: Image - adjusted for equal height with reduced height */}
           <div className="lg:col-span-5 flex order-2 lg:order-1">
             <div 
               ref={imageRef} 
@@ -87,7 +113,7 @@ const About = () => {
               onMouseEnter={() => setShowSpinText(true)}
               onMouseLeave={() => setShowSpinText(false)}
             >
-              <div className="bg-[#3E40EF] rounded-2xl overflow-hidden z-10 relative h-full min-h-[350px] sm:min-h-[400px] lg:min-h-[480px]">
+              <div className="bg-[#3E40EF] rounded-2xl overflow-hidden z-10 relative h-full min-h-[300px] sm:min-h-[320px] lg:min-h-[380px]">
                 <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full group-hover:bg-white/10 transition-all duration-500"></div>
 
                 <div className="flex-1 w-full flex items-center justify-center relative">
@@ -134,7 +160,7 @@ const About = () => {
                 Nice to meet you
               </div>
               
-              <div className="flex-grow bg-[#ffffff] rounded-lg border border-gray-200 p-6 relative shadow-xl transition-all duration-300 hover:shadow-2xl hover:border-[#3E40EF]/20 group">
+              <div className="flex-grow bg-[#ffffff] rounded-lg border border-gray-200 p-6 relative shadow-xl transition-all duration-300 hover:shadow-2xl hover:border-[#3E40EF]/20 group" style={{ minHeight: '300px', maxHeight: '380px' }}>
                 {/* Terminal Header with interactive buttons */}
                 <div className="absolute top-0 left-0 right-0 h-10 bg-[#121212] rounded-t-lg border-b border-gray-200 flex items-center px-4">
                   <div className="flex gap-2">
@@ -156,14 +182,13 @@ const About = () => {
                   </div>
                   
                   <div className="space-y-4 text-[#7e7e7e] font-display text-base leading-relaxed relative overflow-hidden">
-                    {/* First paragraph with hover effect and subtle animation */}
-                    <p className="group-hover:text-[#5f5f5f] transition-colors relative transform hover:translate-x-1 hover:text-black transition-all duration-300">
+                    {/* First paragraph with underline effect only */}
+                    <p className="text-[#5f5f5f] transition-colors relative">
                       With over 5 years of experience in UI/UX design, I've had the privilege of working on a diverse range of projects, from innovative startups to established enterprises. My design philosophy revolves around understanding user needs and business goals to create solutions that are both beautiful and functional.
-                      <span className="absolute h-full w-1 bg-[#3E40EF]/10 left-[-10px] top-0 group-hover:bg-[#3E40EF]/30 transition-colors duration-300"></span>
                     </p>
                     
-                    {/* Second paragraph with highlight effect on key terms */}
-                    <p className="group-hover:text-[#5f5f5f] transition-colors relative transform hover:translate-x-1 hover:text-black transition-all duration-300">
+                    {/* Second paragraph with underline effect on key terms only */}
+                    <p className="text-[#5f5f5f] transition-colors relative">
                       I currently serve as Chief Product Officer at{" "}
                       <span className="text-black font-semibold relative inline-block group-hover:text-[#3E40EF] transition-colors duration-300">
                         Imaginum
@@ -175,67 +200,77 @@ const About = () => {
                         <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#3E40EF] group-hover:w-full transition-all duration-500"></span>
                       </span>
                       .
-                      <span className="absolute h-full w-1 bg-[#3E40EF]/10 left-[-10px] top-0 group-hover:bg-[#3E40EF]/30 transition-colors duration-300"></span>
                     </p>
                     
-                    {/* Terminal prompt at the end with blinking cursor */}
-                    <div className="flex items-center text-[#424242] font-mono text-sm mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    {/* Interactive terminal section with blinking cursor */}
+                    <div 
+                      ref={terminalInputRef}
+                      className="flex items-center text-[#424242] font-mono text-sm mt-4 cursor-text"
+                      tabIndex={0}
+                    >
                       <span className="text-[#3E40EF] mr-2">$</span>
                       <span className="inline-block w-2 h-4 bg-[#3E40EF] animate-pulse"></span>
                     </div>
+                    
+                    {/* Message when user interacts - hidden by default */}
+                    {showTerminalMessage && (
+                      <div className="mt-2 p-2 rounded-md bg-[#0a2f1a] text-[#92d9a7] text-sm font-mono animate-fade-in">
+                        Seems you're interested! Let's discuss further - reach out to me through the contact section.
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
-          {/* Lower Boxes: Education, Location, Experience */}
-          <div className="lg:col-span-12 grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6 mt-8">
-            {/* Education Box */}
-            <div className="p-5 rounded-lg bg-white border border-gray-200 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-[#3E40EF]/30 hover:translate-y-[-5px] group">
-              <div className="flex items-start gap-4">
-                <div className="p-2.5 rounded-lg bg-[#3E40EF]/10 text-[#3E40EF] group-hover:bg-[#3E40EF] group-hover:text-white transition-colors duration-300">
-                  <BookOpen className="h-6 w-6" />
-                </div>
-                <div>
-                  <h4 className="text-lg font-bold mb-2 text-[#3E40EF]">Education</h4>
-                  <p className="text-gray-700 text-sm">
-                    B.Tech in ECE<br />
-                    Vellore Institute of Technology, 2022-2026
-                  </p>
-                </div>
+        </div>
+        
+        {/* Lower Boxes: Education, Location, Experience - moved below the photo and terminal */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6 mt-8">
+          {/* Education Box */}
+          <div className="p-5 rounded-lg bg-white border border-gray-200 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-[#3E40EF]/30 hover:translate-y-[-5px] group">
+            <div className="flex items-start gap-4">
+              <div className="p-2.5 rounded-lg bg-[#3E40EF]/10 text-[#3E40EF] group-hover:bg-[#3E40EF] group-hover:text-white transition-colors duration-300">
+                <BookOpen className="h-6 w-6" />
+              </div>
+              <div>
+                <h4 className="text-lg font-bold mb-2 text-[#3E40EF]">Education</h4>
+                <p className="text-gray-700 text-sm">
+                  B.Tech in ECE<br />
+                  Vellore Institute of Technology, 2022-2026
+                </p>
               </div>
             </div>
+          </div>
 
-            {/* Location Box */}
-            <div className="p-5 rounded-lg bg-white border border-gray-200 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-[#3E40EF]/30 hover:translate-y-[-5px] group">
-              <div className="flex items-start gap-4">
-                <div className="p-2.5 rounded-lg bg-[#3E40EF]/10 text-[#3E40EF] group-hover:bg-[#3E40EF] group-hover:text-white transition-colors duration-300">
-                  <MapPin className="h-6 w-6" />
-                </div>
-                <div>
-                  <h4 className="text-lg font-bold mb-2 text-[#3E40EF]">Location</h4>
-                  <p className="text-gray-700 text-sm">
-                    Based in India<br />
-                    Available for remote work
-                  </p>
-                </div>
+          {/* Location Box */}
+          <div className="p-5 rounded-lg bg-white border border-gray-200 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-[#3E40EF]/30 hover:translate-y-[-5px] group">
+            <div className="flex items-start gap-4">
+              <div className="p-2.5 rounded-lg bg-[#3E40EF]/10 text-[#3E40EF] group-hover:bg-[#3E40EF] group-hover:text-white transition-colors duration-300">
+                <MapPin className="h-6 w-6" />
+              </div>
+              <div>
+                <h4 className="text-lg font-bold mb-2 text-[#3E40EF]">Location</h4>
+                <p className="text-gray-700 text-sm">
+                  Based in India<br />
+                  Available for remote work
+                </p>
               </div>
             </div>
+          </div>
 
-            {/* Experience Box */}
-            <div className="p-5 rounded-lg bg-white border border-gray-200 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-[#3E40EF]/30 hover:translate-y-[-5px] group">
-              <div className="flex items-start gap-4">
-                <div className="p-2.5 rounded-lg bg-[#3E40EF]/10 text-[#3E40EF] group-hover:bg-[#3E40EF] group-hover:text-white transition-colors duration-300">
-                  <Sparkles className="h-6 w-6" />
-                </div>
-                <div>
-                  <h4 className="text-lg font-bold mb-2 text-[#3E40EF]">Experience</h4>
-                  <p className="text-gray-700 text-sm">
-                    Chief Product Officer at Imaginum<br />
-                    Tech & Design Head at CSED
-                  </p>
-                </div>
+          {/* Experience Box */}
+          <div className="p-5 rounded-lg bg-white border border-gray-200 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-[#3E40EF]/30 hover:translate-y-[-5px] group">
+            <div className="flex items-start gap-4">
+              <div className="p-2.5 rounded-lg bg-[#3E40EF]/10 text-[#3E40EF] group-hover:bg-[#3E40EF] group-hover:text-white transition-colors duration-300">
+                <Sparkles className="h-6 w-6" />
+              </div>
+              <div>
+                <h4 className="text-lg font-bold mb-2 text-[#3E40EF]">Experience</h4>
+                <p className="text-gray-700 text-sm">
+                  Chief Product Officer at Imaginum<br />
+                  Tech & Design Head at CSED
+                </p>
               </div>
             </div>
           </div>
