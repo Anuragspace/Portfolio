@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Menu, X, Linkedin, ExternalLink, Github, Instagram, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { WordRotate } from "@/components/WordRotate";
@@ -282,5 +282,7 @@ const Navbar = () => {
     </header>
   );
 };
+
+Navbar.displayName = "Navbar";
 
 export default Navbar;
