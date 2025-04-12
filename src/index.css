@@ -139,16 +139,23 @@
 
 .animate-marquee {
   animation: marquee 15s linear infinite;
+  will-change: transform; /* Performance optimization */
+  touch-action: pan-y; /* Better touch handling */
 }
 
 /* Pause animation on hover or when being dragged */
 .skills-scroll-container.dragging {
-  animation-play-state: paused;
-  cursor: grabbing;
+  animation-play-state: paused !important;
+  cursor: grabbing !important;
 }
 
 .skills-scroll-container:hover {
   animation-play-state: paused;
+}
+
+/* Visual feedback for dragging */
+.skills-scroll-container.dragging > div {
+  transform: scale(0.98);
 }
 
 /* Timeline styles */
