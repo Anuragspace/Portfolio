@@ -76,7 +76,7 @@ const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({ className = "
   // Custom rectangular cursor component
   const RectCursor = ({ className = "" }) => (
     <div 
-      className={`inline-block h-4 w-2 bg-gray-500 ${showCursor ? 'opacity-100' : 'opacity-0'} transition-opacity ${className}`}
+      className={`inline-block h-4 w-2 bg-[#9b87f5] ${showCursor ? 'opacity-100' : 'opacity-0'} transition-opacity ${className}`}
     />
   );
   
@@ -86,11 +86,14 @@ const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({ className = "
       onClick={handleContainerClick}
       className={`font-mono text-sm w-full cursor-text ${className}`}
     >
-      <div ref={terminalContainerRef} className="space-y-3 h-auto min-h-[170px]">
+      <div ref={terminalContainerRef} className="space-y-3 h-auto min-h-[220px] md:min-h-[170px]">
         {/* User input area - fully integrated into the visual style */}
         <div className="flex items-center">
           <span className="text-[#27C93F] mr-2">$&gt;</span>
           <form onSubmit={handleSubmit} className="flex-1 flex items-center">
+            {!isTypingResponse && !inputValue && (
+              <RectCursor className="bg-[#9b87f5] mr-2" />
+            )}
             <input
               ref={inputRef}
               type="text"
@@ -100,9 +103,6 @@ const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({ className = "
               placeholder={placeholderText}
               autoFocus={false}
             />
-            {!isTypingResponse && !inputValue && (
-              <RectCursor />
-            )}
           </form>
         </div>
 

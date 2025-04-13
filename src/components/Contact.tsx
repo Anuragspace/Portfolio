@@ -62,7 +62,7 @@ const Contact = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           <motion.div className="lg:col-span-5 space-y-4">
             {/* Contact Information Card */}
-            <div className="bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
+            <div className="bg-white rounded-2xl shadow-sm p-4 md:p-5 border border-gray-100">
               <h3 className="text-xl font-bold mb-5 text-gray-800">Contact Information</h3>
               
               <div className="space-y-5">
@@ -104,7 +104,7 @@ const Contact = () => {
             </div>
             
             {/* Available For Card */}
-            <div className="bg-[#3E40EF] rounded-2xl shadow-md p-6 border border-[#3E40EF]/20 text-white">
+            <div className="bg-[#3E40EF] rounded-2xl shadow-md p-4 md:p-5 border border-[#3E40EF]/20 text-white">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
                 <h4 className="text-xl font-bold text-white">Available For</h4>
                 <div className="flex items-center bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full self-start">
@@ -135,7 +135,7 @@ const Contact = () => {
               <Button 
                 className="w-full bg-white hover:bg-white/90 text-black font-semibold py-2.5 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg"
               >
-                <AnimatedShinyText className="text-black">Let's Collaborate</AnimatedShinyText>
+                <span className="text-black font-semibold">Let's Collaborate</span>
                 <ExternalLink size={16} className="ml-2" />
               </Button>
             </div>
@@ -143,7 +143,7 @@ const Contact = () => {
           
           {/* Contact Form Card */}
           <motion.div className="lg:col-span-7 h-full">
-            <div className="bg-white p-5 md:p-6 rounded-2xl shadow-sm border border-gray-100 relative overflow-hidden h-full flex flex-col">
+            <div className="bg-white p-4 md:p-5 rounded-2xl shadow-sm border border-gray-100 relative overflow-hidden h-full flex flex-col">
               <ShineBorder 
                 borderWidth={1.1} 
                 duration={10} 

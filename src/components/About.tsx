@@ -2,7 +2,7 @@
 import { useEffect, useState, useRef } from "react";
 import { MapPin, Sparkles, BookOpen } from "lucide-react";
 import { Globe } from "@/components/Globe";
-import { TextReveal } from "./TextReveal";
+import { DesktopTextReveal, MobileTextReveal } from "./TextRevealResponsive";
 import SpinningText from "./SpinningText";
 import InteractiveTerminal from "./InteractiveTerminal";
 
@@ -62,21 +62,30 @@ const About = () => {
           <div ref={textContainerRef} className="w-full lg:px-0 px-0">
             <div className="w-full">
               <h3 className="text-2xl md:text-3xl font-bold leading-snug w-full">
-                <TextReveal className="text-gray-400" lineIndex={0} totalLines={3}>
+                <DesktopTextReveal className="text-gray-400" lineIndex={0} totalLines={3}>
                   I'm a UI/UX Designer with a passion for creating beautiful digital products
-                </TextReveal>
+                </DesktopTextReveal>
+                <MobileTextReveal className="text-gray-400" lineIndex={0} totalLines={3}>
+                  I'm a UI/UX Designer with a passion for creating beautiful digital products
+                </MobileTextReveal>
               </h3>
             
               <h3 className="mt-2 md:mt-1 w-full">
-                <TextReveal className="text-gray-400" lineIndex={1} totalLines={3}>
+                <DesktopTextReveal className="text-gray-400" lineIndex={1} totalLines={3}>
                   creating user-centered digital experiences that elevate brand presence
-                </TextReveal>
+                </DesktopTextReveal>
+                <MobileTextReveal className="text-gray-400" lineIndex={1} totalLines={3}>
+                  creating user-centered digital experiences that elevate brand presence
+                </MobileTextReveal>
               </h3>
 
               <h3 className="mt-2 md:mt-1 mb-3 md:mb-2 w-full">
-                <TextReveal className="text-gray-400" lineIndex={2} totalLines={3}>
+                <DesktopTextReveal className="text-gray-400" lineIndex={2} totalLines={3}>
                   blend aesthetics with functionality and innovation in every project
-                </TextReveal>
+                </DesktopTextReveal>
+                <MobileTextReveal className="text-gray-400" lineIndex={2} totalLines={3}>
+                  blend aesthetics with functionality and innovation in every project
+                </MobileTextReveal>
               </h3>
             </div>
           </div>
