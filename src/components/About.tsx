@@ -1,3 +1,4 @@
+
 import { useEffect, useState, useRef } from "react";
 import { MapPin, Sparkles, BookOpen } from "lucide-react";
 import { Globe } from "@/components/Globe";
@@ -44,6 +45,34 @@ const About = () => {
           <div className="w-24 h-1 bg-[#3E40EF]"></div>
         </div>
         
+        {/* Text introduction that spans full width */}
+        <div className="mb-10 lg:px-2 w-full px-2">
+          <div className="inline-block px-4 py-1.5 bg-[#3E40EF]/10 text-[#3E40EF] rounded-full text-sm font-medium mb-5">
+            <BookOpen className="inline-block mr-2 h-4 w-4" />
+            Nice to meet you
+          </div>
+          
+          <div className="relative w-full">
+            <h3 className="text-2xl md:text-3xl font-bold leading-snug">
+              <TextReveal className="text-gray-400">
+                I'm a UI/UX Designer with a passion for
+              </TextReveal>
+            </h3>
+          
+            <h3 className="mt-2">
+              <TextReveal className="text-gray-400">
+                creating user-centered digital experiences that
+              </TextReveal>
+            </h3>
+
+            <h3 className="mt-2 mb-2">
+              <TextReveal className="text-gray-400">
+                blend aesthetics with functionality and innovation
+              </TextReveal>
+            </h3>
+          </div>
+        </div>
+        
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Left Column: Image */}
           <div className="lg:col-span-5">
@@ -70,13 +99,13 @@ const About = () => {
                   <div className="absolute top-6 left-6 flex -z-20 cursor-none">
                     <div 
                       className="w-28 h-28 rounded-full border-2 border-white/50 flex items-center justify-center"
-                      style={{ boxSizing: "border-box" }} // Ensures the border is included in the element's dimensions
+                      style={{ boxSizing: "border-box" }} 
                     >
                       <SpinningText 
                         children="ANURAG ADARSH • DESIGNER • UI/UX •" 
                         className="text-white" 
                         duration={15}
-                        radius={4} // Adjust radius to match the reduced size
+                        radius={4}
                         followCursor={true}
                       />
                     </div>
@@ -94,56 +123,33 @@ const About = () => {
 
           {/* Right Column: Content */}
           <div className="lg:col-span-7">
-            <div className="space-y-4">
-              <div className="inline-block px-4 py-1.5 bg-[#3E40EF]/10 text-[#3E40EF] rounded-full text-sm font-medium">
-                <BookOpen className="inline-block mr-2 h-4 w-4" />
-                Nice to meet you
-              </div>
-              
-              <div className="relative py-1">
-                <h3 className="text-2xl md:text-3xl font-bold leading-snug">
-                  <TextReveal className="text-gray-400">
-                    I'm a UI/UX Designer with a passion for
-                  </TextReveal>
-                </h3>
-              
-                <h3 className="mt-1">
-                  <TextReveal className="text-gray-400">
-                    creating user-centered digital experiences
-                  </TextReveal>
-                </h3>
-              </div>
-              
-              <div className="bg-[#ffffff] rounded-lg border border-gray-350 p-6 relative shadow-xl">
-                {/* Terminal Header */}
-                <div className="absolute top-0 left-0 right-0 h-10 bg-[#121212] rounded-t-lg border-b border-gray-350 flex items-center px-4">
-                  <div className="flex gap-2">
-                    <div className="h-3 w-3 rounded-full bg-[#FF5F56]"></div>
-                    <div className="h-3 w-3 rounded-full bg-[#FFBD2E]"></div>
-                    <div className="h-3 w-3 rounded-full bg-[#27C93F]"></div>
-                  </div>
-                  <div className="absolute left-1/2 -translate-x-1/2 text-white/60 text-sm font-mono">
-                    about.txt
-                  </div>
+            <div className="h-full bg-[#ffffff] rounded-lg border border-gray-350 p-6 relative shadow-xl">
+              {/* Terminal Header */}
+              <div className="absolute top-0 left-0 right-0 h-10 bg-[#121212] rounded-t-lg border-b border-gray-350 flex items-center px-4">
+                <div className="flex gap-2">
+                  <div className="h-3 w-3 rounded-full bg-[#FF5F56]"></div>
+                  <div className="h-3 w-3 rounded-full bg-[#FFBD2E]"></div>
+                  <div className="h-3 w-3 rounded-full bg-[#27C93F]"></div>
                 </div>
+                <div className="absolute left-1/2 -translate-x-1/2 text-white/60 text-sm font-mono">
+                  about.txt
+                </div>
+              </div>
 
-                {/* Terminal Content */}
-                <div className="mt-6">
-                  <p className="text-[#424242] font-mono text-sm mb-2">
-                    {'// <hello world />'}
+              {/* Terminal Content */}
+              <div className="mt-6">
+                <p className="text-[#424242] font-mono text-sm mb-2">
+                  {'// <hello world />'}
+                </p>
+                <div className="space-y-4 text-[#7e7e7e] font-display text-base leading-relaxed">
+                  <p>
+                    With over 5 years of experience in UI/UX design, I've had the privilege of working on a diverse range of projects, from innovative startups to established enterprises. My design philosophy revolves around understanding user needs and business goals to create solutions that are both beautiful and functional.
                   </p>
-                  <div className="space-y-4 text-[#7e7e7e] font-display text-base leading-relaxed">
-                    <p>
-                      With over 5 years of experience in UI/UX design, I've had the privilege of working on a diverse range of projects, from innovative startups to established enterprises. My design philosophy revolves around understanding user needs and business goals to create solutions that are both beautiful and functional.
-                    </p>
-                    
-                    <p>
-                      I currently serve as Chief Product Officer at <span className="text-black font-semibold">Imaginum</span>, where I lead the design and strategy of our digital products. Previously, I spearheaded design initiatives as Tech & Design Head at <span className="text-black font-semibold">CSED</span>.
-                    </p>
-                  </div>
+                  
+                  <p>
+                    I currently serve as Chief Product Officer at <span className="text-black font-semibold">Imaginum</span>, where I lead the design and strategy of our digital products. Previously, I spearheaded design initiatives as Tech & Design Head at <span className="text-black font-semibold">CSED</span>.
+                  </p>
                 </div>
-
-                
               </div>
             </div>
           </div>
