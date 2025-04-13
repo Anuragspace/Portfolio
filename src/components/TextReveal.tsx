@@ -46,14 +46,17 @@ export const TextReveal: FC<TextRevealProps> = memo(({
               const wordCount = words.length;
               
               // Adjust overlap for smoother animation between lines
-              const startBase = lineIndex / totalLines; 
-              const endBase = (lineIndex + 1) / totalLines;
+              // Use shallower curve for line transitions to make it more synchronized
+              // Start with line index, but ensure all lines progress more closely together
+              const lineProgress = lineIndex / (totalLines * 1.2);
               
-              // Modify to synchronize line transitions
-              // Earlier words in a line start sooner, later words complete later
-              const segmentSize = (endBase - startBase) / (wordCount + 1);
-              const start = startBase + (i * segmentSize * 0.8); // Words start sooner
-              const end = start + segmentSize * 1.5; // Words take longer to complete
+              // Calculate base animation timing based on synchronized line progress
+              const wordPosition = i / wordCount;
+              
+              // Ensure words within a line animate closely together but maintain sequence
+              // Each word starts when the previous is ~40% complete for better visual flow
+              const start = lineProgress + (wordPosition * 0.05); 
+              const end = start + 0.08; // Shorter completion time for smoother transitions
               
               return (
                 <Word key={i} progress={scrollYProgress} range={[start, end]}>
@@ -81,7 +84,7 @@ const Word: FC<WordProps> = memo(({ children, progress, range }) => {
   const color = useTransform(progress, range, ["#9ca3af", "#000000"]);
 
   return (
-    <span className="relative mx-1">
+    <span className="relative mx-1 whitespace-normal break-words">
       <motion.span
         style={{ opacity, color }}
         className="font-semibold"

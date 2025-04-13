@@ -1,8 +1,9 @@
 
 import React, { useState } from "react";
-import { Linkedin, Instagram, Twitter, Github, Heart, Share2, ArrowUp, Dribbble, ExternalLink, Link, Globe as GlobeIcon } from "lucide-react";
+import { Linkedin, Instagram, Twitter, Github, Heart, Share2, Dribbble, ExternalLink, Link, Globe as GlobeIcon } from "lucide-react";
 import { Globe } from "@/components/Globe";
 import BubblingHearts from "./BubblingHearts";
+import ShareButton from "./ShareButton";
 
 const Footer = () => {
   const year = new Date().getFullYear();
@@ -37,24 +38,10 @@ const Footer = () => {
     { name: "Instagram", icon: Instagram, href: "https://instagram.com" },
   ];
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-  };
-
   return (
     <footer className="bg-white p-1 pb-1">
       <div className="rounded-3xl bg-[#3E40EF] text-white relative pt-20 pb-10 overflow-hidden mx-4 mb-4">
-        {/* Go to top button */}
-        <button 
-          onClick={scrollToTop}
-          className="absolute top-8 right-8 w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#3E40EF] hover:bg-gray-100 transition-colors shadow-md"
-          aria-label="Go to top"
-        >
-          <ArrowUp size={18} />
-        </button>
+        {/* Removed Go to top button since we have a floating home button now */}
         
         <div className="container-custom">
           {/* Main content section */}
@@ -76,44 +63,14 @@ const Footer = () => {
                   href="#contact"
                   className="inline-flex items-center justify-center w-36 px-5 py-2.5 bg-black text-white rounded-full font-medium hover:bg-gray-900 transition-colors"
                 >
-                  Let's Talk <ArrowUp className="ml-2 rotate-45" size={16} />
+                  Let's Talk <Share2 className="ml-2 rotate-45" size={16} />
                 </a>
                 
-                <div className="relative">
-                  <button 
-                    onClick={() => {
-                      if (navigator.share) {
-                        navigator.share({
-                          title: 'Anurag Adarsh Portfolio',
-                          text: 'Check out my portfolio showcasing UI/UX design work',
-                          url: 'https://anuragadarsh.in',
-                        })
-                        .catch(err => {
-                          console.error('Share failed:', err);
-                          // Fallback to copy to clipboard
-                          handleShareClick();
-                        });
-                      } else {
-                        // Fallback to copy to clipboard
-                        handleShareClick();
-                      }
-                    }}
-                    className="inline-flex items-center justify-center w-40 px-5 py-2.5 rounded-full bg-white/10 text-sm text-white hover:bg-white/20 transition-colors"
-                  >
-                    <Share2 size={16} className="mr-2" />
-                    <span className="whitespace-nowrap">Share Portfolio</span>
-                  </button>
-                  
-                  {/* Tooltip for share confirmation */}
-                  {showShareTooltip && (
-                    <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-black text-white text-xs py-2 px-4 rounded-lg shadow-lg">
-                      <div className="flex items-center space-x-1">
-                        <GlobeIcon size={12} />
-                        <span>anuragadarsh.in copied!</span>
-                      </div>
-                      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 rotate-45 w-2 h-2 bg-black"></div>
-                    </div>
-                  )}
+                <div className="relative w-40">
+                  <ShareButton 
+                    message="Check out this amazing design portfolio!" 
+                    className="w-full inline-flex items-center justify-center px-5 py-2.5 rounded-full bg-white/10 text-sm text-white hover:bg-white/20 transition-colors"
+                  />
                 </div>
               </div>
               
