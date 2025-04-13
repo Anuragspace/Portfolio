@@ -21,7 +21,7 @@ export const DesktopTextReveal: FC<TextRevealResponsiveProps> = memo(({
   const targetRef = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
-    offset: ["start 0.8", "start 0.3"], // Trigger when in middle of screen
+    offset: ["start 0.65", "start 0.2"], // Trigger when in middle of screen
   });
 
   if (typeof children !== "string") {
@@ -39,8 +39,8 @@ export const DesktopTextReveal: FC<TextRevealResponsiveProps> = memo(({
           const segmentSize = (endBase - startBase) / (words.length + 1);
           
           // Much slower animation timing for a more deliberate reveal
-          const start = startBase + (i * segmentSize * 0.1);
-                        const end = start + (segmentSize * 0.5);
+          const start = startBase + (i * segmentSize * 0.15);
+          const end = start + (segmentSize * 0.4);
           
           return (
             <Word key={i} progress={scrollYProgress} range={[start, end]}>
@@ -119,8 +119,8 @@ export const MobileTextReveal: FC<TextRevealResponsiveProps> = memo(({
               const segmentSize = (endBase - startBase) / (wordCount + 1);
               
               // Much slower animation timing for mobile
-              const start = startBase + (wordIndex * segmentSize * 0.1);
-              const end = start + (segmentSize * 0.5);
+              const start = startBase + (wordIndex * segmentSize * 0.15);
+              const end = start + (segmentSize * 0.4);
             
               return (
                 <Word key={`${groupIndex}-${i}`} progress={scrollYProgress} range={[start, end]}>
@@ -144,15 +144,14 @@ interface WordProps {
 }
 
 const Word: FC<WordProps> = memo(({ children, progress, range }) => {
-  // Even slower transition
+  // Slowed down transition
   const opacity = useTransform(progress, range, [0.2, 1]);
   const color = useTransform(progress, range, ["#9ca3af", "#000000"]);
-  const y = useTransform(progress, range, [8, 0]);  // Add subtle vertical movement
 
   return (
     <span className="relative mx-[1px] md:mx-1 inline-flex">
       <motion.span
-        style={{ opacity, color, y }}
+        style={{ opacity, color }}
         className="font-manrope font-semibold whitespace-pre text-[20px] md:text-[26px]"
       >
         {children}
