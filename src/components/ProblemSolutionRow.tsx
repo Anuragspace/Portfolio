@@ -2,6 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { AlertTriangle, LightbulbIcon } from "lucide-react";
 
 interface ProblemSolutionRowProps {
   problem: string;
@@ -26,10 +27,21 @@ const ProblemSolutionRow = ({
             viewport={{ once: true }}
             transition={{ duration: 0.4 }}
           >
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ 
+                duration: 20,
+                repeat: Infinity,
+                ease: "linear"
+              }}
+              className="mr-3 text-[#3E40EF]"
+            >
+              <AlertTriangle size={20} />
+            </motion.div>
             <h3 className="text-xl font-medium uppercase tracking-wider text-gray-500">problem</h3>
           </motion.div>
           <motion.p 
-            className="text-lg text-gray-800"
+            className="text-lg text-gray-800 font-manrope"
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -51,10 +63,21 @@ const ProblemSolutionRow = ({
             viewport={{ once: true }}
             transition={{ duration: 0.4 }}
           >
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ 
+                duration: 20,
+                repeat: Infinity,
+                ease: "linear"
+              }}
+              className="mr-3 text-[#3E40EF]"
+            >
+              <LightbulbIcon size={20} />
+            </motion.div>
             <h3 className="text-xl font-medium uppercase tracking-wider text-gray-500">solution</h3>
           </motion.div>
           <motion.p 
-            className="text-lg text-gray-800"
+            className="text-lg text-gray-800 font-manrope"
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

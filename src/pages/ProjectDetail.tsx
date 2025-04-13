@@ -131,22 +131,24 @@ const projectsData = [
   }
 ];
 
-// Combined images and titles arrays for the slider
-const combineDesignAssets = (project: any) => {
-  const allImages = [...project.designProcess, ...project.designElements];
-  const titles = [
-    ...Array(project.designProcess.length).fill("Design Process"),
-    ...Array(project.designElements.length).fill("Design Elements")
-  ];
-  return { allImages, titles };
+// Enhanced function for processing design assets
+const prepareDesignAssets = (project: any) => {
+  // Just take one process and one element image for the simplified slider
+  const processImage = project.designProcess[0];
+  const elementImage = project.designElements[0];
+  
+  return { 
+    images: [processImage, elementImage],
+    titles: ["Design Process", "Design Elements"]
+  };
 };
 
 const ProjectDetail = () => {
   const { id } = useParams();
   const [project, setProject] = useState<any>(null);
   const [nextProject, setNextProject] = useState<any>(null);
-  const [designAssets, setDesignAssets] = useState<{allImages: string[], titles: string[]}>({
-    allImages: [], titles: []
+  const [designAssets, setDesignAssets] = useState<{images: string[], titles: string[]}>({
+    images: [], titles: []
   });
   
   // Fetch project data based on id
@@ -156,8 +158,8 @@ const ProjectDetail = () => {
       if (currentProject) {
         setProject(currentProject);
         
-        // Combine design assets
-        setDesignAssets(combineDesignAssets(currentProject));
+        // Process design assets
+        setDesignAssets(prepareDesignAssets(currentProject));
         
         // Find next project (cycle back to first if this is the last)
         const currentIndex = projectsData.findIndex(p => p.id === id);
@@ -189,145 +191,147 @@ const ProjectDetail = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-black text-white">
-      {/* New Header */}
+    <div className="min-h-screen bg-white text-black">
+      {/* Header */}
       <ProjectPageHeader />
       
       {/* Hero Section */}
-      <section className="relative pt-24 pb-16">
-        <div className="absolute inset-0 bg-black z-0"></div>
+      <section className="relative pt-28 pb-8">
+        {/* Project title overlay */}
+        <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/70 to-transparent z-20 text-center pointer-events-none">
+          <h1 className="text-3xl md:text-4xl font-bold text-white">{project.title}</h1>
+        </div>
         
-        {/* Banner image with rounded corners and margin */}
+        {/* Banner image with rounded corners and 16:9 aspect ratio */}
         <div className="container mx-auto px-6">
-          <div className="w-full max-w-5xl mx-auto mt-10 mb-12 overflow-hidden rounded-xl">
-            <img 
-              src={project.image} 
-              alt={project.title}
-              className="w-full h-auto object-cover"
-            />
+          <div className="w-full max-w-5xl mx-auto overflow-hidden rounded-xl">
+            <div className="aspect-video">
+              <img 
+                src={project.image} 
+                alt={project.title}
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Content sections on white background */}
-      <div className="bg-white text-black">
-        {/* Project Overview Section */}
-        <section className="py-24">
-          <div className="container mx-auto px-6">
-            <div className="max-w-4xl">
-              <h2 className="text-4xl font-bold text-left mb-8">Project Overview</h2>
-              
-              {/* Text Reveal Animation (Different for Mobile/Desktop) */}
-              <DesktopTextReveal lineIndex={0} totalLines={5} className="mb-6 text-left text-xl leading-relaxed">
-                {project.description}
-              </DesktopTextReveal>
-              
-              <MobileTextReveal lineIndex={0} totalLines={5} className="mb-6 text-left text-xl leading-relaxed">
-                {project.description}
-              </MobileTextReveal>
-            </div>
+      {/* Project Overview Section */}
+      <section className="py-16">
+        <div className="container mx-auto px-6">
+          <div className="max-w-5xl mx-auto">
+            <h2 className="text-4xl font-bold text-left mb-8">Project Overview</h2>
+            
+            {/* Text Reveal Animation (Different for Mobile/Desktop) */}
+            <DesktopTextReveal lineIndex={0} totalLines={5} className="mb-6 text-left text-2xl leading-relaxed font-manrope">
+              {project.description}
+            </DesktopTextReveal>
+            
+            <MobileTextReveal lineIndex={0} totalLines={5} className="mb-6 text-left text-xl leading-relaxed font-manrope">
+              {project.description}
+            </MobileTextReveal>
           </div>
-          
-          {/* Horizontal line separator */}
-          <div className="container mx-auto px-6 mt-20">
-            <div className="w-full h-px bg-gray-200"></div>
-          </div>
-        </section>
+        </div>
         
-        {/* Problem & Solution Section */}
-        <section className="pb-24">
-          <div className="container mx-auto px-6">
-            <ProblemSolutionRow 
-              problem={project.problem}
-              solution={project.solution}
-              className="max-w-6xl"
-            />
-          </div>
-          
-          {/* Horizontal line separator */}
-          <div className="container mx-auto px-6 mt-20">
-            <div className="w-full h-px bg-gray-200"></div>
-          </div>
-        </section>
-
-        {/* Project Details Section */}
-        <section className="pb-24">
-          <div className="container mx-auto px-6">
-            <ProjectDetailsGrid 
-              items={projectDetails}
-              className="max-w-6xl"
-            />
-          </div>
-          
-          {/* Horizontal line separator */}
-          <div className="container mx-auto px-6 mt-20">
-            <div className="w-full h-px bg-gray-200"></div>
-          </div>
-        </section>
-
-        {/* Design Process & Elements Combined Section */}
-        <section className="pb-24">
-          <div className="container mx-auto px-6">
-            <CombinedSlider 
-              images={designAssets.allImages}
-              titles={designAssets.titles}
-              className="max-w-6xl mx-auto"
-            />
-          </div>
-          
-          {/* Horizontal line separator */}
-          <div className="container mx-auto px-6 mt-20">
-            <div className="w-full h-px bg-gray-200"></div>
-          </div>
-        </section>
+        {/* Horizontal line separator */}
+        <div className="container mx-auto px-6 mt-12">
+          <div className="w-full h-px bg-gray-200"></div>
+        </div>
+      </section>
+      
+      {/* Problem & Solution Section */}
+      <section className="pb-16">
+        <div className="container mx-auto px-6">
+          <ProblemSolutionRow 
+            problem={project.problem}
+            solution={project.solution}
+            className="max-w-5xl mx-auto"
+          />
+        </div>
         
-        {/* Final Design Section */}
-        <section className="pb-24">
-          <div className="container mx-auto px-6">
-            <div className="max-w-6xl mx-auto">
-              <h2 className="text-4xl font-bold text-left mb-12">Final Design</h2>
-              <motion.div 
-                className="rounded-xl overflow-hidden"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-              >
-                <img 
-                  src={project.finalDesign[0]}
-                  alt="Final design"
-                  className="w-full h-auto"
-                />
-              </motion.div>
-            </div>
-          </div>
-        </section>
+        {/* Horizontal line separator */}
+        <div className="container mx-auto px-6 mt-12">
+          <div className="w-full h-px bg-gray-200"></div>
+        </div>
+      </section>
 
-        {/* Navigation Section */}
-        <section className="py-10 border-t border-gray-200">
-          <div className="container mx-auto px-6">
-            <div className="flex flex-col md:flex-row justify-between items-center">
+      {/* Project Details Section */}
+      <section className="pb-16">
+        <div className="container mx-auto px-6">
+          <ProjectDetailsGrid 
+            items={projectDetails}
+            className="max-w-5xl mx-auto"
+          />
+        </div>
+        
+        {/* Horizontal line separator */}
+        <div className="container mx-auto px-6 mt-12">
+          <div className="w-full h-px bg-gray-200"></div>
+        </div>
+      </section>
+
+      {/* Combined Design Process & Elements Section */}
+      <section className="pb-16">
+        <div className="container mx-auto px-6">
+          <CombinedSlider 
+            images={designAssets.images}
+            titles={designAssets.titles}
+            className="max-w-5xl mx-auto"
+          />
+        </div>
+        
+        {/* Horizontal line separator */}
+        <div className="container mx-auto px-6 mt-12">
+          <div className="w-full h-px bg-gray-200"></div>
+        </div>
+      </section>
+      
+      {/* Final Design Section */}
+      <section className="pb-16">
+        <div className="container mx-auto px-6">
+          <div className="max-w-5xl mx-auto">
+            <h2 className="text-4xl font-bold text-left mb-12">Final Design</h2>
+            <motion.div 
+              className="rounded-xl overflow-hidden"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <img 
+                src={project.finalDesign[0]}
+                alt="Final design"
+                className="w-full h-auto"
+              />
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Navigation Section */}
+      <section className="py-10 border-t border-gray-200">
+        <div className="container mx-auto px-6">
+          <div className="flex flex-col md:flex-row justify-between items-center max-w-5xl mx-auto">
+            <Link 
+              to="/#projects" 
+              className="flex items-center text-gray-700 hover:text-[#3E40EF] transition-colors mb-6 md:mb-0"
+            >
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              <span>Back to Projects</span>
+            </Link>
+            
+            {nextProject && (
               <Link 
-                to="/#projects" 
-                className="flex items-center text-gray-700 hover:text-[#3E40EF] transition-colors mb-6 md:mb-0"
+                to={`/projects/${nextProject.id}`} 
+                className="flex items-center text-[#3E40EF] hover:text-[#3E40EF]/90 transition-colors font-medium"
               >
-                <ArrowLeft className="mr-2 h-4 w-4" />
-                <span>Back to Projects</span>
+                <span>Next Project: {nextProject.title}</span>
+                <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
-              
-              {nextProject && (
-                <Link 
-                  to={`/projects/${nextProject.id}`} 
-                  className="flex items-center text-[#3E40EF] hover:text-[#3E40EF]/90 transition-colors font-medium"
-                >
-                  <span>Next Project: {nextProject.title}</span>
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              )}
-            </div>
+            )}
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
 
       {/* Footer */}
       <Footer />
