@@ -4,7 +4,7 @@ import { MapPin, Sparkles, BookOpen } from "lucide-react";
 import { Globe } from "@/components/Globe";
 import { TextReveal } from "./TextReveal";
 import SpinningText from "./SpinningText";
-import InteractiveTerminal from "./InteractiveTerminal";
+import TerminalText from "./TerminalText";
 
 const About = () => {
   const [isHighlighted, setIsHighlighted] = useState(false);
@@ -13,7 +13,11 @@ const About = () => {
   const imageRef = useRef<HTMLDivElement>(null);
   const textContainerRef = useRef<HTMLDivElement>(null);
 
-  // No longer needed as we're using interactive terminal
+  // Terminal text content
+  const terminalLines = [
+    "Hello! Welcome to my portfolio.",
+    "Interested to discuss something? Connect with me on LinkedIn!"
+  ];
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -57,19 +61,19 @@ const About = () => {
           
           <div ref={textContainerRef} className="w-full lg:px-0 px-0">
             <div className="w-full">
-              <h3 className="text-2xl md:text-3xl font-bold leading-snug w-full md:w-[95%] break-words hyphens-auto">
+              <h3 className="text-2xl md:text-3xl font-bold leading-snug w-full break-words hyphens-auto">
                 <TextReveal className="text-gray-400 break-normal" lineIndex={0} totalLines={3}>
                   I'm a UI/UX Designer with a passion for creating beautiful digital products
                 </TextReveal>
               </h3>
             
-              <h3 className="mt-2 w-full md:w-[95%] break-words hyphens-auto">
+              <h3 className="mt-2 w-full break-words hyphens-auto">
                 <TextReveal className="text-gray-400 break-normal" lineIndex={1} totalLines={3}>
                   creating user-centered digital experiences that elevate brand presence
                 </TextReveal>
               </h3>
 
-              <h3 className="mt-2 mb-2 w-full md:w-[95%] break-words hyphens-auto">
+              <h3 className="mt-2 mb-2 w-full break-words hyphens-auto">
                 <TextReveal className="text-gray-400 break-normal" lineIndex={2} totalLines={3}>
                   blend aesthetics with functionality and innovation in every project
                 </TextReveal>
@@ -158,12 +162,11 @@ const About = () => {
                     I currently serve as Chief Product Officer at <span className="text-black font-semibold">Imaginum</span>, where I lead the design and strategy of our digital products. Previously, I spearheaded design initiatives as Tech & Design Head at <span className="text-black font-semibold">CSED</span>.
                   </p>
                   
-                  {/* Interactive Terminal */}
-                  <div className="mt-6 font-mono text-sm bg-[#f5f5f5] p-3 rounded-md border border-gray-200 transition-all duration-300 hover:shadow-md">
-                    <InteractiveTerminal 
-                      placeholder="Type here and press Enter..."
-                      responseMessage="Seems you're interested to discuss! Connect with me on LinkedIn."
-                      messageColor="#3E40EF"
+                  {/* Terminal interaction with blinking cursor */}
+                  <div className="mt-6 font-mono text-sm bg-[#f5f5f5] p-3 rounded-md border border-gray-200">
+                    <TerminalText 
+                      textToType={terminalLines} 
+                      typingSpeed={40}
                       className="text-[#464646]"
                     />
                   </div>

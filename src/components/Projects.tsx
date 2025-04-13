@@ -85,20 +85,20 @@ const ProjectCard = memo(({ project, index }: { project: Project; index: number 
             
             {/* Project Buttons */}
             {index === 0 || index === 2 ? (
-              <div className="relative w-full">
-                <RainbowButton className="mt-auto w-full justify-center sm:justify-between">
+              <div className="relative w-fit">
+                <RainbowButton className="mt-auto scale-90 origin-left">
                   <Link to={`/projects/${project.id}`} className="flex items-center text-sm">
                     View Project
-                    <ArrowUpRight size={16} className="ml-2 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                    <ArrowUpRight size={14} className="ml-1" />
                   </Link>
                 </RainbowButton>
               </div>
             ) : (
-              <div className="relative w-full">
-                <WhiteRainbowButton className="mt-auto w-full justify-center sm:justify-between">
+              <div className="relative w-fit">
+                <WhiteRainbowButton className="mt-auto scale-90 origin-left">
                   <Link to={`/projects/${project.id}`} className="flex items-center text-sm">
                     View Project
-                    <ArrowUpRight size={16} className="ml-2 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                    <ArrowUpRight size={14} className="ml-1" />
                   </Link>
                 </WhiteRainbowButton>
               </div>
@@ -123,7 +123,7 @@ const ProjectCard = memo(({ project, index }: { project: Project; index: number 
           </div>
           
           {/* Image Section - 60% */}
-          <div className="w-full md:w-[60%] h-full overflow-hidden rounded-xl md:mx-0 mt-1 md:mt-0 order-first md:order-none">
+          <div className="w-full md:w-[60%] h-full overflow-hidden rounded-xl md:mx-0 mt-2 md:mt-0 order-first md:order-none">
             <img 
               src={project.image} 
               alt={project.title} 

@@ -94,12 +94,12 @@ export function SocialDock() {
   }, [prevScrollPos]);
 
   return (
-    <div className={`dock-container fixed bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 z-30 transition-all duration-300 ${
+    <div className={`fixed bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 z-30 transition-all duration-300 ${
       visible && !menuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8 pointer-events-none'
     }`}>
       <Dock 
         direction="middle" 
-        className="h-16 px-4 py-2 bg-white border border-gray-100 shadow-md rounded-xl mx-auto w-[90%] max-w-md"
+        className="h-12 px-4 py-1.5 bg-white border border-gray-100 shadow-md rounded-xl mx-auto w-[90%] max-w-md"
       >
         <DockIcon>
           <Button
