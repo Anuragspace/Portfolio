@@ -4,13 +4,20 @@ import { MapPin, Sparkles, BookOpen } from "lucide-react";
 import { Globe } from "@/components/Globe";
 import { TextReveal } from "./TextReveal";
 import SpinningText from "./SpinningText";
-
+import TerminalText from "./TerminalText";
 
 const About = () => {
   const [isHighlighted, setIsHighlighted] = useState(false);
   const [showSpinText, setShowSpinText] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
+  const textContainerRef = useRef<HTMLDivElement>(null);
+
+  // Terminal text content
+  const terminalLines = [
+    "Hello! Welcome to my portfolio.",
+    "Interested to discuss something? Connect with me on LinkedIn!"
+  ];
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -45,32 +52,36 @@ const About = () => {
           <div className="w-24 h-1 bg-[#3E40EF]"></div>
         </div>
         
-        {/* Text introduction that spans full width */}
-        <div className="mb-10 lg:px-2 w-full px-2">
+        {/* Text introduction that spans full width - Now wider and synchronized */}
+        <div className="mb-10 w-full relative px-0">
           <div className="inline-block px-4 py-1.5 bg-[#3E40EF]/10 text-[#3E40EF] rounded-full text-sm font-medium mb-5">
             <BookOpen className="inline-block mr-2 h-4 w-4" />
             Nice to meet you
           </div>
           
-          <div className="relative w-full">
-            <h3 className="text-2xl md:text-3xl font-bold leading-snug">
-              <TextReveal className="text-gray-400">
-                I'm a UI/UX Designer with a passion for
-              </TextReveal>
-            </h3>
-          
-            <h3 className="mt-2">
-              <TextReveal className="text-gray-400">
-                creating user-centered digital experiences that
-              </TextReveal>
-            </h3>
+          <div ref={textContainerRef} className="w-full lg:grid lg:grid-cols-12 gap-4 lg:px-0 px-0">
+            <div className="lg:col-span-12 w-full">
+              <h3 className="text-2xl md:text-3xl font-bold leading-snug w-full break-words hyphens-auto">
+                <TextReveal className="text-gray-400 break-normal" lineIndex={0} totalLines={3}>
+                  I'm a UI/UX Designer with a passion for creating beautiful digital products
+                </TextReveal>
+              </h3>
+            
+              <h3 className="mt-2 w-full break-words hyphens-auto">
+                <TextReveal className="text-gray-400 break-normal" lineIndex={1} totalLines={3}>
+                  creating user-centered digital experiences that elevate brand presence
+                </TextReveal>
+              </h3>
 
-            <h3 className="mt-2 mb-2">
-              <TextReveal className="text-gray-400">
-                blend aesthetics with functionality and innovation
-              </TextReveal>
-            </h3>
+              <h3 className="mt-2 mb-2 w-full break-words hyphens-auto">
+                <TextReveal className="text-gray-400 break-normal" lineIndex={2} totalLines={3}>
+                  blend aesthetics with functionality and innovation in every project
+                </TextReveal>
+              </h3>
+            </div>
           </div>
+
+          {/* No custom styles here - using Tailwind classes instead */}
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -121,9 +132,9 @@ const About = () => {
             </div>
           </div>
 
-          {/* Right Column: Content */}
+          {/* Right Column: Terminal Content */}
           <div className="lg:col-span-7">
-            <div className="h-full bg-[#ffffff] rounded-lg border border-gray-350 p-6 relative shadow-xl">
+            <div className="h-[450px] bg-[#ffffff] rounded-lg border border-gray-350 p-6 relative shadow-xl overflow-hidden">
               {/* Terminal Header */}
               <div className="absolute top-0 left-0 right-0 h-10 bg-[#121212] rounded-t-lg border-b border-gray-350 flex items-center px-4">
                 <div className="flex gap-2">
@@ -136,12 +147,13 @@ const About = () => {
                 </div>
               </div>
 
-              {/* Terminal Content */}
+              {/* Terminal Content with Blinking Cursor and Typing Effect */}
               <div className="mt-6">
                 <p className="text-[#424242] font-mono text-sm mb-2">
                   {'// <hello world />'}
                 </p>
-                <div className="space-y-4 text-[#7e7e7e] font-display text-base leading-relaxed">
+                
+                <div className="space-y-4 text-[#7e7e7e] font-display text-base leading-relaxed h-[290px] overflow-hidden">
                   <p>
                     With over 5 years of experience in UI/UX design, I've had the privilege of working on a diverse range of projects, from innovative startups to established enterprises. My design philosophy revolves around understanding user needs and business goals to create solutions that are both beautiful and functional.
                   </p>
@@ -149,6 +161,15 @@ const About = () => {
                   <p>
                     I currently serve as Chief Product Officer at <span className="text-black font-semibold">Imaginum</span>, where I lead the design and strategy of our digital products. Previously, I spearheaded design initiatives as Tech & Design Head at <span className="text-black font-semibold">CSED</span>.
                   </p>
+                  
+                  {/* Terminal interaction with blinking cursor */}
+                  <div className="mt-6 font-mono text-sm bg-[#f5f5f5] p-3 rounded-md border border-gray-200">
+                    <TerminalText 
+                      textToType={terminalLines} 
+                      typingSpeed={40}
+                      className="text-[#464646]"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
