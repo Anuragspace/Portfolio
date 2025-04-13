@@ -21,7 +21,7 @@ export const DesktopTextReveal: FC<TextRevealResponsiveProps> = memo(({
   const targetRef = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
-    offset: ["start 0.9", "start 0.4"],
+    offset: ["start 0.65", "start 0.2"], // Trigger when in middle of screen
   });
 
   if (typeof children !== "string") {
@@ -38,9 +38,9 @@ export const DesktopTextReveal: FC<TextRevealResponsiveProps> = memo(({
           const endBase = (lineIndex + 1) / totalLines;
           const segmentSize = (endBase - startBase) / (words.length + 1);
           
-          // Slowed down animation timing (lower values for slower animation)
-          const start = startBase + (i * segmentSize * 0.3);
-          const end = start + (segmentSize * 0.7);
+          // Much slower animation timing for a more deliberate reveal
+          const start = startBase + (i * segmentSize * 0.15);
+          const end = start + (segmentSize * 0.4);
           
           return (
             <Word key={i} progress={scrollYProgress} range={[start, end]}>
@@ -118,9 +118,9 @@ export const MobileTextReveal: FC<TextRevealResponsiveProps> = memo(({
               const endBase = (lineIndex + 1) / totalLines;
               const segmentSize = (endBase - startBase) / (wordCount + 1);
               
-              // Slowed down responsiveness for mobile
-              const start = startBase + (wordIndex * segmentSize * 0.4);
-              const end = start + (segmentSize * 0.8);
+              // Much slower animation timing for mobile
+              const start = startBase + (wordIndex * segmentSize * 0.15);
+              const end = start + (segmentSize * 0.4);
             
               return (
                 <Word key={`${groupIndex}-${i}`} progress={scrollYProgress} range={[start, end]}>
@@ -152,7 +152,7 @@ const Word: FC<WordProps> = memo(({ children, progress, range }) => {
     <span className="relative mx-[1px] md:mx-1 inline-flex">
       <motion.span
         style={{ opacity, color }}
-        className="font-manrope font-semibold whitespace-pre text-[18px] md:text-[24px]"
+        className="font-manrope font-semibold whitespace-pre text-[20px] md:text-[26px]"
       >
         {children}
       </motion.span>

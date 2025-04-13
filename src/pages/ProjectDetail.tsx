@@ -196,15 +196,12 @@ const ProjectDetail = () => {
       <ProjectPageHeader />
       
       {/* Hero Section */}
-      <section className="relative pt-28 pb-8">
+      <section className="relative pt-28 pb-4">
         {/* Banner image with rounded corners and 16:9 aspect ratio */}
         <div className="container mx-auto px-6">
-          <div className="w-full max-w-5xl mx-auto">
-            {/* Project title */}
-            <h1 className="text-3xl md:text-5xl font-bold text-left mb-6 font-manrope">{project.title}</h1>
-            
+          <div className="w-full max-w-6xl mx-auto">
             {/* Banner image with 16:9 aspect ratio */}
-            <div className="overflow-hidden rounded-xl">
+            <div className="overflow-hidden rounded-xl relative">
               <div className="aspect-video">
                 <img 
                   src={project.image} 
@@ -212,6 +209,11 @@ const ProjectDetail = () => {
                   className="w-full h-full object-cover"
                   style={{ boxShadow: 'none' }}
                 />
+                
+                {/* Title positioned at bottom left of image */}
+                <div className="absolute bottom-0 left-0 p-6 md:p-8 bg-gradient-to-t from-black/60 to-transparent w-full">
+                  <h1 className="text-3xl md:text-5xl font-bold text-white font-manrope">{project.title}</h1>
+                </div>
               </div>
             </div>
           </div>
@@ -219,20 +221,36 @@ const ProjectDetail = () => {
       </section>
 
       {/* Project Overview Section */}
-      <section className="py-12">
+      <section className="py-10">
         <div className="container mx-auto px-6">
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             <h2 className="text-4xl font-bold text-left mb-6 font-manrope">Project Overview</h2>
             
             {/* Text Reveal Animation (Different for Mobile/Desktop) */}
-            <DesktopTextReveal lineIndex={0} totalLines={5} className="mb-6 text-left text-2xl leading-relaxed font-manrope">
+            <DesktopTextReveal lineIndex={0} totalLines={5} className="mb-6 text-left text-3xl leading-relaxed font-manrope">
               {project.description}
             </DesktopTextReveal>
             
-            <MobileTextReveal lineIndex={0} totalLines={5} className="mb-6 text-left text-xl leading-relaxed font-manrope">
+            <MobileTextReveal lineIndex={0} totalLines={5} className="mb-6 text-left text-2xl leading-relaxed font-manrope">
               {project.description}
             </MobileTextReveal>
           </div>
+        </div>
+        
+        {/* Horizontal line separator */}
+        <div className="container mx-auto px-6 mt-8">
+          <div className="w-full h-px bg-gray-200"></div>
+        </div>
+      </section>
+      
+      {/* Problem & Solution Section */}
+      <section className="pb-12">
+        <div className="container mx-auto px-6">
+          <ProblemSolutionRow 
+            problem={project.problem}
+            solution={project.solution}
+            className="max-w-6xl mx-auto"
+          />
         </div>
         
         {/* Horizontal line separator */}
@@ -240,59 +258,44 @@ const ProjectDetail = () => {
           <div className="w-full h-px bg-gray-200"></div>
         </div>
       </section>
-      
-      {/* Problem & Solution Section */}
-      <section className="pb-16">
-        <div className="container mx-auto px-6">
-          <ProblemSolutionRow 
-            problem={project.problem}
-            solution={project.solution}
-            className="max-w-5xl mx-auto"
-          />
-        </div>
-        
-        {/* Horizontal line separator */}
-        <div className="container mx-auto px-6 mt-12">
-          <div className="w-full h-px bg-gray-200"></div>
-        </div>
-      </section>
 
       {/* Project Details Section */}
-      <section className="pb-16">
-        <div className="container mx-auto px-6">
+      <section className="pb-12">
+        <div className="container mx-auto px-4">
           <ProjectDetailsGrid 
             items={projectDetails}
-            className="max-w-5xl mx-auto"
+            className="max-w-6xl mx-auto"
           />
         </div>
         
         {/* Horizontal line separator */}
-        <div className="container mx-auto px-6 mt-12">
+        <div className="container mx-auto px-4 mt-10">
           <div className="w-full h-px bg-gray-200"></div>
         </div>
       </section>
 
       {/* Combined Design Process & Elements Section */}
-      <section className="pb-16">
-        <div className="container mx-auto px-6">
+      <section className="pb-12">
+        <div className="container mx-auto px-4">
           <CombinedSlider 
             images={designAssets.images}
             titles={designAssets.titles}
-            className="max-w-5xl mx-auto"
+            className="max-w-6xl mx-auto"
+            interval={6000}
           />
         </div>
         
         {/* Horizontal line separator */}
-        <div className="container mx-auto px-6 mt-12">
+        <div className="container mx-auto px-4 mt-10">
           <div className="w-full h-px bg-gray-200"></div>
         </div>
       </section>
       
       {/* Final Design Section */}
-      <section className="pb-16">
-        <div className="container mx-auto px-6">
-          <div className="max-w-5xl mx-auto">
-            <h2 className="text-4xl font-bold text-left mb-12">Final Design</h2>
+      <section className="pb-12">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-4xl font-bold text-left mb-8 font-manrope">Final Design</h2>
             <motion.div 
               className="rounded-xl overflow-hidden"
               initial={{ opacity: 0, y: 20 }}
@@ -303,7 +306,8 @@ const ProjectDetail = () => {
               <img 
                 src={project.finalDesign[0]}
                 alt="Final design"
-                className="w-full h-auto"
+                className="w-full h-auto aspect-video object-cover"
+                style={{ boxShadow: 'none' }}
               />
             </motion.div>
           </div>
@@ -312,8 +316,8 @@ const ProjectDetail = () => {
 
       {/* Navigation Section */}
       <section className="py-10 border-t border-gray-200">
-        <div className="container mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-center max-w-5xl mx-auto">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row justify-between items-center max-w-6xl mx-auto">
             <Link 
               to="/#projects" 
               className="flex items-center text-gray-700 hover:text-[#3E40EF] transition-colors mb-6 md:mb-0 font-manrope"
@@ -325,7 +329,7 @@ const ProjectDetail = () => {
             {nextProject && (
               <Link 
                 to={`/projects/${nextProject.id}`} 
-                className="flex items-center text-[#3E40EF] hover:text-[#3E40EF]/90 transition-colors font-medium bg-[#3E40EF]/5 px-4 py-2 rounded-full font-manrope"
+                className="flex items-center text-[#3E40EF] hover:text-[#3E40EF]/80 transition-colors font-medium bg-[#3E40EF]/5 hover:bg-[#3E40EF]/10 px-5 py-2.5 rounded-full font-manrope"
               >
                 <span>Next Project: {nextProject.title}</span>
                 <ArrowRight className="ml-2 h-4 w-4" />

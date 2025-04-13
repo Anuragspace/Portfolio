@@ -27,7 +27,7 @@ const ProjectPageHeader = ({ className }: ProjectPageHeaderProps) => {
     <header 
       className={cn(
         "fixed top-0 left-0 right-0 z-50 py-6 w-full transition-all duration-300",
-        isScrolled && "bg-white/80 backdrop-blur-md border-b border-gray-100 py-4 shadow-sm",
+        isScrolled && "bg-white/40 backdrop-blur-md border-b border-gray-100 py-4",
         className
       )}
     >
@@ -43,7 +43,7 @@ const ProjectPageHeader = ({ className }: ProjectPageHeaderProps) => {
               >
                 <Sparkles className="h-4 w-4 text-white" />
               </motion.div>
-              <div className="hidden sm:flex items-center">
+              <div className="flex items-center">
                 <WordRotate 
                   words={["Portfolio", "Anurag Adarsh", "Designer", "Developer"]} 
                   className="text-inherit inline-block"
@@ -61,7 +61,7 @@ const ProjectPageHeader = ({ className }: ProjectPageHeaderProps) => {
           {/* Navigation - only show rotating text and button on mobile */}
           <div className="flex items-center space-x-4 sm:space-x-8">
             <motion.nav 
-              className="relative bg-gray-100/80 backdrop-blur-sm rounded-full px-2 py-2 hidden sm:flex items-center gap-1"
+              className="relative bg-gray-100/50 backdrop-blur-sm rounded-full px-2 py-2 hidden sm:flex items-center gap-1"
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.3 }}
@@ -90,6 +90,12 @@ const ProjectPageHeader = ({ className }: ProjectPageHeaderProps) => {
                 className="relative z-10 text-sm font-medium px-3 py-1.5 rounded-full transition-all duration-300 text-black hover:bg-white/80"
               >
                 Skills
+              </Link>
+              <Link 
+                to="/#blog" 
+                className="relative z-10 text-sm font-medium px-3 py-1.5 rounded-full transition-all duration-300 text-black hover:bg-white/80"
+              >
+                Blog
               </Link>
             </motion.nav>
             

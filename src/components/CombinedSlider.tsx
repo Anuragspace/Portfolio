@@ -126,7 +126,7 @@ const CombinedSlider = ({
       {/* Image slider - wider with less padding */}
       <div 
         className="relative w-full aspect-video mx-auto rounded-xl overflow-hidden cursor-grab active:cursor-grabbing" 
-        style={{ maxWidth: '92%' }}
+        style={{ maxWidth: '100%' }}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
@@ -138,10 +138,10 @@ const CombinedSlider = ({
             src={images[currentIndex]}
             alt={`${titles[currentIndex]} slide ${currentIndex + 1}`}
             className="absolute inset-0 w-full h-full object-cover"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
+            initial={{ opacity: 0, scale: 1.05 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
             loading="lazy"
             draggable="false"
             style={{ boxShadow: 'none' }}

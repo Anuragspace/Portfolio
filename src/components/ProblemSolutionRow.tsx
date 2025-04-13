@@ -72,7 +72,13 @@ const ProblemSolutionRow = ({
               }}
               className="mr-3 text-[#3E40EF]"
             >
-              <LightbulbIcon size={20} />
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 2v8"/>
+                <path d="m16 4-4 4-4-4"/>
+                <path d="M3 10h18"/>
+                <path d="M12 14v8"/>
+                <path d="m16 18-4 4-4-4"/>
+              </svg>
             </motion.div>
             <h3 className="text-xl font-medium uppercase tracking-wider text-gray-500 font-manrope">solution</h3>
           </motion.div>
