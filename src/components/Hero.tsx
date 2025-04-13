@@ -54,7 +54,6 @@ const Hero = () => {
                   <ShinyButton 
                     onClick={triggerConfetti} 
                     className="h-11 bg-white text-black shadow w-full text-sm sm:text-base"
-                    style={{ width: '50%' }} 
                   >
                     Click Me
                   </ShinyButton>

@@ -1,6 +1,5 @@
 
 import React, { useState, useEffect, useRef, FormEvent } from "react";
-import { TextCursor } from "lucide-react";
 import { motion } from "framer-motion";
 
 interface InteractiveTerminalProps {
@@ -14,8 +13,10 @@ const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({ className = "
   const [responseText, setResponseText] = useState("");
   const [isTypingResponse, setIsTypingResponse] = useState(false);
   const [currentResponseIndex, setCurrentResponseIndex] = useState(0);
+  const [isThinking, setIsThinking] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const terminalContainerRef = useRef<HTMLDivElement>(null);
 
   const responseMessage = "Seems interested to discuss. Connect on LinkedIn!";
   const placeholderText = "type here...";
@@ -41,10 +42,17 @@ const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({ className = "
     e.preventDefault();
     
     if (inputValue.trim() && !isTypingResponse) {
+      const userInput = inputValue;
       setHasInteracted(true);
-      setIsTypingResponse(true);
-      setCurrentResponseIndex(0);
+      setIsThinking(true);
       setInputValue("");
+      
+      // Simulate thinking before response
+      setTimeout(() => {
+        setIsThinking(false);
+        setIsTypingResponse(true);
+        setCurrentResponseIndex(0);
+      }, 1500);
     }
   };
 
@@ -65,19 +73,24 @@ const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({ className = "
     }
   }, [isTypingResponse, currentResponseIndex]);
 
-  // Remove auto-focus on component mount as requested
-
+  // Custom rectangular cursor component
+  const RectCursor = ({ className = "" }) => (
+    <div 
+      className={`inline-block h-4 w-2 bg-gray-500 ${showCursor ? 'opacity-100' : 'opacity-0'} transition-opacity ${className}`}
+    />
+  );
+  
   return (
     <div 
       ref={containerRef}
       onClick={handleContainerClick}
       className={`font-mono text-sm w-full cursor-text ${className}`}
     >
-      <div className="space-y-2">
-        {/* User input area - integrated into the same visual style without differentiation */}
-        <form onSubmit={handleSubmit} className="flex items-center">
+      <div ref={terminalContainerRef} className="space-y-3 h-auto min-h-[170px]">
+        {/* User input area - fully integrated into the visual style */}
+        <div className="flex items-center">
           <span className="text-[#27C93F] mr-2">$&gt;</span>
-          <div className="flex-1 flex items-center">
+          <form onSubmit={handleSubmit} className="flex-1 flex items-center">
             <input
               ref={inputRef}
               type="text"
@@ -85,27 +98,39 @@ const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({ className = "
               onChange={(e) => setInputValue(e.target.value)}
               className="flex-1 w-full bg-transparent border-none outline-none text-gray-800 placeholder:text-gray-400 placeholder:opacity-60"
               placeholder={placeholderText}
+              autoFocus={false}
             />
-            {showCursor && !isTypingResponse && (
-              <TextCursor className="h-4 w-2 ml-1 text-gray-400 animate-pulse" />
+            {!isTypingResponse && !inputValue && (
+              <RectCursor />
             )}
-          </div>
-        </form>
+          </form>
+        </div>
 
         {/* Response display */}
         {hasInteracted && (
           <div className="flex items-start">
             <span className="text-[#FFBD2E] mr-2">$&gt;</span>
-            <motion.span 
+            <motion.div 
               className="text-[#9b87f5] break-words"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
             >
-              {responseText}
-              {isTypingResponse && showCursor && (
-                <TextCursor className="h-4 w-2 ml-1 text-[#9b87f5] animate-pulse inline-block" />
+              {isThinking ? (
+                <span className="inline-flex items-center">
+                  thinking
+                  <span className="inline-flex ml-0.5 animate-[pulse_1.5s_ease-in-out_infinite]">.</span>
+                  <span className="inline-flex ml-0.5 animate-[pulse_1.5s_ease-in-out_0.5s_infinite]">.</span>
+                  <span className="inline-flex ml-0.5 animate-[pulse_1.5s_ease-in-out_1s_infinite]">.</span>
+                </span>
+              ) : (
+                <>
+                  {responseText}
+                  {isTypingResponse && (
+                    <RectCursor className="bg-[#9b87f5] ml-0.5" />
+                  )}
+                </>
               )}
-            </motion.span>
+            </motion.div>
           </div>
         )}
       </div>

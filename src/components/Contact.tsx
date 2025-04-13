@@ -63,41 +63,41 @@ const Contact = () => {
           <motion.div className="lg:col-span-5 space-y-4">
             {/* Contact Information Card */}
             <div className="bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
-              <h3 className="text-xl font-bold mb-4 text-gray-800">Contact Information</h3>
+              <h3 className="text-xl font-bold mb-5 text-gray-800">Contact Information</h3>
               
-              <div className="space-y-4">
+              <div className="space-y-5">
                 {/* Contact info items */}
-                <div className="flex items-start group">
-                  <div className="w-10 h-10 bg-accent/10 rounded-full flex items-center justify-center mr-3 shrink-0">
+                <div className="flex items-center group hover:bg-accent/5 p-2 rounded-lg transition-colors">
+                  <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center mr-4 shrink-0 group-hover:bg-accent/20 transition-colors duration-300">
                     <Mail className="text-accent" size={18} />
                   </div>
                   <div>
-                    <p className="font-medium text-gray-500">Email Address</p>
+                    <p className="font-medium text-gray-500 text-sm">Email Address</p>
                     <a href="mailto:hello@example.com" className="text-accent hover:underline font-medium">
                       hello@example.com
                     </a>
                   </div>
                 </div>
                 
-                <div className="flex items-start group">
+                <div className="flex items-center group hover:bg-accent/5 p-2 rounded-lg transition-colors">
                   <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center mr-4 shrink-0 group-hover:bg-accent/20 transition-colors duration-300">
                     <Phone className="text-accent" size={20} />
                   </div>
                   <div>
-                    <p className="font-medium text-gray-500">Phone Number</p>
+                    <p className="font-medium text-gray-500 text-sm">Phone Number</p>
                     <a href="tel:+1234567890" className="text-accent hover:underline font-medium">
                       +1 (234) 567-890
                     </a>
                   </div>
                 </div>
                 
-                <div className="flex items-start group">
+                <div className="flex items-center group hover:bg-accent/5 p-2 rounded-lg transition-colors">
                   <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center mr-4 shrink-0 group-hover:bg-accent/20 transition-colors duration-300">
                     <MapPin className="text-accent" size={20} />
                   </div>
                   <div>
-                    <p className="font-medium text-gray-500">Location</p>
-                    <p className="text-gray-800">New York, United States</p>
+                    <p className="font-medium text-gray-500 text-sm">Location</p>
+                    <p className="text-gray-800 font-medium">New York, United States</p>
                   </div>
                 </div>
               </div>
@@ -105,9 +105,9 @@ const Contact = () => {
             
             {/* Available For Card */}
             <div className="bg-[#3E40EF] rounded-2xl shadow-md p-6 border border-[#3E40EF]/20 text-white">
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
                 <h4 className="text-xl font-bold text-white">Available For</h4>
-                <div className="flex items-center bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full">
+                <div className="flex items-center bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full self-start">
                   <div className="w-2.5 h-2.5 bg-green-400 rounded-full mr-2 animate-pulse"></div>
                   <span className="text-sm font-medium text-white">Open to Work</span>
                 </div>
@@ -133,9 +133,9 @@ const Contact = () => {
               </ul>
               
               <Button 
-                className="w-full bg-white hover:bg-white/90 text-[#3E40EF] py-2.5 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg font-medium"
+                className="w-full bg-white hover:bg-white/90 text-black font-semibold py-2.5 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg"
               >
-                <AnimatedShinyText className="text-[#3E40EF]">Let's Collaborate</AnimatedShinyText>
+                <AnimatedShinyText className="text-black">Let's Collaborate</AnimatedShinyText>
                 <ExternalLink size={16} className="ml-2" />
               </Button>
             </div>

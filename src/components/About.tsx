@@ -153,7 +153,7 @@ const About = () => {
                   {'// <hello world />'}
                 </p>
                 
-                <div className="space-y-4 text-[#7e7e7e] font-display text-base leading-relaxed h-[290px] overflow-y-auto pr-2">
+                <div className="space-y-4 text-[#7e7e7e] font-display text-base leading-relaxed h-[320px] overflow-hidden pr-2">
                   <p>
                     With over 5 years of experience in UI/UX design, I've had the privilege of working on a diverse range of projects, from innovative startups to established enterprises. My design philosophy revolves around understanding user needs and business goals to create solutions that are both beautiful and functional.
                   </p>
