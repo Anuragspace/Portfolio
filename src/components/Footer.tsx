@@ -81,11 +81,27 @@ const Footer = () => {
                 
                 <div className="relative">
                   <button 
-                    onClick={handleShareClick}
-                    className="inline-flex items-center justify-center w-36 px-5 py-2.5 rounded-full bg-white/10 text-sm text-white hover:bg-white/20 transition-colors"
+                    onClick={() => {
+                      if (navigator.share) {
+                        navigator.share({
+                          title: 'Anurag Adarsh Portfolio',
+                          text: 'Check out my portfolio showcasing UI/UX design work',
+                          url: 'https://anuragadarsh.in',
+                        })
+                        .catch(err => {
+                          console.error('Share failed:', err);
+                          // Fallback to copy to clipboard
+                          handleShareClick();
+                        });
+                      } else {
+                        // Fallback to copy to clipboard
+                        handleShareClick();
+                      }
+                    }}
+                    className="inline-flex items-center justify-center w-40 px-5 py-2.5 rounded-full bg-white/10 text-sm text-white hover:bg-white/20 transition-colors"
                   >
                     <Share2 size={16} className="mr-2" />
-                    Share Portfolio
+                    <span className="whitespace-nowrap">Share Portfolio</span>
                   </button>
                   
                   {/* Tooltip for share confirmation */}

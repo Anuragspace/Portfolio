@@ -122,9 +122,9 @@ const Posters = () => {
   
   return (
     <section className="relative bg-gradient-to-b from-white to-gray-50/50 py-8 md:py-16 overflow-hidden">
-      {/* Blur effects - reduced height to just affect posters */}
-      <div className="absolute left-0 top-1/4 bottom-1/4 w-[50px] md:w-[80px] bg-gradient-to-r from-white via-white/90 to-transparent z-10" />
-      <div className="absolute right-0 top-1/4 bottom-1/4 w-[50px] md:w-[80px] bg-gradient-to-l from-white via-white/90 to-transparent z-10" />
+      {/* Blur effects - extended to cover poster area fully */}
+      <div className="absolute left-0 top-1/4 bottom-0 w-[50px] md:w-[80px] bg-gradient-to-r from-white via-white/90 to-transparent z-10" />
+      <div className="absolute right-0 top-1/4 bottom-0 w-[50px] md:w-[80px] bg-gradient-to-l from-white via-white/90 to-transparent z-10" />
 
       <div className="container mx-auto px-3 md:px-4 max-w-7xl">
         <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12">

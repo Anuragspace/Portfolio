@@ -47,8 +47,9 @@ const Hero = () => {
               <div className="flex flex-row sm:gap-5 gap-3 sm:pl-2 pt-4 animate-slide-in" style={{ animationDelay: "0.3s" }}>
                 <div className="flex flex-row w-full max-w-[360px] sm:gap-4 gap-2">
                   <a href="#projects" className="flex-1">
-                    <RainbowButton className="w-full whitespace-nowrap h-11 text-sm sm:text-base">
+                    <RainbowButton className="w-full whitespace-nowrap h-11 text-sm sm:text-base transition-all duration-300 hover:transform hover:scale-105 hover:shadow-md group">
                       View Projects
+                      <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
                     </RainbowButton>
                   </a>
                   <ShinyButton 

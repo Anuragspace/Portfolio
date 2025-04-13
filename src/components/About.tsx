@@ -59,8 +59,8 @@ const About = () => {
             Nice to meet you
           </div>
           
-          <div ref={textContainerRef} className="w-full lg:grid lg:grid-cols-12 gap-4 lg:px-0 px-0">
-            <div className="lg:col-span-12 w-full">
+          <div ref={textContainerRef} className="w-full lg:px-0 px-0">
+            <div className="w-full">
               <h3 className="text-2xl md:text-3xl font-bold leading-snug w-full break-words hyphens-auto">
                 <TextReveal className="text-gray-400 break-normal" lineIndex={0} totalLines={3}>
                   I'm a UI/UX Designer with a passion for creating beautiful digital products

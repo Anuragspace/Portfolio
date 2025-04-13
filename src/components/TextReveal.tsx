@@ -42,13 +42,18 @@ export const TextReveal: FC<TextRevealProps> = memo(({
         <div className="w-full flex items-center bg-transparent">
           <span className="flex flex-wrap text-2xl md:text-3xl font-bold text-gray-400 w-full">
             {words.map((word, i) => {
-              // Calculate start and end based on word position, but offset by lineIndex
+              // Calculate start and end based on word position and lineIndex
               const wordCount = words.length;
+              
+              // Adjust overlap for smoother animation between lines
               const startBase = lineIndex / totalLines; 
               const endBase = (lineIndex + 1) / totalLines;
-              const segmentSize = (endBase - startBase) / wordCount;
-              const start = startBase + (i * segmentSize);
-              const end = startBase + ((i + 1) * segmentSize);
+              
+              // Modify to synchronize line transitions
+              // Earlier words in a line start sooner, later words complete later
+              const segmentSize = (endBase - startBase) / (wordCount + 1);
+              const start = startBase + (i * segmentSize * 0.8); // Words start sooner
+              const end = start + segmentSize * 1.5; // Words take longer to complete
               
               return (
                 <Word key={i} progress={scrollYProgress} range={[start, end]}>

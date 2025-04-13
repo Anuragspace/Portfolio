@@ -123,7 +123,7 @@ const ProjectCard = memo(({ project, index }: { project: Project; index: number 
           </div>
           
           {/* Image Section - 60% */}
-          <div className="w-full md:w-[60%] h-full overflow-hidden rounded-xl md:mx-0 mt-3 md:mt-0 order-first md:order-none">
+          <div className="w-full md:w-[60%] h-full overflow-hidden rounded-xl md:mx-0 mt-2 md:mt-0 order-first md:order-none">
             <img 
               src={project.image} 
               alt={project.title} 

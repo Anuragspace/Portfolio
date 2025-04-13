@@ -1,7 +1,9 @@
+
 import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 import './styles/performance-optimizations.css'
+import HomeButton from './components/HomeButton.tsx'
 
 // Add performance monitoring
 const reportWebVitals = (metric: any) => {
@@ -13,7 +15,12 @@ const reportWebVitals = (metric: any) => {
 const root = createRoot(document.getElementById("root")!);
 
 // Render with React 18 concurrent features
-root.render(<App />);
+root.render(
+  <>
+    <App />
+    <HomeButton />
+  </>
+);
 
 // Optional: measure performance
 // reportWebVitals();
