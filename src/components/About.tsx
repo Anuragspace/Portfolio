@@ -67,13 +67,13 @@ const About = () => {
                 </TextReveal>
               </h3>
             
-              <h3 className="mt-3 md:mt-2 w-full">
+              <h3 className="mt-2 md:mt-1 w-full">
                 <TextReveal className="text-gray-400" lineIndex={1} totalLines={3}>
                   creating user-centered digital experiences that elevate brand presence
                 </TextReveal>
               </h3>
 
-              <h3 className="mt-3 md:mt-2 mb-3 md:mb-2 w-full">
+              <h3 className="mt-2 md:mt-1 mb-3 md:mb-2 w-full">
                 <TextReveal className="text-gray-400" lineIndex={2} totalLines={3}>
                   blend aesthetics with functionality and innovation in every project
                 </TextReveal>
@@ -134,7 +134,7 @@ const About = () => {
 
           {/* Right Column: Terminal Content */}
           <div className="lg:col-span-7">
-            <div className="h-[450px] bg-[#ffffff] rounded-lg border border-gray-200 p-6 relative shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden">
+            <div className="h-[450px] bg-[#ffffff] rounded-lg border border-gray-200 p-6 relative shadow-sm overflow-hidden">
               {/* Terminal Header */}
               <div className="absolute top-0 left-0 right-0 h-10 bg-[#121212] rounded-t-lg border-b border-gray-350 flex items-center px-4">
                 <div className="flex gap-2">
@@ -164,7 +164,7 @@ const About = () => {
                   
                   {/* Interactive terminal with user input */}
                   <div className="mt-6 mb-2 w-full max-w-full">
-                    <InteractiveTerminal className="md:min-w-[400px] w-full" />
+                    <InteractiveTerminal className="md:min-w-[400px] w-full font-mono" />
                   </div>
                 </div>
               </div>

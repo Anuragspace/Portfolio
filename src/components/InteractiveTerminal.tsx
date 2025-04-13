@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useRef, KeyboardEvent, FormEvent } from "react";
+import React, { useState, useEffect, useRef, FormEvent } from "react";
 import { TextCursor } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -18,7 +18,7 @@ const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({ className = "
   const containerRef = useRef<HTMLDivElement>(null);
 
   const responseMessage = "Seems interested to discuss. Connect on LinkedIn!";
-const placeholderText = "type here...";
+  const placeholderText = "type here...";
 
   // Focus input on container click
   const handleContainerClick = () => {
@@ -65,21 +65,16 @@ const placeholderText = "type here...";
     }
   }, [isTypingResponse, currentResponseIndex]);
 
-  // Auto-focus the input on component mount
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, []);
+  // Remove auto-focus on component mount as requested
 
   return (
     <div 
       ref={containerRef}
       onClick={handleContainerClick}
-      className={`font-mono text-sm w-full transition duration-300 focus-within:shadow-md cursor-text ${className}`}
+      className={`font-mono text-sm w-full cursor-text ${className}`}
     >
       <div className="space-y-2">
-        {/* User input area */}
+        {/* User input area - integrated into the same visual style without differentiation */}
         <form onSubmit={handleSubmit} className="flex items-center">
           <span className="text-[#27C93F] mr-2">$&gt;</span>
           <div className="flex-1 flex items-center">

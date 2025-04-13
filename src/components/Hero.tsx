@@ -45,16 +45,16 @@ const Hero = () => {
                 I transform complex problems into elegant, intuitive designs that delight users and drive business growth.
               </p>
               <div className="flex flex-row sm:gap-5 gap-3 sm:pl-2 pt-4 animate-slide-in" style={{ animationDelay: "0.3s" }}>
-                <div className="flex flex-row w-full max-w-[360px] sm:gap-4 gap-2">
-                  <a href="#projects" className="flex-1">
-                    <RainbowButton className="w-full whitespace-nowrap h-11 text-sm sm:text-base transition-all duration-300 hover:transform hover:scale-105 hover:shadow-md group">
+                <div className="flex flex-row w-full max-w-[360px] sm:gap-4 gap-2 mx-auto sm:mx-0">
+                  <a href="#projects" className="w-1/2">
+                    <RainbowButton className="w-full whitespace-nowrap h-11 text-sm sm:text-base transition-all duration-300 hover:transform hover:scale-105 hover:shadow-md">
                       View Projects
-                      <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
                     </RainbowButton>
                   </a>
                   <ShinyButton 
                     onClick={triggerConfetti} 
-                    className="h-11 bg-white text-black shadow w-full flex-1 text-sm sm:text-base"
+                    className="h-11 bg-white text-black shadow w-full text-sm sm:text-base"
+                    style={{ width: '50%' }} 
                   >
                     Click Me
                   </ShinyButton>
@@ -64,7 +64,7 @@ const Hero = () => {
           </div>
           
           <div className="lg:col-span-5 relative z-10">
-            <div className="relative mx-auto">
+            <div className="relative mx-auto px-4 sm:px-0">
               <div className="relative rounded-[2rem] overflow-hidden bg-gradient-to-br from-blue-400 to-blue-600 w-full max-w-sm aspect-[4/5] mx-auto shadow-xl">
                 <div className="absolute inset-0 w-[150%] h-[150%] left-[-25%] top-[-25%] rotate-animation opacity-10 z-0">
                   <div className="w-full h-full border-[30px] border-[#3E40EF]/20 rounded-full"></div>
