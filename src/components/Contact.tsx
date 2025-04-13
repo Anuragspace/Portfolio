@@ -35,11 +35,10 @@ const Contact = () => {
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);
-      setShowHeartAnimation(true);
+      // Remove heart animation triggering as requested
       
       // Reset form after showing success message
       setTimeout(() => {
-        setShowHeartAnimation(false);
         setTimeout(() => {
           setIsSubmitted(false);
           setFormState({
@@ -49,23 +48,23 @@ const Contact = () => {
             message: ""
           });
         }, 500);
-      }, 3000);
+      }, 4000); // Increased duration to show success message longer
     }, 1500);
   };
   
   return (
-    <section id="contact" className="py-8 bg-gradient-to-b from-white to-gray-50/80">
-      <div className="container mx-auto px-4 max-w-5xl">
+    <section id="contact" className="py-12 bg-gradient-to-b from-white to-gray-50/80">
+      <div className="container mx-auto px-4 max-w-6xl">
         <motion.div 
-          className="text-center mb-6"
+          className="text-center mb-8"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3">Get In Touch</h2>
-          <div className="w-20 h-1 bg-accent mx-auto mb-4"></div>
-          <p className="text-gray-600 max-w-xl mx-auto text-sm md:text-base">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">Get In Touch</h2>
+          <div className="w-24 h-1 bg-accent mx-auto mb-5"></div>
+          <p className="text-gray-600 max-w-2xl mx-auto text-base md:text-lg">
             Have a project in mind or want to discuss collaboration opportunities? 
             I'd love to hear from you and explore how we can work together.
           </p>
