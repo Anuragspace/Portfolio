@@ -4,21 +4,21 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-interface ProjectSliderProps {
+interface CombinedSliderProps {
   images: string[];
-  title: string;
+  titles: string[];
   autoplay?: boolean;
   interval?: number;
   className?: string;
 }
 
-const ProjectSlider = ({
+const CombinedSlider = ({
   images,
-  title,
+  titles,
   autoplay = true,
   interval = 5000,
   className,
-}: ProjectSliderProps) => {
+}: CombinedSliderProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
@@ -42,19 +42,19 @@ const ProjectSlider = ({
 
   return (
     <div 
-      className={cn("relative w-full overflow-hidden rounded-xl", className)}
+      className={cn("relative w-full overflow-hidden", className)}
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
       {/* Title with animated underline that moves with slides */}
-      <div className="relative z-10 mb-5 flex flex-col items-center">
-        <h3 className="text-2xl md:text-3xl font-bold text-center mb-2">{title}</h3>
-        <div className="relative h-1 w-24 bg-gray-200 rounded-full overflow-hidden">
+      <div className="relative z-10 mb-6 flex flex-col items-center">
+        <h3 className="text-2xl md:text-3xl font-semibold text-center mb-3">{titles[currentIndex]}</h3>
+        <div className="relative h-px w-40 bg-gray-200">
           <motion.div 
-            className="absolute top-0 left-0 h-full bg-[#3E40EF] rounded-full"
+            className="absolute top-0 left-0 h-full bg-[#3E40EF]"
             animate={{ 
               x: `${(currentIndex / (images.length - 1)) * 100}%`,
-              width: "50%" 
+              width: "30%" 
             }}
             transition={{ duration: 0.3 }}
           />
@@ -62,13 +62,13 @@ const ProjectSlider = ({
       </div>
       
       {/* Image slider */}
-      <div className="relative w-full aspect-video">
+      <div className="relative w-full aspect-video mx-auto rounded-xl overflow-hidden" style={{ maxWidth: '85%' }}>
         <AnimatePresence mode="wait">
           <motion.img
             key={currentIndex}
             src={images[currentIndex]}
-            alt={`${title} slide ${currentIndex + 1}`}
-            className="absolute inset-0 w-full h-full object-cover rounded-xl"
+            alt={`${titles[currentIndex]} slide ${currentIndex + 1}`}
+            className="absolute inset-0 w-full h-full object-cover"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -81,31 +81,31 @@ const ProjectSlider = ({
         <div className="absolute inset-0 flex items-center justify-between px-4">
           <button
             onClick={goToPrevious}
-            className="w-10 h-10 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center text-gray-800 hover:bg-white transition-colors shadow-md z-10"
+            className="w-10 h-10 rounded-full bg-black/30 backdrop-blur-sm text-white hover:bg-black/50 transition-colors"
             aria-label="Previous image"
           >
-            <ArrowLeft size={18} />
+            <ArrowLeft size={18} className="mx-auto" />
           </button>
           
           <button
             onClick={goToNext}
-            className="w-10 h-10 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center text-gray-800 hover:bg-white transition-colors shadow-md z-10"
+            className="w-10 h-10 rounded-full bg-black/30 backdrop-blur-sm text-white hover:bg-black/50 transition-colors"
             aria-label="Next image"
           >
-            <ArrowRight size={18} />
+            <ArrowRight size={18} className="mx-auto" />
           </button>
         </div>
         
         {/* Indicators */}
-        <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
+        <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-1.5">
           {images.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
+              className={`h-1.5 rounded-full transition-all duration-300 ${
                 index === currentIndex 
                   ? "bg-white w-6" 
-                  : "bg-white/50 hover:bg-white/80"
+                  : "bg-white/50 w-1.5 hover:bg-white/80"
               }`}
               aria-label={`Go to slide ${index + 1}`}
             />
@@ -116,4 +116,4 @@ const ProjectSlider = ({
   );
 };
 
-export default ProjectSlider;
+export default CombinedSlider;

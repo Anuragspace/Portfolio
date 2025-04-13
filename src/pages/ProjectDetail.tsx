@@ -1,18 +1,15 @@
+
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, ArrowRight, Github, ExternalLink } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { RainbowButton } from "@/components/RainbowButton";
-import { BlurFade } from "@/components/BlurFade";
-import { AnimatedGridPattern } from "@/components/AnimatedGridPattern";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 import { DesktopTextReveal, MobileTextReveal } from "@/components/TextRevealResponsive";
-import ProblemSolution from "@/components/ProblemSolution";
-import ProjectDetailsList from "@/components/ProjectDetailsList";
-import ProjectSlider from "@/components/ProjectSlider";
-import Navbar from "@/components/Navbar";
+import ProjectPageHeader from "@/components/ProjectPageHeader";
+import ProblemSolutionRow from "@/components/ProblemSolutionRow";
+import ProjectDetailsGrid from "@/components/ProjectDetailsGrid";
+import CombinedSlider from "@/components/CombinedSlider";
 import Footer from "@/components/Footer";
 import HomeButton from "@/components/HomeButton";
-import { motion } from "framer-motion";
 
 // Mock data for projects
 const projectsData = [
@@ -134,10 +131,23 @@ const projectsData = [
   }
 ];
 
+// Combined images and titles arrays for the slider
+const combineDesignAssets = (project: any) => {
+  const allImages = [...project.designProcess, ...project.designElements];
+  const titles = [
+    ...Array(project.designProcess.length).fill("Design Process"),
+    ...Array(project.designElements.length).fill("Design Elements")
+  ];
+  return { allImages, titles };
+};
+
 const ProjectDetail = () => {
   const { id } = useParams();
   const [project, setProject] = useState<any>(null);
   const [nextProject, setNextProject] = useState<any>(null);
+  const [designAssets, setDesignAssets] = useState<{allImages: string[], titles: string[]}>({
+    allImages: [], titles: []
+  });
   
   // Fetch project data based on id
   useEffect(() => {
@@ -145,6 +155,9 @@ const ProjectDetail = () => {
       const currentProject = projectsData.find(p => p.id === id);
       if (currentProject) {
         setProject(currentProject);
+        
+        // Combine design assets
+        setDesignAssets(combineDesignAssets(currentProject));
         
         // Find next project (cycle back to first if this is the last)
         const currentIndex = projectsData.findIndex(p => p.id === id);
@@ -176,163 +189,150 @@ const ProjectDetail = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Navbar */}
-      <Navbar />
+    <div className="min-h-screen bg-black text-white">
+      {/* New Header */}
+      <ProjectPageHeader />
       
-      {/* Hero Section with Banner */}
-      <section className="relative h-[85vh] overflow-hidden pt-20">
-        <AnimatedGridPattern
-          numSquares={30}
-          maxOpacity={0.1}
-          duration={3}
-          repeatDelay={1}
-          className="absolute inset-0 text-[#3E40EF]/100"
-        />
-        <img 
-          src={project.image} 
-          alt={project.title}
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-black/20" />
+      {/* Hero Section */}
+      <section className="relative pt-24 pb-16">
+        <div className="absolute inset-0 bg-black z-0"></div>
         
-        <div className="absolute inset-0 flex items-end">
-          <div className="container mx-auto px-6 pb-24">
-            <BlurFade direction="up">
-              <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
-                {project.title}
-              </h1>
-              <p className="text-xl text-white/90 max-w-3xl mb-8">
-                {project.impact}
-              </p>
-              
-              {/* Hero buttons with equal width */}
-              <div className="flex flex-wrap gap-4">
-                <RainbowButton className="w-36">
-                  <a 
-                    href={project.liveUrl} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="w-full flex items-center justify-center"
-                  >
-                    Visit Site
-                  </a>
-                </RainbowButton>
-                
-                <Button variant="outline" className="w-36 bg-white/10 text-white border-white/20 hover:bg-white/20">
-                  <a 
-                    href={project.githubUrl} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="w-full flex items-center justify-center"
-                  >
-                    View Code
-                  </a>
-                </Button>
-              </div>
-            </BlurFade>
-          </div>
-        </div>
-      </section>
-
-      {/* Project Description with Text Reveal Animation */}
-      <section className="py-20 bg-gray-50">
+        {/* Banner image with rounded corners and margin */}
         <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-10 text-center">Project Overview</h2>
-            
-            {/* Text Reveal Animation (Different for Mobile/Desktop) */}
-            <DesktopTextReveal lineIndex={0} totalLines={5} className="mb-6">
-              {project.description}
-            </DesktopTextReveal>
-            
-            <MobileTextReveal lineIndex={0} totalLines={5} className="mb-6">
-              {project.description}
-            </MobileTextReveal>
-          </div>
-        </div>
-      </section>
-
-      {/* Problem & Solution Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-6">
-          <h2 className="text-3xl md:text-4xl font-bold mb-10 text-center">Challenge & Solution</h2>
-          <ProblemSolution 
-            problem={project.problem}
-            solution={project.solution}
-            className="max-w-6xl mx-auto"
-          />
-        </div>
-      </section>
-
-      {/* Project Details Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-6">
-          <h2 className="text-3xl md:text-4xl font-bold mb-10 text-center">Project Details</h2>
-          <ProjectDetailsList 
-            items={projectDetails}
-            className="max-w-6xl mx-auto"
-          />
-        </div>
-      </section>
-
-      {/* Design Process Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-6">
-          <ProjectSlider 
-            images={project.designProcess}
-            title="Design Process"
-            className="max-w-5xl mx-auto mb-24"
-          />
-          
-          <ProjectSlider 
-            images={project.designElements}
-            title="Design Elements"
-            className="max-w-5xl mx-auto mb-24"
-          />
-          
-          <div className="max-w-5xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-10 text-center">Final Design</h2>
-            <motion.img 
-              src={project.finalDesign[0]}
-              alt="Final design"
-              className="w-full h-auto rounded-xl shadow-xl"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+          <div className="w-full max-w-5xl mx-auto mt-10 mb-12 overflow-hidden rounded-xl">
+            <img 
+              src={project.image} 
+              alt={project.title}
+              className="w-full h-auto object-cover"
             />
           </div>
         </div>
       </section>
 
-      {/* Navigation Section */}
-      <section className="py-12 border-t">
-        <div className="container mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <Button variant="ghost" asChild className="rounded-full">
-              <Link to="/#projects" className="flex items-center px-6 py-3">
+      {/* Content sections on white background */}
+      <div className="bg-white text-black">
+        {/* Project Overview Section */}
+        <section className="py-24">
+          <div className="container mx-auto px-6">
+            <div className="max-w-4xl">
+              <h2 className="text-4xl font-bold text-left mb-8">Project Overview</h2>
+              
+              {/* Text Reveal Animation (Different for Mobile/Desktop) */}
+              <DesktopTextReveal lineIndex={0} totalLines={5} className="mb-6 text-left text-xl leading-relaxed">
+                {project.description}
+              </DesktopTextReveal>
+              
+              <MobileTextReveal lineIndex={0} totalLines={5} className="mb-6 text-left text-xl leading-relaxed">
+                {project.description}
+              </MobileTextReveal>
+            </div>
+          </div>
+          
+          {/* Horizontal line separator */}
+          <div className="container mx-auto px-6 mt-20">
+            <div className="w-full h-px bg-gray-200"></div>
+          </div>
+        </section>
+        
+        {/* Problem & Solution Section */}
+        <section className="pb-24">
+          <div className="container mx-auto px-6">
+            <ProblemSolutionRow 
+              problem={project.problem}
+              solution={project.solution}
+              className="max-w-6xl"
+            />
+          </div>
+          
+          {/* Horizontal line separator */}
+          <div className="container mx-auto px-6 mt-20">
+            <div className="w-full h-px bg-gray-200"></div>
+          </div>
+        </section>
+
+        {/* Project Details Section */}
+        <section className="pb-24">
+          <div className="container mx-auto px-6">
+            <ProjectDetailsGrid 
+              items={projectDetails}
+              className="max-w-6xl"
+            />
+          </div>
+          
+          {/* Horizontal line separator */}
+          <div className="container mx-auto px-6 mt-20">
+            <div className="w-full h-px bg-gray-200"></div>
+          </div>
+        </section>
+
+        {/* Design Process & Elements Combined Section */}
+        <section className="pb-24">
+          <div className="container mx-auto px-6">
+            <CombinedSlider 
+              images={designAssets.allImages}
+              titles={designAssets.titles}
+              className="max-w-6xl mx-auto"
+            />
+          </div>
+          
+          {/* Horizontal line separator */}
+          <div className="container mx-auto px-6 mt-20">
+            <div className="w-full h-px bg-gray-200"></div>
+          </div>
+        </section>
+        
+        {/* Final Design Section */}
+        <section className="pb-24">
+          <div className="container mx-auto px-6">
+            <div className="max-w-6xl mx-auto">
+              <h2 className="text-4xl font-bold text-left mb-12">Final Design</h2>
+              <motion.div 
+                className="rounded-xl overflow-hidden"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+              >
+                <img 
+                  src={project.finalDesign[0]}
+                  alt="Final design"
+                  className="w-full h-auto"
+                />
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Navigation Section */}
+        <section className="py-10 border-t border-gray-200">
+          <div className="container mx-auto px-6">
+            <div className="flex flex-col md:flex-row justify-between items-center">
+              <Link 
+                to="/#projects" 
+                className="flex items-center text-gray-700 hover:text-[#3E40EF] transition-colors mb-6 md:mb-0"
+              >
                 <ArrowLeft className="mr-2 h-4 w-4" />
-                Back to Projects
+                <span>Back to Projects</span>
               </Link>
-            </Button>
-            
-            {nextProject && (
-              <Button variant="default" asChild className="rounded-full bg-[#3E40EF] hover:bg-[#3E40EF]/90">
-                <Link to={`/projects/${nextProject.id}`} className="flex items-center px-6 py-3">
+              
+              {nextProject && (
+                <Link 
+                  to={`/projects/${nextProject.id}`} 
+                  className="flex items-center text-[#3E40EF] hover:text-[#3E40EF]/90 transition-colors font-medium"
+                >
                   <span>Next Project: {nextProject.title}</span>
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
-              </Button>
-            )}
+              )}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
       {/* Footer */}
       <Footer />
       
-      {/* Home Button - Side floating button for back to top */}
+      {/* Home Button */}
       <HomeButton />
     </div>
   );
