@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, MotionValue, useScroll, useTransform } from "framer-motion";
-import { ComponentPropsWithoutRef, FC, ReactNode, useRef, memo, useContext, createContext } from "react";
+import { ComponentPropsWithoutRef, FC, ReactNode, useRef, memo, useContext, createContext, useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
 // Create a context to track line index
@@ -36,11 +36,24 @@ export const TextReveal: FC<TextRevealProps> = memo(({
 
   const words = children.split(" ");
 
+  // Calculate optimal number of words per line based on screen size
+  const [isMobile, setIsMobile] = useState(false);
+  
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   return (
     <RevealContext.Provider value={{ lineIndex, totalLines }}>
       <div ref={targetRef} className={cn("relative z-0 w-full", className)}>
         <div className="w-full flex items-center bg-transparent">
-          <span className="flex flex-wrap text-2xl md:text-3xl font-bold text-gray-400 w-full">
+          <span className="flex flex-wrap text-2xl md:text-3xl font-bold text-gray-400 w-full md:gap-x-1">
             {words.map((word, i) => {
               // Calculate start and end based on word position and lineIndex
               const wordCount = words.length;
@@ -49,11 +62,14 @@ export const TextReveal: FC<TextRevealProps> = memo(({
               const startBase = lineIndex / totalLines; 
               const endBase = (lineIndex + 1) / totalLines;
               
-              // Modify to synchronize line transitions
-              // Earlier words in a line start sooner, later words complete later
+              // Improved timing calculation for better word flow
+              // Mobile devices get slightly different timing for better visual flow
               const segmentSize = (endBase - startBase) / (wordCount + 1);
-              const start = startBase + (i * segmentSize * 0.8); // Words start sooner
-              const end = start + segmentSize * 1.5; // Words take longer to complete
+              const mobileFactor = isMobile ? 0.4 : 0.6;
+              const completionFactor = isMobile ? 1.0 : 1.2;
+              
+              const start = startBase + (i * segmentSize * mobileFactor);
+              const end = start + segmentSize * completionFactor;
               
               return (
                 <Word key={i} progress={scrollYProgress} range={[start, end]}>
@@ -81,10 +97,10 @@ const Word: FC<WordProps> = memo(({ children, progress, range }) => {
   const color = useTransform(progress, range, ["#9ca3af", "#000000"]);
 
   return (
-    <span className="relative mx-1">
+    <span className="relative mx-0.5 md:mx-1 inline-flex">
       <motion.span
         style={{ opacity, color }}
-        className="font-semibold"
+        className="font-semibold whitespace-pre"
       >
         {children}
       </motion.span>

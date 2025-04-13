@@ -4,7 +4,7 @@ import { MapPin, Sparkles, BookOpen } from "lucide-react";
 import { Globe } from "@/components/Globe";
 import { TextReveal } from "./TextReveal";
 import SpinningText from "./SpinningText";
-import TerminalText from "./TerminalText";
+import InteractiveTerminal from "./InteractiveTerminal";
 
 const About = () => {
   const [isHighlighted, setIsHighlighted] = useState(false);
@@ -61,20 +61,20 @@ const About = () => {
           
           <div ref={textContainerRef} className="w-full lg:px-0 px-0">
             <div className="w-full">
-              <h3 className="text-2xl md:text-3xl font-bold leading-snug w-full break-words hyphens-auto">
-                <TextReveal className="text-gray-400 break-normal" lineIndex={0} totalLines={3}>
+              <h3 className="text-2xl md:text-3xl font-bold leading-snug w-full">
+                <TextReveal className="text-gray-400" lineIndex={0} totalLines={3}>
                   I'm a UI/UX Designer with a passion for creating beautiful digital products
                 </TextReveal>
               </h3>
             
-              <h3 className="mt-2 w-full break-words hyphens-auto">
-                <TextReveal className="text-gray-400 break-normal" lineIndex={1} totalLines={3}>
+              <h3 className="mt-3 md:mt-2 w-full">
+                <TextReveal className="text-gray-400" lineIndex={1} totalLines={3}>
                   creating user-centered digital experiences that elevate brand presence
                 </TextReveal>
               </h3>
 
-              <h3 className="mt-2 mb-2 w-full break-words hyphens-auto">
-                <TextReveal className="text-gray-400 break-normal" lineIndex={2} totalLines={3}>
+              <h3 className="mt-3 md:mt-2 mb-3 md:mb-2 w-full">
+                <TextReveal className="text-gray-400" lineIndex={2} totalLines={3}>
                   blend aesthetics with functionality and innovation in every project
                 </TextReveal>
               </h3>
@@ -134,7 +134,7 @@ const About = () => {
 
           {/* Right Column: Terminal Content */}
           <div className="lg:col-span-7">
-            <div className="h-[450px] bg-[#ffffff] rounded-lg border border-gray-350 p-6 relative shadow-xl overflow-hidden">
+            <div className="h-[450px] bg-[#ffffff] rounded-lg border border-gray-200 p-6 relative shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden">
               {/* Terminal Header */}
               <div className="absolute top-0 left-0 right-0 h-10 bg-[#121212] rounded-t-lg border-b border-gray-350 flex items-center px-4">
                 <div className="flex gap-2">
@@ -153,7 +153,7 @@ const About = () => {
                   {'// <hello world />'}
                 </p>
                 
-                <div className="space-y-4 text-[#7e7e7e] font-display text-base leading-relaxed h-[290px] overflow-hidden">
+                <div className="space-y-4 text-[#7e7e7e] font-display text-base leading-relaxed h-[290px] overflow-y-auto pr-2">
                   <p>
                     With over 5 years of experience in UI/UX design, I've had the privilege of working on a diverse range of projects, from innovative startups to established enterprises. My design philosophy revolves around understanding user needs and business goals to create solutions that are both beautiful and functional.
                   </p>
@@ -162,13 +162,9 @@ const About = () => {
                     I currently serve as Chief Product Officer at <span className="text-black font-semibold">Imaginum</span>, where I lead the design and strategy of our digital products. Previously, I spearheaded design initiatives as Tech & Design Head at <span className="text-black font-semibold">CSED</span>.
                   </p>
                   
-                  {/* Terminal interaction with blinking cursor */}
-                  <div className="mt-6 font-mono text-sm bg-[#f5f5f5] p-3 rounded-md border border-gray-200">
-                    <TerminalText 
-                      textToType={terminalLines} 
-                      typingSpeed={40}
-                      className="text-[#464646]"
-                    />
+                  {/* Interactive terminal with user input */}
+                  <div className="mt-6 mb-2 w-full max-w-full">
+                    <InteractiveTerminal className="md:min-w-[400px] w-full" />
                   </div>
                 </div>
               </div>
