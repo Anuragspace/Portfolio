@@ -10,6 +10,7 @@ import ProjectDetailsGrid from "@/components/ProjectDetailsGrid";
 import CombinedSlider from "@/components/CombinedSlider";
 import Footer from "@/components/Footer";
 import HomeButton from "@/components/HomeButton";
+import { AnimatedGridPattern } from "@/components/AnimatedGridPattern";
 
 // Mock data for projects
 const projectsData = [
@@ -198,11 +199,22 @@ const ProjectDetail = () => {
       {/* Hero Section */}
       <section className="relative pt-28 pb-4">
         {/* Banner image with rounded corners and 16:9 aspect ratio */}
-        <div className="container mx-auto px-6">
-          <div className="w-full max-w-6xl mx-auto">
+        <div className="container mx-auto px-4">
+          <div className="w-full max-w-7xl mx-auto">
             {/* Banner image with 16:9 aspect ratio */}
             <div className="overflow-hidden rounded-xl relative">
-              <div className="aspect-video">
+              <div className="aspect-video h-[300px] md:h-[400px]">
+                {/* Animated grid pattern overlay */}
+                <div className="absolute inset-0 z-10 opacity-20">
+                  <AnimatedGridPattern
+                    width={30}
+                    height={30}
+                    numSquares={40}
+                    maxOpacity={0.3}
+                    className="text-[#3E40EF]/30"
+                  />
+                </div>
+                
                 <img 
                   src={project.image} 
                   alt={project.title}
@@ -211,9 +223,14 @@ const ProjectDetail = () => {
                 />
                 
                 {/* Title positioned at bottom left of image */}
-                <div className="absolute bottom-0 left-0 p-6 md:p-8 bg-gradient-to-t from-black/60 to-transparent w-full">
+                <motion.div 
+                  className="absolute bottom-0 left-0 p-6 md:p-8 bg-gradient-to-t from-black/50 to-transparent w-full"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                >
                   <h1 className="text-3xl md:text-5xl font-bold text-white font-manrope">{project.title}</h1>
-                </div>
+                </motion.div>
               </div>
             </div>
           </div>
@@ -223,7 +240,7 @@ const ProjectDetail = () => {
       {/* Project Overview Section */}
       <section className="py-10">
         <div className="container mx-auto px-6">
-          <div className="max-w-6xl mx-auto">
+          <div className="max-w-7xl mx-auto">
             <h2 className="text-4xl font-bold text-left mb-6 font-manrope">Project Overview</h2>
             
             {/* Text Reveal Animation (Different for Mobile/Desktop) */}
@@ -249,7 +266,7 @@ const ProjectDetail = () => {
           <ProblemSolutionRow 
             problem={project.problem}
             solution={project.solution}
-            className="max-w-6xl mx-auto"
+            className="max-w-7xl mx-auto"
           />
         </div>
         
@@ -264,7 +281,7 @@ const ProjectDetail = () => {
         <div className="container mx-auto px-4">
           <ProjectDetailsGrid 
             items={projectDetails}
-            className="max-w-6xl mx-auto"
+            className="max-w-7xl mx-auto"
           />
         </div>
         
@@ -280,8 +297,8 @@ const ProjectDetail = () => {
           <CombinedSlider 
             images={designAssets.images}
             titles={designAssets.titles}
-            className="max-w-6xl mx-auto"
-            interval={6000}
+            className="max-w-7xl mx-auto"
+            interval={8000}
           />
         </div>
         
@@ -294,14 +311,14 @@ const ProjectDetail = () => {
       {/* Final Design Section */}
       <section className="pb-12">
         <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
+          <div className="max-w-7xl mx-auto">
             <h2 className="text-4xl font-bold text-left mb-8 font-manrope">Final Design</h2>
             <motion.div 
               className="rounded-xl overflow-hidden"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8 }}
             >
               <img 
                 src={project.finalDesign[0]}
@@ -317,7 +334,7 @@ const ProjectDetail = () => {
       {/* Navigation Section */}
       <section className="py-10 border-t border-gray-200">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center max-w-6xl mx-auto">
+          <div className="flex flex-col md:flex-row justify-between items-center max-w-7xl mx-auto">
             <Link 
               to="/#projects" 
               className="flex items-center text-gray-700 hover:text-[#3E40EF] transition-colors mb-6 md:mb-0 font-manrope"

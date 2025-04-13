@@ -27,7 +27,7 @@ const ProjectPageHeader = ({ className }: ProjectPageHeaderProps) => {
     <header 
       className={cn(
         "fixed top-0 left-0 right-0 z-50 py-6 w-full transition-all duration-300",
-        isScrolled && "bg-white/40 backdrop-blur-md border-b border-gray-100 py-4",
+        isScrolled && "bg-white/70 backdrop-blur-md border-b border-gray-100 py-4",
         className
       )}
     >
@@ -38,8 +38,8 @@ const ProjectPageHeader = ({ className }: ProjectPageHeaderProps) => {
             <div className="flex items-center gap-2">
               <motion.div 
                 className="w-8 h-8 rounded-full bg-[#3E40EF] flex items-center justify-center"
-                whileHover={{ scale: 1.1 }}
-                transition={{ duration: 0.2 }}
+                whileHover={{ scale: 1.1, rotate: 10 }}
+                transition={{ duration: 0.3 }}
               >
                 <Sparkles className="h-4 w-4 text-white" />
               </motion.div>
@@ -104,7 +104,7 @@ const ProjectPageHeader = ({ className }: ProjectPageHeaderProps) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.3 }}
             >
-              <Link to="/#contact" className="px-4 py-2 bg-[#3E40EF]/10 backdrop-blur-sm rounded-full text-black border border-[#3E40EF]/20 hover:bg-[#3E40EF]/20 transition-all font-medium">
+              <Link to="/#contact" className="px-4 py-2 bg-[#3E40EF] backdrop-blur-sm rounded-full text-white border border-[#3E40EF]/20 hover:bg-[#3E40EF]/90 transition-all font-medium">
                 Get in Touch
               </Link>
             </motion.div>
