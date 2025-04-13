@@ -83,22 +83,20 @@ const ProjectCard = memo(({ project, index }: { project: Project; index: number 
               </div>
             </div>
             
-            {/* Project Buttons */}
+            {/* Project Buttons (removed arrow as requested) */}
             {index === 0 || index === 2 ? (
               <div className="relative w-fit">
                 <RainbowButton className="mt-auto scale-90 origin-left">
-                  <Link to={`/projects/${project.id}`} className="flex items-center text-sm">
+                  <Link to={`/projects/${project.id}`} className="flex items-center justify-center text-sm w-32">
                     View Project
-                    <ArrowUpRight size={14} className="ml-1" />
                   </Link>
                 </RainbowButton>
               </div>
             ) : (
               <div className="relative w-fit">
                 <WhiteRainbowButton className="mt-auto scale-90 origin-left">
-                  <Link to={`/projects/${project.id}`} className="flex items-center text-sm">
+                  <Link to={`/projects/${project.id}`} className="flex items-center justify-center text-sm w-32">
                     View Project
-                    <ArrowUpRight size={14} className="ml-1" />
                   </Link>
                 </WhiteRainbowButton>
               </div>
