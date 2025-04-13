@@ -27,14 +27,14 @@ const ProjectPageHeader = ({ className }: ProjectPageHeaderProps) => {
     <header 
       className={cn(
         "fixed top-0 left-0 right-0 z-50 py-6 w-full transition-all duration-300",
-        isScrolled && "bg-white/10 backdrop-blur-md border-b border-white/10 py-4",
+        isScrolled && "bg-white/80 backdrop-blur-md border-b border-gray-100 py-4 shadow-sm",
         className
       )}
     >
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between">
           {/* Logo with WordRotate */}
-          <Link to="/" className="text-white font-medium text-lg relative z-10">
+          <Link to="/" className="text-black font-medium text-lg relative z-10">
             <div className="flex items-center gap-2">
               <motion.div 
                 className="w-8 h-8 rounded-full bg-[#3E40EF] flex items-center justify-center"
@@ -58,10 +58,10 @@ const ProjectPageHeader = ({ className }: ProjectPageHeaderProps) => {
             </div>
           </Link>
 
-          {/* Navigation */}
+          {/* Navigation - only show rotating text and button on mobile */}
           <div className="flex items-center space-x-4 sm:space-x-8">
             <motion.nav 
-              className="relative bg-white/10 backdrop-blur-sm rounded-full px-2 py-2 flex items-center gap-1"
+              className="relative bg-gray-100/80 backdrop-blur-sm rounded-full px-2 py-2 hidden sm:flex items-center gap-1"
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.3 }}
@@ -75,21 +75,21 @@ const ProjectPageHeader = ({ className }: ProjectPageHeaderProps) => {
               />
               <Link 
                 to="/#about" 
-                className="relative z-10 text-sm font-medium px-3 py-1.5 rounded-full transition-all duration-300 text-white hover:bg-white/10"
+                className="relative z-10 text-sm font-medium px-3 py-1.5 rounded-full transition-all duration-300 text-black hover:bg-white/80"
               >
                 About
               </Link>
               <Link 
                 to="/#projects" 
-                className="relative z-10 text-sm font-medium px-3 py-1.5 rounded-full transition-all duration-300 text-white hover:bg-white/10"
+                className="relative z-10 text-sm font-medium px-3 py-1.5 rounded-full transition-all duration-300 text-black hover:bg-white/80"
               >
                 Projects
               </Link>
               <Link 
-                to="/#experience" 
-                className="relative z-10 text-sm font-medium px-3 py-1.5 rounded-full transition-all duration-300 text-white hover:bg-white/10"
+                to="/#skills" 
+                className="relative z-10 text-sm font-medium px-3 py-1.5 rounded-full transition-all duration-300 text-black hover:bg-white/80"
               >
-                Experience
+                Skills
               </Link>
             </motion.nav>
             
@@ -98,8 +98,8 @@ const ProjectPageHeader = ({ className }: ProjectPageHeaderProps) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.3 }}
             >
-              <Link to="/#contact" className="px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-white border border-white/20 hover:bg-white/20 transition-all">
-                Say Hello
+              <Link to="/#contact" className="px-4 py-2 bg-[#3E40EF]/10 backdrop-blur-sm rounded-full text-black border border-[#3E40EF]/20 hover:bg-[#3E40EF]/20 transition-all font-medium">
+                Get in Touch
               </Link>
             </motion.div>
           </div>

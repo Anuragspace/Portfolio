@@ -2,7 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { AlertTriangle, LightbulbIcon } from "lucide-react";
+import { Asterisk, LightbulbIcon } from "lucide-react";
 
 interface ProblemSolutionRowProps {
   problem: string;
@@ -30,15 +30,15 @@ const ProblemSolutionRow = ({
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ 
-                duration: 20,
+                duration: 30,
                 repeat: Infinity,
                 ease: "linear"
               }}
               className="mr-3 text-[#3E40EF]"
             >
-              <AlertTriangle size={20} />
+              <Asterisk size={20} />
             </motion.div>
-            <h3 className="text-xl font-medium uppercase tracking-wider text-gray-500">problem</h3>
+            <h3 className="text-xl font-medium uppercase tracking-wider text-gray-500 font-manrope">problem</h3>
           </motion.div>
           <motion.p 
             className="text-lg text-gray-800 font-manrope"
@@ -66,7 +66,7 @@ const ProblemSolutionRow = ({
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ 
-                duration: 20,
+                duration: 30,
                 repeat: Infinity,
                 ease: "linear"
               }}
@@ -74,7 +74,7 @@ const ProblemSolutionRow = ({
             >
               <LightbulbIcon size={20} />
             </motion.div>
-            <h3 className="text-xl font-medium uppercase tracking-wider text-gray-500">solution</h3>
+            <h3 className="text-xl font-medium uppercase tracking-wider text-gray-500 font-manrope">solution</h3>
           </motion.div>
           <motion.p 
             className="text-lg text-gray-800 font-manrope"

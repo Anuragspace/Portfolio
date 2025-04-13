@@ -113,8 +113,8 @@ const CombinedSlider = ({
     >
       {/* Title with animated underline that moves with slides */}
       <div className="relative z-10 mb-6 flex flex-col items-center">
-        <h3 className="text-2xl md:text-3xl font-semibold text-center mb-3">{titles[currentIndex]}</h3>
-        <div className="relative h-0.5 w-40 bg-gray-200 overflow-hidden rounded-full">
+        <h3 className="text-2xl md:text-3xl font-semibold text-center mb-3 font-manrope">{titles[currentIndex]}</h3>
+        <div className="relative h-0.5 w-60 bg-gray-200 overflow-hidden rounded-full">
           <motion.div 
             className="absolute top-0 left-0 h-full bg-[#3E40EF] origin-left"
             animate={progressControls}
@@ -123,10 +123,10 @@ const CombinedSlider = ({
         </div>
       </div>
       
-      {/* Image slider */}
+      {/* Image slider - wider with less padding */}
       <div 
         className="relative w-full aspect-video mx-auto rounded-xl overflow-hidden cursor-grab active:cursor-grabbing" 
-        style={{ maxWidth: '85%' }}
+        style={{ maxWidth: '92%' }}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
@@ -144,19 +144,20 @@ const CombinedSlider = ({
             transition={{ duration: 0.5 }}
             loading="lazy"
             draggable="false"
+            style={{ boxShadow: 'none' }}
           />
         </AnimatePresence>
         
-        {/* Indicators */}
-        <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-3">
+        {/* Indicators - simplified for only 2 slides */}
+        <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-5">
           {images.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
               className={`h-2 rounded-full transition-all duration-300 ${
                 index === currentIndex 
-                  ? "bg-white w-8" 
-                  : "bg-white/50 w-2 hover:bg-white/80"
+                  ? "bg-white w-10" 
+                  : "bg-white/50 w-10 hover:bg-white/80"
               }`}
               aria-label={`Go to slide ${index + 1}`}
             />

@@ -38,9 +38,9 @@ export const DesktopTextReveal: FC<TextRevealResponsiveProps> = memo(({
           const endBase = (lineIndex + 1) / totalLines;
           const segmentSize = (endBase - startBase) / (words.length + 1);
           
-          // Desktop-optimized animation timing
-          const start = startBase + (i * segmentSize * 0.6);
-          const end = start + (segmentSize * 1.1);
+          // Slowed down animation timing (lower values for slower animation)
+          const start = startBase + (i * segmentSize * 0.3);
+          const end = start + (segmentSize * 0.7);
           
           return (
             <Word key={i} progress={scrollYProgress} range={[start, end]}>
@@ -113,14 +113,14 @@ export const MobileTextReveal: FC<TextRevealResponsiveProps> = memo(({
               const wordIndex = groupIndex * optimalWordsPerRow + i;
               const wordCount = words.length;
               
-              // Better timing for mobile animations
+              // Slowed down timing for mobile animations
               const startBase = lineIndex / totalLines; 
               const endBase = (lineIndex + 1) / totalLines;
               const segmentSize = (endBase - startBase) / (wordCount + 1);
               
-              // Improved responsiveness for mobile
-              const start = startBase + (wordIndex * segmentSize * 0.8);
-              const end = start + (segmentSize * 1.2);
+              // Slowed down responsiveness for mobile
+              const start = startBase + (wordIndex * segmentSize * 0.4);
+              const end = start + (segmentSize * 0.8);
             
               return (
                 <Word key={`${groupIndex}-${i}`} progress={scrollYProgress} range={[start, end]}>
@@ -144,6 +144,7 @@ interface WordProps {
 }
 
 const Word: FC<WordProps> = memo(({ children, progress, range }) => {
+  // Slowed down transition
   const opacity = useTransform(progress, range, [0.2, 1]);
   const color = useTransform(progress, range, ["#9ca3af", "#000000"]);
 
@@ -151,7 +152,7 @@ const Word: FC<WordProps> = memo(({ children, progress, range }) => {
     <span className="relative mx-[1px] md:mx-1 inline-flex">
       <motion.span
         style={{ opacity, color }}
-        className="font-semibold whitespace-pre"
+        className="font-manrope font-semibold whitespace-pre text-[18px] md:text-[24px]"
       >
         {children}
       </motion.span>

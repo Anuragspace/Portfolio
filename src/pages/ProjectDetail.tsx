@@ -197,30 +197,32 @@ const ProjectDetail = () => {
       
       {/* Hero Section */}
       <section className="relative pt-28 pb-8">
-        {/* Project title overlay */}
-        <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/70 to-transparent z-20 text-center pointer-events-none">
-          <h1 className="text-3xl md:text-4xl font-bold text-white">{project.title}</h1>
-        </div>
-        
         {/* Banner image with rounded corners and 16:9 aspect ratio */}
         <div className="container mx-auto px-6">
-          <div className="w-full max-w-5xl mx-auto overflow-hidden rounded-xl">
-            <div className="aspect-video">
-              <img 
-                src={project.image} 
-                alt={project.title}
-                className="w-full h-full object-cover"
-              />
+          <div className="w-full max-w-5xl mx-auto">
+            {/* Project title */}
+            <h1 className="text-3xl md:text-5xl font-bold text-left mb-6 font-manrope">{project.title}</h1>
+            
+            {/* Banner image with 16:9 aspect ratio */}
+            <div className="overflow-hidden rounded-xl">
+              <div className="aspect-video">
+                <img 
+                  src={project.image} 
+                  alt={project.title}
+                  className="w-full h-full object-cover"
+                  style={{ boxShadow: 'none' }}
+                />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Project Overview Section */}
-      <section className="py-16">
+      <section className="py-12">
         <div className="container mx-auto px-6">
           <div className="max-w-5xl mx-auto">
-            <h2 className="text-4xl font-bold text-left mb-8">Project Overview</h2>
+            <h2 className="text-4xl font-bold text-left mb-6 font-manrope">Project Overview</h2>
             
             {/* Text Reveal Animation (Different for Mobile/Desktop) */}
             <DesktopTextReveal lineIndex={0} totalLines={5} className="mb-6 text-left text-2xl leading-relaxed font-manrope">
@@ -234,7 +236,7 @@ const ProjectDetail = () => {
         </div>
         
         {/* Horizontal line separator */}
-        <div className="container mx-auto px-6 mt-12">
+        <div className="container mx-auto px-6 mt-10">
           <div className="w-full h-px bg-gray-200"></div>
         </div>
       </section>
@@ -314,7 +316,7 @@ const ProjectDetail = () => {
           <div className="flex flex-col md:flex-row justify-between items-center max-w-5xl mx-auto">
             <Link 
               to="/#projects" 
-              className="flex items-center text-gray-700 hover:text-[#3E40EF] transition-colors mb-6 md:mb-0"
+              className="flex items-center text-gray-700 hover:text-[#3E40EF] transition-colors mb-6 md:mb-0 font-manrope"
             >
               <ArrowLeft className="mr-2 h-4 w-4" />
               <span>Back to Projects</span>
@@ -323,7 +325,7 @@ const ProjectDetail = () => {
             {nextProject && (
               <Link 
                 to={`/projects/${nextProject.id}`} 
-                className="flex items-center text-[#3E40EF] hover:text-[#3E40EF]/90 transition-colors font-medium"
+                className="flex items-center text-[#3E40EF] hover:text-[#3E40EF]/90 transition-colors font-medium bg-[#3E40EF]/5 px-4 py-2 rounded-full font-manrope"
               >
                 <span>Next Project: {nextProject.title}</span>
                 <ArrowRight className="ml-2 h-4 w-4" />
