@@ -86,7 +86,7 @@ const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({ className = "
       onClick={handleContainerClick}
       className={`font-mono text-sm w-full cursor-text ${className}`}
     >
-      <div ref={terminalContainerRef} className="space-y-3 h-auto min-h-[220px] md:min-h-[170px]">
+      <div ref={terminalContainerRef} className="space-y-3 h-auto min-h-[250px] md:min-h-[200px]">
         {/* User input area - fully integrated into the visual style */}
         <div className="flex items-center">
           <span className="text-[#27C93F] mr-2">$&gt;</span>

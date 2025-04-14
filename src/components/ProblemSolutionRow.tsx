@@ -2,7 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { Asterisk } from "lucide-react";
+import { Asterisk, Circle } from "lucide-react";
 
 interface ProblemSolutionRowProps {
   problem: string;
@@ -72,13 +72,8 @@ const ProblemSolutionRow = ({
               }}
               className="mr-3 text-[#3E40EF]"
             >
-              {/* Circular icon for solution */}
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
-                <circle cx="12" cy="12" r="5" stroke="currentColor" strokeWidth="2" />
-                <path d="M12 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                <path d="M7 12H17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-              </svg>
+              {/* Circular icon for solution - simplified */}
+              <Circle size={20} className="stroke-current" />
             </motion.div>
             <h3 className="text-xl font-medium uppercase tracking-wider text-gray-500 font-manrope">solution</h3>
           </motion.div>

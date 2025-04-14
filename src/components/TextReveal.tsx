@@ -1,3 +1,4 @@
+
 "use client";
 
 import { motion, MotionValue, useScroll, useTransform } from "framer-motion";
@@ -86,13 +87,13 @@ export const TextReveal: FC<TextRevealProps> = memo(({
                 // Improved timing calculation for better text flow
                 const segmentSize = (endBase - startBase) / (wordCount + 1);
                 
-                // Refined factors for more continuous flow on all devices
-                const responsiveFactor = isMobile ? 0.8 : 0.6;
-                const completionFactor = isMobile ? 1.2 : 1.1;
+                // Slow down the animation considerably for a much more gradual reveal
+                const responsiveFactor = isMobile ? 0.4 : 0.2; // Reduced from 0.8/0.6 to 0.4/0.2
+                const completionFactor = isMobile ? 0.7 : 0.6; // Reduced from 1.2/1.1 to 0.7/0.6
                 
-                // More continuous reveal with better rhythm
+                // More continuous reveal with better rhythm and much slower timing
                 const start = startBase + (wordIndex * segmentSize * responsiveFactor);
-                const end = start + segmentSize * completionFactor;
+                const end = start + (segmentSize * completionFactor);
               
               return (
                   <Word key={`${groupIndex}-${i}`} progress={scrollYProgress} range={[start, end]}>
@@ -117,13 +118,17 @@ interface WordProps {
 }
 
 const Word: FC<WordProps> = memo(({ children, progress, range }) => {
+  // Slower opacity transition
   const opacity = useTransform(progress, range, [0.2, 1]);
+  // Slower color transition
   const color = useTransform(progress, range, ["#9ca3af", "#000000"]);
+  // Add subtle Y movement for enhanced animation
+  const y = useTransform(progress, range, [10, 0]);
 
   return (
     <span className="relative mx-[1px] md:mx-1 inline-flex">
       <motion.span
-        style={{ opacity, color }}
+        style={{ opacity, color, y }}
         className="font-semibold whitespace-pre"
       >
         {children}

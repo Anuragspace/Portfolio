@@ -169,6 +169,11 @@ const ProjectDetail = () => {
     }
   }, [id]);
 
+  // Scroll to top whenever project changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
+
   if (!project) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -197,18 +202,16 @@ const ProjectDetail = () => {
       
       {/* Hero Section */}
       <section className="relative pt-28 pb-4">
-        {/* Banner image with increased height (>80% screen size) */}
         <div className="container mx-auto px-4 sm:px-4 md:px-4 lg:px-2">
           <div className="w-full max-w-7xl mx-auto">
-            {/* Banner image with higher height - no grid overlay */}
+            {/* Banner image with increased height (>85% screen size) */}
             <div className="overflow-hidden rounded-xl relative">
-              {/* Increased height to more than 80% of screen size with vh units */}
-              <div className="h-[85vh] md:h-[80vh]">
+              {/* Increased height to more than 85% of screen size with vh units */}
+              <div className="h-[90vh] md:h-[85vh]">
                 <img 
                   src={project.image} 
                   alt={project.title}
                   className="w-full h-full object-cover"
-                  style={{ boxShadow: 'none' }}
                 />
                 
                 {/* Title positioned at bottom left of image */}
@@ -316,7 +319,7 @@ const ProjectDetail = () => {
             images={designAssets.images}
             titles={designAssets.titles}
             className="max-w-7xl mx-auto"
-            interval={15000} // Even slower transition
+            interval={25000} // Even slower transition
           />
         </div>
         
@@ -342,7 +345,6 @@ const ProjectDetail = () => {
                 src={project.finalDesign[0]}
                 alt="Final design"
                 className="w-full h-auto aspect-video object-cover"
-                style={{ boxShadow: 'none' }}
               />
             </motion.div>
           </div>
@@ -356,7 +358,6 @@ const ProjectDetail = () => {
             <Link 
               to="/#projects" 
               className="flex items-center text-gray-700 hover:text-[#3E40EF] transition-colors font-medium font-manrope"
-              onClick={() => window.scrollTo(0, 0)}
             >
               <ArrowLeft className="mr-2 h-4 w-4" />
               <span>Back</span>
@@ -365,7 +366,6 @@ const ProjectDetail = () => {
             {nextProject && (
               <Link 
                 to={`/projects/${nextProject.id}`} 
-                onClick={() => window.scrollTo(0, 0)} // Scroll to top on click
                 className="flex items-center text-[#3E40EF] hover:text-[#3E40EF]/80 transition-colors font-medium font-manrope"
               >
                 <span>Next</span>

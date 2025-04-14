@@ -21,7 +21,7 @@ export const DesktopTextReveal: FC<TextRevealResponsiveProps> = memo(({
   const targetRef = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
-    offset: ["start 0.65", "start 0.25"], // Trigger when in middle of screen
+    offset: ["start 0.75", "start 0.35"], // Adjusted for more visible area
   });
 
   if (typeof children !== "string") {
@@ -39,8 +39,9 @@ export const DesktopTextReveal: FC<TextRevealResponsiveProps> = memo(({
           const segmentSize = (endBase - startBase) / (words.length + 1);
           
           // Much slower animation timing for a more deliberate reveal
-          const start = startBase + (i * segmentSize * 0.04); // Reduced from 0.08 to 0.04
-          const end = start + (segmentSize * 0.15);  // Reduced from 0.25 to 0.15
+          // Significantly reduced factors for slower, more controlled animation
+          const start = startBase + (i * segmentSize * 0.02); // Reduced from 0.04 to 0.02
+          const end = start + (segmentSize * 0.08);  // Reduced from 0.15 to 0.08
           
           return (
             <Word key={i} progress={scrollYProgress} range={[start, end]}>
@@ -65,7 +66,7 @@ export const MobileTextReveal: FC<TextRevealResponsiveProps> = memo(({
   const targetRef = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
-    offset: ["start 0.7", "start 0.3"], // Trigger closer to middle of screen
+    offset: ["start 0.8", "start 0.4"], // Adjusted to trigger earlier on mobile
   });
 
   if (typeof children !== "string") {
@@ -119,8 +120,8 @@ export const MobileTextReveal: FC<TextRevealResponsiveProps> = memo(({
               const segmentSize = (endBase - startBase) / (wordCount + 1);
               
               // Much slower animation timing for mobile with more natural spacing
-              const start = startBase + (wordIndex * segmentSize * 0.04); // Reduced from 0.08 to 0.04 
-              const end = start + (segmentSize * 0.15);  // Reduced from 0.25 to 0.15
+              const start = startBase + (wordIndex * segmentSize * 0.02); // Reduced from 0.04 to 0.02
+              const end = start + (segmentSize * 0.08);  // Reduced from 0.15 to 0.08
             
               return (
                 <Word key={`${groupIndex}-${i}`} progress={scrollYProgress} range={[start, end]}>
