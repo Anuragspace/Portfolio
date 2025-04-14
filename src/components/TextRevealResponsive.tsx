@@ -11,7 +11,7 @@ export interface TextRevealResponsiveProps extends ComponentPropsWithoutRef<"div
   totalLines?: number;
 }
 
-// Desktop-optimized component with fewer line breaks
+// Desktop-optimized component with improved, consistent line breaks
 export const DesktopTextReveal: FC<TextRevealResponsiveProps> = memo(({ 
   children, 
   className,
@@ -21,7 +21,7 @@ export const DesktopTextReveal: FC<TextRevealResponsiveProps> = memo(({
   const targetRef = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
-    offset: ["start 0.5", "start 0.1"], // Trigger when in middle of screen
+    offset: ["start 0.65", "start 0.25"], // Trigger when in middle of screen
   });
 
   if (typeof children !== "string") {
@@ -38,9 +38,9 @@ export const DesktopTextReveal: FC<TextRevealResponsiveProps> = memo(({
           const endBase = (lineIndex + 1) / totalLines;
           const segmentSize = (endBase - startBase) / (words.length + 1);
           
-          // Even slower animation timing for a more deliberate reveal
-          const start = startBase + (i * segmentSize * 0.08);
-          const end = start + (segmentSize * 0.25);
+          // Much slower animation timing for a more deliberate reveal
+          const start = startBase + (i * segmentSize * 0.04); // Reduced from 0.08 to 0.04
+          const end = start + (segmentSize * 0.15);  // Reduced from 0.25 to 0.15
           
           return (
             <Word key={i} progress={scrollYProgress} range={[start, end]}>
@@ -55,7 +55,7 @@ export const DesktopTextReveal: FC<TextRevealResponsiveProps> = memo(({
 
 DesktopTextReveal.displayName = "DesktopTextReveal";
 
-// Mobile-optimized component with more controlled line breaks
+// Mobile-optimized component with improved text wrapping
 export const MobileTextReveal: FC<TextRevealResponsiveProps> = memo(({ 
   children, 
   className,
@@ -65,7 +65,7 @@ export const MobileTextReveal: FC<TextRevealResponsiveProps> = memo(({
   const targetRef = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
-    offset: ["start 0.6", "start 0.2"], // Trigger closer to middle of screen
+    offset: ["start 0.7", "start 0.3"], // Trigger closer to middle of screen
   });
 
   if (typeof children !== "string") {
@@ -87,15 +87,15 @@ export const MobileTextReveal: FC<TextRevealResponsiveProps> = memo(({
     return () => window.removeEventListener('resize', checkResponsive);
   }, []);
 
-  // Optimize word grouping for mobile - smaller groups for more consistent lines
+  // Improve word grouping for mobile - create more natural sentence breaks
   const getOptimalWordsPerRow = () => {
     if (screenWidth < 320) return 3;
-    if (screenWidth < 380) return 4;
-    if (screenWidth < 480) return 4;
+    if (screenWidth < 375) return 3;
+    if (screenWidth < 400) return 4;
     return 5;
   };
 
-  // Group words for controlled line breaks on mobile
+  // Group words for more natural line breaks on mobile
   const wordGroups = [];
   const optimalWordsPerRow = getOptimalWordsPerRow();
   
@@ -107,20 +107,20 @@ export const MobileTextReveal: FC<TextRevealResponsiveProps> = memo(({
     <div ref={targetRef} className={cn("relative z-0 w-full block md:hidden", className)}>
       <div className="w-full flex flex-col bg-transparent">
         {wordGroups.map((group, groupIndex) => (
-          <div key={groupIndex} className="flex flex-wrap text-2xl font-bold text-gray-400 w-full gap-x-[3px] mb-1">
+          <div key={groupIndex} className="flex flex-wrap text-[18px] font-bold text-gray-400 w-full gap-x-[3px] mb-1 md:mb-0.5">
             {group.map((word, i) => {
               // Calculate global word index
               const wordIndex = groupIndex * optimalWordsPerRow + i;
               const wordCount = words.length;
               
-              // Slowed down timing for mobile animations
+              // Even slower animation timing for mobile
               const startBase = lineIndex / totalLines; 
               const endBase = (lineIndex + 1) / totalLines;
               const segmentSize = (endBase - startBase) / (wordCount + 1);
               
-              // Even slower animation timing for mobile with more natural spacing
-              const start = startBase + (wordIndex * segmentSize * 0.08);
-              const end = start + (segmentSize * 0.25);
+              // Much slower animation timing for mobile with more natural spacing
+              const start = startBase + (wordIndex * segmentSize * 0.04); // Reduced from 0.08 to 0.04 
+              const end = start + (segmentSize * 0.15);  // Reduced from 0.25 to 0.15
             
               return (
                 <Word key={`${groupIndex}-${i}`} progress={scrollYProgress} range={[start, end]}>
@@ -144,14 +144,15 @@ interface WordProps {
 }
 
 const Word: FC<WordProps> = memo(({ children, progress, range }) => {
-  // Slowed down transition
-  const opacity = useTransform(progress, range, [0.2, 1]);
+  // Slowed down transition with smoother effect
+  const opacity = useTransform(progress, range, [0.15, 1]);
   const color = useTransform(progress, range, ["#9ca3af", "#000000"]);
+  const y = useTransform(progress, range, [6, 0]); // Add subtle upward movement
 
   return (
     <span className="relative mx-[1px] md:mx-1 inline-flex">
       <motion.span
-        style={{ opacity, color }}
+        style={{ opacity, color, y }}
         className="font-manrope font-semibold whitespace-pre text-[20px] md:text-[26px]"
       >
         {children}

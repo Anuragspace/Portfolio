@@ -10,7 +10,6 @@ import ProjectDetailsGrid from "@/components/ProjectDetailsGrid";
 import CombinedSlider from "@/components/CombinedSlider";
 import Footer from "@/components/Footer";
 import HomeButton from "@/components/HomeButton";
-import { AnimatedGridPattern } from "@/components/AnimatedGridPattern";
 
 // Mock data for projects
 const projectsData = [
@@ -198,30 +197,19 @@ const ProjectDetail = () => {
       
       {/* Hero Section */}
       <section className="relative pt-28 pb-4">
-        {/* Banner image with increased height (>60% screen size) */}
+        {/* Banner image with increased height (>80% screen size) */}
         <div className="container mx-auto px-4 sm:px-4 md:px-4 lg:px-2">
           <div className="w-full max-w-7xl mx-auto">
-            {/* Banner image with 16:9 aspect ratio and animated grid overlay */}
+            {/* Banner image with higher height - no grid overlay */}
             <div className="overflow-hidden rounded-xl relative">
-              {/* Increased height to more than 60% of screen size with vh units */}
-              <div className="h-[70vh] md:h-[65vh]">
+              {/* Increased height to more than 80% of screen size with vh units */}
+              <div className="h-[85vh] md:h-[80vh]">
                 <img 
                   src={project.image} 
                   alt={project.title}
                   className="w-full h-full object-cover"
                   style={{ boxShadow: 'none' }}
                 />
-                
-                {/* Animated grid pattern overlay */}
-                <div className="absolute inset-0 z-10 opacity-30">
-                  <AnimatedGridPattern 
-                    width={30} 
-                    height={30} 
-                    numSquares={50}
-                    maxOpacity={0.25}
-                    className="text-white/30"
-                  />
-                </div>
                 
                 {/* Title positioned at bottom left of image */}
                 <div className="absolute bottom-0 left-0 p-6 md:p-8 bg-gradient-to-t from-black/80 to-transparent w-full z-20">
@@ -240,31 +228,58 @@ const ProjectDetail = () => {
         </div>
       </section>
 
-      {/* Project Overview Section */}
-      <section className="py-10">
+      {/* Project Overview Section with enhanced text reveal */}
+      <section className="py-14">
         <div className="container mx-auto px-4 sm:px-4 md:px-4 lg:px-2">
           <div className="max-w-7xl mx-auto">
-            <h2 className="text-4xl font-bold text-left mb-6 font-manrope">Project Overview</h2>
+            <h2 className="text-4xl font-bold text-left mb-8 font-manrope">Project Overview</h2>
             
-            {/* Text Reveal Animation (Different for Mobile/Desktop) */}
-            <DesktopTextReveal lineIndex={0} totalLines={5} className="mb-6 text-left text-3xl leading-relaxed font-manrope">
-              {project.description}
-            </DesktopTextReveal>
-            
-            <MobileTextReveal lineIndex={0} totalLines={5} className="mb-6 text-left text-2xl leading-relaxed font-manrope">
-              {project.description}
-            </MobileTextReveal>
+            {/* Enhanced Text Reveal Animation with 4 lines for desktop */}
+            <div className="w-full">
+              {/* Line 1 */}
+              <DesktopTextReveal lineIndex={0} totalLines={4} className="mb-2 text-left text-3xl leading-relaxed font-manrope">
+                {project.description.substring(0, Math.floor(project.description.length / 4))}
+              </DesktopTextReveal>
+              
+              {/* Line 2 */}
+              <DesktopTextReveal lineIndex={1} totalLines={4} className="mb-2 text-left text-3xl leading-relaxed font-manrope">
+                {project.description.substring(
+                  Math.floor(project.description.length / 4),
+                  Math.floor(project.description.length / 2)
+                )}
+              </DesktopTextReveal>
+              
+              {/* Line 3 */}
+              <DesktopTextReveal lineIndex={2} totalLines={4} className="mb-2 text-left text-3xl leading-relaxed font-manrope">
+                {project.description.substring(
+                  Math.floor(project.description.length / 2),
+                  Math.floor(3 * project.description.length / 4)
+                )}
+              </DesktopTextReveal>
+              
+              {/* Line 4 */}
+              <DesktopTextReveal lineIndex={3} totalLines={4} className="mb-2 text-left text-3xl leading-relaxed font-manrope">
+                {project.description.substring(
+                  Math.floor(3 * project.description.length / 4)
+                )}
+              </DesktopTextReveal>
+              
+              {/* Mobile optimized text reveal */}
+              <MobileTextReveal lineIndex={0} totalLines={4} className="mb-6 text-left text-2xl leading-relaxed font-manrope">
+                {project.description}
+              </MobileTextReveal>
+            </div>
           </div>
         </div>
         
         {/* Horizontal line separator */}
-        <div className="container mx-auto px-6 mt-8">
+        <div className="container mx-auto px-6 mt-12">
           <div className="w-full h-px bg-gray-200"></div>
         </div>
       </section>
       
       {/* Problem & Solution Section */}
-      <section className="pb-12">
+      <section className="pb-16">
         <div className="container mx-auto px-4 sm:px-4 md:px-4 lg:px-2">
           <ProblemSolutionRow 
             problem={project.problem}
@@ -274,13 +289,13 @@ const ProjectDetail = () => {
         </div>
         
         {/* Horizontal line separator */}
-        <div className="container mx-auto px-4 mt-10">
+        <div className="container mx-auto px-4 mt-12">
           <div className="w-full h-px bg-gray-200"></div>
         </div>
       </section>
 
       {/* Project Details Section */}
-      <section className="pb-12">
+      <section className="pb-16">
         <div className="container mx-auto px-4 sm:px-4 md:px-4 lg:px-2">
           <ProjectDetailsGrid 
             items={projectDetails}
@@ -289,33 +304,33 @@ const ProjectDetail = () => {
         </div>
         
         {/* Horizontal line separator */}
-        <div className="container mx-auto px-4 mt-10">
+        <div className="container mx-auto px-4 mt-12">
           <div className="w-full h-px bg-gray-200"></div>
         </div>
       </section>
 
       {/* Combined Design Process & Elements Section */}
-      <section className="pb-12">
+      <section className="pb-16">
         <div className="container mx-auto px-4 sm:px-4 md:px-4 lg:px-2">
           <CombinedSlider 
             images={designAssets.images}
             titles={designAssets.titles}
             className="max-w-7xl mx-auto"
-            interval={10000} // Even slower transition
+            interval={15000} // Even slower transition
           />
         </div>
         
         {/* Horizontal line separator */}
-        <div className="container mx-auto px-4 mt-10">
+        <div className="container mx-auto px-4 mt-12">
           <div className="w-full h-px bg-gray-200"></div>
         </div>
       </section>
       
       {/* Final Design Section */}
-      <section className="pb-12">
+      <section className="pb-20">
         <div className="container mx-auto px-4 sm:px-4 md:px-4 lg:px-2">
           <div className="max-w-7xl mx-auto">
-            <h2 className="text-4xl font-bold text-left mb-8 font-manrope">Final Design</h2>
+            <h2 className="text-4xl font-bold text-left mb-10 font-manrope">Final Design</h2>
             <motion.div 
               className="rounded-xl overflow-hidden"
               initial={{ opacity: 0, y: 20 }}
@@ -334,13 +349,14 @@ const ProjectDetail = () => {
         </div>
       </section>
 
-      {/* Navigation Section */}
-      <section className="py-10 border-t border-gray-200">
+      {/* Navigation Section - simplified with just Next and Back */}
+      <section className="py-12 border-t border-gray-200">
         <div className="container mx-auto px-4">
-          <div className="flex justify-center items-center gap-16 max-w-7xl mx-auto">
+          <div className="flex justify-center items-center gap-10 max-w-7xl mx-auto">
             <Link 
               to="/#projects" 
               className="flex items-center text-gray-700 hover:text-[#3E40EF] transition-colors font-medium font-manrope"
+              onClick={() => window.scrollTo(0, 0)}
             >
               <ArrowLeft className="mr-2 h-4 w-4" />
               <span>Back</span>
@@ -363,7 +379,7 @@ const ProjectDetail = () => {
       {/* Footer */}
       <Footer />
       
-      {/* Home Button */}
+      {/* Home Button - moved further down */}
       <HomeButton />
     </div>
   );

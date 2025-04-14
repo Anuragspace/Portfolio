@@ -114,9 +114,9 @@ const CombinedSlider = ({
       ref={sliderRef}
     >
       {/* Title with animated underline that moves with slides */}
-      <div className="relative z-10 mb-6 flex flex-col items-center">
-        <h3 className="text-2xl md:text-3xl font-semibold text-center mb-3 font-manrope">{titles[currentIndex]}</h3>
-        <div className="relative h-0.5 w-60 bg-gray-200 overflow-hidden rounded-full">
+      <div className="relative z-10 mb-8 flex flex-col items-center">
+        <h3 className="text-2xl md:text-3xl font-semibold text-center mb-4 font-manrope">{titles[currentIndex]}</h3>
+        <div className="relative h-0.5 w-64 bg-gray-200 overflow-hidden rounded-full">
           <motion.div 
             className="absolute top-0 left-0 h-full bg-[#3E40EF] origin-left"
             animate={progressControls}
@@ -125,10 +125,10 @@ const CombinedSlider = ({
         </div>
       </div>
       
-      {/* Image slider - wider with less padding */}
+      {/* Image slider - larger with increased height */}
       <div 
         className="relative w-full mx-auto rounded-xl overflow-hidden cursor-grab active:cursor-grabbing" 
-        style={{ maxWidth: '100%', height: '400px' }} /* Fixed height for desktop view */
+        style={{ maxWidth: '100%', height: '500px' }} /* Increased height for desktop view */
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
@@ -143,7 +143,7 @@ const CombinedSlider = ({
             initial={{ opacity: 0, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -100 }}
-            transition={{ duration: 1.2, ease: "easeInOut" }}
+            transition={{ duration: 1.8, ease: "easeInOut" }} /* Slower transition */
             loading="lazy"
             draggable="false"
             style={{ boxShadow: 'none' }}
@@ -151,15 +151,15 @@ const CombinedSlider = ({
         </AnimatePresence>
         
         {/* Indicators - simplified for only 2 slides */}
-        <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-5">
+        <div className="absolute bottom-6 left-0 right-0 flex justify-center space-x-6">
           {images.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
-              className={`h-2 rounded-full transition-all duration-300 ${
+              className={`h-2.5 rounded-full transition-all duration-500 ${
                 index === currentIndex 
-                  ? "bg-white w-10" 
-                  : "bg-white/50 w-10 hover:bg-white/80"
+                  ? "bg-white w-12" 
+                  : "bg-white/50 w-12 hover:bg-white/80"
               }`}
               aria-label={`Go to slide ${index + 1}`}
             />

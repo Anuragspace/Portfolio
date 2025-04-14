@@ -2,7 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { Asterisk, LightbulbIcon } from "lucide-react";
+import { Asterisk } from "lucide-react";
 
 interface ProblemSolutionRowProps {
   problem: string;
@@ -54,7 +54,7 @@ const ProblemSolutionRow = ({
         {/* Separator for mobile */}
         <div className="h-px w-full bg-gray-200 md:hidden my-6"></div>
         
-        {/* Solution Column */}
+        {/* Solution Column with circular icon */}
         <div className="flex flex-col">
           <motion.div 
             className="flex items-center mb-4"
@@ -72,13 +72,12 @@ const ProblemSolutionRow = ({
               }}
               className="mr-3 text-[#3E40EF]"
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10"/>
-                <circle cx="12" cy="12" r="4"/>
-                <line x1="12" y1="2" x2="12" y2="4"/>
-                <line x1="12" y1="20" x2="12" y2="22"/>
-                <line x1="22" y1="12" x2="20" y2="12"/>
-                <line x1="4" y1="12" x2="2" y2="12"/>
+              {/* Circular icon for solution */}
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
+                <circle cx="12" cy="12" r="5" stroke="currentColor" strokeWidth="2" />
+                <path d="M12 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                <path d="M7 12H17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
               </svg>
             </motion.div>
             <h3 className="text-xl font-medium uppercase tracking-wider text-gray-500 font-manrope">solution</h3>
