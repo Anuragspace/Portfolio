@@ -198,12 +198,13 @@ const ProjectDetail = () => {
       
       {/* Hero Section */}
       <section className="relative pt-28 pb-4">
-        {/* Banner image with rounded corners and 16:9 aspect ratio */}
-        <div className="container mx-auto px-4 sm:px-6">
+        {/* Banner image with increased height (>60% screen size) */}
+        <div className="container mx-auto px-4 sm:px-4 md:px-4 lg:px-2">
           <div className="w-full max-w-7xl mx-auto">
             {/* Banner image with 16:9 aspect ratio and animated grid overlay */}
             <div className="overflow-hidden rounded-xl relative">
-              <div className="aspect-[16/7] md:aspect-[16/8]">
+              {/* Increased height to more than 60% of screen size with vh units */}
+              <div className="h-[70vh] md:h-[65vh]">
                 <img 
                   src={project.image} 
                   alt={project.title}
@@ -216,14 +217,14 @@ const ProjectDetail = () => {
                   <AnimatedGridPattern 
                     width={30} 
                     height={30} 
-                    numSquares={40}
-                    maxOpacity={0.2}
+                    numSquares={50}
+                    maxOpacity={0.25}
                     className="text-white/30"
                   />
                 </div>
                 
                 {/* Title positioned at bottom left of image */}
-                <div className="absolute bottom-0 left-0 p-6 md:p-8 bg-gradient-to-t from-black/70 to-transparent w-full z-20">
+                <div className="absolute bottom-0 left-0 p-6 md:p-8 bg-gradient-to-t from-black/80 to-transparent w-full z-20">
                   <motion.h1 
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -241,8 +242,8 @@ const ProjectDetail = () => {
 
       {/* Project Overview Section */}
       <section className="py-10">
-        <div className="container mx-auto px-6">
-          <div className="max-w-6xl mx-auto">
+        <div className="container mx-auto px-4 sm:px-4 md:px-4 lg:px-2">
+          <div className="max-w-7xl mx-auto">
             <h2 className="text-4xl font-bold text-left mb-6 font-manrope">Project Overview</h2>
             
             {/* Text Reveal Animation (Different for Mobile/Desktop) */}
@@ -264,23 +265,23 @@ const ProjectDetail = () => {
       
       {/* Problem & Solution Section */}
       <section className="pb-12">
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto px-4 sm:px-4 md:px-4 lg:px-2">
           <ProblemSolutionRow 
             problem={project.problem}
             solution={project.solution}
-            className="max-w-6xl mx-auto"
+            className="max-w-7xl mx-auto"
           />
         </div>
         
         {/* Horizontal line separator */}
-        <div className="container mx-auto px-6 mt-10">
+        <div className="container mx-auto px-4 mt-10">
           <div className="w-full h-px bg-gray-200"></div>
         </div>
       </section>
 
       {/* Project Details Section */}
       <section className="pb-12">
-        <div className="container mx-auto px-4 sm:px-0">
+        <div className="container mx-auto px-4 sm:px-4 md:px-4 lg:px-2">
           <ProjectDetailsGrid 
             items={projectDetails}
             className="max-w-7xl mx-auto"
@@ -295,12 +296,12 @@ const ProjectDetail = () => {
 
       {/* Combined Design Process & Elements Section */}
       <section className="pb-12">
-        <div className="container mx-auto px-4 sm:px-0">
+        <div className="container mx-auto px-4 sm:px-4 md:px-4 lg:px-2">
           <CombinedSlider 
             images={designAssets.images}
             titles={designAssets.titles}
             className="max-w-7xl mx-auto"
-            interval={8000} // Slower transition
+            interval={10000} // Even slower transition
           />
         </div>
         
@@ -312,7 +313,7 @@ const ProjectDetail = () => {
       
       {/* Final Design Section */}
       <section className="pb-12">
-        <div className="container mx-auto px-4 sm:px-0">
+        <div className="container mx-auto px-4 sm:px-4 md:px-4 lg:px-2">
           <div className="max-w-7xl mx-auto">
             <h2 className="text-4xl font-bold text-left mb-8 font-manrope">Final Design</h2>
             <motion.div 
@@ -336,24 +337,25 @@ const ProjectDetail = () => {
       {/* Navigation Section */}
       <section className="py-10 border-t border-gray-200">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col-reverse md:flex-row justify-between items-center max-w-7xl mx-auto">
+          <div className="flex justify-center items-center gap-16 max-w-7xl mx-auto">
+            <Link 
+              to="/#projects" 
+              className="flex items-center text-gray-700 hover:text-[#3E40EF] transition-colors font-medium font-manrope"
+            >
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              <span>Back</span>
+            </Link>
+            
             {nextProject && (
               <Link 
                 to={`/projects/${nextProject.id}`} 
-                className="flex items-center text-[#3E40EF] hover:text-[#3E40EF]/80 transition-colors font-medium bg-[#3E40EF]/5 hover:bg-[#3E40EF]/10 px-5 py-2.5 rounded-full font-manrope mb-6 md:mb-0"
+                onClick={() => window.scrollTo(0, 0)} // Scroll to top on click
+                className="flex items-center text-[#3E40EF] hover:text-[#3E40EF]/80 transition-colors font-medium font-manrope"
               >
-                <span>Next Project: {nextProject.title}</span>
+                <span>Next</span>
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             )}
-            
-            <Link 
-              to="/#projects" 
-              className="flex items-center text-gray-700 hover:text-[#3E40EF] transition-colors font-manrope"
-            >
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              <span>Back to Projects</span>
-            </Link>
           </div>
         </div>
       </section>
