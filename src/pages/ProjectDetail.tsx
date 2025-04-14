@@ -10,6 +10,7 @@ import ProjectDetailsGrid from "@/components/ProjectDetailsGrid";
 import CombinedSlider from "@/components/CombinedSlider";
 import Footer from "@/components/Footer";
 import HomeButton from "@/components/HomeButton";
+import { AnimatedGridPattern } from "@/components/AnimatedGridPattern";
 
 // Mock data for projects
 const projectsData = [
@@ -198,11 +199,11 @@ const ProjectDetail = () => {
       {/* Hero Section */}
       <section className="relative pt-28 pb-4">
         {/* Banner image with rounded corners and 16:9 aspect ratio */}
-        <div className="container mx-auto px-6">
-          <div className="w-full max-w-6xl mx-auto">
-            {/* Banner image with 16:9 aspect ratio */}
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="w-full max-w-7xl mx-auto">
+            {/* Banner image with 16:9 aspect ratio and animated grid overlay */}
             <div className="overflow-hidden rounded-xl relative">
-              <div className="aspect-video">
+              <div className="aspect-[16/7] md:aspect-[16/8]">
                 <img 
                   src={project.image} 
                   alt={project.title}
@@ -210,9 +211,27 @@ const ProjectDetail = () => {
                   style={{ boxShadow: 'none' }}
                 />
                 
+                {/* Animated grid pattern overlay */}
+                <div className="absolute inset-0 z-10 opacity-30">
+                  <AnimatedGridPattern 
+                    width={30} 
+                    height={30} 
+                    numSquares={40}
+                    maxOpacity={0.2}
+                    className="text-white/30"
+                  />
+                </div>
+                
                 {/* Title positioned at bottom left of image */}
-                <div className="absolute bottom-0 left-0 p-6 md:p-8 bg-gradient-to-t from-black/60 to-transparent w-full">
-                  <h1 className="text-3xl md:text-5xl font-bold text-white font-manrope">{project.title}</h1>
+                <div className="absolute bottom-0 left-0 p-6 md:p-8 bg-gradient-to-t from-black/70 to-transparent w-full z-20">
+                  <motion.h1 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    className="text-3xl md:text-5xl font-bold text-white font-manrope"
+                  >
+                    {project.title}
+                  </motion.h1>
                 </div>
               </div>
             </div>
@@ -261,10 +280,10 @@ const ProjectDetail = () => {
 
       {/* Project Details Section */}
       <section className="pb-12">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 sm:px-0">
           <ProjectDetailsGrid 
             items={projectDetails}
-            className="max-w-6xl mx-auto"
+            className="max-w-7xl mx-auto"
           />
         </div>
         
@@ -276,12 +295,12 @@ const ProjectDetail = () => {
 
       {/* Combined Design Process & Elements Section */}
       <section className="pb-12">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 sm:px-0">
           <CombinedSlider 
             images={designAssets.images}
             titles={designAssets.titles}
-            className="max-w-6xl mx-auto"
-            interval={6000}
+            className="max-w-7xl mx-auto"
+            interval={8000} // Slower transition
           />
         </div>
         
@@ -293,8 +312,8 @@ const ProjectDetail = () => {
       
       {/* Final Design Section */}
       <section className="pb-12">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
+        <div className="container mx-auto px-4 sm:px-0">
+          <div className="max-w-7xl mx-auto">
             <h2 className="text-4xl font-bold text-left mb-8 font-manrope">Final Design</h2>
             <motion.div 
               className="rounded-xl overflow-hidden"
@@ -317,24 +336,24 @@ const ProjectDetail = () => {
       {/* Navigation Section */}
       <section className="py-10 border-t border-gray-200">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center max-w-6xl mx-auto">
-            <Link 
-              to="/#projects" 
-              className="flex items-center text-gray-700 hover:text-[#3E40EF] transition-colors mb-6 md:mb-0 font-manrope"
-            >
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              <span>Back to Projects</span>
-            </Link>
-            
+          <div className="flex flex-col-reverse md:flex-row justify-between items-center max-w-7xl mx-auto">
             {nextProject && (
               <Link 
                 to={`/projects/${nextProject.id}`} 
-                className="flex items-center text-[#3E40EF] hover:text-[#3E40EF]/80 transition-colors font-medium bg-[#3E40EF]/5 hover:bg-[#3E40EF]/10 px-5 py-2.5 rounded-full font-manrope"
+                className="flex items-center text-[#3E40EF] hover:text-[#3E40EF]/80 transition-colors font-medium bg-[#3E40EF]/5 hover:bg-[#3E40EF]/10 px-5 py-2.5 rounded-full font-manrope mb-6 md:mb-0"
               >
                 <span>Next Project: {nextProject.title}</span>
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             )}
+            
+            <Link 
+              to="/#projects" 
+              className="flex items-center text-gray-700 hover:text-[#3E40EF] transition-colors font-manrope"
+            >
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              <span>Back to Projects</span>
+            </Link>
           </div>
         </div>
       </section>

@@ -27,7 +27,7 @@ const CombinedSlider = ({
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
 
-  // Handle autoplay
+  // Handle autoplay with longer intervals for slower transitions
   useEffect(() => {
     if (!autoplay || isPaused || images.length <= 1) return;
     
@@ -38,13 +38,15 @@ const CombinedSlider = ({
     return () => clearInterval(timer);
   }, [autoplay, images.length, interval, isPaused]);
 
-  // Animate progress bar
+  // Animate progress bar with slower progress
   useEffect(() => {
     const duration = interval / 1000; // Convert to seconds for animation
     
     if (!isPaused && autoplay) {
+      // Reset first then animate
+      progressControls.set({ scaleX: 0 });
       progressControls.start({
-        scaleX: [0, 1],
+        scaleX: 1,
         transition: { duration, ease: "linear" }
       });
     } else {
@@ -138,10 +140,10 @@ const CombinedSlider = ({
             src={images[currentIndex]}
             alt={`${titles[currentIndex]} slide ${currentIndex + 1}`}
             className="absolute inset-0 w-full h-full object-cover"
-            initial={{ opacity: 0, scale: 1.05 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
             loading="lazy"
             draggable="false"
             style={{ boxShadow: 'none' }}

@@ -21,7 +21,7 @@ export const DesktopTextReveal: FC<TextRevealResponsiveProps> = memo(({
   const targetRef = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
-    offset: ["start 0.65", "start 0.2"], // Trigger when in middle of screen
+    offset: ["start 0.5", "start 0.1"], // Trigger when in middle of screen
   });
 
   if (typeof children !== "string") {
@@ -38,9 +38,9 @@ export const DesktopTextReveal: FC<TextRevealResponsiveProps> = memo(({
           const endBase = (lineIndex + 1) / totalLines;
           const segmentSize = (endBase - startBase) / (words.length + 1);
           
-          // Much slower animation timing for a more deliberate reveal
-          const start = startBase + (i * segmentSize * 0.15);
-          const end = start + (segmentSize * 0.4);
+          // Even slower animation timing for a more deliberate reveal
+          const start = startBase + (i * segmentSize * 0.08);
+          const end = start + (segmentSize * 0.25);
           
           return (
             <Word key={i} progress={scrollYProgress} range={[start, end]}>
@@ -65,7 +65,7 @@ export const MobileTextReveal: FC<TextRevealResponsiveProps> = memo(({
   const targetRef = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
-    offset: ["start 0.9", "start 0.4"],
+    offset: ["start 0.6", "start 0.2"], // Trigger closer to middle of screen
   });
 
   if (typeof children !== "string") {
@@ -87,10 +87,10 @@ export const MobileTextReveal: FC<TextRevealResponsiveProps> = memo(({
     return () => window.removeEventListener('resize', checkResponsive);
   }, []);
 
-  // Optimize word grouping for mobile
+  // Optimize word grouping for mobile - smaller groups for more consistent lines
   const getOptimalWordsPerRow = () => {
-    if (screenWidth < 320) return 2;
-    if (screenWidth < 380) return 3;
+    if (screenWidth < 320) return 3;
+    if (screenWidth < 380) return 4;
     if (screenWidth < 480) return 4;
     return 5;
   };
@@ -118,9 +118,9 @@ export const MobileTextReveal: FC<TextRevealResponsiveProps> = memo(({
               const endBase = (lineIndex + 1) / totalLines;
               const segmentSize = (endBase - startBase) / (wordCount + 1);
               
-              // Much slower animation timing for mobile
-              const start = startBase + (wordIndex * segmentSize * 0.15);
-              const end = start + (segmentSize * 0.4);
+              // Even slower animation timing for mobile with more natural spacing
+              const start = startBase + (wordIndex * segmentSize * 0.08);
+              const end = start + (segmentSize * 0.25);
             
               return (
                 <Word key={`${groupIndex}-${i}`} progress={scrollYProgress} range={[start, end]}>

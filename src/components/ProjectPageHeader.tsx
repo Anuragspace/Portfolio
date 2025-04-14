@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { WordRotate } from "@/components/WordRotate";
 import { BorderBeam } from "@/components/BorderBeam";
-import { Sparkles } from "lucide-react";
+import { Sparkles, ArrowUpRight } from "lucide-react";
 
 interface ProjectPageHeaderProps {
   className?: string;
@@ -27,7 +27,7 @@ const ProjectPageHeader = ({ className }: ProjectPageHeaderProps) => {
     <header 
       className={cn(
         "fixed top-0 left-0 right-0 z-50 py-6 w-full transition-all duration-300",
-        isScrolled && "bg-white/40 backdrop-blur-md border-b border-gray-100 py-4",
+        isScrolled && "bg-white/30 backdrop-blur-sm border-b border-gray-100 py-4",
         className
       )}
     >
@@ -58,54 +58,19 @@ const ProjectPageHeader = ({ className }: ProjectPageHeaderProps) => {
             </div>
           </Link>
 
-          {/* Navigation - only show rotating text and button on mobile */}
+          {/* Mobile - only show Get in Touch button */}
           <div className="flex items-center space-x-4 sm:space-x-8">
-            <motion.nav 
-              className="relative bg-gray-100/50 backdrop-blur-sm rounded-full px-2 py-2 hidden sm:flex items-center gap-1"
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.3 }}
-            >
-              <BorderBeam 
-                colorFrom="#3E40EF"
-                colorTo="#6366F1"
-                size={70}
-                duration={7}
-                className="opacity-70"
-              />
-              <Link 
-                to="/#about" 
-                className="relative z-10 text-sm font-medium px-3 py-1.5 rounded-full transition-all duration-300 text-black hover:bg-white/80"
-              >
-                About
-              </Link>
-              <Link 
-                to="/#projects" 
-                className="relative z-10 text-sm font-medium px-3 py-1.5 rounded-full transition-all duration-300 text-black hover:bg-white/80"
-              >
-                Projects
-              </Link>
-              <Link 
-                to="/#skills" 
-                className="relative z-10 text-sm font-medium px-3 py-1.5 rounded-full transition-all duration-300 text-black hover:bg-white/80"
-              >
-                Skills
-              </Link>
-              <Link 
-                to="/#blog" 
-                className="relative z-10 text-sm font-medium px-3 py-1.5 rounded-full transition-all duration-300 text-black hover:bg-white/80"
-              >
-                Blog
-              </Link>
-            </motion.nav>
-            
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.3 }}
             >
-              <Link to="/#contact" className="px-4 py-2 bg-[#3E40EF]/10 backdrop-blur-sm rounded-full text-black border border-[#3E40EF]/20 hover:bg-[#3E40EF]/20 transition-all font-medium">
-                Get in Touch
+              <Link 
+                to="/#contact" 
+                className="flex items-center gap-1.5 px-5 py-2.5 bg-[#3E40EF] text-white rounded-full hover:bg-[#3E40EF]/90 transition-all font-medium"
+              >
+                <span>Get in Touch</span>
+                <ArrowUpRight className="h-4 w-4 rotate-45" />
               </Link>
             </motion.div>
           </div>
