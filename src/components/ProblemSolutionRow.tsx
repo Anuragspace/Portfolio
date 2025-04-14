@@ -72,7 +72,6 @@ const ProblemSolutionRow = ({
               }}
               className="mr-3 text-[#3E40EF]"
             >
-              {/* Circular icon for solution - simplified */}
               <Circle size={20} className="stroke-current" />
             </motion.div>
             <h3 className="text-xl font-medium uppercase tracking-wider text-gray-500 font-manrope">solution</h3>

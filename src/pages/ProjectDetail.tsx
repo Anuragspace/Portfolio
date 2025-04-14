@@ -200,14 +200,13 @@ const ProjectDetail = () => {
       {/* Header */}
       <ProjectPageHeader />
       
-      {/* Hero Section */}
+      {/* Hero Section with adjusted banner height */}
       <section className="relative pt-28 pb-4">
         <div className="container mx-auto px-4 sm:px-4 md:px-4 lg:px-2">
           <div className="w-full max-w-7xl mx-auto">
-            {/* Banner image with increased height (>85% screen size) */}
+            {/* Banner image with adjusted height (60% screen size) */}
             <div className="overflow-hidden rounded-xl relative">
-              {/* Increased height to more than 85% of screen size with vh units */}
-              <div className="h-[90vh] md:h-[85vh]">
+              <div className="h-[60vh] md:h-[60vh]"> {/* Adjusted to 60% of viewport height */}
                 <img 
                   src={project.image} 
                   alt={project.title}
@@ -268,7 +267,7 @@ const ProjectDetail = () => {
               </DesktopTextReveal>
               
               {/* Mobile optimized text reveal */}
-              <MobileTextReveal lineIndex={0} totalLines={4} className="mb-6 text-left text-2xl leading-relaxed font-manrope">
+              <MobileTextReveal lineIndex={0} totalLines={2} className="mb-6 text-left text-2xl leading-relaxed font-manrope">
                 {project.description}
               </MobileTextReveal>
             </div>
@@ -319,7 +318,7 @@ const ProjectDetail = () => {
             images={designAssets.images}
             titles={designAssets.titles}
             className="max-w-7xl mx-auto"
-            interval={25000} // Even slower transition
+            interval={5000} // Faster transition
           />
         </div>
         
@@ -335,7 +334,7 @@ const ProjectDetail = () => {
           <div className="max-w-7xl mx-auto">
             <h2 className="text-4xl font-bold text-left mb-10 font-manrope">Final Design</h2>
             <motion.div 
-              className="rounded-xl overflow-hidden"
+              className="rounded-xl overflow-hidden aspect-w-16 aspect-h-9" // 16:9 aspect ratio
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -344,20 +343,21 @@ const ProjectDetail = () => {
               <img 
                 src={project.finalDesign[0]}
                 alt="Final design"
-                className="w-full h-auto aspect-video object-cover"
+                className="w-full h-full object-cover"
               />
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Navigation Section - simplified with just Next and Back */}
+      {/* Navigation Section - simplified with just Next and Back buttons on same line */}
       <section className="py-12 border-t border-gray-200">
         <div className="container mx-auto px-4">
-          <div className="flex justify-center items-center gap-10 max-w-7xl mx-auto">
+          <div className="flex justify-between items-center max-w-7xl mx-auto">
             <Link 
               to="/#projects" 
               className="flex items-center text-gray-700 hover:text-[#3E40EF] transition-colors font-medium font-manrope"
+              onClick={() => window.scrollTo(0, 0)}
             >
               <ArrowLeft className="mr-2 h-4 w-4" />
               <span>Back</span>
@@ -367,6 +367,7 @@ const ProjectDetail = () => {
               <Link 
                 to={`/projects/${nextProject.id}`} 
                 className="flex items-center text-[#3E40EF] hover:text-[#3E40EF]/80 transition-colors font-medium font-manrope"
+                onClick={() => window.scrollTo(0, 0)}
               >
                 <span>Next</span>
                 <ArrowRight className="ml-2 h-4 w-4" />
@@ -379,7 +380,7 @@ const ProjectDetail = () => {
       {/* Footer */}
       <Footer />
       
-      {/* Home Button - moved further down */}
+      {/* Home Button */}
       <HomeButton />
     </div>
   );

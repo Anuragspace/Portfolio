@@ -21,7 +21,7 @@ export const DesktopTextReveal: FC<TextRevealResponsiveProps> = memo(({
   const targetRef = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
-    offset: ["start 0.75", "start 0.35"], // Adjusted for more visible area
+    offset: ["start 0.8", "start 0.3"], // Adjusted for more gradual reveal
   });
 
   if (typeof children !== "string") {
@@ -38,10 +38,9 @@ export const DesktopTextReveal: FC<TextRevealResponsiveProps> = memo(({
           const endBase = (lineIndex + 1) / totalLines;
           const segmentSize = (endBase - startBase) / (words.length + 1);
           
-          // Much slower animation timing for a more deliberate reveal
-          // Significantly reduced factors for slower, more controlled animation
-          const start = startBase + (i * segmentSize * 0.02); // Reduced from 0.04 to 0.02
-          const end = start + (segmentSize * 0.08);  // Reduced from 0.15 to 0.08
+          // Adjusted timing for smoother, more natural reveal
+          const start = startBase + (i * segmentSize * 0.4); 
+          const end = start + (segmentSize * 0.6);  
           
           return (
             <Word key={i} progress={scrollYProgress} range={[start, end]}>
@@ -66,7 +65,7 @@ export const MobileTextReveal: FC<TextRevealResponsiveProps> = memo(({
   const targetRef = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
-    offset: ["start 0.8", "start 0.4"], // Adjusted to trigger earlier on mobile
+    offset: ["start 0.85", "start 0.35"], // Adjusted to trigger earlier on mobile
   });
 
   if (typeof children !== "string") {
@@ -88,12 +87,12 @@ export const MobileTextReveal: FC<TextRevealResponsiveProps> = memo(({
     return () => window.removeEventListener('resize', checkResponsive);
   }, []);
 
-  // Improve word grouping for mobile - create more natural sentence breaks
+  // Improve word grouping for mobile - create more natural line breaks
   const getOptimalWordsPerRow = () => {
     if (screenWidth < 320) return 3;
-    if (screenWidth < 375) return 3;
-    if (screenWidth < 400) return 4;
-    return 5;
+    if (screenWidth < 375) return 4;
+    if (screenWidth < 400) return 5;
+    return 6;
   };
 
   // Group words for more natural line breaks on mobile
@@ -114,14 +113,14 @@ export const MobileTextReveal: FC<TextRevealResponsiveProps> = memo(({
               const wordIndex = groupIndex * optimalWordsPerRow + i;
               const wordCount = words.length;
               
-              // Even slower animation timing for mobile
+              // Adjusted timing for more natural reveal
               const startBase = lineIndex / totalLines; 
               const endBase = (lineIndex + 1) / totalLines;
               const segmentSize = (endBase - startBase) / (wordCount + 1);
               
-              // Much slower animation timing for mobile with more natural spacing
-              const start = startBase + (wordIndex * segmentSize * 0.02); // Reduced from 0.04 to 0.02
-              const end = start + (segmentSize * 0.08);  // Reduced from 0.15 to 0.08
+              // More natural animation timing
+              const start = startBase + (wordIndex * segmentSize * 0.4);
+              const end = start + (segmentSize * 0.6);
             
               return (
                 <Word key={`${groupIndex}-${i}`} progress={scrollYProgress} range={[start, end]}>
@@ -145,10 +144,10 @@ interface WordProps {
 }
 
 const Word: FC<WordProps> = memo(({ children, progress, range }) => {
-  // Slowed down transition with smoother effect
-  const opacity = useTransform(progress, range, [0.15, 1]);
+  // Smoother transitions with better contrast
+  const opacity = useTransform(progress, range, [0.2, 1]);
   const color = useTransform(progress, range, ["#9ca3af", "#000000"]);
-  const y = useTransform(progress, range, [6, 0]); // Add subtle upward movement
+  const y = useTransform(progress, range, [10, 0]); // Subtle upward movement
 
   return (
     <span className="relative mx-[1px] md:mx-1 inline-flex">
@@ -156,7 +155,7 @@ const Word: FC<WordProps> = memo(({ children, progress, range }) => {
         style={{ opacity, color, y }}
         className="font-manrope font-semibold whitespace-pre text-[20px] md:text-[26px]"
       >
-        {children}
+        {children}{" "}
       </motion.span>
     </span>
   );
