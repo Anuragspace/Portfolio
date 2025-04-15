@@ -28,7 +28,7 @@ export const TextReveal: FC<TextRevealProps> = memo(({
   const targetRef = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
-    offset: ["start 0.9", "start 0.4"],
+    offset: ["start 0.9", "start 0.3"], // Adjusted for smoother reveal
   });
 
   if (typeof children !== "string") {
@@ -37,72 +37,25 @@ export const TextReveal: FC<TextRevealProps> = memo(({
 
   const words = children.split(" ");
 
-  // Calculate optimal number of words per line based on screen size
-  const [isMobile, setIsMobile] = useState(false);
-  const [screenWidth, setScreenWidth] = useState(0);
-  
-  useEffect(() => {
-    const checkResponsive = () => {
-      const width = window.innerWidth;
-      setIsMobile(width < 768);
-      setScreenWidth(width);
-    };
-    
-    checkResponsive();
-    window.addEventListener('resize', checkResponsive);
-    return () => window.removeEventListener('resize', checkResponsive);
-  }, []);
-
-  // Calculate optimal character count per line for better text wrapping
-  const getOptimalWordsPerRow = () => {
-    if (screenWidth < 380) return 3;
-    if (screenWidth < 480) return 4;
-    if (screenWidth < 640) return 5;
-    return 8;
-  };
-
-  // Group words for more controlled line breaks
-  const wordGroups = [];
-  const optimalWordsPerRow = getOptimalWordsPerRow();
-  
-  for (let i = 0; i < words.length; i += optimalWordsPerRow) {
-    wordGroups.push(words.slice(i, i + optimalWordsPerRow));
-  }
-
   return (
     <RevealContext.Provider value={{ lineIndex, totalLines }}>
       <div ref={targetRef} className={cn("relative z-0 w-full", className)}>
-        <div className="w-full flex flex-col bg-transparent">
-          {wordGroups.map((group, groupIndex) => (
-            <div key={groupIndex} className="flex flex-wrap text-2xl md:text-3xl font-bold text-gray-400 w-full gap-x-[3px] md:gap-x-1 mb-1 md:mb-0">
-              {group.map((word, i) => {
-                // Calculate global word index
-                const wordIndex = groupIndex * optimalWordsPerRow + i;
-                const wordCount = words.length;
-                
-                // Adjust overlap for smoother animation between lines
-                const startBase = lineIndex / totalLines; 
-                const endBase = (lineIndex + 1) / totalLines;
-                
-                // Improved timing calculation for better text flow
-                const segmentSize = (endBase - startBase) / (wordCount + 1);
-                
-                // Slow down the animation considerably for a much more gradual reveal
-                const responsiveFactor = isMobile ? 0.4 : 0.2; // Reduced from 0.8/0.6 to 0.4/0.2
-                const completionFactor = isMobile ? 0.7 : 0.6; // Reduced from 1.2/1.1 to 0.7/0.6
-                
-                // More continuous reveal with better rhythm and much slower timing
-                const start = startBase + (wordIndex * segmentSize * responsiveFactor);
-                const end = start + (segmentSize * completionFactor);
-              
-              return (
-                  <Word key={`${groupIndex}-${i}`} progress={scrollYProgress} range={[start, end]}>
-                    {word}
-                  </Word>
-                );
-              })}
-            </div>
-          ))}
+        <div className="w-full flex flex-wrap bg-transparent">
+          {words.map((word, i) => {
+            const startBase = lineIndex / totalLines; 
+            const endBase = (lineIndex + 1) / totalLines;
+            const segmentSize = (endBase - startBase) / words.length;
+            
+            // Adjust timing for smoother, gradual word-by-word reveal
+            const start = Math.max(0, startBase + (i * segmentSize * 0.8));
+            const end = Math.min(1, start + (segmentSize * 1.2));
+            
+            return (
+              <Word key={i} progress={scrollYProgress} range={[start, end]}>
+                {word}
+              </Word>
+            );
+          })}
         </div>
       </div>
     </RevealContext.Provider>
@@ -118,20 +71,18 @@ interface WordProps {
 }
 
 const Word: FC<WordProps> = memo(({ children, progress, range }) => {
-  // Slower opacity transition
+  // Smoother transitions with better contrast
   const opacity = useTransform(progress, range, [0.2, 1]);
-  // Slower color transition
   const color = useTransform(progress, range, ["#9ca3af", "#000000"]);
-  // Add subtle Y movement for enhanced animation
-  const y = useTransform(progress, range, [10, 0]);
+  const y = useTransform(progress, range, [8, 0]); // Subtle upward movement
 
   return (
-    <span className="relative mx-[1px] md:mx-1 inline-flex">
+    <span className="relative mx-[3px] md:mx-2 inline-flex">
       <motion.span
         style={{ opacity, color, y }}
-        className="font-semibold whitespace-pre"
+        className="font-semibold whitespace-pre text-xl md:text-2xl lg:text-3xl"
       >
-        {children}
+        {children}{" "}
       </motion.span>
     </span>
   );

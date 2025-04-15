@@ -21,7 +21,7 @@ export const DesktopTextReveal: FC<TextRevealResponsiveProps> = memo(({
   const targetRef = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
-    offset: ["start 0.8", "start 0.3"], // Adjusted for more gradual reveal
+    offset: ["start 0.9", "start 0.3"], // Adjusted for smoother reveal
   });
 
   if (typeof children !== "string") {
@@ -36,11 +36,11 @@ export const DesktopTextReveal: FC<TextRevealResponsiveProps> = memo(({
         {words.map((word, i) => {
           const startBase = lineIndex / totalLines; 
           const endBase = (lineIndex + 1) / totalLines;
-          const segmentSize = (endBase - startBase) / (words.length + 1);
+          const segmentSize = (endBase - startBase) / words.length;
           
           // Adjusted timing for smoother, more natural reveal
-          const start = startBase + (i * segmentSize * 0.4); 
-          const end = start + (segmentSize * 0.6);  
+          const start = Math.max(0, startBase + (i * segmentSize * 0.8)); 
+          const end = Math.min(1, start + (segmentSize * 1.2));  
           
           return (
             <Word key={i} progress={scrollYProgress} range={[start, end]}>
@@ -65,7 +65,7 @@ export const MobileTextReveal: FC<TextRevealResponsiveProps> = memo(({
   const targetRef = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
-    offset: ["start 0.85", "start 0.35"], // Adjusted to trigger earlier on mobile
+    offset: ["start 0.9", "start 0.3"], // Adjusted to trigger earlier on mobile
   });
 
   if (typeof children !== "string") {
@@ -107,7 +107,7 @@ export const MobileTextReveal: FC<TextRevealResponsiveProps> = memo(({
     <div ref={targetRef} className={cn("relative z-0 w-full block md:hidden", className)}>
       <div className="w-full flex flex-col bg-transparent">
         {wordGroups.map((group, groupIndex) => (
-          <div key={groupIndex} className="flex flex-wrap text-[18px] font-bold text-gray-400 w-full gap-x-[3px] mb-1 md:mb-0.5">
+          <div key={groupIndex} className="flex flex-wrap text-xl font-bold text-gray-400 w-full gap-x-[3px] mb-2">
             {group.map((word, i) => {
               // Calculate global word index
               const wordIndex = groupIndex * optimalWordsPerRow + i;
@@ -116,11 +116,11 @@ export const MobileTextReveal: FC<TextRevealResponsiveProps> = memo(({
               // Adjusted timing for more natural reveal
               const startBase = lineIndex / totalLines; 
               const endBase = (lineIndex + 1) / totalLines;
-              const segmentSize = (endBase - startBase) / (wordCount + 1);
+              const segmentSize = (endBase - startBase) / wordCount;
               
               // More natural animation timing
-              const start = startBase + (wordIndex * segmentSize * 0.4);
-              const end = start + (segmentSize * 0.6);
+              const start = Math.max(0, startBase + (wordIndex * segmentSize * 0.8));
+              const end = Math.min(1, start + (segmentSize * 1.2));
             
               return (
                 <Word key={`${groupIndex}-${i}`} progress={scrollYProgress} range={[start, end]}>
@@ -147,13 +147,13 @@ const Word: FC<WordProps> = memo(({ children, progress, range }) => {
   // Smoother transitions with better contrast
   const opacity = useTransform(progress, range, [0.2, 1]);
   const color = useTransform(progress, range, ["#9ca3af", "#000000"]);
-  const y = useTransform(progress, range, [10, 0]); // Subtle upward movement
+  const y = useTransform(progress, range, [8, 0]); // Subtle upward movement
 
   return (
-    <span className="relative mx-[1px] md:mx-1 inline-flex">
+    <span className="relative mx-[2px] md:mx-2 inline-flex">
       <motion.span
         style={{ opacity, color, y }}
-        className="font-manrope font-semibold whitespace-pre text-[20px] md:text-[26px]"
+        className="font-manrope font-semibold whitespace-pre text-lg md:text-xl lg:text-2xl"
       >
         {children}{" "}
       </motion.span>

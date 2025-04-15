@@ -114,9 +114,9 @@ const CombinedSlider = ({
       ref={sliderRef}
     >
       {/* Title with animated underline that moves with slides */}
-      <div className="relative z-10 mb-6 flex flex-col items-center">
+      <div className="relative z-10 mb-8 flex flex-col items-center">
         <h3 className="text-2xl md:text-4xl font-semibold text-center mb-4 font-manrope">{titles[currentIndex]}</h3>
-        <div className="relative h-0.5 w-64 bg-gray-200 overflow-hidden rounded-full">
+        <div className="relative h-1 w-64 bg-gray-200 overflow-hidden rounded-full">
           <motion.div 
             className="absolute top-0 left-0 h-full bg-[#3E40EF] origin-left"
             animate={progressControls}
@@ -127,7 +127,7 @@ const CombinedSlider = ({
       
       {/* Image slider with 16:9 aspect ratio */}
       <div 
-        className="relative w-full mx-auto rounded-xl overflow-hidden cursor-grab active:cursor-grabbing" 
+        className="relative w-full mx-auto rounded-xl overflow-hidden cursor-grab active:cursor-grabbing shadow-lg" 
         style={{ maxWidth: '100%' }} 
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
@@ -144,7 +144,7 @@ const CombinedSlider = ({
               initial={{ opacity: 0, x: 100 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -100 }}
-              transition={{ duration: 0.8, ease: "easeInOut" }} /* Faster transition */
+              transition={{ duration: 0.6, ease: "easeInOut" }} /* Adjusted for smoother transition */
               loading="lazy"
               draggable="false"
               style={{ 
@@ -166,7 +166,7 @@ const CombinedSlider = ({
               className={`h-2.5 rounded-full transition-all duration-300 ${
                 index === currentIndex 
                   ? "bg-white w-12" 
-                  : "bg-white/50 w-12 hover:bg-white/80"
+                  : "bg-white/50 w-8 hover:bg-white/80"
               }`}
               aria-label={`Go to slide ${index + 1}`}
             />

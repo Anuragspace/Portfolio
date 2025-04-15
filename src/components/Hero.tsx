@@ -20,7 +20,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="min-h-screen pt-24 pb-16 flex items-center relative overflow-hidden">
+    <section className="min-h-[90vh] md:min-h-screen pt-24 pb-16 flex items-center relative overflow-hidden">
       {/* Add the AnimatedGridPattern with mask and skew effect */}
       <AnimatedGridPattern
         numSquares={30}
@@ -38,22 +38,22 @@ const Hero = () => {
                 <Sparkles className="inline-block mr-2 h-4 w-4" />
                 UI/UX Designer & Product Designer
               </div>
-              <h1 className="animate-slide-in font-black"  style={{ animationDelay: "0.1s" }}>
+              <h1 className="animate-slide-in font-black text-4xl md:text-5xl lg:text-6xl"  style={{ animationDelay: "0.1s" }}>
                 Crafting Digital Experiences That <span className="text-[#3E40EF]">Inspire</span>
               </h1>
-              <p className="text-lg text-gray-600 animate-slide-in" style={{ animationDelay: "0.2s" }}>
+              <p className="text-lg md:text-xl text-gray-600 animate-slide-in" style={{ animationDelay: "0.2s" }}>
                 I transform complex problems into elegant, intuitive designs that delight users and drive business growth.
               </p>
               <div className="flex flex-row sm:gap-5 gap-3 sm:pl-2 pt-4 animate-slide-in" style={{ animationDelay: "0.3s" }}>
                 <div className="flex flex-row w-full max-w-[360px] sm:gap-4 gap-2 mx-auto sm:mx-0">
                   <a href="#projects" className="w-1/2">
-                    <RainbowButton className="w-full whitespace-nowrap h-11 text-sm sm:text-base transition-all duration-300 hover:transform hover:scale-105 hover:shadow-md">
+                    <RainbowButton className="w-full whitespace-nowrap h-12 text-sm sm:text-base transition-all duration-300 hover:transform hover:scale-105 hover:shadow-md">
                       View Projects
                     </RainbowButton>
                   </a>
                   <ShinyButton 
                     onClick={triggerConfetti} 
-                    className="h-11 bg-white text-black shadow w-full text-sm sm:text-base"
+                    className="h-12 bg-white text-black shadow w-full text-sm sm:text-base"
                   >
                     Click Me
                   </ShinyButton>
@@ -74,8 +74,8 @@ const Hero = () => {
                 <img 
                   src="/lovable-uploads/anurag.webp" 
                   alt="Designer portrait" 
-                  rel="preload"
-                  className="w-full h-full object-cover z-20 relative"
+                  fetchpriority="high"
+                  className="w-full h-full object-cover z-20 relative hero-image"
                 />
               </div>
               

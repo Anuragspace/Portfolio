@@ -133,13 +133,13 @@ const projectsData = [
 
 // Enhanced function for processing design assets
 const prepareDesignAssets = (project: any) => {
-  // Just take one process and one element image for the simplified slider
-  const processImage = project.designProcess[0];
-  const elementImage = project.designElements[0];
-  
+  // Use all available process and element images for the slider
   return { 
-    images: [processImage, elementImage],
-    titles: ["Design Process", "Design Elements"]
+    images: [...project.designProcess, ...project.designElements].slice(0, 6),
+    titles: Array(project.designProcess.length + project.designElements.length)
+      .fill("")
+      .map((_, i) => i < project.designProcess.length ? "Design Process" : "Design Elements")
+      .slice(0, 6)
   };
 };
 
@@ -201,16 +201,17 @@ const ProjectDetail = () => {
       <ProjectPageHeader />
       
       {/* Hero Section with adjusted banner height */}
-      <section className="relative pt-28 pb-4">
+      <section className="relative pt-28 pb-8">
         <div className="container mx-auto px-4 sm:px-4 md:px-4 lg:px-2">
           <div className="w-full max-w-7xl mx-auto">
-            {/* Banner image with adjusted height (60% screen size) */}
-            <div className="overflow-hidden rounded-xl relative">
-              <div className="h-[60vh] md:h-[60vh]"> {/* Adjusted to 60% of viewport height */}
+            {/* Banner image with adjusted height */}
+            <div className="overflow-hidden rounded-xl relative shadow-xl">
+              <div className="h-[40vh] md:h-[60vh]"> {/* 60% height on desktop, 40% on mobile */}
                 <img 
                   src={project.image} 
                   alt={project.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover primary-banner"
+                  fetchpriority="high"
                 />
                 
                 {/* Title positioned at bottom left of image */}
@@ -239,12 +240,12 @@ const ProjectDetail = () => {
             {/* Enhanced Text Reveal Animation with 4 lines for desktop */}
             <div className="w-full">
               {/* Line 1 */}
-              <DesktopTextReveal lineIndex={0} totalLines={4} className="mb-2 text-left text-3xl leading-relaxed font-manrope">
+              <DesktopTextReveal lineIndex={0} totalLines={4} className="mb-2 text-left text-2xl md:text-3xl leading-relaxed font-manrope">
                 {project.description.substring(0, Math.floor(project.description.length / 4))}
               </DesktopTextReveal>
               
               {/* Line 2 */}
-              <DesktopTextReveal lineIndex={1} totalLines={4} className="mb-2 text-left text-3xl leading-relaxed font-manrope">
+              <DesktopTextReveal lineIndex={1} totalLines={4} className="mb-2 text-left text-2xl md:text-3xl leading-relaxed font-manrope">
                 {project.description.substring(
                   Math.floor(project.description.length / 4),
                   Math.floor(project.description.length / 2)
@@ -252,7 +253,7 @@ const ProjectDetail = () => {
               </DesktopTextReveal>
               
               {/* Line 3 */}
-              <DesktopTextReveal lineIndex={2} totalLines={4} className="mb-2 text-left text-3xl leading-relaxed font-manrope">
+              <DesktopTextReveal lineIndex={2} totalLines={4} className="mb-2 text-left text-2xl md:text-3xl leading-relaxed font-manrope">
                 {project.description.substring(
                   Math.floor(project.description.length / 2),
                   Math.floor(3 * project.description.length / 4)
@@ -260,15 +261,19 @@ const ProjectDetail = () => {
               </DesktopTextReveal>
               
               {/* Line 4 */}
-              <DesktopTextReveal lineIndex={3} totalLines={4} className="mb-2 text-left text-3xl leading-relaxed font-manrope">
+              <DesktopTextReveal lineIndex={3} totalLines={4} className="mb-2 text-left text-2xl md:text-3xl leading-relaxed font-manrope">
                 {project.description.substring(
                   Math.floor(3 * project.description.length / 4)
                 )}
               </DesktopTextReveal>
               
-              {/* Mobile optimized text reveal */}
-              <MobileTextReveal lineIndex={0} totalLines={2} className="mb-6 text-left text-2xl leading-relaxed font-manrope">
-                {project.description}
+              {/* Mobile optimized text reveal with 2 sections */}
+              <MobileTextReveal lineIndex={0} totalLines={2} className="mb-3 text-left leading-relaxed font-manrope">
+                {project.description.substring(0, Math.floor(project.description.length / 2))}
+              </MobileTextReveal>
+              
+              <MobileTextReveal lineIndex={1} totalLines={2} className="mb-6 text-left leading-relaxed font-manrope">
+                {project.description.substring(Math.floor(project.description.length / 2))}
               </MobileTextReveal>
             </div>
           </div>
@@ -318,7 +323,7 @@ const ProjectDetail = () => {
             images={designAssets.images}
             titles={designAssets.titles}
             className="max-w-7xl mx-auto"
-            interval={5000} // Faster transition
+            interval={4000} // Faster transition
           />
         </div>
         
@@ -334,42 +339,42 @@ const ProjectDetail = () => {
           <div className="max-w-7xl mx-auto">
             <h2 className="text-4xl font-bold text-left mb-10 font-manrope">Final Design</h2>
             <motion.div 
-              className="rounded-xl overflow-hidden aspect-w-16 aspect-h-9" // 16:9 aspect ratio
+              className="rounded-xl overflow-hidden shadow-xl"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <img 
-                src={project.finalDesign[0]}
-                alt="Final design"
-                className="w-full h-full object-cover"
-              />
+              <div className="aspect-w-16 aspect-h-9"> {/* Proper 16:9 aspect ratio */}
+                <img 
+                  src={project.finalDesign[0]}
+                  alt="Final design"
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Navigation Section - simplified with just Next and Back buttons on same line */}
+      {/* Navigation Section - simplified with just Next and Back buttons */}
       <section className="py-12 border-t border-gray-200">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center max-w-7xl mx-auto">
             <Link 
               to="/#projects" 
               className="flex items-center text-gray-700 hover:text-[#3E40EF] transition-colors font-medium font-manrope"
-              onClick={() => window.scrollTo(0, 0)}
             >
               <ArrowLeft className="mr-2 h-4 w-4" />
-              <span>Back</span>
+              <span>Back to Projects</span>
             </Link>
             
             {nextProject && (
               <Link 
                 to={`/projects/${nextProject.id}`} 
                 className="flex items-center text-[#3E40EF] hover:text-[#3E40EF]/80 transition-colors font-medium font-manrope"
-                onClick={() => window.scrollTo(0, 0)}
               >
-                <span>Next</span>
+                <span>Next Project</span>
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             )}

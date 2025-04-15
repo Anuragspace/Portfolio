@@ -21,34 +21,76 @@ export const cacheDOMElements = () => {
   }
 };
 
-// Optimize image loading
+// Optimize image loading with priority for above-fold images
 export const optimizeImageLoading = () => {
   if ('loading' in HTMLImageElement.prototype) {
     // Browser supports 'loading' attribute
     const images = document.querySelectorAll('img');
     images.forEach(img => {
       if (!img.hasAttribute('loading')) {
-        img.setAttribute('loading', 'lazy');
+        // Priority loading for hero images
+        if (img.closest('.hero-image') || img.closest('.primary-banner')) {
+          img.setAttribute('fetchpriority', 'high');
+        } else {
+          img.setAttribute('loading', 'lazy');
+        }
       }
     });
   }
 };
 
-// Debounce function for scroll and resize handlers
-export const debounce = (func: Function, wait: number) => {
+// Improved debounce function with immediate option for smoother interactions
+export const debounce = (func: Function, wait: number, immediate = false) => {
   let timeout: ReturnType<typeof setTimeout> | null = null;
   
   return function executedFunction(...args: any[]) {
+    const callNow = immediate && !timeout;
+    
     const later = () => {
       timeout = null;
-      func(...args);
+      if (!immediate) func(...args);
     };
     
     if (timeout) {
       clearTimeout(timeout);
     }
+    
     timeout = setTimeout(later, wait);
+    
+    if (callNow) func(...args);
   };
+};
+
+// Enhanced scroll optimization with RAF for smoother animations
+export const optimizeScrollHandlers = () => {
+  if (typeof window !== 'undefined') {
+    const originalAddEventListener = window.addEventListener;
+    let ticking = false;
+    
+    window.addEventListener = function(type, listener, options) {
+      if (type === 'scroll') {
+        const optimizedListener = function(e: Event) {
+          if (!ticking) {
+            window.requestAnimationFrame(() => {
+              (listener as EventListener)(e);
+              ticking = false;
+            });
+            ticking = true;
+          }
+        };
+        
+        return originalAddEventListener.call(this, type, optimizedListener as EventListener, 
+          { ...options, passive: true });
+      }
+      
+      if (type === 'resize') {
+        const debouncedListener = debounce(listener as Function, 100);
+        return originalAddEventListener.call(this, type, debouncedListener as EventListener, options);
+      }
+      
+      return originalAddEventListener.call(this, type, listener, options);
+    };
+  }
 };
 
 // Initialize all performance optimizations
@@ -57,16 +99,17 @@ export const initPerformanceOptimizations = () => {
     // Apply optimizations only in browser environment
     cacheDOMElements();
     optimizeImageLoading();
+    optimizeScrollHandlers();
     
-    // Optimize scroll handlers
-    const originalAddEventListener = window.addEventListener;
-    window.addEventListener = function(type, listener, options) {
-      if (type === 'scroll' || type === 'resize') {
-        const debouncedListener = debounce(listener as Function, 100);
-        return originalAddEventListener.call(this, type, debouncedListener as EventListener, options);
+    // Add font display swap for better loading performance
+    const style = document.createElement('style');
+    style.textContent = `
+      @font-face {
+        font-family: 'Manrope';
+        font-display: swap;
       }
-      return originalAddEventListener.call(this, type, listener, options);
-    };
+    `;
+    document.head.appendChild(style);
   }
 };
 
