@@ -20,7 +20,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="min-h-[90vh] md:min-h-screen pt-24 pb-16 flex items-center relative overflow-hidden">
+    <section className="min-h-[100vh] w-full flex items-center relative overflow-hidden">
       {/* Add the AnimatedGridPattern with mask and skew effect */}
       <AnimatedGridPattern
         numSquares={30}
@@ -30,8 +30,8 @@ const Hero = () => {
         className="absolute inset-x-[-42%] inset-y-[-5%] h-[100%] skew-y-12 text-[#3E40EF]/100 [mask-image:radial-gradient(500px_circle_at_center,white,transparent)]"
       />
 
-      <div className="container-custom">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <div className="container-custom w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center w-full">
           <div className="lg:col-span-7 z-10">
             <div className="space-y-6 max-w-3xl">
               <div className="inline-block px-3 py-1 bg-[#3E40EF]/10 text-[#3E40EF] rounded-full text-sm font-medium mb-2 animate-fade-in">
@@ -74,7 +74,7 @@ const Hero = () => {
                 <img 
                   src="/lovable-uploads/anurag.webp" 
                   alt="Designer portrait" 
-                  fetchPriority="high"  // Fixed attribute name
+                  fetchPriority="high"
                   className="w-full h-full object-cover z-20 relative hero-image"
                 />
               </div>

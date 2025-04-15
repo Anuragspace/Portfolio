@@ -27,7 +27,7 @@ const CombinedSlider = ({
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
 
-  // Handle autoplay with faster intervals for quicker transitions
+  // Handle autoplay with proper intervals
   useEffect(() => {
     if (!autoplay || isPaused || images.length <= 1) return;
     
@@ -38,7 +38,7 @@ const CombinedSlider = ({
     return () => clearInterval(timer);
   }, [autoplay, images.length, interval, isPaused]);
 
-  // Animate progress bar with faster progress
+  // Animate progress bar
   useEffect(() => {
     const duration = interval / 1000; // Convert to seconds for animation
     
@@ -125,7 +125,7 @@ const CombinedSlider = ({
         </div>
       </div>
       
-      {/* Image slider with 16:9 aspect ratio */}
+      {/* Image slider with proper 16:9 aspect ratio container */}
       <div 
         className="relative w-full mx-auto rounded-xl overflow-hidden cursor-grab active:cursor-grabbing shadow-lg" 
         style={{ maxWidth: '100%' }} 
@@ -134,7 +134,7 @@ const CombinedSlider = ({
         onTouchEnd={handleTouchEnd}
         onMouseDown={handleMouseDown}
       >
-        <div className="aspect-w-16 aspect-h-9 relative"> {/* 16:9 aspect ratio container */}
+        <div className="relative pb-[56.25%] w-full"> {/* 16:9 aspect ratio with padding bottom trick */}
           <AnimatePresence mode="wait">
             <motion.img
               key={currentIndex}
@@ -144,11 +144,10 @@ const CombinedSlider = ({
               initial={{ opacity: 0, x: 100 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -100 }}
-              transition={{ duration: 0.6, ease: "easeInOut" }} /* Adjusted for smoother transition */
+              transition={{ duration: 0.8, ease: "easeInOut" }}
               loading="lazy"
               draggable="false"
               style={{ 
-                boxShadow: 'none',
                 width: '100%',
                 height: '100%',
                 objectFit: 'cover'
@@ -157,7 +156,7 @@ const CombinedSlider = ({
           </AnimatePresence>
         </div>
         
-        {/* Indicators - simplified for only 2 slides */}
+        {/* Indicators - improved visibility */}
         <div className="absolute bottom-6 left-0 right-0 flex justify-center space-x-6">
           {images.map((_, index) => (
             <button
@@ -165,8 +164,8 @@ const CombinedSlider = ({
               onClick={() => setCurrentIndex(index)}
               className={`h-2.5 rounded-full transition-all duration-300 ${
                 index === currentIndex 
-                  ? "bg-white w-12" 
-                  : "bg-white/50 w-8 hover:bg-white/80"
+                  ? "bg-white w-12 shadow-md" 
+                  : "bg-white/60 w-8 hover:bg-white/90"
               }`}
               aria-label={`Go to slide ${index + 1}`}
             />

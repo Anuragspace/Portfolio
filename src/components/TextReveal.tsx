@@ -2,7 +2,7 @@
 "use client";
 
 import { motion, MotionValue, useScroll, useTransform } from "framer-motion";
-import { ComponentPropsWithoutRef, FC, ReactNode, useRef, memo, useContext, createContext, useState, useEffect } from "react";
+import { ComponentPropsWithoutRef, FC, ReactNode, useRef, memo, useContext, createContext } from "react";
 import { cn } from "@/lib/utils";
 
 // Create a context to track line index
@@ -42,13 +42,9 @@ export const TextReveal: FC<TextRevealProps> = memo(({
       <div ref={targetRef} className={cn("relative z-0 w-full", className)}>
         <div className="w-full flex flex-wrap bg-transparent">
           {words.map((word, i) => {
-            const startBase = lineIndex / totalLines; 
-            const endBase = (lineIndex + 1) / totalLines;
-            const segmentSize = (endBase - startBase) / words.length;
-            
-            // Adjust timing for smoother, gradual word-by-word reveal
-            const start = Math.max(0, startBase + (i * segmentSize * 0.8));
-            const end = Math.min(1, start + (segmentSize * 1.2));
+            // Calculate start and end points for each word based on total words
+            const start = i / words.length;
+            const end = start + 1 / words.length;
             
             return (
               <Word key={i} progress={scrollYProgress} range={[start, end]}>
@@ -77,10 +73,11 @@ const Word: FC<WordProps> = memo(({ children, progress, range }) => {
   const y = useTransform(progress, range, [8, 0]); // Subtle upward movement
 
   return (
-    <span className="relative mx-[3px] md:mx-2 inline-flex">
+    <span className="relative mx-[3px] md:mx-[6px] inline-flex">
+      <span className="absolute opacity-30">{children}</span>
       <motion.span
         style={{ opacity, color, y }}
-        className="font-semibold whitespace-pre text-xl md:text-2xl lg:text-3xl"
+        className="font-semibold whitespace-pre"
       >
         {children}{" "}
       </motion.span>

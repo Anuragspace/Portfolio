@@ -200,11 +200,11 @@ const ProjectDetail = () => {
       <ProjectPageHeader />
       
       {/* Hero Section with adjusted banner height */}
-      <section className="relative pt-28 pb-8">
-        <div className="container mx-auto px-4 sm:px-4 md:px-4 lg:px-2">
+      <section className="relative pt-28 pb-8 w-full">
+        <div className="container mx-auto px-4 sm:px-4 md:px-4 lg:px-2 w-full">
           <div className="w-full max-w-7xl mx-auto">
             {/* Banner image with adjusted height */}
-            <div className="overflow-hidden rounded-xl relative shadow-xl">
+            <div className="overflow-hidden rounded-xl relative shadow-xl w-full">
               <div className="h-[40vh] md:h-[60vh]">
                 <img 
                   src={project.image} 
@@ -231,8 +231,8 @@ const ProjectDetail = () => {
       </section>
 
       {/* Project Overview Section with enhanced text reveal */}
-      <section className="py-14">
-        <div className="container mx-auto px-4 sm:px-4 md:px-4 lg:px-2">
+      <section className="py-14 w-full">
+        <div className="container mx-auto px-4 sm:px-4 md:px-4 lg:px-2 w-full">
           <div className="max-w-7xl mx-auto">
             <h2 className="text-4xl font-bold text-left mb-8 font-manrope">Project Overview</h2>
             
@@ -315,15 +315,18 @@ const ProjectDetail = () => {
         </div>
       </section>
 
-      {/* Combined Design Process & Elements Section */}
-      <section className="pb-16">
-        <div className="container mx-auto px-4 sm:px-4 md:px-4 lg:px-2">
-          <CombinedSlider 
-            images={designAssets.images}
-            titles={designAssets.titles}
-            className="max-w-7xl mx-auto"
-            interval={4000} // Faster transition
-          />
+      {/* Combined Design Process & Elements Section - Improved for better visibility */}
+      <section className="py-16 w-full">
+        <div className="container mx-auto px-4 sm:px-4 md:px-4 lg:px-2 w-full">
+          <div className="max-w-7xl mx-auto">
+            <h2 className="text-4xl font-bold text-left mb-10 font-manrope">Design Process & Elements</h2>
+            <CombinedSlider 
+              images={designAssets.images}
+              titles={designAssets.titles}
+              className="w-full"
+              interval={6000} // Slower transition for better viewing
+            />
+          </div>
         </div>
         
         {/* Horizontal line separator */}
@@ -332,23 +335,23 @@ const ProjectDetail = () => {
         </div>
       </section>
       
-      {/* Final Design Section */}
-      <section className="pb-20">
-        <div className="container mx-auto px-4 sm:px-4 md:px-4 lg:px-2">
+      {/* Final Design Section with proper aspect ratio */}
+      <section className="pb-20 w-full">
+        <div className="container mx-auto px-4 sm:px-4 md:px-4 lg:px-2 w-full">
           <div className="max-w-7xl mx-auto">
             <h2 className="text-4xl font-bold text-left mb-10 font-manrope">Final Design</h2>
             <motion.div 
-              className="rounded-xl overflow-hidden shadow-xl"
+              className="rounded-xl overflow-hidden shadow-xl w-full"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <div className="aspect-w-16 aspect-h-9"> {/* Proper 16:9 aspect ratio */}
+              <div className="relative pb-[56.25%] w-full"> {/* 16:9 aspect ratio */}
                 <img 
                   src={project.finalDesign[0]}
                   alt="Final design"
-                  className="w-full h-full object-cover"
+                  className="absolute inset-0 w-full h-full object-cover"
                 />
               </div>
             </motion.div>
