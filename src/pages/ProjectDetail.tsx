@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, ArrowRight } from "lucide-react";
@@ -206,12 +205,12 @@ const ProjectDetail = () => {
           <div className="w-full max-w-7xl mx-auto">
             {/* Banner image with adjusted height */}
             <div className="overflow-hidden rounded-xl relative shadow-xl">
-              <div className="h-[40vh] md:h-[60vh]"> {/* 60% height on desktop, 40% on mobile */}
+              <div className="h-[40vh] md:h-[60vh]">
                 <img 
                   src={project.image} 
                   alt={project.title}
+                  fetchPriority="high"
                   className="w-full h-full object-cover primary-banner"
-                  fetchpriority="high"
                 />
                 
                 {/* Title positioned at bottom left of image */}

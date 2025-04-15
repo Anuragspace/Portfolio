@@ -74,7 +74,7 @@ const Hero = () => {
                 <img 
                   src="/lovable-uploads/anurag.webp" 
                   alt="Designer portrait" 
-                  fetchpriority="high"
+                  fetchPriority="high"  // Fixed attribute name
                   className="w-full h-full object-cover z-20 relative hero-image"
                 />
               </div>
