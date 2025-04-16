@@ -28,7 +28,7 @@ export const TextReveal: FC<TextRevealProps> = memo(({
   const targetRef = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
-    offset: ["start 0.9", "start 0.25"], // Adjusted for smoother reveal with a longer scroll distance
+    offset: ["start 0.9", "start 0.4"], // Adjusted for smoother reveal with a longer scroll distance
   });
 
   if (typeof children !== "string") {
@@ -44,8 +44,8 @@ export const TextReveal: FC<TextRevealProps> = memo(({
           {words.map((word, i) => {
             // Calculate start and end points for each word based on total words
             // Overlap ranges slightly for smoother word-to-word transitions
-            const start = i / (words.length * 1.1);
-            const end = start + 1.4 / words.length;
+            const start = i / (words.length * 1.2);
+            const end = start + 1.2 / words.length;
             
             return (
               <Word key={i} progress={scrollYProgress} range={[start, end]}>
@@ -74,7 +74,7 @@ const Word: FC<WordProps> = memo(({ children, progress, range }) => {
   const y = useTransform(progress, range, [5, 0]); // More subtle upward movement
 
   return (
-    <span className="relative mx-[2px] md:mx-[4px] inline-flex">
+    <span className="relative mx-[1px] md:mx-[3px] inline-flex">
       <span className="absolute opacity-20">{children}</span>
       <motion.span
         style={{ opacity, color, y }}

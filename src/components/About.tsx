@@ -1,4 +1,3 @@
-
 import { useEffect, useState, useRef } from "react";
 import { MapPin, Sparkles, BookOpen } from "lucide-react";
 import { Globe } from "@/components/Globe";
@@ -47,14 +46,14 @@ const About = () => {
   return (
     <section id="about" ref={sectionRef} className="section-padding relative overflow-hidden">
       <div className="container-custom">
-        <div className="mb-10">
+        <div className="mb-8 md:mb-10">
           <h2 className="mb-4">About Me</h2>
           <div className="w-24 h-1 bg-[#3E40EF]"></div>
         </div>
         
         {/* Text introduction that spans full width - Now wider and synchronized */}
-        <div className="mb-10 w-full relative px-0">
-          <div className="inline-block px-4 py-1.5 bg-[#3E40EF]/10 text-[#3E40EF] rounded-full text-sm font-medium mb-5">
+        <div className="mb-6 md:mb-10 w-full relative px-0">
+          <div className="inline-block px-4 py-1.5 bg-[#3E40EF]/10 text-[#3E40EF] rounded-full text-sm font-medium mb-4 md:mb-5">
             <BookOpen className="inline-block mr-2 h-4 w-4" />
             Nice to meet you
           </div>
@@ -70,7 +69,7 @@ const About = () => {
                 </MobileTextReveal>
               </h3>
             
-              <h3 className="mt-2 md:mt-1 w-full">
+              <h3 className="mt-1 md:mt-1 w-full">
                 <DesktopTextReveal className="text-gray-400" lineIndex={1} totalLines={3}>
                   creating user-centered digital experiences that elevate brand presence
                 </DesktopTextReveal>
@@ -79,7 +78,7 @@ const About = () => {
                 </MobileTextReveal>
               </h3>
 
-              <h3 className="mt-2 md:mt-1 mb-3 md:mb-2 w-full">
+              <h3 className="mt-1 md:mt-1 mb-2 md:mb-2 w-full">
                 <DesktopTextReveal className="text-gray-400" lineIndex={2} totalLines={3}>
                   blend aesthetics with functionality and innovation in every project
                 </DesktopTextReveal>
@@ -89,8 +88,6 @@ const About = () => {
               </h3>
             </div>
           </div>
-
-          {/* No custom styles here - using Tailwind classes instead */}
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">

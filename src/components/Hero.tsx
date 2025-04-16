@@ -20,7 +20,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="min-h-[100vh] w-full flex items-center relative overflow-hidden pt-[80px] md:pt-0">
+    <section className="min-h-[100vh] w-full flex items-center relative overflow-hidden pt-[60px] pb-8 md:pt-0 md:pb-0">
       {/* Add the AnimatedGridPattern with mask and skew effect */}
       <AnimatedGridPattern
         numSquares={30}
@@ -31,29 +31,29 @@ const Hero = () => {
       />
 
       <div className="container-custom w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-12 items-center w-full">
           <div className="lg:col-span-7 z-10">
-            <div className="space-y-6 max-w-3xl">
-              <div className="inline-block px-3 py-1 bg-[#3E40EF]/10 text-[#3E40EF] rounded-full text-sm font-medium mb-2 animate-fade-in mt-12 sm:mt-0">
+            <div className="space-y-4 md:space-y-6 max-w-3xl">
+              <div className="inline-block px-3 py-1 bg-[#3E40EF]/10 text-[#3E40EF] rounded-full text-sm font-medium mb-2 animate-fade-in mt-2 sm:mt-0">
                 <Sparkles className="inline-block mr-2 h-4 w-4" />
                 UI/UX Designer & Product Designer
               </div>
-              <h1 className="animate-slide-in font-black text-4xl md:text-5xl lg:text-6xl" style={{ animationDelay: "0.1s" }}>
+              <h1 className="animate-slide-in font-black text-3xl md:text-5xl lg:text-6xl" style={{ animationDelay: "0.1s" }}>
                 Crafting Digital Experiences That <span className="text-[#3E40EF]">Inspire</span>
               </h1>
               <p className="text-lg md:text-xl text-gray-600 animate-slide-in" style={{ animationDelay: "0.2s" }}>
                 I transform complex problems into elegant, intuitive designs that delight users and drive business growth.
               </p>
-              <div className="flex flex-row sm:gap-5 gap-3 sm:pl-2 pt-4 animate-slide-in" style={{ animationDelay: "0.3s" }}>
+              <div className="flex flex-row sm:gap-5 gap-3 sm:pl-2 pt-2 md:pt-4 animate-slide-in" style={{ animationDelay: "0.3s" }}>
                 <div className="flex flex-row w-full max-w-[360px] sm:gap-4 gap-2 mx-auto sm:mx-0">
                   <a href="#projects" className="w-1/2">
-                    <RainbowButton className="w-full whitespace-nowrap h-12 text-sm sm:text-base transition-all duration-300 hover:transform hover:scale-105 hover:shadow-md">
+                    <RainbowButton className="w-full whitespace-nowrap h-10 sm:h-12 text-sm sm:text-base transition-all duration-300 hover:transform hover:scale-105 hover:shadow-md">
                       View Projects
                     </RainbowButton>
                   </a>
                   <ShinyButton 
                     onClick={triggerConfetti} 
-                    className="h-12 bg-white text-black shadow w-full text-sm sm:text-base"
+                    className="h-10 sm:h-12 bg-white text-black shadow w-full text-sm sm:text-base"
                   >
                     Click Me
                   </ShinyButton>
@@ -62,7 +62,7 @@ const Hero = () => {
             </div>
           </div>
           
-          <div className="lg:col-span-5 relative z-10 mt-6 md:mt-0">
+          <div className="lg:col-span-5 relative z-10 mt-3 md:mt-0">
             <div className="relative mx-auto px-4 sm:px-0">
               <div className="relative rounded-[2rem] overflow-hidden bg-gradient-to-br from-blue-400 to-blue-600 w-full max-w-sm aspect-[4/5] mx-auto shadow-xl">
                 <div className="absolute inset-0 w-[150%] h-[150%] left-[-25%] top-[-25%] rotate-animation opacity-10 z-0">
