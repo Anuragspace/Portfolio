@@ -20,7 +20,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="min-h-[100vh] w-full flex items-center relative overflow-hidden">
+    <section className="min-h-[100vh] w-full flex items-center relative overflow-hidden pt-[80px] md:pt-0">
       {/* Add the AnimatedGridPattern with mask and skew effect */}
       <AnimatedGridPattern
         numSquares={30}
@@ -34,11 +34,11 @@ const Hero = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center w-full">
           <div className="lg:col-span-7 z-10">
             <div className="space-y-6 max-w-3xl">
-              <div className="inline-block px-3 py-1 bg-[#3E40EF]/10 text-[#3E40EF] rounded-full text-sm font-medium mb-2 animate-fade-in">
+              <div className="inline-block px-3 py-1 bg-[#3E40EF]/10 text-[#3E40EF] rounded-full text-sm font-medium mb-2 animate-fade-in mt-12 sm:mt-0">
                 <Sparkles className="inline-block mr-2 h-4 w-4" />
                 UI/UX Designer & Product Designer
               </div>
-              <h1 className="animate-slide-in font-black text-4xl md:text-5xl lg:text-6xl"  style={{ animationDelay: "0.1s" }}>
+              <h1 className="animate-slide-in font-black text-4xl md:text-5xl lg:text-6xl" style={{ animationDelay: "0.1s" }}>
                 Crafting Digital Experiences That <span className="text-[#3E40EF]">Inspire</span>
               </h1>
               <p className="text-lg md:text-xl text-gray-600 animate-slide-in" style={{ animationDelay: "0.2s" }}>
@@ -62,7 +62,7 @@ const Hero = () => {
             </div>
           </div>
           
-          <div className="lg:col-span-5 relative z-10">
+          <div className="lg:col-span-5 relative z-10 mt-6 md:mt-0">
             <div className="relative mx-auto px-4 sm:px-0">
               <div className="relative rounded-[2rem] overflow-hidden bg-gradient-to-br from-blue-400 to-blue-600 w-full max-w-sm aspect-[4/5] mx-auto shadow-xl">
                 <div className="absolute inset-0 w-[150%] h-[150%] left-[-25%] top-[-25%] rotate-animation opacity-10 z-0">
