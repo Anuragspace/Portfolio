@@ -1,11 +1,12 @@
+
 import React from "react";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 export interface ProjectDetailsItem {
   label: string;
-  value: string | string[];
+  value: string | Array<{ icon: React.ReactNode; name: string }>;
   isLink?: boolean;
   linkUrl?: string;
 }
