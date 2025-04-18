@@ -182,7 +182,7 @@ const ProjectDetail = () => {
     <div className="min-h-screen bg-white text-black">
       <ProjectPageHeader />
       
-      {/* Banner Section - Updated height and padding */}
+      {/* Banner Section */}
       <section className="relative pt-20 w-full">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="w-full max-w-7xl mx-auto">
@@ -210,22 +210,18 @@ const ProjectDetail = () => {
         </div>
       </section>
 
-      {/* Overview Section - Updated width and text layout */}
+      {/* Overview Section */}
       <section className="py-16 md:py-20 w-full">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-bold mb-8 font-manrope">Project Overview</h2>
-            <div className="text-xl md:text-2xl font-medium leading-relaxed text-gray-700 space-y-6 max-w-none">
+            <div className="text-2xl md:text-3xl font-medium leading-relaxed text-gray-700">
               <DesktopTextReveal className="hidden md:block" lineIndex={0} totalLines={1}>
-                {project.description}
+                MyBet Apps revolutionizes event booking through an intuitive, user-centric interface. We identified critical usability challenges in the existing platform and executed a complete UI/UX overhaul, focusing on seamless navigation and enhanced user engagement. Through extensive user research and iterative design, we created an interface that simplifies complex booking processes while maintaining robust functionality. Our design approach prioritizes accessibility across all user skill levels, resulting in a 75% improvement in user retention and a 45% increase in booking conversion rates. The revamped platform showcases modern design principles with a consistent visual language that resonates with both new and experienced users.
               </DesktopTextReveal>
               <MobileTextReveal className="block md:hidden" lineIndex={0} totalLines={1}>
-                {project.description}
+                MyBet Apps revolutionizes event booking through an intuitive, user-centric interface. We identified critical usability challenges in the existing platform and executed a complete UI/UX overhaul, focusing on seamless navigation and enhanced user engagement. Through extensive user research and iterative design, we created an interface that simplifies complex booking processes while maintaining robust functionality. Our design approach prioritizes accessibility across all user skill levels, resulting in a 75% improvement in user retention and a 45% increase in booking conversion rates. The revamped platform showcases modern design principles with a consistent visual language that resonates with both new and experienced users.
               </MobileTextReveal>
-              <p className="mt-4">Our team focused on creating an intuitive user interface that would make the complex functionality accessible to users of all skill levels.</p>
-              <p>The design process involved extensive user research, wireframing, and iterative prototyping to ensure the final product met both user needs and business objectives.</p>
-              <p>We implemented modern design principles and maintained consistent visual language throughout the application to enhance user engagement and satisfaction.</p>
-              <p>The result was a significant improvement in user engagement metrics and positive feedback from both clients and end-users.</p>
             </div>
           </div>
         </div>
