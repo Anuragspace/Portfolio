@@ -1,6 +1,6 @@
+
 import React from "react";
-import { RainbowButton } from "@/features/shared/components/RainbowButton";
-import { ShinyButton } from "@/features/shared/components/ShinyButton";
+import { RainbowButton, ShinyButton } from "@/features/shared/components/magic-ui";
 import confetti from "canvas-confetti";
 
 interface HeroButtonsProps {

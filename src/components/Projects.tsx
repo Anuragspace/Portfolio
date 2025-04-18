@@ -1,10 +1,7 @@
-
 import React, { memo } from "react";
 import { ExternalLink, ArrowUpRight } from "lucide-react";
-import { BorderBeam } from "@/components/BorderBeam";
+import { BorderBeam, RainbowButton, WhiteRainbowButton } from "@/features/shared/components/magic-ui";
 import { AnimatedGridPattern } from "@/components/AnimatedGridPattern";
-import { RainbowButton } from "@/components/RainbowButton";
-import { WhiteRainbowButton } from "@/components/WhiteRainbowButton";
 import { motion, LazyMotion, domAnimation, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
 
@@ -18,7 +15,6 @@ interface Project {
   link: string;
 }
 
-// Memoized project card for better performance
 const ProjectCard = memo(({ project, index }: { project: Project; index: number }) => {
   const ref = React.useRef(null);
   const inView = useInView(ref, {
@@ -43,7 +39,6 @@ const ProjectCard = memo(({ project, index }: { project: Project; index: number 
         }}
       >
         <div className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-4`}>
-          {/* Text Content Section - 40% */}
           <div 
             className={`relative w-full md:w-[40%] p-4 md:p-6 flex flex-col justify-between rounded-xl overflow-hidden ${
               index % 2 === 0 
@@ -83,7 +78,6 @@ const ProjectCard = memo(({ project, index }: { project: Project; index: number 
               </div>
             </div>
             
-            {/* Project Buttons (removed arrow as requested) */}
             {index === 0 || index === 2 ? (
               <div className="relative w-fit">
                 <RainbowButton className="mt-auto scale-90 origin-left">
@@ -102,14 +96,12 @@ const ProjectCard = memo(({ project, index }: { project: Project; index: number 
               </div>
             )}
             
-            {/* Animated circular element */}
             <div 
               className={`absolute -bottom-16 -right-16 w-32 h-32 rounded-full opacity-0 group-hover:opacity-10 transition-all duration-500 transform scale-0 group-hover:scale-100 ${
                 index % 2 === 0 ? 'bg-[#3E40EF]' : 'bg-white'
               }`}
             />
 
-            {/* Border Beam Effect */}
             <BorderBeam 
               colorFrom={index % 2 === 0 ? "#3E40EF" : "#ffffff"} 
               colorTo={index % 2 === 0 ? "#6366F1" : "#D6BCFA"} 
@@ -120,7 +112,6 @@ const ProjectCard = memo(({ project, index }: { project: Project; index: number 
             />
           </div>
           
-          {/* Image Section - 60% */}
           <div className="w-full md:w-[60%] h-full overflow-hidden rounded-xl md:mx-0 mt-2 md:mt-0 order-first md:order-none">
             <img 
               src={project.image} 
@@ -180,7 +171,6 @@ const Projects = () => {
   return (
     <LazyMotion features={domAnimation}>
       <section id="projects" className="section-padding py-14 md:py-16 bg-gray-50 relative overflow-hidden">
-        {/* Background patterns - lighter for performance */}
         <AnimatedGridPattern
           numSquares={24}
           maxOpacity={0.08}

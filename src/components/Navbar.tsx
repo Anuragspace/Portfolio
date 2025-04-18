@@ -1,19 +1,15 @@
-
 import React, { useState, useEffect, useCallback } from "react";
 import { Menu, X, Linkedin, ExternalLink, Github, Instagram, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { WordRotate } from "@/components/WordRotate";
-import { BorderBeam } from "@/components/BorderBeam";
+import { BorderBeam, RainbowButton, WhiteRainbowButton } from "@/features/shared/components/magic-ui";
 import { motion, AnimatePresence } from "framer-motion";
-import { RainbowButton } from "@/components/RainbowButton";
-import { WhiteRainbowButton } from "@/components/WhiteRainbowButton";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
 
-  // Prevent body scroll when menu is open
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -30,7 +26,6 @@ const Navbar = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
       
-      // Determine active section based on scroll position
       const sections = document.querySelectorAll("section[id]");
       let currentSection = "home";
       
@@ -72,7 +67,6 @@ const Navbar = () => {
     >
       <div className="container-custom flex items-center justify-center">
         <div className="w-full flex items-center justify-between">
-          {/* Logo */}
           <div className={`flex items-center transition-all duration-300 ${
             isScrolled ? "opacity-0 invisible" : "opacity-100 visible"
           }`}>
@@ -95,7 +89,6 @@ const Navbar = () => {
             </a>
           </div>
 
-          {/* Desktop Navigation */}
           <nav className={`hidden md:flex items-center ${
             isScrolled ? "fixed left-1/2 -translate-x-1/2 mt-4" : ""
           }`}>
@@ -123,7 +116,6 @@ const Navbar = () => {
             </div>
           </nav>
 
-          {/* Resume Button only for desktop */}
           <div className={`hidden md:flex items-center transition-all duration-300 ${
             isScrolled ? "opacity-0 invisible" : "opacity-100 visible"
           }`}>
@@ -134,7 +126,6 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Enhanced Mobile Menu Button with modern UI */}
           <button
             className={`md:hidden relative z-50 p-2 rounded-full bg-white flex items-center justify-center transition-all duration-300 ${
               isScrolled ? "opacity-0 invisible" : "opacity-100 visible"
@@ -172,7 +163,6 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Navigation - Simplified animations */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div 
@@ -183,7 +173,6 @@ const Navbar = () => {
             className="md:hidden fixed inset-0 z-40 flex flex-col"
             style={{ zIndex: 45 }}
           >
-            {/* Backdrop with blur effect */}
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -192,7 +181,6 @@ const Navbar = () => {
               onClick={toggleMenu}
             />
             
-            {/* Menu content with simpler animation */}
             <motion.div 
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
@@ -201,7 +189,6 @@ const Navbar = () => {
               className="relative ml-auto h-full w-4/5 max-w-sm bg-[#3E40EF] text-white flex flex-col overflow-y-auto"
             >
               <div className="p-6 flex flex-col h-full">
-                {/* Logo for mobile menu */}
                 <div className="mb-8 pt-4">
                   <div className="flex items-center gap-2">
                     <Sparkles className="h-5 w-5 text-white" />
@@ -210,7 +197,6 @@ const Navbar = () => {
                   <div className="mt-2 h-0.5 w-12 bg-white/30 rounded-full"></div>
                 </div>
                 
-                {/* Navigation links */}
                 <nav className="flex flex-col space-y-1 py-4">
                   {navLinks.map((link, index) => (
                     <motion.div
@@ -234,7 +220,6 @@ const Navbar = () => {
                   ))}
                 </nav>
                 
-                {/* Social links and resume button */}
                 <div className="mt-auto pt-6 border-t border-white/10">
                   <div className="flex items-center justify-between mb-6">
                     <div className="flex space-x-4">
