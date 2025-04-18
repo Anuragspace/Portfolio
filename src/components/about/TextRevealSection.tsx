@@ -12,30 +12,30 @@ const TextRevealSection = () => {
       </div>
       
       <div className="w-full lg:px-0 px-0">
-        <div className="w-full">
-          <h3 className="text-2xl md:text-3xl font-bold leading-snug w-full">
-            <DesktopTextReveal className="text-gray-400" lineIndex={0} totalLines={3}>
+        <div className="w-full max-w-4xl">
+          <h3 className="text-2xl md:text-4xl font-bold leading-relaxed md:leading-relaxed w-full">
+            <DesktopTextReveal className="text-gray-700" lineIndex={0} totalLines={3}>
               I'm a UI/UX Designer with a passion for creating beautiful digital products
             </DesktopTextReveal>
-            <MobileTextReveal className="text-gray-400" lineIndex={0} totalLines={3}>
+            <MobileTextReveal className="text-gray-700" lineIndex={0} totalLines={3}>
               I'm a UI/UX Designer with a passion for creating beautiful digital products
             </MobileTextReveal>
           </h3>
         
-          <h3 className="mt-1 md:mt-1 w-full">
-            <DesktopTextReveal className="text-gray-400" lineIndex={1} totalLines={3}>
+          <h3 className="mt-2 md:mt-2 text-2xl md:text-4xl w-full">
+            <DesktopTextReveal className="text-gray-700" lineIndex={1} totalLines={3}>
               creating user-centered digital experiences that elevate brand presence
             </DesktopTextReveal>
-            <MobileTextReveal className="text-gray-400" lineIndex={1} totalLines={3}>
+            <MobileTextReveal className="text-gray-700" lineIndex={1} totalLines={3}>
               creating user-centered digital experiences that elevate brand presence
             </MobileTextReveal>
           </h3>
 
-          <h3 className="mt-1 md:mt-1 mb-2 md:mb-2 w-full">
-            <DesktopTextReveal className="text-gray-400" lineIndex={2} totalLines={3}>
+          <h3 className="mt-2 md:mt-2 mb-2 md:mb-2 text-2xl md:text-4xl w-full">
+            <DesktopTextReveal className="text-gray-700" lineIndex={2} totalLines={3}>
               blend aesthetics with functionality and innovation in every project
             </DesktopTextReveal>
-            <MobileTextReveal className="text-gray-400" lineIndex={2} totalLines={3}>
+            <MobileTextReveal className="text-gray-700" lineIndex={2} totalLines={3}>
               blend aesthetics with functionality and innovation in every project
             </MobileTextReveal>
           </h3>

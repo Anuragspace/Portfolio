@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, ArrowRight, AlertTriangle, Lightbulb, ExternalLink, Figma, Code2, FileCode } from "lucide-react";
@@ -188,7 +187,7 @@ const ProjectDetail = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="w-full max-w-7xl mx-auto">
             <div className="overflow-hidden rounded-lg relative shadow-xl w-full">
-              <div className="h-[50vh] md:h-[70vh]">
+              <div className="h-[45vh] md:h-[60vh]">
                 <img 
                   src={project.image} 
                   alt={project.title}
@@ -216,14 +215,18 @@ const ProjectDetail = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-5xl mx-auto">
             <h2 className="text-3xl font-bold mb-8 font-manrope">Project Overview</h2>
-            <h3 className="text-xl md:text-2xl font-medium leading-relaxed w-full mb-6 text-gray-700">
+            <div className="text-xl md:text-2xl font-medium leading-relaxed text-gray-700 space-y-4">
               <DesktopTextReveal className="hidden md:block" lineIndex={0} totalLines={1}>
                 {project.description}
               </DesktopTextReveal>
               <MobileTextReveal className="block md:hidden" lineIndex={0} totalLines={1}>
                 {project.description}
               </MobileTextReveal>
-            </h3>
+              <p className="mt-4">Our team focused on creating an intuitive user interface that would make the complex functionality accessible to users of all skill levels.</p>
+              <p>The design process involved extensive user research, wireframing, and iterative prototyping to ensure the final product met both user needs and business objectives.</p>
+              <p>We implemented modern design principles and maintained consistent visual language throughout the application to enhance user engagement and satisfaction.</p>
+              <p>The result was a significant improvement in user engagement metrics and positive feedback from both clients and end-users.</p>
+            </div>
           </div>
         </div>
         

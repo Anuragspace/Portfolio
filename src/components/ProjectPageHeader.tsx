@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -31,7 +30,7 @@ const ProjectPageHeader = ({ className }: ProjectPageHeaderProps) => {
   return (
     <header 
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 py-3 w-full transition-all duration-300",
+        "fixed top-0 left-0 right-0 z-50 py-2 w-full transition-all duration-300",
         isVisible ? "translate-y-0" : "-translate-y-full",
         isVisible && "bg-white/30 backdrop-blur-sm border-b border-gray-100",
         className
@@ -64,22 +63,20 @@ const ProjectPageHeader = ({ className }: ProjectPageHeaderProps) => {
             </div>
           </Link>
 
-          {/* Mobile - only show Get in Touch button */}
-          <div className="flex items-center space-x-4 sm:space-x-8">
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.3 }}
+          {/* Get in Touch button */}
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.3 }}
+          >
+            <Link 
+              to="/#contact" 
+              className="flex items-center whitespace-nowrap gap-1.5 px-5 py-2.5 bg-[#3E40EF] text-white rounded-full hover:bg-[#3E40EF]/90 transition-all text-base font-medium"
             >
-              <Link 
-                to="/#contact" 
-                className="flex items-center gap-1.5 px-5 py-2.5 bg-[#3E40EF] text-white rounded-full hover:bg-[#3E40EF]/90 transition-all font-medium"
-              >
-                <span>Get in Touch</span>
-                <ArrowUpRight className="h-4 w-4 rotate-45" />
-              </Link>
-            </motion.div>
-          </div>
+              <span>Get in Touch</span>
+              <ArrowUpRight className="h-4 w-4 rotate-45" />
+            </Link>
+          </motion.div>
         </div>
       </div>
     </header>
