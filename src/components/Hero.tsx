@@ -1,8 +1,5 @@
-
 import React from "react";
-import { Sparkles, User } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Sparkles } from "lucide-react";
 import { RainbowButton } from "@/components/RainbowButton";
 import { ShinyButton } from "@/components/ShinyButton";
 import { AnimatedGridPattern } from "@/components/AnimatedGridPattern";
@@ -50,13 +47,13 @@ const Hero = () => {
               <div className="flex flex-row sm:gap-5 gap-3 sm:pl-2 pt-4 md:pt-6 animate-slide-in" style={{ animationDelay: "0.3s" }}>
                 <div className="flex flex-row w-full max-w-[360px] sm:gap-4 gap-2 mx-auto sm:mx-0">
                   <a href="#projects" className="w-1/2">
-                    <RainbowButton className="w-full h-11 sm:h-12 text-sm sm:text-base transition-all duration-300 hover:transform hover:scale-105 hover:shadow-md">
+                    <RainbowButton className="w-full h-11 sm:h-12 text-sm sm:text-base transition-all duration-300 hover:transform hover:scale-105 hover:shadow-md px-6">
                       View Projects
                     </RainbowButton>
                   </a>
                   <ShinyButton 
                     onClick={triggerConfetti} 
-                    className="h-11 sm:h-12 bg-white text-black shadow w-full text-sm sm:text-base"
+                    className="h-11 sm:h-12 bg-white text-black shadow w-full text-sm sm:text-base px-4"
                   >
                     Click Me
                   </ShinyButton>
@@ -124,4 +121,3 @@ const Hero = () => {
 };
 
 export default Hero;
-
