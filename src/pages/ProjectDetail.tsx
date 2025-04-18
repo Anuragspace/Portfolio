@@ -9,8 +9,8 @@ import HomeButton from "@/components/HomeButton";
 import ProblemSolutionRow from "@/components/ProblemSolutionRow";
 import ProjectDetailsGrid from "@/components/ProjectDetailsGrid";
 
-// Mock data for projects
 const projectsData = [
+  // Mock data for projects
   {
     id: "1",
     title: "Peingpo Builder",
@@ -120,7 +120,6 @@ const ProjectDetail = () => {
   const [project, setProject] = useState<any>(null);
   const [nextProject, setNextProject] = useState<any>(null);
   
-  // Control header visibility on scroll
   useEffect(() => {
     const controlNavbar = () => {
       if (window.scrollY > lastScrollY && isVisible) {
@@ -135,14 +134,12 @@ const ProjectDetail = () => {
     return () => window.removeEventListener('scroll', controlNavbar);
   }, [lastScrollY, isVisible]);
 
-  // Fetch project data based on id
   useEffect(() => {
     if (id) {
       const currentProject = projectsData.find(p => p.id === id);
       if (currentProject) {
         setProject(currentProject);
         
-        // Find next project (cycle back to first if this is the last)
         const currentIndex = projectsData.findIndex(p => p.id === id);
         const nextIndex = (currentIndex + 1) % projectsData.length;
         setNextProject(projectsData[nextIndex]);
@@ -150,7 +147,6 @@ const ProjectDetail = () => {
     }
   }, [id]);
 
-  // Scroll to top whenever project changes
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id]);
@@ -163,7 +159,6 @@ const ProjectDetail = () => {
     );
   }
 
-  // Create project details items with tool icons
   const projectDetailsItems = [
     { label: "Year", value: project.year },
     { label: "Category", value: project.category },
@@ -187,12 +182,11 @@ const ProjectDetail = () => {
     <div className="min-h-screen bg-white text-black">
       <ProjectPageHeader />
       
-      {/* Banner Section with increased height */}
       <section className="relative pt-20 w-full">
         <div className="container mx-auto px-4 sm:px-4 md:px-4 lg:px-2 w-full">
           <div className="w-full max-w-7xl mx-auto">
             <div className="overflow-hidden rounded-lg relative shadow-xl w-full">
-              <div className="h-[60vh] md:h-[90vh]">
+              <div className="h-[60vh] md:h-[80vh]">
                 <img 
                   src={project.image} 
                   alt={project.title}
@@ -215,19 +209,18 @@ const ProjectDetail = () => {
         </div>
       </section>
 
-      {/* Project Overview with Text Reveal */}
       <section className="py-20 w-full">
-        <div className="container mx-auto px-4 max-w-5xl">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            <p className="text-2xl md:text-3xl leading-relaxed font-manrope text-gray-800">
-              {project.description}
-            </p>
-          </motion.div>
+        <div className="container mx-auto px-4 max-w-7xl">
+          <div className="max-w-5xl mx-auto">
+            <h3 className="text-2xl md:text-3xl font-bold leading-snug w-full mb-6">
+              <DesktopTextReveal className="text-gray-400" lineIndex={0} totalLines={1}>
+                {project.description}
+              </DesktopTextReveal>
+              <MobileTextReveal className="text-gray-400" lineIndex={0} totalLines={1}>
+                {project.description}
+              </MobileTextReveal>
+            </h3>
+          </div>
         </div>
         
         <div className="container mx-auto px-6 mt-16">
@@ -235,7 +228,6 @@ const ProjectDetail = () => {
         </div>
       </section>
 
-      {/* Problem & Solution */}
       <section className="py-20">
         <div className="container mx-auto px-4 max-w-6xl">
           <ProblemSolutionRow 
@@ -245,21 +237,18 @@ const ProjectDetail = () => {
         </div>
       </section>
 
-      {/* Project Details Grid */}
       <section className="py-16">
         <div className="container mx-auto px-4">
           <ProjectDetailsGrid items={projectDetailsItems} />
         </div>
       </section>
 
-      {/* Design Process & Elements - Centered Layout */}
       <section className="py-20 w-full">
-        <div className="container mx-auto px-4 max-w-6xl">
+        <div className="container mx-auto px-4 max-w-7xl">
           <div className="space-y-24">
-            {/* Design Process */}
             <div>
               <h2 className="text-4xl font-bold mb-12 font-manrope text-center">Design Process</h2>
-              <div className="aspect-video rounded-lg overflow-hidden">
+              <div className="aspect-video rounded-lg overflow-hidden max-w-5xl mx-auto">
                 <img 
                   src={project.designProcess[0]} 
                   alt="Design Process"
@@ -268,13 +257,23 @@ const ProjectDetail = () => {
               </div>
             </div>
             
-            {/* Design Elements */}
             <div>
               <h2 className="text-4xl font-bold mb-12 font-manrope text-center">Design Elements</h2>
-              <div className="aspect-video rounded-lg overflow-hidden">
+              <div className="aspect-video rounded-lg overflow-hidden max-w-5xl mx-auto">
                 <img 
                   src={project.designElements[0]} 
                   alt="Design Elements"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+
+            <div>
+              <h2 className="text-4xl font-bold mb-12 font-manrope text-center">Final Design</h2>
+              <div className="aspect-video rounded-lg overflow-hidden max-w-5xl mx-auto">
+                <img 
+                  src={project.finalDesign[0]} 
+                  alt="Final Design"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -283,7 +282,6 @@ const ProjectDetail = () => {
         </div>
       </section>
 
-      {/* Navigation Section */}
       <section className="py-12 border-t border-gray-100">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center max-w-7xl mx-auto">

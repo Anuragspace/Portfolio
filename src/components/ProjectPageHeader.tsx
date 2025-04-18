@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -10,22 +11,29 @@ interface ProjectPageHeaderProps {
 }
 
 const ProjectPageHeader = ({ className }: ProjectPageHeaderProps) => {
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+    const controlNavbar = () => {
+      if (window.scrollY > lastScrollY && window.scrollY > 100) {
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
+      }
+      setLastScrollY(window.scrollY);
     };
     
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    window.addEventListener("scroll", controlNavbar);
+    return () => window.removeEventListener("scroll", controlNavbar);
+  }, [lastScrollY]);
 
   return (
     <header 
       className={cn(
         "fixed top-0 left-0 right-0 z-50 py-4 w-full transition-all duration-300",
-        isScrolled && "bg-white/30 backdrop-blur-sm border-b border-gray-100",
+        isVisible ? "translate-y-0" : "-translate-y-full",
+        isVisible && "bg-white/30 backdrop-blur-sm border-b border-gray-100",
         className
       )}
     >
