@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, ArrowRight, AlertTriangle, Lightbulb, ExternalLink, Figma, Code2, FileCode } from "lucide-react";
@@ -182,11 +183,12 @@ const ProjectDetail = () => {
     <div className="min-h-screen bg-white text-black">
       <ProjectPageHeader />
       
-      <section className="relative pt-20 w-full">
-        <div className="container mx-auto px-4 sm:px-4 md:px-4 lg:px-2 w-full">
+      {/* Banner Section */}
+      <section className="relative pt-16 w-full">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="w-full max-w-7xl mx-auto">
             <div className="overflow-hidden rounded-lg relative shadow-xl w-full">
-              <div className="h-[60vh] md:h-[80vh]">
+              <div className="h-[50vh] md:h-[70vh]">
                 <img 
                   src={project.image} 
                   alt={project.title}
@@ -209,46 +211,55 @@ const ProjectDetail = () => {
         </div>
       </section>
 
-      <section className="py-20 w-full">
-        <div className="container mx-auto px-4 max-w-7xl">
+      {/* Overview Section */}
+      <section className="py-16 md:py-20 w-full">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-5xl mx-auto">
-            <h3 className="text-2xl md:text-3xl font-bold leading-snug w-full mb-6">
-              <DesktopTextReveal className="text-gray-400" lineIndex={0} totalLines={1}>
+            <h2 className="text-3xl font-bold mb-8 font-manrope">Project Overview</h2>
+            <h3 className="text-xl md:text-2xl font-medium leading-relaxed w-full mb-6 text-gray-700">
+              <DesktopTextReveal className="hidden md:block" lineIndex={0} totalLines={1}>
                 {project.description}
               </DesktopTextReveal>
-              <MobileTextReveal className="text-gray-400" lineIndex={0} totalLines={1}>
+              <MobileTextReveal className="block md:hidden" lineIndex={0} totalLines={1}>
                 {project.description}
               </MobileTextReveal>
             </h3>
           </div>
         </div>
         
-        <div className="container mx-auto px-6 mt-16">
+        <div className="container mx-auto px-6 mt-12">
           <div className="w-full h-px bg-gray-100"></div>
         </div>
       </section>
 
-      <section className="py-20">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <ProblemSolutionRow 
-            problem={project.problem}
-            solution={project.solution}
-          />
+      {/* Problem Solution Section */}
+      <section className="py-12 md:py-16">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-6xl mx-auto">
+            <ProblemSolutionRow 
+              problem={project.problem}
+              solution={project.solution}
+            />
+          </div>
         </div>
       </section>
 
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <ProjectDetailsGrid items={projectDetailsItems} />
+      {/* Project Details Section */}
+      <section className="py-12 md:py-16">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-6xl mx-auto">
+            <ProjectDetailsGrid items={projectDetailsItems} />
+          </div>
         </div>
       </section>
 
-      <section className="py-20 w-full">
-        <div className="container mx-auto px-4 max-w-7xl">
-          <div className="space-y-24">
+      {/* Design Process Section */}
+      <section className="py-12 md:py-16 w-full">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-6xl mx-auto space-y-16 md:space-y-20">
             <div>
-              <h2 className="text-4xl font-bold mb-12 font-manrope text-center">Design Process</h2>
-              <div className="aspect-video rounded-lg overflow-hidden max-w-5xl mx-auto">
+              <h2 className="text-3xl font-bold mb-8 font-manrope text-center">Design Process</h2>
+              <div className="aspect-video rounded-lg overflow-hidden w-full">
                 <img 
                   src={project.designProcess[0]} 
                   alt="Design Process"
@@ -258,8 +269,8 @@ const ProjectDetail = () => {
             </div>
             
             <div>
-              <h2 className="text-4xl font-bold mb-12 font-manrope text-center">Design Elements</h2>
-              <div className="aspect-video rounded-lg overflow-hidden max-w-5xl mx-auto">
+              <h2 className="text-3xl font-bold mb-8 font-manrope text-center">Design Elements</h2>
+              <div className="aspect-video rounded-lg overflow-hidden w-full">
                 <img 
                   src={project.designElements[0]} 
                   alt="Design Elements"
@@ -269,8 +280,8 @@ const ProjectDetail = () => {
             </div>
 
             <div>
-              <h2 className="text-4xl font-bold mb-12 font-manrope text-center">Final Design</h2>
-              <div className="aspect-video rounded-lg overflow-hidden max-w-5xl mx-auto">
+              <h2 className="text-3xl font-bold mb-8 font-manrope text-center">Final Design</h2>
+              <div className="aspect-video rounded-lg overflow-hidden w-full">
                 <img 
                   src={project.finalDesign[0]} 
                   alt="Final Design"
@@ -282,9 +293,10 @@ const ProjectDetail = () => {
         </div>
       </section>
 
+      {/* Navigation Section */}
       <section className="py-12 border-t border-gray-100">
-        <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center max-w-7xl mx-auto">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center max-w-6xl mx-auto">
             <Link 
               to="/#projects" 
               className="flex items-center text-gray-700 hover:text-[#3E40EF] transition-colors font-medium font-manrope"

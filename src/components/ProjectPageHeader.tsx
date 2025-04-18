@@ -31,7 +31,7 @@ const ProjectPageHeader = ({ className }: ProjectPageHeaderProps) => {
   return (
     <header 
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 py-4 w-full transition-all duration-300",
+        "fixed top-0 left-0 right-0 z-50 py-3 w-full transition-all duration-300",
         isVisible ? "translate-y-0" : "-translate-y-full",
         isVisible && "bg-white/30 backdrop-blur-sm border-b border-gray-100",
         className
