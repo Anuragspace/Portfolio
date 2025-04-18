@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Sparkles, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -123,3 +124,4 @@ const Hero = () => {
 };
 
 export default Hero;
+
