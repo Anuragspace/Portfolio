@@ -6,6 +6,8 @@ import { DesktopTextReveal, MobileTextReveal } from "@/components/TextRevealResp
 import ProjectPageHeader from "@/components/ProjectPageHeader";
 import Footer from "@/components/Footer";
 import HomeButton from "@/components/HomeButton";
+import ProblemSolutionRow from "@/components/ProblemSolutionRow";
+import ProjectDetailsGrid from "@/components/ProjectDetailsGrid";
 
 // Mock data for projects
 const projectsData = [
@@ -25,13 +27,13 @@ const projectsData = [
     problem: "Companies needed to maintain security for private projects while giving users the freedom to manage their own workspaces. Existing solutions were either too restrictive or lacked proper access controls.",
     solution: "Peingpo Builder implements a role-based permission system with customizable access levels. This allows organizations to define security policies while users can freely create and manage projects within those guardrails.",
     designProcess: [
-      "https://images.unsplash.com/photo-1557683316-973673baf926?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2129&q=80"
+      "https://images.unsplash.com/photo-1557683316-973673baf926?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=2129&q=80"
     ],
     designElements: [
-      "https://images.unsplash.com/photo-1643208589889-0735ad7218f0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80"
+      "https://images.unsplash.com/photo-1643208589889-0735ad7218f0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80"
     ],
     finalDesign: [
-      "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80"
+      "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80"
     ]
   },
   {
@@ -50,10 +52,10 @@ const projectsData = [
     problem: "The original app had confusing navigation, inconsistent visual elements, and a complex booking process that frustrated users and led to high abandonment rates.",
     solution: "A complete UX overhaul focused on simplifying the booking flow, creating a consistent visual language, and implementing intuitive navigation patterns tailored to user behavior.",
     designProcess: [
-      "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
     ],
     designElements: [
-      "https://images.unsplash.com/photo-1506097425191-7ad538b29cef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80"
+      "https://images.unsplash.com/photo-1506097425191-7ad538b29cef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80"
     ],
     finalDesign: [
       "https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
@@ -64,7 +66,7 @@ const projectsData = [
     title: "RunOn",
     year: "2019",
     description: "RunOn is a running tracking app with many features, but most users didn't know it existed. Its landing page didn't convey its advanced technology and benefits, leading to low traffic and poor user conversions.",
-    image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
     tags: ["UX Research", "UI Design", "Prototyping"],
     role: ["UX Designer", "Researcher"],
     tools: ["Sketch", "Principle", "Maze"],
@@ -161,32 +163,48 @@ const ProjectDetail = () => {
     );
   }
 
+  // Create project details items with tool icons
+  const projectDetailsItems = [
+    { label: "Year", value: project.year },
+    { label: "Category", value: project.category },
+    {
+      label: "Tools",
+      value: project.tools.map(tool => ({
+        name: tool,
+        icon: tool.toLowerCase().includes('figma') ? <Figma className="h-5 w-5" /> :
+              tool.toLowerCase().includes('react') ? <Code2 className="h-5 w-5" /> : null
+      }))
+    },
+    { 
+      label: "Website", 
+      value: "Visit Website",
+      isLink: true,
+      linkUrl: project.liveUrl
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-white text-black">
-      <div className={`transition-transform duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
-        <ProjectPageHeader />
-      </div>
+      <ProjectPageHeader />
       
-      {/* Banner Section */}
-      <section className="relative pt-28 pb-8 w-full">
+      {/* Banner Section with increased height */}
+      <section className="relative pt-20 w-full">
         <div className="container mx-auto px-4 sm:px-4 md:px-4 lg:px-2 w-full">
           <div className="w-full max-w-7xl mx-auto">
             <div className="overflow-hidden rounded-lg relative shadow-xl w-full">
-              <div className="h-[40vh] md:h-[60vh]">
+              <div className="h-[60vh] md:h-[90vh]">
                 <img 
                   src={project.image} 
                   alt={project.title}
                   fetchPriority="high"
-                  className="w-full h-full object-cover primary-banner"
+                  className="w-full h-full object-cover"
                 />
-                
-                {/* Title positioned at bottom left of image */}
-                <div className="absolute bottom-0 left-0 p-6 md:p-8 bg-gradient-to-t from-black/80 to-transparent w-full z-20">
+                <div className="absolute bottom-0 left-0 p-6 md:p-8 bg-gradient-to-t from-black/80 to-transparent w-full">
                   <motion.h1 
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.2 }}
-                    className="text-3xl md:text-5xl font-bold text-white font-manrope"
+                    className="text-4xl md:text-6xl font-bold text-white font-manrope"
                   >
                     {project.title}
                   </motion.h1>
@@ -197,199 +215,76 @@ const ProjectDetail = () => {
         </div>
       </section>
 
-      {/* Project Overview Section with enhanced text reveal */}
-      <section className="py-14 w-full">
-        <div className="container mx-auto px-4 sm:px-4 md:px-4 lg:px-2 w-full">
-          <div className="max-w-7xl mx-auto">
-            <h2 className="text-4xl font-bold text-left mb-8 font-manrope">Project Overview</h2>
-            
-            {/* Desktop Text Reveal */}
-            <div className="hidden md:block">
-              <motion.p 
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                className="text-2xl md:text-3xl leading-relaxed font-manrope text-gray-700"
-              >
-                {project.description}
-              </motion.p>
-            </div>
-            
-            {/* Mobile Text Reveal */}
-            <div className="block md:hidden">
-              <motion.p 
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                className="text-xl leading-relaxed font-manrope text-gray-700"
-              >
-                {project.description}
-              </motion.p>
-            </div>
-          </div>
+      {/* Project Overview with Text Reveal */}
+      <section className="py-20 w-full">
+        <div className="container mx-auto px-4 max-w-5xl">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            <p className="text-2xl md:text-3xl leading-relaxed font-manrope text-gray-800">
+              {project.description}
+            </p>
+          </motion.div>
         </div>
         
-        <div className="container mx-auto px-6 mt-12">
-          <div className="w-full h-px bg-gray-200"></div>
+        <div className="container mx-auto px-6 mt-16">
+          <div className="w-full h-px bg-gray-100"></div>
         </div>
       </section>
 
-      {/* Problem & Solution Section with New Icons */}
-      <section className="pb-16">
-        <div className="container mx-auto px-4 sm:px-4 md:px-4 lg:px-2">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-7xl mx-auto">
-            <div className="space-y-4">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="p-2 rounded-lg bg-red-100">
-                  <AlertTriangle className="h-6 w-6 text-red-600" />
-                </div>
-                <h3 className="text-2xl font-bold">Problem</h3>
-              </div>
-              <p className="text-lg text-gray-700 leading-relaxed">{project.problem}</p>
-            </div>
-            
-            <div className="space-y-4">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="p-2 rounded-lg bg-green-100">
-                  <Lightbulb className="h-6 w-6 text-green-600" />
-                </div>
-                <h3 className="text-2xl font-bold">Solution</h3>
-              </div>
-              <p className="text-lg text-gray-700 leading-relaxed">{project.solution}</p>
-            </div>
-          </div>
-        </div>
-        
-        <div className="container mx-auto px-4 mt-12">
-          <div className="w-full h-px bg-gray-200"></div>
+      {/* Problem & Solution */}
+      <section className="py-20">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <ProblemSolutionRow 
+            problem={project.problem}
+            solution={project.solution}
+          />
         </div>
       </section>
 
-      {/* Project Details Section with Enhanced Tools Display */}
-      <section className="pb-16">
-        <div className="container mx-auto px-4 sm:px-4 md:px-4 lg:px-2">
-          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Year */}
-            <div className="p-6 rounded-lg bg-gray-50">
-              <h3 className="text-lg font-medium text-gray-600 mb-2">Year</h3>
-              <p className="text-xl font-bold">{project.year}</p>
-            </div>
-            
-            {/* Category */}
-            <div className="p-6 rounded-lg bg-gray-50">
-              <h3 className="text-lg font-medium text-gray-600 mb-2">Category</h3>
-              <p className="text-xl font-bold">{project.category}</p>
-            </div>
-            
-            {/* Tools with Icons */}
-            <div className="p-6 rounded-lg bg-gray-50">
-              <h3 className="text-lg font-medium text-gray-600 mb-2">Tools</h3>
-              <div className="flex flex-wrap gap-3">
-                {project.tools.map((tool: string) => (
-                  <div key={tool} className="flex items-center gap-2">
-                    {tool.toLowerCase().includes('figma') && <Figma className="h-5 w-5" />}
-                    {tool.toLowerCase().includes('react') && <Code2 className="h-5 w-5" />}
-                    {tool.toLowerCase().includes('typescript') && <FileCode className="h-5 w-5" />}
-                    <span className="text-lg font-medium">{tool}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            
-            {/* Website Link */}
-            <div className="p-6 rounded-lg bg-gray-50">
-              <h3 className="text-lg font-medium text-gray-600 mb-2">Website</h3>
-              <a 
-                href={project.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-[#9b87f5] text-white rounded-md hover:bg-[#8b77e5] transition-colors"
-              >
-                <span>Visit Website</span>
-                <ExternalLink className="h-4 w-4" />
-              </a>
-            </div>
-          </div>
-        </div>
-        
-        <div className="container mx-auto px-4 mt-12">
-          <div className="w-full h-px bg-gray-200"></div>
+      {/* Project Details Grid */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <ProjectDetailsGrid items={projectDetailsItems} />
         </div>
       </section>
 
-      {/* Design Process & Elements Section - New Layout */}
-      <section className="py-16 w-full">
-        <div className="container mx-auto px-4 sm:px-4 md:px-4 lg:px-2 w-full">
-          <div className="max-w-7xl mx-auto space-y-16">
+      {/* Design Process & Elements - Centered Layout */}
+      <section className="py-20 w-full">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="space-y-24">
             {/* Design Process */}
             <div>
-              <h2 className="text-4xl font-bold mb-8 font-manrope">Design Process</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="space-y-4">
-                  <p className="text-xl text-gray-700 leading-relaxed">
-                    Our design process focused on creating an intuitive and engaging user experience
-                    through careful planning and iteration.
-                  </p>
-                </div>
-                <div className="rounded-lg overflow-hidden">
-                  <img 
-                    src={project.designProcess[0]} 
-                    alt="Design Process"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+              <h2 className="text-4xl font-bold mb-12 font-manrope text-center">Design Process</h2>
+              <div className="aspect-video rounded-lg overflow-hidden">
+                <img 
+                  src={project.designProcess[0]} 
+                  alt="Design Process"
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
             
             {/* Design Elements */}
             <div>
-              <h2 className="text-4xl font-bold mb-8 font-manrope">Design Elements</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="rounded-lg overflow-hidden">
-                  <img 
-                    src={project.designElements[0]} 
-                    alt="Design Elements"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="space-y-4">
-                  <p className="text-xl text-gray-700 leading-relaxed">
-                    The visual elements were carefully chosen to create a cohesive and engaging
-                    user interface that aligns with the project's goals.
-                  </p>
-                </div>
+              <h2 className="text-4xl font-bold mb-12 font-manrope text-center">Design Elements</h2>
+              <div className="aspect-video rounded-lg overflow-hidden">
+                <img 
+                  src={project.designElements[0]} 
+                  alt="Design Elements"
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Final Design Section */}
-      <section className="pb-20 w-full">
-        <div className="container mx-auto px-4 sm:px-4 md:px-4 lg:px-2 w-full">
-          <div className="max-w-7xl mx-auto">
-            <h2 className="text-4xl font-bold text-left mb-10 font-manrope">Final Design</h2>
-            <motion.div 
-              className="rounded-xl overflow-hidden shadow-xl w-full"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <div className="relative pb-[56.25%] w-full"> {/* 16:9 aspect ratio */}
-                <img 
-                  src={project.finalDesign[0]}
-                  alt="Final design"
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
       {/* Navigation Section */}
-      <section className="py-12 border-t border-gray-200">
+      <section className="py-12 border-t border-gray-100">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center max-w-7xl mx-auto">
             <Link 
@@ -413,10 +308,7 @@ const ProjectDetail = () => {
         </div>
       </section>
 
-      {/* Footer */}
       <Footer />
-      
-      {/* Home Button */}
       <HomeButton />
     </div>
   );
