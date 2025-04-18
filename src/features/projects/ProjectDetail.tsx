@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, ArrowRight, AlertTriangle, Lightbulb, ExternalLink, Figma, Code2, FileCode } from "lucide-react";
@@ -183,12 +182,12 @@ const ProjectDetail = () => {
     <div className="min-h-screen bg-white text-black">
       <ProjectPageHeader />
       
-      {/* Banner Section */}
-      <section className="relative pt-16 w-full">
+      {/* Banner Section - Updated height and padding */}
+      <section className="relative pt-20 w-full">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="w-full max-w-7xl mx-auto">
             <div className="overflow-hidden rounded-lg relative shadow-xl w-full">
-              <div className="h-[45vh] md:h-[60vh]">
+              <div className="h-[55vh] md:h-[70vh] lg:h-[75vh]">
                 <img 
                   src={project.image} 
                   alt={project.title}
@@ -211,12 +210,12 @@ const ProjectDetail = () => {
         </div>
       </section>
 
-      {/* Overview Section */}
+      {/* Overview Section - Updated width and text layout */}
       <section className="py-16 md:py-20 w-full">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-bold mb-8 font-manrope">Project Overview</h2>
-            <div className="text-xl md:text-2xl font-medium leading-relaxed text-gray-700 space-y-4">
+            <div className="text-xl md:text-2xl font-medium leading-relaxed text-gray-700 space-y-6 max-w-none">
               <DesktopTextReveal className="hidden md:block" lineIndex={0} totalLines={1}>
                 {project.description}
               </DesktopTextReveal>
