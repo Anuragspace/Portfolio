@@ -45,17 +45,17 @@ const Hero = () => {
                 I transform complex problems into elegant, intuitive designs that delight users and drive business growth.
               </p>
               <div className="flex flex-row sm:gap-5 gap-3 sm:pl-2 pt-4 md:pt-6 animate-slide-in" style={{ animationDelay: "0.3s" }}>
-                <div className="flex flex-row w-full max-w-[360px] sm:gap-4 gap-2 mx-auto sm:mx-0">
-                  <a href="#projects" className="w-1/2">
+                <div className="flex flex-row w-full max-w-[480px] sm:gap-4 gap-2 mx-auto sm:mx-0">
+                  <a href="#projects" className="w-[60%]">
                     <RainbowButton 
-                      className="w-full h-11 sm:h-12 text-sm sm:text-base transition-all duration-300 hover:transform hover:scale-105 hover:shadow-md px-6 rounded-xl"
+                      className="w-full h-11 sm:h-12 text-sm sm:text-base transition-all duration-300 hover:transform hover:scale-105 hover:shadow-md px-8 rounded-xl whitespace-nowrap"
                     >
                       View Projects
                     </RainbowButton>
                   </a>
                   <ShinyButton 
                     onClick={triggerConfetti} 
-                    className="h-11 sm:h-12 bg-white text-black shadow w-full text-sm sm:text-base px-6 rounded-xl"
+                    className="h-11 sm:h-12 bg-white text-black shadow w-[40%] text-sm sm:text-base px-4 rounded-xl whitespace-nowrap"
                   >
                     Click Me
                   </ShinyButton>
