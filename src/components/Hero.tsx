@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Sparkles, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -21,7 +20,6 @@ const Hero = () => {
 
   return (
     <section className="min-h-[100vh] w-full flex items-center relative overflow-hidden pt-[60px] pb-8 md:pt-0 md:pb-0">
-      {/* Add the AnimatedGridPattern with mask and skew effect */}
       <AnimatedGridPattern
         numSquares={30}
         maxOpacity={0.1}
@@ -38,22 +36,26 @@ const Hero = () => {
                 <Sparkles className="inline-block mr-2 h-4 w-4" />
                 UI/UX Designer & Product Designer
               </div>
-              <h1 className="animate-slide-in font-black text-3xl md:text-5xl lg:text-6xl" style={{ animationDelay: "0.1s" }}>
-                Crafting Digital Experiences That <span className="text-[#3E40EF]">Inspire</span>
+              <h1 className="animate-slide-in font-black text-4xl md:text-5xl lg:text-6xl leading-tight" style={{ animationDelay: "0.1s" }}>
+                Crafting Digital 
+                <br />
+                Experiences That 
+                <br />
+                <span className="text-[#3E40EF]">Inspire</span>
               </h1>
-              <p className="text-lg md:text-xl text-gray-600 animate-slide-in" style={{ animationDelay: "0.2s" }}>
+              <p className="text-lg md:text-xl text-gray-600 animate-slide-in mt-4" style={{ animationDelay: "0.2s" }}>
                 I transform complex problems into elegant, intuitive designs that delight users and drive business growth.
               </p>
-              <div className="flex flex-row sm:gap-5 gap-3 sm:pl-2 pt-2 md:pt-4 animate-slide-in" style={{ animationDelay: "0.3s" }}>
+              <div className="flex flex-row sm:gap-5 gap-3 sm:pl-2 pt-4 md:pt-6 animate-slide-in" style={{ animationDelay: "0.3s" }}>
                 <div className="flex flex-row w-full max-w-[360px] sm:gap-4 gap-2 mx-auto sm:mx-0">
                   <a href="#projects" className="w-1/2">
-                    <RainbowButton className="w-full whitespace-nowrap h-10 sm:h-12 text-sm sm:text-base transition-all duration-300 hover:transform hover:scale-105 hover:shadow-md">
+                    <RainbowButton className="w-full h-11 sm:h-12 text-sm sm:text-base transition-all duration-300 hover:transform hover:scale-105 hover:shadow-md">
                       View Projects
                     </RainbowButton>
                   </a>
                   <ShinyButton 
                     onClick={triggerConfetti} 
-                    className="h-10 sm:h-12 bg-white text-black shadow w-full text-sm sm:text-base"
+                    className="h-11 sm:h-12 bg-white text-black shadow w-full text-sm sm:text-base"
                   >
                     Click Me
                   </ShinyButton>
@@ -62,7 +64,7 @@ const Hero = () => {
             </div>
           </div>
           
-          <div className="lg:col-span-5 relative z-10 mt-3 md:mt-0">
+          <div className="lg:col-span-5 relative z-10 mt-6 md:mt-0">
             <div className="relative mx-auto px-4 sm:px-0">
               <div className="relative rounded-[2rem] overflow-hidden bg-gradient-to-br from-blue-400 to-blue-600 w-full max-w-sm aspect-[4/5] mx-auto shadow-xl">
                 <div className="absolute inset-0 w-[150%] h-[150%] left-[-25%] top-[-25%] rotate-animation opacity-10 z-0">
@@ -102,7 +104,6 @@ const Hero = () => {
         </div>
       </div>
       
-      {/* Social Dock positioned at bottom of hero section */}
       <SocialDock />
       
       <div className="absolute -top-24 -right-24 w-96 h-96 bg-[#3E40EF]/10 rounded-full blur-3xl"></div>
