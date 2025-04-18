@@ -1,6 +1,7 @@
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Index from './pages/Index';
-import ProjectDetail from './pages/ProjectDetail';
+import ProjectDetail from './features/projects/ProjectDetail';
 import NotFound from './pages/NotFound';
 import { ThemeProvider } from 'next-themes';
 

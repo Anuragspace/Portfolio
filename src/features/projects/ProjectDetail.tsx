@@ -1,8 +1,9 @@
+
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, ArrowRight, AlertTriangle, Lightbulb, ExternalLink, Figma, Code2, FileCode } from "lucide-react";
 import { motion } from "framer-motion";
-import { DesktopTextReveal, MobileTextReveal } from "@/components/TextRevealResponsive";
+import { DesktopTextReveal, MobileTextReveal } from "@/features/shared/components/magic-ui/TextRevealResponsive";
 import ProjectPageHeader from "@/components/ProjectPageHeader";
 import Footer from "@/components/Footer";
 import HomeButton from "@/components/HomeButton";

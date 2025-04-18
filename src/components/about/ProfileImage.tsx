@@ -1,7 +1,7 @@
 
 import React, { useState } from "react";
-import { Globe } from "@/components/Globe";
-import SpinningText from "../SpinningText";
+import { Globe } from "@/features/shared/components/magic-ui/Globe";
+import { SpinningText } from "@/features/shared/components/magic-ui/SpinningText";
 
 const ProfileImage = () => {
   const [showSpinText, setShowSpinText] = useState(false);

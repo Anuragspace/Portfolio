@@ -17,7 +17,7 @@ import {
   ScanLine
 } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Globe } from "@/components/Globe";
+import { Globe } from "@/features/shared/components/magic-ui/Globe";
 
 const Skills = () => {
   // References for interactive scrolling

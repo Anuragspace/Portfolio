@@ -1,7 +1,7 @@
 
 import React, { useState } from "react";
 import { Linkedin, Instagram, Twitter, Github, Heart, Share2, ArrowUp, Dribbble, ExternalLink, Link, Globe as GlobeIcon } from "lucide-react";
-import { Globe } from "@/components/Globe";
+import { Globe } from "@/features/shared/components/magic-ui/Globe";
 import BubblingHearts from "./BubblingHearts";
 
 const Footer = () => {

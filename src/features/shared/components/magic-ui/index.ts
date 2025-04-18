@@ -7,5 +7,5 @@ export { WhiteRainbowButton } from "./WhiteRainbowButton";
 export { ShinyButton } from "./ShinyButton";
 export { SpinningText } from "./SpinningText";
 export { TextReveal } from "./TextReveal";
-export { TextRevealResponsive } from "./TextRevealResponsive";
-export { RippleAnimation } from "./RippleAnimation";
+export { DesktopTextReveal, MobileTextReveal, Word } from "./TextRevealResponsive";
+export { default as RippleAnimation } from "./RippleAnimation";

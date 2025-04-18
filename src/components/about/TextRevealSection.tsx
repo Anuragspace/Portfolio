@@ -1,7 +1,7 @@
 
 import React from "react";
 import { BookOpen } from "lucide-react";
-import { DesktopTextReveal, MobileTextReveal } from "../TextRevealResponsive";
+import { DesktopTextReveal, MobileTextReveal } from "@/features/shared/components/magic-ui/TextRevealResponsive";
 
 const TextRevealSection = () => {
   return (
