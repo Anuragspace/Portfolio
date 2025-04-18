@@ -1,10 +1,8 @@
-
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { WordRotate } from "@/components/WordRotate";
-import { BorderBeam } from "@/components/BorderBeam";
 import { Sparkles, ArrowUpRight } from "lucide-react";
 
 interface ProjectPageHeaderProps {
@@ -26,8 +24,8 @@ const ProjectPageHeader = ({ className }: ProjectPageHeaderProps) => {
   return (
     <header 
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 py-6 w-full transition-all duration-300",
-        isScrolled && "bg-white/30 backdrop-blur-sm border-b border-gray-100 py-4",
+        "fixed top-0 left-0 right-0 z-50 py-4 w-full transition-all duration-300",
+        isScrolled && "bg-white/30 backdrop-blur-sm border-b border-gray-100",
         className
       )}
     >
