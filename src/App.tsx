@@ -1,15 +1,15 @@
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ThemeProvider } from 'next-themes';
 import Index from './pages/Index';
 import ProjectDetail from './features/projects/ProjectDetail';
 import NotFound from './pages/NotFound';
+import { ThemeProvider } from 'next-themes';
 
 function App() {
   return (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+    <ThemeProvider attribute="class" defaultTheme="light">
       <Router>
-        <div className="flex flex-col min-h-screen bg-background text-foreground">
+        <div className="flex flex-col min-h-screen">
           <main className="flex-grow">
             <Routes>
               <Route path="/" element={<Index />} />
