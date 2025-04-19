@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { Menu, X, Linkedin, ExternalLink, Github, Instagram, Sparkles } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Menu, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { WordRotate } from "@/components/WordRotate";
 import { BorderBeam, RainbowButton, WhiteRainbowButton } from "@/features/shared/components/magic-ui";
 import { motion, AnimatePresence } from "framer-motion";
+import { ThemeToggle } from "./ThemeToggle";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -92,7 +93,7 @@ const Navbar = () => {
           <nav className={`hidden md:flex items-center ${
             isScrolled ? "fixed left-1/2 -translate-x-1/2 mt-4" : ""
           }`}>
-            <div className="relative bg-white shadow-sm rounded-full px-2 py-2.5 flex items-center gap-1">
+            <div className="relative bg-card shadow-sm rounded-full px-2 py-2.5 flex items-center gap-1">
               <BorderBeam 
                 colorFrom="#3E40EF"
                 colorTo="#6366F1"
@@ -107,12 +108,13 @@ const Navbar = () => {
                   className={`relative z-10 text-sm font-medium px-4 py-2.5 rounded-full transition-all duration-300 hover:text-[#3E40EF] ${
                     activeSection === link.href.substring(1) 
                       ? "bg-[#3E40EF]/10 text-[#3E40EF]" 
-                      : "text-gray-700 hover:bg-gray-100"
+                      : "text-foreground hover:bg-secondary"
                   }`}
                 >
                   {link.name}
                 </a>
               ))}
+              <ThemeToggle />
             </div>
           </nav>
 
