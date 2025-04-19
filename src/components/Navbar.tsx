@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Menu, Sparkles } from "lucide-react";
+import { Menu, Sparkles, Linkedin, Github, Instagram } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { WordRotate } from "@/components/WordRotate";
 import { BorderBeam, RainbowButton, WhiteRainbowButton } from "@/features/shared/components/magic-ui";
