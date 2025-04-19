@@ -4,7 +4,7 @@ import InteractiveTerminal from "../InteractiveTerminal";
 
 const TerminalContent = () => {
   return (
-    <div className="h-[580px] lg:h-[450px] bg-[#ffffff] rounded-lg border border-gray-200 p-6 relative shadow-sm overflow-hidden">
+    <div className="h-[660px] lg:h-[450px] bg-[#ffffff] rounded-lg border border-gray-200 p-6 relative shadow-sm overflow-hidden">
       {/* Terminal Header */}
       <div className="absolute top-0 left-0 right-0 h-10 bg-[#121212] rounded-t-lg border-b border-gray-350 flex items-center px-4">
         <div className="flex gap-2">
