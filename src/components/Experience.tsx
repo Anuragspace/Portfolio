@@ -37,9 +37,9 @@ const Experience = () => {
   const experiences: Experience[] = [
     {
       id: 1,
-      role: "Chief Product Officer",
+      role: "CPO & Head of Design",
       company: "Imaginum",
-      period: "Jan 2022 - Present",
+      period: "Jan 2025 - Present",
       description: [
         "Leading a team of designers and developers to create innovative digital products",
         "Establishing product strategy and design system implementation",
@@ -53,7 +53,7 @@ const Experience = () => {
       id: 2,
       role: "Tech & Design Head",
       company: "CSED",
-      period: "Mar 2020 - Dec 2021",
+      period: "Jan 2024 - Jan 2025",
       description: [
         "Revamped the department website resulting in 40% increase in student engagement",
         "Led design sprints and workshops to solve complex UX challenges",

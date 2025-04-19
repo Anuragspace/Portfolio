@@ -25,8 +25,8 @@ const TerminalContent = () => {
         
         <div className="space-y-6 text-[#7e7e7e] font-display text-base leading-relaxed pr-2">
           <p className="text-gray-700">
-          I'm a UI/UX designer with over 5 years of experience creating intuitive, user-centered digital products. My journey spans working with both startups and established teams, where I focus on aligning user needs with business goals to design experiences that are not only visually engaging but also deeply functional.          </p>
-          
+          Driven by a passion for design, I’m a UI/UX enthusiast crafting intuitive digital experiences. As a student, I bridge the gap between user needs and design solutions, ensuring projects are visually compelling and functional. Whether independently or with teams, I create designs that resonate with users, solving problems and delivering seamless interactions.
+          </p>
           <p className="text-gray-700">
           I lead product and design at Imaginum, overseeing strategy and execution of digital solutions. Previously, I was Tech & Design Head at CSED, shaping meaningful design for socially-driven tech. I’m passionate about solving real-world problems and bringing ideas to life with clarity and empathy.
           </p>

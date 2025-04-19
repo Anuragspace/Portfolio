@@ -29,13 +29,13 @@ export const HeroImage = () => {
           </div>
         </div>
         
-        <div className="absolute top-[40px] sm:right-[-30px] right-[0px] bg-white/50 backdrop-blur-sm px-4 py-3 rounded-full shadow-lg z-30 flex items-center gap-4 animate-float" style={{ animationDelay: "0.5s" }}>
+        <div className="absolute top-[25px] lg:top-[40px] sm:right-[-30px] right-[0px] bg-white/50 backdrop-blur-sm px-4 py-3 rounded-full shadow-lg z-30 flex items-center gap-4 animate-float" style={{ animationDelay: "0.5s" }}>
           <div className="w-10 h-10 rounded-full bg-[#3E40EF] flex items-center justify-center">
             <Sparkles className="h-5 w-5 text-white" />
           </div>
           <div className="text-left">
-            <p className="font-bold text-gray-800">Expert</p>
-            <p className="text-xs text-[#3E40EF]">UI/UX Design</p>
+            <p className="font-bold text-gray-800">UI/UX Designer</p>
+            <p className="text-xs text-[#3E40EF]">Creativity</p>
           </div>
         </div>
       </div>

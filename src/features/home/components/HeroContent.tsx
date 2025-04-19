@@ -20,11 +20,10 @@ export const HeroContent = ({ triggerConfetti }: HeroContentProps) => {
           <br />
           Experiences That 
           <br />
-          <span className="text-[#3E40EF]">Inspire</span>
+          <span className="text-[#3E40EF]">Resonate</span>
         </h1>
         <p className="text-lg md:text-xl text-gray-600 animate-slide-in mt-4" style={{ animationDelay: "0.2s" }}>
-          I transform complex problems into elegant, intuitive designs that delight users and drive business growth.
-        </p>
+        Crafting intuitive digital experiences that captivate, inspire, and drive meaningful connections.        </p>
         <div className="flex flex-row sm:gap-5 gap-3 sm:pl-2 pt-6 md:pt-6 animate-slide-in" style={{ animationDelay: "0.3s" }}>
           <HeroButtons triggerConfetti={triggerConfetti} />
         </div>
