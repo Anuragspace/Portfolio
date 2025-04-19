@@ -122,7 +122,7 @@ export function SocialDock() {
             className="w-8 h-8 text-gray-700 flex items-center justify-center hover:bg-gray-100 transition-all"
             asChild
           >
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <a href="https://github.com/Anuragspace" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
               <Icons.github className="h-4 w-4" />
             </a>
           </Button>
@@ -135,7 +135,7 @@ export function SocialDock() {
             className="w-8 h-8 text-gray-700 flex items-center justify-center hover:bg-gray-100 transition-all"
             asChild
           >
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <a href="https://www.linkedin.com/in/adarshanurag/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
               <Icons.linkedin className="h-4 w-4" />
             </a>
           </Button>
@@ -148,7 +148,7 @@ export function SocialDock() {
             className="w-8 h-8 text-gray-700 flex items-center justify-center hover:bg-gray-100 transition-all"
             asChild
           >
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <a href="https://www.instagram.com/anurag__adarsh/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
               <Icons.instagram className="h-4 w-4" />
             </a>
           </Button>
@@ -161,7 +161,7 @@ export function SocialDock() {
             className="w-8 h-8 text-gray-700 flex items-center justify-center hover:bg-gray-100 transition-all"
             asChild
           >
-            <a href="https://behance.net" target="_blank" rel="noopener noreferrer" aria-label="Behance">
+            <a href="https://www.behance.net/anuragadarsh1" target="_blank" rel="noopener noreferrer" aria-label="Behance">
               <Icons.behance className="h-4 w-4" />
             </a>
           </Button>

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { AnimatedShinyText } from "@/components/ui/animated-shiny-text";
 import { ShineBorder } from "@/components/ui/shine-border";
+import emailjs from "@emailjs/browser";
 
 const Contact = () => {
   const [formState, setFormState] = useState({
@@ -25,26 +26,39 @@ const Contact = () => {
     });
   };
   
+  // Update handleSubmit to use EmailJS
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-      
-      // Reset form after showing success message
-      setTimeout(() => {
-        setIsSubmitted(false);
+  
+    emailjs.send(
+      "service_qepo5nu",      // Replace with your EmailJS service ID
+      "template_d16c59j",     // Replace with your EmailJS template ID
+      {
+        from_name: formState.name,
+        from_email: formState.email,
+        subject: formState.subject,
+        message: formState.message,
+      },
+      "rsqkXvYNlgt7dKMNA"       // Replace with your EmailJS public key (user ID)
+    )
+    .then(
+      (result) => {
+        setIsSubmitting(false);
+        setIsSubmitted(true);
+        // Remove the timeout that resets isSubmitted to false
         setFormState({
           name: "",
           email: "",
           subject: "",
           message: ""
         });
-      }, 3000);
-    }, 1500);
+      },
+      (error) => {
+        setIsSubmitting(false);
+        alert("Failed to send message. Please try again later.");
+      }
+    );
   };
   
   return (
@@ -74,7 +88,7 @@ const Contact = () => {
                   <div>
                     <p className="font-medium text-gray-500 text-sm">Email Address</p>
                     <a href="mailto:hello@example.com" className="text-accent hover:underline font-medium">
-                      hello@example.com
+                      anuraglife2020@gmail.com
                     </a>
                   </div>
                 </div>
@@ -86,7 +100,7 @@ const Contact = () => {
                   <div>
                     <p className="font-medium text-gray-500 text-sm">Phone Number</p>
                     <a href="tel:+1234567890" className="text-accent hover:underline font-medium">
-                      +1 (234) 567-890
+                      +91 9142405639
                     </a>
                   </div>
                 </div>
@@ -97,7 +111,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <p className="font-medium text-gray-500 text-sm">Location</p>
-                    <p className="text-gray-800 font-medium">New York, United States</p>
+                    <p className="text-gray-800 font-medium">Vellore, India</p>
                   </div>
                 </div>
               </div>
@@ -263,8 +277,8 @@ const Contact = () => {
               </div>
               
               {/* Background pattern */}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full -mr-16 -mt-16 z-0"></div>
-              <div className="absolute bottom-0 left-0 w-24 h-24 bg-accent/5 rounded-full -ml-12 -mb-12 z-0"></div>
+              <div className="absolute top-6 right-6 w-60 h-60 bg-accent/5 rounded-full -mr-16 -mt-16 z-0"></div>
+              <div className="absolute bottom-4 left-4 w-36 h-36 bg-accent/5 rounded-full -ml-12 -mb-12 z-0"></div>
             </div>
           </motion.div>
         </div>

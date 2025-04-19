@@ -120,9 +120,14 @@ const Navbar = () => {
             isScrolled ? "opacity-0 invisible" : "opacity-100 visible"
           }`}>
             <div className="ml-2">
+            <a
+                href="https://drive.google.com/file/d/13sT38haaEyeer0A-SJeqAVRGsHEnaGC1/view?usp=sharing" // <-- Replace with your actual Google Drive resume link
+                target="_blank"
+                rel="noopener noreferrer">
               <RainbowButton className="text-sm px-4 py-1.5">
                 Resume
               </RainbowButton>
+              </a>
             </div>
           </div>
 
@@ -251,10 +256,14 @@ const Navbar = () => {
                         <Instagram size={20} />
                       </a>
                     </div>
-                    
+                    <a
+                      href="https://drive.google.com/file/d/13sT38haaEyeer0A-SJeqAVRGsHEnaGC1/view?usp=sharing" // <-- Replace with your actual Google Drive resume link
+                     target="_blank"
+                      rel="noopener noreferrer">
                     <WhiteRainbowButton className="px-4 py-1.5 h-auto">
                       Resume
                     </WhiteRainbowButton>
+                    </a>
                   </div>
                   
                   <p className="text-sm text-white/60">© 2023 Anurag Adarsh. All rights reserved.</p>
