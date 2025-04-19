@@ -230,7 +230,7 @@ const Contact = () => {
                           onChange={handleChange}
                           onFocus={() => setFocusedField('message')}
                           onBlur={() => setFocusedField(null)}
-                          rows={4}
+                          rows={8}
                           className={`w-full pl-11 pr-4 py-3 bg-gray-50/50 border ${focusedField === 'message' ? 'border-accent' : 'border-gray-200'} rounded-xl focus:outline-none focus:ring-2 focus:ring-accent/30 transition-all duration-300 resize-none`}
                           placeholder="Your Message"
                           required

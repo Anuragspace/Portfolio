@@ -26,14 +26,14 @@ const Index = () => {
   
   // Optimize scrolling with react-scroll
   useEffect(() => {
-    // Add smooth scrolling behavior to the document
-    document.documentElement.style.scrollBehavior = "smooth";
+    // REMOVE this line:
+    // document.documentElement.style.scrollBehavior = "smooth";
     
     // Initialize scrollSpy for detecting active sections
     Events.scrollEvent.register('begin', () => {});
     Events.scrollEvent.register('end', () => {});
     scrollSpy.update();
-
+    // ... existing code ...
     // Register for scroll events with passive: true for better performance
     window.addEventListener('scroll', scrollSpy.update, { passive: true });
     
@@ -42,7 +42,10 @@ const Index = () => {
       Events.scrollEvent.remove('begin');
       Events.scrollEvent.remove('end');
       window.removeEventListener('scroll', scrollSpy.update);
-      document.documentElement.style.removeProperty("scroll-behavior");
+      // REMOVE this line:
+      // document.getElementById('target-section')?.scrollIntoView({ behavior: 'auto' });
+      // REMOVE this line from cleanup:
+      // document.documentElement.style.removeProperty("scroll-behavior");
     };
   }, []);
   
@@ -69,7 +72,9 @@ const Index = () => {
         <Skills />
         <Projects />
         <MemoizedExperience />
+        <section id="posters">
         <MemoizedPosters />
+        </section>
         <MemoizedContact />
         <MemoizedFooter />
       </div>

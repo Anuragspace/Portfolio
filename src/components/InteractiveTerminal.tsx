@@ -76,7 +76,7 @@ const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({ className = "
   // Custom rectangular cursor component
   const RectCursor = ({ className = "" }) => (
     <div 
-      className={`inline-block h-4 w-2 bg-[#9b87f5] ${showCursor ? 'opacity-100' : 'opacity-0'} transition-opacity ${className}`}
+      className={`inline-block h-4 w-2 bg-[#3E40EF] ${showCursor ? 'opacity-100' : 'opacity-0'} transition-opacity ${className}`}
     />
   );
   
@@ -111,7 +111,7 @@ const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({ className = "
           <div className="flex items-start">
             <span className="text-[#FFBD2E] mr-2">$&gt;</span>
             <motion.div 
-              className="text-[#9b87f5] break-words"
+              className="text-[#3E40EF] break-words"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
             >

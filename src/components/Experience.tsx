@@ -81,7 +81,7 @@ const Experience = () => {
           {experiences.map((exp, index) => (
             <div key={exp.id} className="relative mb-8">
               {/* Timeline dot with pulse effect - better aligned */}
-              <div className="absolute left-[-4px] md:left-[-4px] top-6 transform -translate-x-1/2 z-10">
+              <div className="absolute left-[-23px] md:left-[1px] top-0 transform -translate-x-1/2 z-10">
                 <div className="relative w-5 h-5 bg-accent rounded-full ring-2 ring-white shadow-md 
                               hover:scale-110 transition-transform duration-300">
                   <div className="absolute inset-0 animate-ping bg-accent rounded-full opacity-20"></div>
@@ -89,7 +89,7 @@ const Experience = () => {
               </div>
               
               {/* Experience card - improved layout */}
-              <div className="ml-6 md:ml-12">
+              <div className="ml-1 md:ml-12">
                 <Card className="group overflow-hidden border border-gray-100 shadow-md hover:shadow-xl 
                                hover:-translate-y-1 transition-all duration-300 will-change-transform">
                   <CardContent className="p-4 md:p-6">

@@ -13,44 +13,38 @@ const projectsData = [
   // Mock data for projects
   {
     id: "1",
-    title: "Peingpo Builder",
+    title: "CSED VIT – Official Club Website",
     year: "2024",
-    description: "I came up with a system that lets companies limit unauthorized users' access, while giving users total freedom to create and close their projects. And it's all in an easy-to-use platform.",
-    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80",
+    description: "I led the complete redesign of the official CSED VIT website to give the club a bold digital identity. The goal was to create a clean, modern, and standout UI that felt interactive and engaging across devices. I handled the full UX process—research, wireframing, prototyping, and final implementation—focusing on smooth transitions and intuitive navigation. The result is a responsive, scalable platform that effectively showcases our events, teams, and mission.",
+    image: "/images/csedh.png",
     tags: ["UI Design", "UX Design", "Web Development"],
-    role: ["Lead Designer", "Frontend Developer"],
-    tools: ["React", "TypeScript", "Tailwind CSS"],
-    category: "Web Application",
-    liveUrl: "https://example.com",
+    role: ["Lead Designer"],
+    tools: ["Figma", "VantaJS", "HTML-CSS"],
+    category: "UI/UX Website Design",
+    liveUrl: "https://csedvit.com",
     githubUrl: "https://github.com/example",
     impact: "Increased user engagement by 150% and reduced project setup time by 60%",
-    problem: "Companies needed to maintain security for private projects while giving users the freedom to manage their own workspaces. Existing solutions were either too restrictive or lacked proper access controls.",
-    solution: "Peingpo Builder implements a role-based permission system with customizable access levels. This allows organizations to define security policies while users can freely create and manage projects within those guardrails.",
-    designProcess: [
-      "https://images.unsplash.com/photo-1557683316-973673baf926?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=2129&q=80"
-    ],
-    designElements: [
-      "https://images.unsplash.com/photo-1643208589889-0735ad7218f0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80"
-    ],
-    finalDesign: [
-      "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80"
-    ]
+    problem: "The current CSED website does not provide an intuitive, comprehensive platform to effectively showcase the club's diverse activities, projects, and events, making it challenging for users to engage and stay updated.",
+    solution: "Design and develop a modern, user-friendly website that highlights CSED's initiatives, events, and projects. The solution will focus on seamless navigation, interactive features, and an attractive layout to enhance engagement.",
+    designProcess: ["/images/csedp.png"],
+    designElements: ["/images/csede.png"],
+    finalDesign: ["/images/csedf.webp"]
   },
   {
     id: "2",
-    title: "MyBet Apps",
-    year: "2021",
-    description: "MyBet Apps is an online Event booking app that had a bad UI/UX design. I noticed the usability problems and created a precise but completely revamped UI to increase user satisfaction and engagement.",
-    image: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80",
+    title: "Campus Mart – Your College Marketplace",
+    year: "2025",
+    description: "Campus Mart is a student-centric web platform designed to simplify on-campus buying, selling, and exchanging of goods. Tailored for college communities, it offers a secure and intuitive space where students can list items, browse deals, and connect with peers. From textbooks and tech to bikes and everyday essentials, Campus Mart brings the campus marketplace online—making student life more affordable, convenient, and connected.",
+    image: "/images/campusm.png",
     tags: ["Product Design", "Mobile App", "Branding"],
-    role: ["UX Researcher", "UI Designer"],
-    tools: ["Figma", "Adobe XD", "InVision"],
-    category: "Mobile Application",
+    role: ["UI Designer"],
+    tools: ["Figma"],
+    category: "UI/UX | Web-APP",
     liveUrl: "https://example.com/mybet",
     githubUrl: "https://github.com/example/mybet",
     impact: "Improved user retention by 75% and increased booking conversion rate by 45%",
-    problem: "The original app had confusing navigation, inconsistent visual elements, and a complex booking process that frustrated users and led to high abandonment rates.",
-    solution: "A complete UX overhaul focused on simplifying the booking flow, creating a consistent visual language, and implementing intuitive navigation patterns tailored to user behavior.",
+    problem: "Students often struggle to find a reliable and convenient way to buy or sell second-hand items within the campus, leading to missed opportunities, wasted resources, and increased expenses.",
+    solution: "Campus Mart provides a dedicated online marketplace for students to securely buy, sell, and exchange goods within their college community. It streamlines transactions, fosters peer connections, and promotes sustainable, affordable student living.",
     designProcess: [
       "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
     ],
@@ -63,19 +57,19 @@ const projectsData = [
   },
   {
     id: "3",
-    title: "RunOn",
+    title: "CabSync – Ride Together",
     year: "2019",
-    description: "RunOn is a running tracking app with many features, but most users didn't know it existed. Its landing page didn't convey its advanced technology and benefits, leading to low traffic and poor user conversions.",
-    image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    description: "CabSync is a student-focused cab pooling platform designed to simplify and secure transportation to and from campus. It connects students with similar routes and travel times, enabling them to share cabs efficiently. By fostering ride-sharing within the college community, CabSync helps reduce travel costs, ease planning, and promote eco-friendly commuting.",
+    image: "/images/cabm.png",
     tags: ["UX Research", "UI Design", "Prototyping"],
     role: ["UX Designer", "Researcher"],
     tools: ["Sketch", "Principle", "Maze"],
-    category: "Web & Mobile App",
+    category: "Mobile App UI/UX",
     liveUrl: "https://example.com/runon",
     githubUrl: "https://github.com/example/runon",
     impact: "Increased landing page conversion by 120% and app downloads by 85% in the first quarter after launch",
-    problem: "The original landing page failed to communicate the app's value proposition effectively. Users couldn't quickly understand the benefits or features that differentiated RunOn from competitors.",
-    solution: "Created a new landing page experience with clear product benefits, engaging visuals of the app in action, and a streamlined sign-up process optimized for conversion.",
+    problem: "Students often face difficulty finding safe, affordable, and timely transportation options, especially during peak hours, late nights, or urgent travel situations.",
+    solution: "CabSync offers a centralized platform for students to coordinate and share cabs with trusted peers. It ensures cost-effective, secure, and hassle-free travel, making daily commutes smarter and more sustainable.",
     designProcess: [
       "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
     ],
@@ -91,7 +85,7 @@ const projectsData = [
     title: "Imaginum Website",
     year: "2023",
     description: "Corporate website design for a creative agency showcasing their portfolio and services with an immersive experience that helps visitors understand the company's values and capabilities.",
-    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80",
+    image: "/images/cabm.png",
     tags: ["Web Design", "Animation", "Development"],
     role: ["Lead Designer", "Front-end Developer"],
     tools: ["Webflow", "GSAP", "Figma"],
@@ -199,7 +193,7 @@ const ProjectDetail = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.2 }}
-                    className="text-4xl md:text-6xl font-bold text-white font-manrope"
+                    className="text-4xl md:text-5xl font-bold text-white font-manrope"
                   >
                     {project.title}
                   </motion.h1>
@@ -215,12 +209,12 @@ const ProjectDetail = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-bold mb-8 font-manrope">Project Overview</h2>
-            <div className="text-2xl md:text-3xl font-medium leading-relaxed text-gray-700">
+            <div className="text-lg md:text-4xl font-medium leading-relaxed text-gray-700">
               <DesktopTextReveal className="hidden md:block" lineIndex={0} totalLines={1}>
-                MyBet Apps revolutionizes event booking through an intuitive, user-centric interface. We identified critical usability challenges in the existing platform and executed a complete UI/UX overhaul, focusing on seamless navigation and enhanced user engagement. Through extensive user research and iterative design, we created an interface that simplifies complex booking processes while maintaining robust functionality. Our design approach prioritizes accessibility across all user skill levels, resulting in a 75% improvement in user retention and a 45% increase in booking conversion rates. The revamped platform showcases modern design principles with a consistent visual language that resonates with both new and experienced users.
+              {project.description}              
               </DesktopTextReveal>
               <MobileTextReveal className="block md:hidden" lineIndex={0} totalLines={1}>
-                MyBet Apps revolutionizes event booking through an intuitive, user-centric interface. We identified critical usability challenges in the existing platform and executed a complete UI/UX overhaul, focusing on seamless navigation and enhanced user engagement. Through extensive user research and iterative design, we created an interface that simplifies complex booking processes while maintaining robust functionality. Our design approach prioritizes accessibility across all user skill levels, resulting in a 75% improvement in user retention and a 45% increase in booking conversion rates. The revamped platform showcases modern design principles with a consistent visual language that resonates with both new and experienced users.
+              {project.description}     
               </MobileTextReveal>
             </div>
           </div>
@@ -232,7 +226,7 @@ const ProjectDetail = () => {
       </section>
 
       {/* Problem Solution Section */}
-      <section className="py-12 md:py-16">
+      <section className="mt-1 mb-3 md:mt-2 md:mb-6">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
             <ProblemSolutionRow 
@@ -280,11 +274,11 @@ const ProjectDetail = () => {
 
             <div>
               <h2 className="text-3xl font-bold mb-8 font-manrope text-center">Final Design</h2>
-              <div className="aspect-video rounded-lg overflow-hidden w-full">
+              <div className="rounded-lg overflow-hidden w-full">
                 <img 
                   src={project.finalDesign[0]} 
                   alt="Final Design"
-                  className="w-full h-full object-cover"
+                  className="w-full h-auto object-contain"
                 />
               </div>
             </div>

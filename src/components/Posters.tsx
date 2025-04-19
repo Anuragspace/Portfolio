@@ -62,37 +62,37 @@ const Posters = () => {
       id: 1,
       title: "Tech Conference 2023",
       description: "Event poster design with modern typographic layout",
-      image: "/lovable-uploads/1.jpg",
+      image: "/images/1.jpg",
     },
     {
       id: 2,
       title: "Summer Music Festival",
       description: "Vibrant poster design for annual music event",
-      image: "/lovable-uploads/3.jpg",
+      image: "/images/3.jpg",
     },
     {
       id: 3,
       title: "Product Launch",
       description: "Minimalist design highlighting new product features",
-      image: "/lovable-uploads/im3.jpg",
+      image: "/images/im3.jpg",
     },
     {
       id: 4,
       title: "Social Media Campaign",
       description: "Series of coordinated visuals for digital campaign",
-      image: "/lovable-uploads/accept letter.png",
+      image: "/images/accept letter.png",
     },
     {
       id: 5,
       title: "Annual Report",
       description: "Corporate visual design with data visualization",
-      image: "/lovable-uploads/IMG2.png",
+      image: "/images/IMG2.png",
     },
     {
       id: 6,
       title: "Sustainability Initiative",
       description: "Campaign promoting environmental awareness",
-      image: "/lovable-uploads/Instagram post - 5.png",
+      image: "/images/Instagram post - 5.png",
     },
   ];
 

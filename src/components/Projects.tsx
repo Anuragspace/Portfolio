@@ -112,8 +112,7 @@ const ProjectCard = memo(({ project, index }: { project: Project; index: number 
             />
           </div>
           
-          <div className="w-full md:w-[60%] h-full overflow-hidden rounded-xl md:mx-0 mt-2 md:mt-0 order-first md:order-none">
-            <img 
+          <div className="w-full md:w-[60%] h-[300px] sm:h-[400px] overflow-hidden rounded-xl md:mx-0 mt-2 md:mt-0 order-first md:order-none">            <img 
               src={project.image} 
               alt={project.title} 
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 rounded-xl"
@@ -132,29 +131,29 @@ const Projects = () => {
   const projects: Project[] = [
     {
       id: 1,
-      title: "Peingpo Builder",
+      title: "CSED VIT – Official Club Website",
       year: "2024",
-      description: "I came up with a system that lets companies limit unauthorized users' access, while giving users total freedom to create and close their projects. And it's all in an easy-to-use platform.",
-      image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80",
+      description: "Designed and developed a modern, interactive, and standout UI with a clean visual hierarchy, smooth transitions, and responsive layouts. Created an engaging user experience to reflect the club’s identity, events, and initiatives across all devices.",
+      image: "/images/csedm.webp",
       tags: ["UI Design", "UX Design", "Web Development"],
       link: "#",
     },
     {
       id: 2,
-      title: "MyBet Apps",
-      year: "2021",
-      description: "MyBet Apps is an online Event booking app that had a bad UI/UX design. I noticed the usability problems and created a precise but completely revamped UI to increase user satisfaction and engagement.",
-      image: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80",
-      tags: ["Product Design", "Mobile App", "Branding"],
+      title: "Campus Mart – Your College Marketplace",
+      year: "2025",
+      description: "Discover a trusted marketplace built for students. Buy, sell, or exchange books, electronics, essentials, and more—all within your campus community. Easy to use, safe to connect, made for you.",
+      image: "/images/campusm.png",
+      tags: ["Product Design", "User Flow", "UI/UX"],
       link: "#",
     },
     {
       id: 3,
-      title: "RunOn",
-      year: "2019",
-      description: "RunOn is a running tracking app with many features, but most users didn't know it existed. Its landing page didn't convey its advanced technology and benefits, leading to low traffic and poor user conversions.",
-      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-      tags: ["UX Research", "UI Design", "Prototyping"],
+      title: "CabSync – Ride Together",
+      year: "2025",
+      description: "Easily find and share cabs with fellow students heading to the same destination. Save money, travel safely, and reduce your carbon footprint—all in one tap.",
+      image: "/images/cabm.png",
+      tags: ["App UI/UX", "UI Design", "Prototyping"],
       link: "#",
     },
     {
@@ -162,7 +161,7 @@ const Projects = () => {
       title: "Imaginum Website",
       year: "2023",
       description: "Corporate website design for a creative agency showcasing their portfolio and services with an immersive experience that helps visitors understand the company's values and capabilities.",
-      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80",
+      image: "/images/imagim.png",
       tags: ["Web Design", "Animation", "Development"],
       link: "#",
     },

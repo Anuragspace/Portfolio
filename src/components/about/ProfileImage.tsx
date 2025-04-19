@@ -8,7 +8,7 @@ const ProfileImage = () => {
 
   return (
     <div 
-      className="relative h-[450px] cursor-none group"
+      className="relative h-[450px] group"
       onMouseEnter={() => setShowSpinText(true)}
       onMouseLeave={() => setShowSpinText(false)}
     >
@@ -19,7 +19,7 @@ const ProfileImage = () => {
           <Globe className="scale-[1.1] translate-y-[30%] -z-10" />
         </div>
         <img 
-          src="/lovable-uploads/1777892e-debe-48e7-b9a6-4e35347f6790.png" 
+          src="\images\anudev.webp" 
           alt="Portrait" 
           className="w-full h-full object-cover translate-y-[7%]"
         />

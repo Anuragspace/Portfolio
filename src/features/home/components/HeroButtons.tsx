@@ -10,7 +10,7 @@ interface HeroButtonsProps {
 export const HeroButtons = ({ triggerConfetti }: HeroButtonsProps) => {
   return (
     <div className="flex flex-row w-full max-w-[480px] sm:gap-4 gap-2 mx-auto sm:mx-0">
-      <a href="#projects" className="w-[60%]">
+      <a href="#projects" className="w-[50%] sm:w-[40%]">
         <RainbowButton 
           className="w-full h-11 sm:h-12 text-sm sm:text-base transition-all duration-300 hover:transform hover:scale-105 hover:shadow-md px-8 rounded-xl whitespace-nowrap"
         >
@@ -19,7 +19,7 @@ export const HeroButtons = ({ triggerConfetti }: HeroButtonsProps) => {
       </a>
       <ShinyButton 
         onClick={triggerConfetti} 
-        className="h-11 sm:h-12 bg-white text-black shadow w-[40%] text-sm sm:text-base px-4 rounded-xl whitespace-nowrap"
+        className="h-11 sm:h-12 bg-white text-black shadow w-[50%] sm:w-[40%] text-sm sm:text-base px-4 rounded-xl whitespace-nowrap"
       >
         Click Me
       </ShinyButton>
