@@ -58,10 +58,14 @@ const HomeButton = memo(() => {
   }, [visible]);
 
   const scrollToTop = () => {
-    // Use Lenis scroll if available, fallback to native
+    // Simpler implementation that works reliably
     if (window.lenis) {
-      window.lenis.scrollTo(0, { duration: 1.2 });
+      window.lenis.scrollTo(0, { 
+        duration: 1.0,
+        lock: false // Don't lock scrolling during animation for better UX
+      });
     } else {
+      // Fallback to native
       window.scrollTo({
         top: 0,
         behavior: 'smooth'

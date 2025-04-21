@@ -30,15 +30,26 @@ const Index = () => {
   }, []);
   
   useEffect(() => {
-    // Use passive event listeners for better performance
-    Events.scrollEvent.register('begin', () => {});
-    Events.scrollEvent.register('end', () => {});
+    // Make sure react-scroll and Lenis work well together
+    Events.scrollEvent.register('begin', () => {
+      // Temporarily disable Lenis during react-scroll navigation
+      if (window.lenis) {
+        window.lenis.stop();
+      }
+    });
+    
+    Events.scrollEvent.register('end', () => {
+      // Re-enable Lenis after react-scroll navigation completes
+      if (window.lenis) {
+        window.lenis.start();
+      }
+      updateScrollSpy();
+    });
     
     // Initialize scrollSpy once
     scrollSpy.update();
     
-    // Let Lenis handle the scroll events, we just need to update react-scroll
-    // Optimize by using requestAnimationFrame to limit updates
+    // Let Lenis handle the scroll events, but still update react-scroll
     let ticking = false;
     const handleScroll = () => {
       if (!ticking) {

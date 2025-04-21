@@ -2,7 +2,7 @@
 import { useEffect, useRef } from 'react';
 import Lenis from '@studio-freight/lenis';
 
-// Define the type for Lenis options separately instead of using Lenis.LenisOptions
+// Define a simpler type for Lenis options without namespace issues
 type LenisOptions = {
   duration?: number;
   easing?: (t: number) => number;
@@ -28,21 +28,21 @@ export function useLenisScroll({
   useEffect(() => {
     if (!enabled) return;
 
-    // Create Lenis instance with optimized defaults
+    // Create Lenis instance with more standard defaults
     lenisRef.current = new Lenis({
-      duration: 1.2,
+      duration: 1.0, // Slightly less duration for more responsive feel
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Improved easing function
       direction: 'vertical',
       gestureDirection: 'vertical',
       smooth: true,
       mouseMultiplier: 1,
-      smoothTouch: false, // Disable on touch devices for better performance
+      smoothTouch: false, // Better performance on mobile
       touchMultiplier: 2,
       infinite: false,
       ...options
     });
 
-    // RAF animation loop with timestamp for consistent animations
+    // Simple RAF loop
     const raf = (time: number) => {
       if (lenisRef.current) {
         lenisRef.current.raf(time);
@@ -52,35 +52,6 @@ export function useLenisScroll({
 
     // Start animation loop
     requestAnimationFrame(raf);
-
-    // Create scroll restoration handler
-    const scrollRestoration = () => {
-      history.scrollRestoration = 'manual';
-    };
-    window.addEventListener('load', scrollRestoration);
-
-    // Pause during route transitions to prevent conflicts
-    const pauseScroll = () => {
-      if (lenisRef.current) lenisRef.current.stop();
-    };
-    
-    const resumeScroll = () => {
-      if (lenisRef.current) lenisRef.current.start();
-    };
-
-    window.addEventListener('popstate', pauseScroll);
-    window.addEventListener('pushstate', pauseScroll);
-    
-    // Document visibility change handler (for performance)
-    const handleVisibilityChange = () => {
-      if (document.hidden) {
-        if (lenisRef.current) lenisRef.current.stop();
-      } else {
-        if (lenisRef.current) lenisRef.current.start();
-      }
-    };
-    
-    document.addEventListener('visibilitychange', handleVisibilityChange);
 
     // Make lenis available globally for debugging
     if (process.env.NODE_ENV === 'development') {
@@ -92,10 +63,6 @@ export function useLenisScroll({
         lenisRef.current.destroy();
         lenisRef.current = null;
       }
-      window.removeEventListener('load', scrollRestoration);
-      window.removeEventListener('popstate', pauseScroll);
-      window.removeEventListener('pushstate', pauseScroll);
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
   }, [enabled, options]);
 
