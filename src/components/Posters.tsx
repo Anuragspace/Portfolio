@@ -62,7 +62,7 @@ const Posters = () => {
       id: 1,
       title: "Tech Conference 2023",
       description: "Event poster design with modern typographic layout",
-      image: "/images/1.jpg",
+      image: "/images/1.webp",
     },
     {
       id: 2,
@@ -86,7 +86,7 @@ const Posters = () => {
       id: 5,
       title: "Annual Report",
       description: "Corporate visual design with data visualization",
-      image: "/images/IMG2.png",
+      image: "/images/IMG2.webp",
     },
     {
       id: 6,

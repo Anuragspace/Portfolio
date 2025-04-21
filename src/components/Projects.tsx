@@ -4,9 +4,10 @@ import { BorderBeam, RainbowButton, WhiteRainbowButton } from "@/features/shared
 import { AnimatedGridPattern } from "@/components/AnimatedGridPattern";
 import { motion, LazyMotion, domAnimation, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
+import { OptimizedImage } from "./OptimizedImage"; // <-- Add this import
 
 interface Project {
-  id: number;
+  id: string;
   title: string;
   year: string;
   description: string;
@@ -112,11 +113,11 @@ const ProjectCard = memo(({ project, index }: { project: Project; index: number 
             />
           </div>
           
-          <div className="w-full md:w-[60%] h-[300px] sm:h-[400px] overflow-hidden rounded-xl md:mx-0 mt-2 md:mt-0 order-first md:order-none">            <img 
-              src={project.image} 
-              alt={project.title} 
+          <div className="w-full md:w-[60%] h-[300px] sm:h-[400px] overflow-hidden rounded-xl md:mx-0 mt-2 md:mt-0 order-first md:order-none">
+            <OptimizedImage
+              src={project.image}
+              alt={project.title}
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 rounded-xl"
-              loading="lazy"
             />
           </div>
         </div>
@@ -130,7 +131,7 @@ ProjectCard.displayName = "ProjectCard";
 const Projects = () => {
   const projects: Project[] = [
     {
-      id: 1,
+      id: "csedvit",
       title: "CSED VIT – Official Club Website",
       year: "2024",
       description: "Designed and developed a modern, interactive, and standout UI with a clean visual hierarchy, smooth transitions, and responsive layouts. Created an engaging user experience to reflect the club’s identity, events, and initiatives across all devices.",
@@ -139,29 +140,29 @@ const Projects = () => {
       link: "#",
     },
     {
-      id: 2,
+      id: "campusmart",
       title: "Campus Mart – Your College Marketplace",
       year: "2025",
       description: "Discover a trusted marketplace built for students. Buy, sell, or exchange books, electronics, essentials, and more—all within your campus community. Easy to use, safe to connect, made for you.",
-      image: "/images/campusm.png",
+      image: "/images/campusm.webp",
       tags: ["Product Design", "User Flow", "UI/UX"],
       link: "#",
     },
     {
-      id: 3,
+      id: "cabsync",
       title: "CabSync – Ride Together",
       year: "2025",
       description: "Easily find and share cabs with fellow students heading to the same destination. Save money, travel safely, and reduce your carbon footprint—all in one tap.",
-      image: "/images/cabm.png",
+      image: "/images/cabm.webp",
       tags: ["App UI/UX", "UI Design", "Prototyping"],
       link: "#",
     },
     {
-      id: 4,
+      id: "imaginum",
       title: "Imaginum Website",
       year: "2023",
       description: "Corporate website design for a creative agency showcasing their portfolio and services with an immersive experience that helps visitors understand the company's values and capabilities.",
-      image: "/images/imagim.png",
+      image: "/images/imagim.webp",
       tags: ["Web Design", "Animation", "Development"],
       link: "#",
     },
@@ -177,6 +178,8 @@ const Projects = () => {
           repeatDelay={2}
           className="absolute inset-x-[-20%] inset-y-[0%] w-[60%] h-[60%] skew-y-12 text-[#3E40EF]/80 [mask-image:radial-gradient(600px_circle_at_center,white,transparent)]"
         />
+
+        
 
         <div className="container-custom">
           <div className="mb-8 md:mb-12 text-center">

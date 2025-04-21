@@ -46,7 +46,7 @@ const InfoBoxes = () => {
           <div>
             <h4 className="text-lg font-bold mb-2 text-[#3E40EF]">Experience</h4>
             <p className="text-gray-700 text-sm">
-              Chief Product Officer at Imaginum<br />
+              Managing Product Design at Imaginum<br />
               Tech & Design Head at CSED
             </p>
           </div>
