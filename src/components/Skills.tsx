@@ -22,7 +22,7 @@ import useIntersectionObserver from "@/hooks/use-intersection-observer";
 
 const Skills = () => {
   const [isVisible, skillsRef] = useIntersectionObserver<HTMLDivElement>({
-    threshold: 0.1,
+    threshold: 0.5,
     once: true
   });
 
@@ -195,8 +195,8 @@ const Skills = () => {
                         className="bg-white h-2.5 rounded-full transition-all"
                         style={{ 
                           width: isVisible ? `${skill.level}%` : '0%',
-                          transitionDuration: '1s',
-                          transitionDelay: `${index * 0.3}s`,
+                          transitionDuration: '1.5s',
+                          transitionDelay: `${index * 0.5}s`,
                           transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)'
                         }}
                       ></div>
