@@ -8,6 +8,7 @@ import Skills from "@/components/Skills";
 import { usePerformanceOptimizations } from "@/hooks/use-performance-optimizations";
 import { LazyMotion, domAnimation, m } from "framer-motion";
 import MetaHead from "@/components/MetaHead";
+import HomeButton from "@/components/HomeButton";
 
 // Lazy load non-critical components
 const Projects = lazy(() => import("@/components/Projects"));
@@ -23,7 +24,7 @@ const Index = () => {
   // Apply performance optimizations
   const { isOptimized } = usePerformanceOptimizations();
   
-  // Optimize scrolling with throttled scroll handler
+  // Optimize scrolling with throttled scroll handler for react-scroll
   const updateScrollSpy = useCallback(() => {
     scrollSpy.update();
   }, []);
@@ -36,7 +37,8 @@ const Index = () => {
     // Initialize scrollSpy once
     scrollSpy.update();
     
-    // Use passive event listener and throttle scroll events
+    // Let Lenis handle the scroll events, we just need to update react-scroll
+    // Optimize by using requestAnimationFrame to limit updates
     let ticking = false;
     const handleScroll = () => {
       if (!ticking) {
@@ -48,6 +50,7 @@ const Index = () => {
       }
     };
     
+    // Use passive listeners for better performance
     window.addEventListener('scroll', handleScroll, { passive: true });
     
     return () => {
@@ -88,6 +91,8 @@ const Index = () => {
         <Suspense fallback={<LoadingFallback />}>
           <Footer />
         </Suspense>
+        
+        <HomeButton />
       </div>
     </LazyMotion>
   );

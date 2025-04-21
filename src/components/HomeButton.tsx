@@ -58,10 +58,15 @@ const HomeButton = memo(() => {
   }, [visible]);
 
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+    // Use Lenis scroll if available, fallback to native
+    if (window.lenis) {
+      window.lenis.scrollTo(0, { duration: 1.2 });
+    } else {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
   };
 
   return (
@@ -88,5 +93,12 @@ const HomeButton = memo(() => {
 });
 
 HomeButton.displayName = "HomeButton";
+
+// Add TypeScript global declaration for Lenis
+declare global {
+  interface Window {
+    lenis?: any;
+  }
+}
 
 export default HomeButton;
