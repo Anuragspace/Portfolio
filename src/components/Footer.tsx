@@ -1,8 +1,8 @@
-
 import React, { useState } from "react";
 import { Linkedin, Instagram, Twitter, Github, Heart, Share2, ArrowUp, ExternalLink, Link, Globe as GlobeIcon } from "lucide-react";
 import { Globe } from "@/features/shared/components/magic-ui/Globe";
 import BubblingHearts from "./BubblingHearts";
+import AnimatedWord from "./AnimatedWord";
 
 const Footer = () => {
   const year = new Date().getFullYear();
@@ -52,6 +52,9 @@ const Footer = () => {
     });
   };
 
+  const impactText = "Let's Design Experiences That Make an Impact! 🤝";
+  const words = impactText.split(' ');
+
   return (
     <footer className="bg-white p-1 pb-1">
       <div className="rounded-3xl bg-[#3E40EF] text-white relative pt-20 pb-10 overflow-hidden mx-4 mb-4">
@@ -75,8 +78,10 @@ const Footer = () => {
                 </a>
               </div>
               
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight max-w-xl">
-                Let's Design Experiences That Make an Impact! <span className="text-yellow-300">🤝</span>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight max-w-xl flex flex-wrap gap-x-2">
+                {words.map((word, index) => (
+                  <AnimatedWord key={index} word={word} />
+                ))}
               </h2>
               
               <div className="flex flex-wrap gap-4 pb-12">

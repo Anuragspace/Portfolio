@@ -14,13 +14,13 @@ const BubblingHeart: React.FC<HeartProps> = ({ x, delay }) => {
       className="absolute bottom-0 pointer-events-none"
       initial={{ x, y: 0, opacity: 0, scale: 0 }}
       animate={{ 
-        y: [-20, -80], 
+        y: [-40, -100], 
         opacity: [0, 1, 0],
-        scale: [0.5, 1, 0.5],
-        x: x + Math.sin(Date.now() / 1000) * 20
+        scale: [0.5, 1.2, 0.5],
+        x: x + Math.sin(Date.now() / 500) * 30
       }}
       transition={{
-        duration: 2,
+        duration: 1,
         delay: delay,
         ease: "easeOut"
       }}
@@ -39,18 +39,17 @@ const BubblingHearts: React.FC<BubblingHeartsProps> = ({ isAnimating }) => {
   
   useEffect(() => {
     if (isAnimating) {
-      const newHearts = Array.from({ length: 6 }, (_, i) => ({
+      const newHearts = Array.from({ length: 8 }, (_, i) => ({
         id: Date.now() + i,
-        x: Math.random() * 40 - 20,
-        delay: i * 0.1
+        x: (Math.random() - 0.5) * 60,
+        delay: i * 0.05
       }));
       
       setHearts(newHearts);
       
-      // Clean up hearts after animation
       const timer = setTimeout(() => {
         setHearts([]);
-      }, 3000);
+      }, 1500);
       
       return () => clearTimeout(timer);
     }
