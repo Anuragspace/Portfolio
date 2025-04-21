@@ -1,6 +1,6 @@
 
 import React, { useEffect, useCallback, memo } from "react";
-import { Events, scrollSpy, scroller } from "react-scroll";
+import { Events, scrollSpy } from "react-scroll";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/about";
@@ -26,14 +26,11 @@ const Index = () => {
   
   // Optimize scrolling with react-scroll
   useEffect(() => {
-    // REMOVE this line:
-    // document.documentElement.style.scrollBehavior = "smooth";
-    
     // Initialize scrollSpy for detecting active sections
     Events.scrollEvent.register('begin', () => {});
     Events.scrollEvent.register('end', () => {});
     scrollSpy.update();
-    // ... existing code ...
+    
     // Register for scroll events with passive: true for better performance
     window.addEventListener('scroll', scrollSpy.update, { passive: true });
     
@@ -42,23 +39,6 @@ const Index = () => {
       Events.scrollEvent.remove('begin');
       Events.scrollEvent.remove('end');
       window.removeEventListener('scroll', scrollSpy.update);
-      // REMOVE this line:
-      // document.getElementById('target-section')?.scrollIntoView({ behavior: 'auto' });
-      // REMOVE this line from cleanup:
-      // document.documentElement.style.removeProperty("scroll-behavior");
-    };
-  }, []);
-  
-  // Pre-connect to external domains for faster loading
-  useEffect(() => {
-    const linkEl = document.createElement('link');
-    linkEl.rel = 'preconnect';
-    linkEl.href = 'https://fonts.gstatic.com';
-    linkEl.crossOrigin = 'anonymous';
-    document.head.appendChild(linkEl);
-    
-    return () => {
-      document.head.removeChild(linkEl);
     };
   }, []);
 
@@ -73,7 +53,7 @@ const Index = () => {
         <Projects />
         <MemoizedExperience />
         <section id="posters">
-        <MemoizedPosters />
+          <MemoizedPosters />
         </section>
         <MemoizedContact />
         <MemoizedFooter />
