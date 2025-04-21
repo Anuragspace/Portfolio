@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef, memo } from 'react';
 import { m, AnimatePresence } from 'framer-motion';
 import { ArrowUp } from 'lucide-react';
@@ -87,12 +88,5 @@ const HomeButton = memo(() => {
 });
 
 HomeButton.displayName = "HomeButton";
-
-// Add TypeScript global declaration for Lenis
-declare global {
-  interface Window {
-    lenis?: any;
-  }
-}
 
 export default HomeButton;

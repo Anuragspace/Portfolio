@@ -32,24 +32,17 @@ const Index = () => {
   useEffect(() => {
     // Make sure react-scroll and Lenis work well together
     Events.scrollEvent.register('begin', () => {
-      // Temporarily disable Lenis during react-scroll navigation
-      if (window.lenis) {
-        window.lenis.stop();
-      }
+      // Continue with scroll events
     });
     
     Events.scrollEvent.register('end', () => {
-      // Re-enable Lenis after react-scroll navigation completes
-      if (window.lenis) {
-        window.lenis.start();
-      }
       updateScrollSpy();
     });
     
     // Initialize scrollSpy once
     scrollSpy.update();
     
-    // Let Lenis handle the scroll events, but still update react-scroll
+    // Handle the scroll events
     let ticking = false;
     const handleScroll = () => {
       if (!ticking) {

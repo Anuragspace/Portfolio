@@ -170,37 +170,35 @@ const Projects = () => {
   ];
 
   return (
-    <LazyMotion features={domAnimation}>
-      <section id="projects" className="section-padding py-14 md:py-16 bg-gray-50 relative overflow-hidden">
-        <AnimatedGridPattern
-          numSquares={24}
-          maxOpacity={0.08}
-          duration={4}
-          repeatDelay={2}
-          className="absolute inset-x-[-20%] inset-y-[0%] w-[60%] h-[60%] skew-y-12 text-[#3E40EF]/80 [mask-image:radial-gradient(600px_circle_at_center,white,transparent)]"
-        />
+    <div id="projects" className="section-padding py-14 md:py-16 bg-gray-50 relative overflow-hidden">
+      <AnimatedGridPattern
+        numSquares={24}
+        maxOpacity={0.08}
+        duration={4}
+        repeatDelay={2}
+        className="absolute inset-x-[-20%] inset-y-[0%] w-[60%] h-[60%] skew-y-12 text-[#3E40EF]/80 [mask-image:radial-gradient(600px_circle_at_center,white,transparent)]"
+      />
 
-        <div className="container-custom">
-          <div className="mb-8 md:mb-12 text-center">
-            <h2 className="mb-4">My Design Work That Stands Out</h2>
-            <p className="mx-auto max-w-2xl text-gray-600">
-              Crafting intuitive digital experiences that solve real problems and delight users across platforms and industries.
-            </p>
-            <div className="mx-auto mt-4 h-1 w-24 bg-[#3E40EF]"></div>
-          </div>
-          
-          <div className="grid grid-cols-1 gap-6 md:gap-10">
-            {projects.map((project, index) => (
-              <ProjectCard 
-                key={project.id} 
-                project={project} 
-                index={index} 
-              />
-            ))}
-          </div>
+      <div className="container-custom">
+        <div className="mb-8 md:mb-12 text-center">
+          <h2 className="mb-4">My Design Work That Stands Out</h2>
+          <p className="mx-auto max-w-2xl text-gray-600">
+            Crafting intuitive digital experiences that solve real problems and delight users across platforms and industries.
+          </p>
+          <div className="mx-auto mt-4 h-1 w-24 bg-[#3E40EF]"></div>
         </div>
-      </section>
-    </LazyMotion>
+        
+        <div className="grid grid-cols-1 gap-6 md:gap-10">
+          {projects.map((project, index) => (
+            <ProjectCard 
+              key={project.id} 
+              project={project} 
+              index={index} 
+            />
+          ))}
+        </div>
+      </div>
+    </div>
   );
 };
 
