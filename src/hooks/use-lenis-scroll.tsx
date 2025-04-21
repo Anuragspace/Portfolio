@@ -2,12 +2,26 @@
 import { useEffect, useRef } from 'react';
 import Lenis from '@studio-freight/lenis';
 
+// Define the type for Lenis options separately instead of using Lenis.LenisOptions
+type LenisOptions = {
+  duration?: number;
+  easing?: (t: number) => number;
+  direction?: 'vertical' | 'horizontal';
+  gestureDirection?: 'vertical' | 'horizontal';
+  smooth?: boolean;
+  mouseMultiplier?: number;
+  smoothTouch?: boolean;
+  touchMultiplier?: number;
+  infinite?: boolean;
+  [key: string]: any; // Allow other options
+};
+
 export function useLenisScroll({ 
   enabled = true, 
   options = {}
 }: { 
   enabled?: boolean; 
-  options?: Partial<Lenis.LenisOptions>
+  options?: Partial<LenisOptions>
 } = {}) {
   const lenisRef = useRef<Lenis | null>(null);
 
