@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from "react";
 import { 
   Palette, 
@@ -18,7 +19,7 @@ import {
 } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Globe } from "@/features/shared/components/magic-ui/Globe";
-import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
+import useIntersectionObserver from "@/hooks/use-intersection-observer";
 
 const Skills = () => {
   const [isVisible, skillsRef] = useIntersectionObserver<HTMLDivElement>({
