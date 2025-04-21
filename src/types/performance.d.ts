@@ -4,7 +4,7 @@
  */
 
 interface Window {
-  _domCache?: WeakMap<string, Element>;
+  _domCache?: WeakMap<object, Element>;
   requestIdleCallback?: (callback: (deadline: IdleDeadline) => void, options?: { timeout: number }) => number;
   cancelIdleCallback?: (handle: number) => void;
 }

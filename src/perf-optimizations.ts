@@ -1,4 +1,3 @@
-
 /**
  * Performance optimizations for the application
  * This file contains functions and configurations to improve website performance
@@ -23,18 +22,22 @@ export const cacheDOMElements = () => {
   // Cache footer element since it's frequently accessed in scroll handlers
   if (typeof window !== 'undefined') {
     // Use a WeakMap to store DOM elements - better for garbage collection
-    window._domCache = new WeakMap<string, Element>();
+    window._domCache = new WeakMap<object, Element>();
     
-    // Cache common elements
+    // Cache common elements using symbol keys for better uniqueness
     const footer = document.querySelector('footer');
     const navbar = document.querySelector('nav');
     
-    if (footer) window._domCache.set('footer', footer);
-    if (navbar) window._domCache.set('navbar', navbar);
+    // Use symbol keys instead of strings
+    const FOOTER_KEY = Symbol('footer');
+    const NAVBAR_KEY = Symbol('navbar');
+    
+    if (footer) window._domCache.set(FOOTER_KEY, footer);
+    if (navbar) window._domCache.set(NAVBAR_KEY, navbar);
     
     // Update cached elements when DOM changes significantly using IntersectionObserver
     // This is more efficient than MutationObserver
-    const observeAndCache = (selector: string, key: string) => {
+    const observeAndCache = (selector: string, key: symbol) => {
       const observer = new IntersectionObserver(() => {
         const element = document.querySelector(selector);
         if (element) window._domCache.set(key, element);
@@ -47,8 +50,8 @@ export const cacheDOMElements = () => {
       }
     };
     
-    observeAndCache('footer', 'footer');
-    observeAndCache('nav', 'navbar');
+    observeAndCache('footer', FOOTER_KEY);
+    observeAndCache('nav', NAVBAR_KEY);
     
     return () => {};
   }
