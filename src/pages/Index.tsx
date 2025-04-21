@@ -1,65 +1,96 @@
 
-import React, { useEffect, useCallback, memo } from "react";
+import React, { useEffect, useCallback, memo, lazy, Suspense } from "react";
 import { Events, scrollSpy } from "react-scroll";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/about";
 import Skills from "@/components/Skills";
-import Projects from "@/components/Projects";
-import Experience from "@/components/Experience";
-import Posters from "@/components/Posters";
-import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
-import MetaHead from "@/components/MetaHead";
 import { usePerformanceOptimizations } from "@/hooks/use-performance-optimizations";
 import { LazyMotion, domAnimation } from "framer-motion";
 
-// Memoize components for better performance
-const MemoizedExperience = memo(Experience);
-const MemoizedPosters = memo(Posters);
-const MemoizedContact = memo(Contact);
-const MemoizedFooter = memo(Footer);
+// Lazy load non-critical components
+const Projects = lazy(() => import("@/components/Projects"));
+const Experience = lazy(() => import("@/components/Experience"));
+const Posters = lazy(() => import("@/components/Posters"));
+const Contact = lazy(() => import("@/components/Contact"));
+const Footer = lazy(() => import("@/components/Footer"));
+const MetaHead = memo(() => import("@/components/MetaHead"));
+
+// Lightweight loading fallback
+const LoadingFallback = () => <div className="min-h-[200px]" />;
 
 const Index = () => {
   // Apply performance optimizations
   const { isOptimized } = usePerformanceOptimizations();
   
-  // Optimize scrolling with react-scroll
+  // Optimize scrolling with throttled scroll handler
+  const updateScrollSpy = useCallback(() => {
+    scrollSpy.update();
+  }, []);
+  
   useEffect(() => {
-    // Initialize scrollSpy for detecting active sections
+    // Use passive event listeners for better performance
     Events.scrollEvent.register('begin', () => {});
     Events.scrollEvent.register('end', () => {});
+    
+    // Initialize scrollSpy once
     scrollSpy.update();
     
-    // Register for scroll events with passive: true for better performance
-    window.addEventListener('scroll', scrollSpy.update, { passive: true });
+    // Use passive event listener and throttle scroll events
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          updateScrollSpy();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll, { passive: true });
     
     return () => {
-      // Clean up scroll events when component unmounts
       Events.scrollEvent.remove('begin');
       Events.scrollEvent.remove('end');
-      window.removeEventListener('scroll', scrollSpy.update);
+      window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [updateScrollSpy]);
 
   return (
-    <LazyMotion features={domAnimation}>
+    <LazyMotion features={domAnimation} strict>
       <div className="min-h-screen bg-white">
         <MetaHead />
         <Navbar />
         <Hero />
         <About />
         <Skills />
-        <Projects />
-        <MemoizedExperience />
+        
+        {/* Lazy load less critical sections */}
+        <Suspense fallback={<LoadingFallback />}>
+          <Projects />
+        </Suspense>
+        
+        <Suspense fallback={<LoadingFallback />}>
+          <Experience />
+        </Suspense>
+        
         <section id="posters">
-          <MemoizedPosters />
+          <Suspense fallback={<LoadingFallback />}>
+            <Posters />
+          </Suspense>
         </section>
-        <MemoizedContact />
-        <MemoizedFooter />
+        
+        <Suspense fallback={<LoadingFallback />}>
+          <Contact />
+        </Suspense>
+        
+        <Suspense fallback={<LoadingFallback />}>
+          <Footer />
+        </Suspense>
       </div>
     </LazyMotion>
   );
 };
 
-export default Index;
+export default memo(Index);

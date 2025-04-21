@@ -1,32 +1,14 @@
 
 /* Performance optimizations for modern browsers */
 
-/* Enable native smooth scrolling */
-html {
-  scroll-behavior: smooth;
+/* Enable native smooth scrolling but disable for users who prefer reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
-/* Optimize animations with will-change */
-.will-change-transform {
-  will-change: transform;
-}
-
-.will-change-opacity {
-  will-change: opacity;
-}
-
-/* Force hardware acceleration for smooth animations */
-.gpu-accelerated {
-  transform: translateZ(0);
-  backface-visibility: hidden;
-}
-
-/* Optimize images */
-img, video {
-  content-visibility: auto;
-}
-
-/* Lazy load animations */
+/* Disable animations for users who prefer reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {
     animation-duration: 0.01ms !important;
@@ -36,16 +18,80 @@ img, video {
   }
 }
 
-/* Prevent layout shifts */
-.prevent-layout-shift {
-  content-visibility: auto;
-  contain-intrinsic-size: 0 500px;
-  contain: content;
+/* For manually reduced animations (for low-powered devices) */
+.reduce-animations *, 
+.reduce-animations ::before, 
+.reduce-animations ::after {
+  animation-duration: 0.2s !important;
+  transition-duration: 0.2s !important;
 }
 
-/* Optimize scroll-triggered animations */
-.optimize-scroll-animation {
-  transform: translate3d(0, 0, 0);
+/* Optimize elements that will be animated */
+.will-change-transform {
+  will-change: transform;
+  transform: translateZ(0);
   backface-visibility: hidden;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
+/* Force hardware acceleration for smooth animations */
+.gpu-accelerated,
+.transform-gpu {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Optimize images with content visibility */
+@supports (content-visibility: auto) {
+  .content-visibility-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 500px;
+  }
+}
+
+/* Prevent layout shifts */
+.prevent-layout-shift {
+  contain: content;
+  content-visibility: auto;
+  contain-intrinsic-size: 0 500px;
+}
+
+/* Optimize the most common animations */
+.transition-transform,
+.transition-opacity,
+.animate-fade-in,
+.animate-scale-in,
+.hover\:scale-105 {
   will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
+/* Optimizations for carousels */
+.embla__container {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Reduce paints for fixed elements */
+.fixed {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* Improve scrolling performance by enabling layer compositing */
+@media screen and (min-width: 768px) {
+  body {
+    overflow-anchor: none; /* Disable scroll anchoring for smoother scrolling */
+  }
+}
+
+/* Optimize scrolling marquee */
+.skills-scroll-container {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }

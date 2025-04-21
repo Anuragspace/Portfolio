@@ -6,8 +6,6 @@ import {
   UseInViewOptions,
   Variants,
   MotionProps,
-  LazyMotion, 
-  domAnimation
 } from "framer-motion";
 import { useRef, memo } from "react";
 
@@ -33,24 +31,23 @@ export const BlurFade = memo(({
   children,
   className,
   variant,
-  duration = 0.3, // Shorter duration for better performance
+  duration = 0.25,
   delay = 0,
-  offset = 8, // Reduced offset
+  offset = 5, // Reduced offset for subtler animation
   direction = "down",
   inView = false,
-  inViewMargin = "-10%", // More aggressive threshold
-  blur = "4px", // Less blur for better performance
+  inViewMargin = "-5%", // More aggressive threshold
   ...props
 }: BlurFadeProps) => {
   const ref = useRef(null);
   const inViewResult = useInView(ref, { 
     once: true, 
     margin: inViewMargin,
-    amount: 0.2 // Only need to see 20% of the element
+    amount: 0.1 // Only need to see 10% of the element
   });
   const isInView = !inView || inViewResult;
   
-  // Simpler variants without blur for better performance
+  // Simplified variants without filter transformations for better performance
   const defaultVariants: Variants = {
     hidden: {
       [direction === "left" || direction === "right" ? "x" : "y"]:
@@ -66,26 +63,25 @@ export const BlurFade = memo(({
   const combinedVariants = variant || defaultVariants;
   
   return (
-    <LazyMotion features={domAnimation}> {/* Load animations only when needed */}
-      <AnimatePresence>
-        <motion.div
-          ref={ref}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          exit="hidden"
-          variants={combinedVariants}
-          transition={{
-            delay: 0.02 + delay, // Shorter delay
-            duration,
-            ease: "easeOut",
-          }}
-          className={className}
-          {...props}
-        >
-          {children}
-        </motion.div>
-      </AnimatePresence>
-    </LazyMotion>
+    <AnimatePresence mode="wait">
+      <motion.div
+        ref={ref}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+        exit="hidden"
+        variants={combinedVariants}
+        transition={{
+          type: "tween", // Changed from spring to tween for lighter animation
+          delay,
+          duration,
+          ease: "easeOut",
+        }}
+        className={className}
+        {...props}
+      >
+        {children}
+      </motion.div>
+    </AnimatePresence>
   );
 });
 

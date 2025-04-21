@@ -1,6 +1,7 @@
 
-import { useState, useEffect, memo } from "react";
+import { useState, useEffect, memo, CSSProperties } from "react";
 import { cn } from "@/lib/utils";
+import { useIsLowPoweredDevice } from "@/hooks/use-optimized-animation";
 
 interface OptimizedImageProps {
   src: string;
@@ -8,6 +9,7 @@ interface OptimizedImageProps {
   className?: string;
   width?: number;
   height?: number;
+  priority?: boolean;
 }
 
 export const OptimizedImage = memo(({ 
@@ -15,30 +17,78 @@ export const OptimizedImage = memo(({
   alt, 
   className,
   width,
-  height
+  height,
+  priority = false
 }: OptimizedImageProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(false);
-
+  const isLowPowered = useIsLowPoweredDevice();
+  
   useEffect(() => {
-    // Reset on src change
+    // Skip preloading for low-powered devices
+    if (isLowPowered && !priority) return;
+    
+    // Reset state on src change
     setIsLoaded(false);
     setError(false);
     
-    // Preload image
-    const img = new Image();
-    img.src = src;
-    img.onload = () => setIsLoaded(true);
-    img.onerror = () => setError(true);
+    // For priority images or already cached images, load immediately
+    if (priority) {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => setIsLoaded(true);
+      img.onerror = () => setError(true);
+      
+      return () => {
+        img.onload = null;
+        img.onerror = null;
+      };
+    }
+    
+    // For non-priority images, use IntersectionObserver
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = new Image();
+            img.src = src;
+            img.onload = () => setIsLoaded(true);
+            img.onerror = () => setError(true);
+            observer.disconnect();
+          }
+        });
+      },
+      { rootMargin: '200px' } // Start loading when within 200px
+    );
+    
+    const currentRef = document.getElementById(`img-${src.replace(/[^a-zA-Z0-9]/g, '-')}`);
+    if (currentRef) {
+      observer.observe(currentRef);
+    }
     
     return () => {
-      img.onload = null;
-      img.onerror = null;
+      observer.disconnect();
     };
-  }, [src]);
+  }, [src, priority, isLowPowered]);
+
+  // Generate a unique ID for the image placeholder
+  const imageId = `img-${src.replace(/[^a-zA-Z0-9]/g, '-')}`;
+  
+  const imgStyles: CSSProperties = {
+    opacity: isLoaded ? 1 : 0,
+    transition: 'opacity 0.3s',
+    willChange: 'opacity',
+    width: width ? `${width}px` : '100%',
+    height: height ? `${height}px` : '100%',
+  };
+
+  // Reduced animation for low-powered devices
+  if (isLowPowered) {
+    imgStyles.transition = 'opacity 0.15s';
+  }
 
   return (
-    <div className={cn("relative overflow-hidden", className)}>
+    <div id={imageId} className={cn("relative overflow-hidden", className)}>
       {!isLoaded && !error && (
         <div 
           className="absolute inset-0 bg-gray-200 animate-pulse" 
@@ -55,11 +105,14 @@ export const OptimizedImage = memo(({
           src={src}
           alt={alt}
           className={cn(
-            "w-full h-full object-cover transition-opacity duration-300 gpu-accelerated will-change-opacity",
-            isLoaded ? "opacity-100" : "opacity-0"
+            "w-full h-full object-cover",
+            isLowPowered ? "" : "transform-gpu"
           )}
-          loading="lazy"
-          style={{ width, height }}
+          style={imgStyles}
+          loading={priority ? "eager" : "lazy"}
+          fetchpriority={priority ? "high" : "auto"}
+          width={width}
+          height={height}
         />
       )}
     </div>
