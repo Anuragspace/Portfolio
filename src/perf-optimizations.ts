@@ -23,7 +23,7 @@ export const cacheDOMElements = () => {
   // Cache footer element since it's frequently accessed in scroll handlers
   if (typeof window !== 'undefined') {
     // Use a WeakMap to store DOM elements - better for garbage collection
-    window._domCache = new WeakMap<symbol, Element>();
+    window._domCache = new WeakMap<any, Element>();
     
     // Cache common elements using symbol keys for better uniqueness
     const footer = document.querySelector('footer');
