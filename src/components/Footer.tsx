@@ -1,8 +1,9 @@
-
 import React, { useState } from "react";
 import { Linkedin, Instagram, Twitter, Github, Heart, Share2, ArrowUp, ExternalLink, Link, Globe as GlobeIcon } from "lucide-react";
 import { Globe } from "@/features/shared/components/magic-ui/Globe";
 import BubblingHearts from "./BubblingHearts";
+import AnimatedWord from "./AnimatedWord";
+import { motion } from "framer-motion";
 
 const Footer = () => {
   const year = new Date().getFullYear();
@@ -15,7 +16,6 @@ const Footer = () => {
   };
   
   const handleShareClick = () => {
-    // Copy to clipboard and show tooltip
     navigator.clipboard.writeText("https://anuragadarsh.in");
     setShowShareTooltip(true);
     setTimeout(() => setShowShareTooltip(false), 3000);
@@ -30,7 +30,6 @@ const Footer = () => {
     { name: "Contact", href: "#contact" },
   ];
   
-  // Add this BehanceIcon component above Footer
   const BehanceIcon = (props: React.SVGProps<SVGSVGElement>) => (
     <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
       <title>Behance</title>
@@ -52,31 +51,53 @@ const Footer = () => {
     });
   };
 
+  const headingText = "Let's Design Experiences That Make an Impact! 🤝";
+  const words = headingText.split(' ');
+
   return (
-    <footer className="bg-white p-1 pb-1">
-      <div className="rounded-3xl bg-[#3E40EF] text-white relative pt-20 pb-10 overflow-hidden mx-4 mb-4">
-        {/* Go to top button */}
-        <button 
+    <motion.footer 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
+      className="bg-white p-1 pb-1"
+    >
+      <motion.div 
+        initial={{ scale: 0.95 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        className="rounded-3xl bg-[#3E40EF] text-white relative pt-20 pb-10 overflow-hidden mx-4 mb-4"
+      >
+        <div className="absolute inset-0 bg-gradient-to-br from-[#3E40EF] to-[#6366F1] opacity-80">
+          <div className="absolute inset-0 bg-grid-white/10 bg-grid-8 mix-blend-multiply" />
+        </div>
+
+        <motion.button 
           onClick={scrollToTop}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
           className="absolute top-8 right-8 w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#3E40EF] hover:bg-gray-100 transition-colors shadow-md"
           aria-label="Go to top"
         >
           <ArrowUp size={18} />
-        </button>
+        </motion.button>
         
         <div className="container-custom">
-          {/* Main content section */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 pb-8">
-            {/* Left column - Text content */}
             <div className="md:col-span-7 space-y-6">
-              <div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+              >
                 <a href="#" className="text-2xl font-bold">
                   <span className="font-display">Anurag Adarsh</span>
                 </a>
-              </div>
+              </motion.div>
               
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight max-w-xl">
-                Let's Design Experiences That Make an Impact! <span className="text-yellow-300">🤝</span>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight max-w-xl space-x-2">
+                {words.map((word, index) => (
+                  <AnimatedWord key={index} word={word} />
+                ))}
               </h2>
               
               <div className="flex flex-wrap gap-4 pb-12">
@@ -98,11 +119,9 @@ const Footer = () => {
                         })
                         .catch(err => {
                           console.error('Share failed:', err);
-                          // Fallback to copy to clipboard
                           handleShareClick();
                         });
                       } else {
-                        // Fallback to copy to clipboard
                         handleShareClick();
                       }
                     }}
@@ -112,7 +131,6 @@ const Footer = () => {
                     <span className="whitespace-nowrap">Share Portfolio</span>
                   </button>
                   
-                  {/* Tooltip for share confirmation */}
                   {showShareTooltip && (
                     <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-black text-white text-xs py-2 px-4 rounded-lg shadow-lg">
                       <div className="flex items-center space-x-1">
@@ -125,7 +143,6 @@ const Footer = () => {
                 </div>
               </div>
               
-              {/* Social links with improved design */}
               <div className="flex flex-wrap gap-4 pt-12">
                 {socialLinks.map((social) => (
                   <a 
@@ -136,7 +153,6 @@ const Footer = () => {
                     className="px-4 py-2.5 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 hover:scale-105 transition-all duration-300 text-sm shadow-sm hover:shadow-md backdrop-blur-sm"
                     aria-label={social.name}
                   >
-                    {/* Ensure Behance icon is visible and sized */}
                     {social.name === "Behance" ? (
                       <social.icon className="mr-2" width={20} height={20} style={{ color: "white" }} />
                     ) : (
@@ -148,26 +164,44 @@ const Footer = () => {
               </div>
             </div>
             
-            {/* Right column - Globe */}
-            <div className="md:col-span-5 flex justify-center md:justify-end items-center">
+            <motion.div 
+              className="md:col-span-5 flex justify-center md:justify-end items-center"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
               <div className="relative h-[300px] w-[300px]">
-                <div className="absolute inset-0 flex items-center justify-center">
+                <motion.div 
+                  className="absolute inset-0 flex items-center justify-center"
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
+                >
                   <Globe className="scale-[1.2]" />
-                </div>
+                </motion.div>
               </div>
-            </div>
+            </motion.div>
           </div>
           
-          {/* Bottom section with copyright and made with love */}
-          <div className="border-t border-white/20 pt-8">
+          <motion.div 
+            className="border-t border-white/20 pt-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+          >
             <div className="flex flex-col md:flex-row justify-between items-center">
-              <p className="text-white/80 text-sm mb-4 md:mb-0">
+              <motion.p 
+                className="text-white/80 text-sm mb-4 md:mb-0"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.2 }}
+              >
                 © {year} Anurag Adarsh • All rights reserved
-              </p>
+              </motion.p>
               
-              <div 
+              <motion.div 
                 className="text-sm text-white/80 flex items-center cursor-pointer group"
                 onClick={handleHeartClick}
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.2 }}
               >
                 Made with 
                 <span className="inline-block mx-1.5 relative">
@@ -175,16 +209,15 @@ const Footer = () => {
                     size={18} 
                     className={`text-red-500 fill-red-500 transition-all duration-300 ${isHeartAnimating ? 'scale-150' : 'group-hover:scale-125'}`} 
                   />
-                  {/* Bubbling hearts animation */}
                   <BubblingHearts isAnimating={isHeartAnimating} />
                 </span> 
                 by Anurag
-              </div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
         </div>
-      </div>
-    </footer>
+      </motion.div>
+    </motion.footer>
   );
 };
 
