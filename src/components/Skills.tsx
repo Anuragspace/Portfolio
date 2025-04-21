@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from "react";
 import { 
   Palette, 
@@ -23,7 +22,7 @@ import useIntersectionObserver from "@/hooks/use-intersection-observer";
 
 const Skills = () => {
   const [isVisible, skillsRef] = useIntersectionObserver<HTMLDivElement>({
-    threshold: 0.2,
+    threshold: 0.1,
     once: true
   });
 
@@ -185,7 +184,7 @@ const Skills = () => {
               <p className="text-white/90 mb-6">Combining creative design thinking with technical expertise to build intuitive and efficient digital experiences.</p>
               
               <div className="space-y-4 mt-auto">
-                {designSkills.map((skill) => (
+                {designSkills.map((skill, index) => (
                   <div key={skill.name}>
                     <div className="flex justify-between mb-1.5">
                       <span className="font-medium text-white">{skill.name}</span>
@@ -193,9 +192,12 @@ const Skills = () => {
                     </div>
                     <div className="w-full bg-white/10 rounded-full h-2.5">
                       <div
-                        className="bg-white h-2.5 rounded-full transition-all duration-1000"
+                        className="bg-white h-2.5 rounded-full transition-all"
                         style={{ 
-                          width: isVisible ? `${skill.level}%` : '0%'
+                          width: isVisible ? `${skill.level}%` : '0%',
+                          transitionDuration: '1s',
+                          transitionDelay: `${index * 0.3}s`,
+                          transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)'
                         }}
                       ></div>
                     </div>
