@@ -110,7 +110,7 @@ export const OptimizedImage = memo(({
           )}
           style={imgStyles}
           loading={priority ? "eager" : "lazy"}
-          fetchpriority={priority ? "high" : "auto"}
+          fetchPriority={priority ? "high" : "auto"}
           width={width}
           height={height}
         />

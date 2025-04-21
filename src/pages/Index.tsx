@@ -7,6 +7,7 @@ import About from "@/components/about";
 import Skills from "@/components/Skills";
 import { usePerformanceOptimizations } from "@/hooks/use-performance-optimizations";
 import { LazyMotion, domAnimation } from "framer-motion";
+import MetaHead from "@/components/MetaHead";
 
 // Lazy load non-critical components
 const Projects = lazy(() => import("@/components/Projects"));
@@ -14,7 +15,6 @@ const Experience = lazy(() => import("@/components/Experience"));
 const Posters = lazy(() => import("@/components/Posters"));
 const Contact = lazy(() => import("@/components/Contact"));
 const Footer = lazy(() => import("@/components/Footer"));
-const MetaHead = memo(() => import("@/components/MetaHead"));
 
 // Lightweight loading fallback
 const LoadingFallback = () => <div className="min-h-[200px]" />;

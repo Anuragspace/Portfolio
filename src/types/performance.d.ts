@@ -4,5 +4,12 @@
  */
 
 interface Window {
-  _cachedFooter?: HTMLElement | null;
+  _domCache?: WeakMap<string, Element>;
+  requestIdleCallback?: (callback: (deadline: IdleDeadline) => void, options?: { timeout: number }) => number;
+  cancelIdleCallback?: (handle: number) => void;
+}
+
+interface IdleDeadline {
+  didTimeout: boolean;
+  timeRemaining: () => number;
 }
