@@ -18,9 +18,14 @@ import {
 } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Globe } from "@/features/shared/components/magic-ui/Globe";
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 
 const Skills = () => {
-  // References for interactive scrolling
+  const [isVisible, skillsRef] = useIntersectionObserver<HTMLDivElement>({
+    threshold: 0.2,
+    once: true
+  });
+
   const sliderRef = useRef<HTMLDivElement>(null);
   const isDraggingRef = useRef(false);
   const startXRef = useRef(0);
@@ -31,7 +36,6 @@ const Skills = () => {
     const slider = sliderRef.current;
     if (!slider) return;
     
-    // Pause automatic scrolling when mouse hovers
     const handleMouseEnter = () => {
       setIsPaused(true);
       slider.style.animationPlayState = 'paused';
@@ -44,7 +48,6 @@ const Skills = () => {
       }
     };
     
-    // Mouse drag handlers - improved for better responsiveness
     const handleMouseDown = (e: MouseEvent) => {
       if (!slider) return;
       isDraggingRef.current = true;
@@ -68,11 +71,10 @@ const Skills = () => {
       if (!isDraggingRef.current || !slider) return;
       e.preventDefault();
       const x = e.pageX - slider.offsetLeft;
-      const walk = (x - startXRef.current) * 3; // Increased scrolling speed for better responsiveness
+      const walk = (x - startXRef.current) * 3;
       slider.scrollLeft = scrollLeftRef.current - walk;
     };
     
-    // Touch handlers for mobile - improved for better responsiveness
     const handleTouchStart = (e: TouchEvent) => {
       if (!slider || e.touches.length !== 1) return;
       isDraggingRef.current = true;
@@ -95,25 +97,23 @@ const Skills = () => {
     
     const handleTouchMove = (e: TouchEvent) => {
       if (!isDraggingRef.current || !slider || e.touches.length !== 1) return;
-      e.preventDefault(); // Prevent page scrolling while dragging
+      e.preventDefault();
       const x = e.touches[0].pageX - slider.offsetLeft;
-      const walk = (x - startXRef.current) * 3; // Increased for better responsiveness
+      const walk = (x - startXRef.current) * 3;
       slider.scrollLeft = scrollLeftRef.current - walk;
     };
     
-    // Add all event listeners
     slider.addEventListener('mouseenter', handleMouseEnter);
     slider.addEventListener('mouseleave', handleMouseLeave);
     
     slider.addEventListener('mousedown', handleMouseDown);
-    document.addEventListener('mouseup', handleMouseUp); // Use document to catch mouse up outside slider
-    document.addEventListener('mousemove', handleMouseMove); // Use document for smoother dragging
+    document.addEventListener('mouseup', handleMouseUp);
+    document.addEventListener('mousemove', handleMouseMove);
     
     slider.addEventListener('touchstart', handleTouchStart);
-    document.addEventListener('touchend', handleTouchEnd); // Use document to catch touch end outside slider
-    document.addEventListener('touchmove', handleTouchMove, { passive: false }); // Prevent default for scrolling
+    document.addEventListener('touchend', handleTouchEnd);
+    document.addEventListener('touchmove', handleTouchMove, { passive: false });
     
-    // Cleanup event listeners on unmount
     return () => {
       slider.removeEventListener('mouseenter', handleMouseEnter);
       slider.removeEventListener('mouseleave', handleMouseLeave);
@@ -127,6 +127,7 @@ const Skills = () => {
       document.removeEventListener('touchmove', handleTouchMove);
     };
   }, [isPaused]);
+  
   const designSkills = [
     { name: "UI Design", level: 95 },
     { name: "UX Design", level: 90 },
@@ -161,40 +162,17 @@ const Skills = () => {
           <div className="w-24 h-1 bg-accent"></div>
         </div>
         
-        {/* Scrolling Technical Skills */}
         <div className="relative mb-12 py-6 overflow-hidden" id="skills-carousel">
-          {/* Gradient overlay left */}
           <div className="absolute left-0 top-0 h-full w-[15%] bg-gradient-to-r from-gray-50 to-transparent z-10"></div>
           
-          {/* Instruction Hint removed since there's no group hover now */}
-          
-          {/* Scrolling content */}
-          <div 
-            ref={sliderRef}
-            className="flex gap-6 animate-marquee whitespace-nowrap cursor-grab active:cursor-grabbing skills-scroll-container relative"
-            id="skills-slider"
-            style={{animationDuration: '12s'}} /* Faster animation */
-          >
-            {technicalSkills.concat(technicalSkills).map((skill, index) => (
-              <div 
-                key={`${skill.name}-${index}`}
-                className="px-6 py-3 bg-white rounded-full shadow-md flex items-center gap-3 border border-gray-100 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 select-none"
-              >
-                <span className="text-[#3E40EF]">{skill.icon}</span>
-                <span className="font-medium text-gray-800">{skill.name}</span>
-              </div>
-            ))}
-          </div>
-          
-          {/* Gradient overlay right */}
           <div className="absolute right-0 top-0 h-full w-[15%] bg-gradient-to-l from-gray-50 to-transparent z-10"></div>
         </div>
         
-        {/* Bento Grid Layout with website violet color */}
         <div className="grid grid-cols-12 gap-5">
-          {/* Design & Development Skills - Left box */}
-          <div className="col-span-12 md:col-span-5 bg-[#3E40EF] rounded-2xl shadow-md p-7 flex flex-col transform hover:scale-[1.02] transition-all duration-300 hover:shadow-lg group relative overflow-hidden">
-            {/* Background gradient circles */}
+          <div 
+            ref={skillsRef}
+            className="col-span-12 md:col-span-5 bg-[#3E40EF] rounded-2xl shadow-md p-7 flex flex-col transform hover:scale-[1.02] transition-all duration-300 hover:shadow-lg group relative overflow-hidden"
+          >
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mt-32 group-hover:bg-white/10 transition-all duration-500"></div>
             <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full -ml-24 -mb-24 group-hover:bg-white/10 transition-all duration-500"></div>
             
@@ -214,15 +192,16 @@ const Skills = () => {
                     </div>
                     <div className="w-full bg-white/10 rounded-full h-2.5">
                       <div
-                        className="bg-white h-2.5 rounded-full transition-all duration-700"
-                        style={{ width: `${skill.level}%` }}
+                        className="bg-white h-2.5 rounded-full transition-all duration-1000"
+                        style={{ 
+                          width: isVisible ? `${skill.level}%` : '0%'
+                        }}
                       ></div>
                     </div>
                   </div>
                 ))}
               </div>
               
-              {/* Pattern decoration */}
               <div className="absolute bottom-6 right-6 grid grid-cols-3 gap-1 opacity-20">
                 {[...Array(9)].map((_, i) => (
                   <div key={i} className="w-1.5 h-1.5 rounded-full bg-white"></div>
@@ -231,9 +210,7 @@ const Skills = () => {
             </div>
           </div>
           
-          {/* Right column container */}
           <div className="col-span-12 md:col-span-7 grid grid-rows-2 gap-5">
-            {/* Interaction Design - Top right box */}
             <div className="bg-[#3E40EF] rounded-2xl shadow-md p-6 transform hover:scale-[1.02] transition-all duration-300 hover:shadow-lg group relative overflow-hidden">
               <div className="absolute -top-20 -right-20 w-40 h-40 bg-white/5 rounded-full group-hover:bg-white/10 transition-all duration-500"></div>
               
@@ -256,9 +233,7 @@ const Skills = () => {
               </div>
             </div>
             
-            {/* Bottom right container for Prototyping and Wireframing */}
             <div className="grid grid-cols-2 gap-5">
-              {/* Prototyping - Bottom left of the right column */}
               <div className="bg-[#3E40EF] rounded-2xl shadow-md p-6 transform hover:scale-[1.02] transition-all duration-300 hover:shadow-lg group relative overflow-hidden">
                 <div className="absolute -top-10 -left-10 w-20 h-20 bg-white/5 rounded-full group-hover:bg-white/10 transition-all duration-500"></div>
                 
@@ -281,7 +256,6 @@ const Skills = () => {
                 </div>
               </div>
               
-              {/* Wireframing - Bottom right - Redesigned */}
               <div className="bg-[#3E40EF] rounded-2xl shadow-md p-6 transform hover:scale-[1.02] transition-all duration-300 hover:shadow-lg group relative overflow-hidden">
                 <div className="absolute -top-20 -left-20 w-40 h-40 bg-white/5 rounded-full group-hover:bg-white/10 transition-all duration-500"></div>
                 
@@ -289,11 +263,9 @@ const Skills = () => {
                   
                   <p className="text-white/90 mb-2">Creating structural blueprints to establish hierarchy and layout.</p>
                   <h3 className="text-xl font-bold mb-2 text-white">Wireframing</h3>
-                  {/* Adjusted Globe position */}
                   <div className="flex-1 w-full flex items-center justify-center relative ">
                     <Globe className="scale-[1.25] translate-y-[4%]" />
                   </div>
-                  
                 </div>
               </div>
             </div>
