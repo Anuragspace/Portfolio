@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
-import { motion, Transition, Variants } from "motion/react";
+import { motion, Transition, Variants } from "framer-motion";
+
 import React, { CSSProperties, useState, useEffect } from "react";
 
 type SpinningTextProps = {
