@@ -1,4 +1,3 @@
-
 import React, { useEffect, useCallback, memo, lazy, Suspense } from "react";
 import { Events, scrollSpy } from "react-scroll";
 import Navbar from "@/components/Navbar";

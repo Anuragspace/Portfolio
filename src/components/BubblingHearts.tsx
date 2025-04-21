@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { m, AnimatePresence } from 'framer-motion';
 import { Heart } from 'lucide-react';
@@ -47,7 +46,6 @@ const BubblingHearts: React.FC<BubblingHeartsProps> = ({ isAnimating }) => {
       
       setHearts(newHearts);
       
-      // Clean up hearts after animation
       const timer = setTimeout(() => {
         setHearts([]);
       }, 3000);
