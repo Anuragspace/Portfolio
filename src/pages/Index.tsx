@@ -1,105 +1,65 @@
 
-import React, { useEffect, useCallback, memo, lazy, Suspense } from "react";
+import React, { useEffect, useCallback, memo } from "react";
 import { Events, scrollSpy } from "react-scroll";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/about";
 import Skills from "@/components/Skills";
-import { usePerformanceOptimizations } from "@/hooks/use-performance-optimizations";
-import { LazyMotion, domAnimation, m } from "framer-motion";
+import Projects from "@/components/Projects";
+import Experience from "@/components/Experience";
+import Posters from "@/components/Posters";
+import Contact from "@/components/Contact";
+import Footer from "@/components/Footer";
 import MetaHead from "@/components/MetaHead";
-import HomeButton from "@/components/HomeButton";
+import { usePerformanceOptimizations } from "@/hooks/use-performance-optimizations";
+import { LazyMotion, domAnimation } from "framer-motion";
 
-// Lazy load non-critical components
-const Projects = lazy(() => import("@/components/Projects"));
-const Experience = lazy(() => import("@/components/Experience"));
-const Posters = lazy(() => import("@/components/Posters"));
-const Contact = lazy(() => import("@/components/Contact"));
-const Footer = lazy(() => import("@/components/Footer"));
-
-// Lightweight loading fallback
-const LoadingFallback = () => <div className="min-h-[200px]" />;
+// Memoize components for better performance
+const MemoizedExperience = memo(Experience);
+const MemoizedPosters = memo(Posters);
+const MemoizedContact = memo(Contact);
+const MemoizedFooter = memo(Footer);
 
 const Index = () => {
   // Apply performance optimizations
   const { isOptimized } = usePerformanceOptimizations();
   
-  // Optimize scrolling with throttled scroll handler for react-scroll
-  const updateScrollSpy = useCallback(() => {
-    scrollSpy.update();
-  }, []);
-  
+  // Optimize scrolling with react-scroll
   useEffect(() => {
-    // Make sure react-scroll and Lenis work well together
-    Events.scrollEvent.register('begin', () => {
-      // Continue with scroll events
-    });
-    
-    Events.scrollEvent.register('end', () => {
-      updateScrollSpy();
-    });
-    
-    // Initialize scrollSpy once
+    // Initialize scrollSpy for detecting active sections
+    Events.scrollEvent.register('begin', () => {});
+    Events.scrollEvent.register('end', () => {});
     scrollSpy.update();
     
-    // Handle the scroll events
-    let ticking = false;
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          updateScrollSpy();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-    
-    // Use passive listeners for better performance
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    // Register for scroll events with passive: true for better performance
+    window.addEventListener('scroll', scrollSpy.update, { passive: true });
     
     return () => {
+      // Clean up scroll events when component unmounts
       Events.scrollEvent.remove('begin');
       Events.scrollEvent.remove('end');
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', scrollSpy.update);
     };
-  }, [updateScrollSpy]);
+  }, []);
 
   return (
-    <LazyMotion features={domAnimation} strict>
+    <LazyMotion features={domAnimation}>
       <div className="min-h-screen bg-white">
         <MetaHead />
         <Navbar />
         <Hero />
         <About />
         <Skills />
-        
-        {/* Lazy load less critical sections */}
-        <Suspense fallback={<LoadingFallback />}>
-          <Projects />
-        </Suspense>
-        
-        <Suspense fallback={<LoadingFallback />}>
-          <Experience />
-        </Suspense>
-        
+        <Projects />
+        <MemoizedExperience />
         <section id="posters">
-          <Suspense fallback={<LoadingFallback />}>
-            <Posters />
-          </Suspense>
+          <MemoizedPosters />
         </section>
-        
-        <Suspense fallback={<LoadingFallback />}>
-          <Contact />
-        </Suspense>
-        
-        <Suspense fallback={<LoadingFallback />}>
-          <Footer />
-        </Suspense>
-        
-        <HomeButton />
+        <MemoizedContact />
+        <MemoizedFooter />
       </div>
     </LazyMotion>
   );
 };
 
-export default memo(Index);
+export default Index;

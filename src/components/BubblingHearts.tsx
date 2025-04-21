@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { m, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Heart } from 'lucide-react';
 
 interface HeartProps {
@@ -10,7 +10,7 @@ interface HeartProps {
 
 const BubblingHeart: React.FC<HeartProps> = ({ x, delay }) => {
   return (
-    <m.div
+    <motion.div
       className="absolute bottom-0 pointer-events-none"
       initial={{ x, y: 0, opacity: 0, scale: 0 }}
       animate={{ 
@@ -26,7 +26,7 @@ const BubblingHeart: React.FC<HeartProps> = ({ x, delay }) => {
       }}
     >
       <Heart className="text-red-500 fill-red-500" size={16} />
-    </m.div>
+    </motion.div>
   );
 };
 
@@ -47,6 +47,7 @@ const BubblingHearts: React.FC<BubblingHeartsProps> = ({ isAnimating }) => {
       
       setHearts(newHearts);
       
+      // Clean up hearts after animation
       const timer = setTimeout(() => {
         setHearts([]);
       }, 3000);

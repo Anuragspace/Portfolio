@@ -1,6 +1,6 @@
 
 import React from "react";
-import { m } from "framer-motion";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Asterisk, Circle } from "lucide-react";
 
@@ -20,14 +20,14 @@ const ProblemSolutionRow = ({
       <div className="grid grid-cols-1 md:grid-cols-2 gap-y-10 md:gap-y-0 md:gap-x-16">
         {/* Problem Column */}
         <div className="flex flex-col">
-          <m.div 
+          <motion.div 
             className="flex items-center mb-4"
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true }}
             transition={{ duration: 0.4 }}
           >
-            <m.div
+            <motion.div
               animate={{ rotate: 360 }}
               transition={{ 
                 duration: 30,
@@ -37,18 +37,18 @@ const ProblemSolutionRow = ({
               className="mr-3 text-[#3E40EF]"
             >
               <Asterisk size={20} />
-            </m.div>
+            </motion.div>
             <h3 className="text-xl font-medium uppercase tracking-wider text-gray-500 font-manrope">problem</h3>
-          </m.div>
-          <m.p 
+          </motion.div>
+          <motion.p 
             className="text-lg text-gray-800 font-manrope"
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true }}
             transition={{ duration: 0.4, delay: 0.1 }}
           >
             {problem}
-          </m.p>
+          </motion.p>
         </div>
         
         {/* Separator for mobile */}
@@ -56,14 +56,14 @@ const ProblemSolutionRow = ({
         
         {/* Solution Column with circular icon */}
         <div className="flex flex-col">
-          <m.div 
+          <motion.div 
             className="flex items-center mb-4"
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true }}
             transition={{ duration: 0.4 }}
           >
-            <m.div
+            <motion.div
               animate={{ rotate: 360 }}
               transition={{ 
                 duration: 30,
@@ -73,18 +73,18 @@ const ProblemSolutionRow = ({
               className="mr-3 text-[#3E40EF]"
             >
               <Circle size={20} className="stroke-current" />
-            </m.div>
+            </motion.div>
             <h3 className="text-xl font-medium uppercase tracking-wider text-gray-500 font-manrope">solution</h3>
-          </m.div>
-          <m.p 
+          </motion.div>
+          <motion.p 
             className="text-lg text-gray-800 font-manrope"
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true }}
             transition={{ duration: 0.4, delay: 0.1 }}
           >
             {solution}
-          </m.p>
+          </motion.p>
         </div>
       </div>
       

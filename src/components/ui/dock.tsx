@@ -2,7 +2,7 @@
 "use client";
 
 import * as React from "react";
-import { m, useMotionValue, useSpring, useTransform, type MotionValue } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform, type MotionValue } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface DockProps {
@@ -71,7 +71,7 @@ export function Dock({ direction = "middle", children, className }: DockProps) {
 
   return (
     <DockContext.Provider value={{ mouseX }}>
-      <m.div 
+      <motion.div 
         ref={ref}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
@@ -82,7 +82,7 @@ export function Dock({ direction = "middle", children, className }: DockProps) {
         )}
       >
         {children}
-      </m.div>
+      </motion.div>
     </DockContext.Provider>
   );
 }
@@ -101,12 +101,12 @@ export function DockIcon({ children, className }: DockIconProps) {
   const y = useTransform(height, [1, 1.3], [0, -8]);
 
   return (
-    <m.div
+    <motion.div
       ref={ref}
       style={{ y, scale: height }}
       className={cn("flex items-center justify-center px-2", className)}
     >
       {children}
-    </m.div>
+    </motion.div>
   );
 }

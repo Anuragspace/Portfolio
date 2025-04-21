@@ -1,16 +1,14 @@
-
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, ArrowRight, AlertTriangle, Lightbulb, ExternalLink, Figma, Code2, FileCode } from "lucide-react";
-import { m } from "framer-motion";
+import { motion } from "framer-motion";
 import { DesktopTextReveal, MobileTextReveal } from "@/features/shared/components/magic-ui/TextRevealResponsive";
 import ProjectPageHeader from "@/components/ProjectPageHeader";
 import Footer from "@/components/Footer";
 import HomeButton from "@/components/HomeButton";
 import ProblemSolutionRow from "@/components/ProblemSolutionRow";
 import ProjectDetailsGrid from "@/components/ProjectDetailsGrid";
-import { OptimizedImage } from "@/components/OptimizedImage";
-import { useOptimizedAnimation } from "@/hooks/use-optimized-animation";
+import { OptimizedImage } from "@/components/OptimizedImage"; // <-- Add this import
 
 const projectsData = [
   // Mock data for projects
@@ -111,7 +109,6 @@ const ProjectDetail = () => {
   const { id } = useParams();
   const [project, setProject] = useState<any>(null);
   const [nextProject, setNextProject] = useState<any>(null);
-  const { shouldAnimate } = useOptimizedAnimation(200);
   
   useEffect(() => {
     const controlNavbar = () => {
@@ -187,14 +184,14 @@ const ProjectDetail = () => {
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute bottom-0 left-0 p-6 md:p-8 bg-gradient-to-t from-black/80 to-transparent w-full">
-                  <m.h1 
+                  <motion.h1 
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.2 }}
                     className="text-4xl md:text-5xl font-bold text-white font-manrope"
                   >
                     {project.title}
-                  </m.h1>
+                  </motion.h1>
                 </div>
               </div>
             </div>
@@ -207,16 +204,14 @@ const ProjectDetail = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-bold mb-8 font-manrope">Project Overview</h2>
-            {shouldAnimate && (
-              <div className="text-lg md:text-4xl font-medium leading-relaxed text-gray-700">
-                <DesktopTextReveal lineIndex={0} totalLines={1}>
-                  {project.description}              
-                </DesktopTextReveal>
-                <MobileTextReveal lineIndex={0} totalLines={1}>
-                  {project.description}     
-                </MobileTextReveal>
-              </div>
-            )}
+            <div className="text-lg md:text-4xl font-medium leading-relaxed text-gray-700">
+              <DesktopTextReveal className="hidden md:block" lineIndex={0} totalLines={1}>
+              {project.description}              
+              </DesktopTextReveal>
+              <MobileTextReveal className="block md:hidden" lineIndex={0} totalLines={1}>
+              {project.description}     
+              </MobileTextReveal>
+            </div>
           </div>
         </div>
         

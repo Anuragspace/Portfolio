@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useRef, FormEvent } from "react";
-import { m } from "framer-motion";
+import { motion } from "framer-motion";
 
 interface InteractiveTerminalProps {
   className?: string;
@@ -110,7 +110,7 @@ const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({ className = "
         {hasInteracted && (
           <div className="flex items-start">
             <span className="text-[#FFBD2E] mr-2">$&gt;</span>
-            <m.div 
+            <motion.div 
               className="text-[#3E40EF] break-words"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -130,7 +130,7 @@ const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({ className = "
                   )}
                 </>
               )}
-            </m.div>
+            </motion.div>
           </div>
         )}
       </div>

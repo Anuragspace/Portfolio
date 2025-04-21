@@ -1,7 +1,6 @@
-
 "use client";
 
-import { m, MotionValue, useScroll, useTransform } from "framer-motion";
+import { motion, MotionValue, useScroll, useTransform } from "framer-motion";
 import { ComponentPropsWithoutRef, FC, ReactNode, useRef, memo, useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -22,7 +21,7 @@ export const DesktopTextReveal: FC<TextRevealResponsiveProps> = memo(({
   const targetRef = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
-    offset: ["start 0.95", "start 0.2"], // Adjusted for smoother, longer reveal
+    offset: ["start 0.9", "start 0.05"], // Adjusted for smoother, longer reveal
   });
 
   if (typeof children !== "string") {
@@ -66,7 +65,7 @@ export const MobileTextReveal: FC<TextRevealResponsiveProps> = memo(({
   const targetRef = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
-    offset: ["start 0.9", "start 0.2"], // Adjusted to trigger earlier on mobile for smoother scroll
+    offset: ["start 0.7", "start 0.05"], // Adjusted to trigger earlier on mobile for smoother scroll
   });
 
   if (typeof children !== "string") {
@@ -112,12 +111,12 @@ const Word: FC<WordProps> = memo(({ children, progress, range }) => {
 
   return (
     <span className="relative mx-[1px] md:mx-[3px] inline-flex">
-      <m.span
+      <motion.span
         style={{ opacity, color, y }}
         className="font-manrope font-semibold whitespace-pre text-base md:text-xl lg:text-2xl"
       >
         {children}{" "}
-      </m.span>
+      </motion.span>
     </span>
   );
 });
