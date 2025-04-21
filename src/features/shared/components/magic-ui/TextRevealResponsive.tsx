@@ -22,7 +22,7 @@ export const DesktopTextReveal: FC<TextRevealResponsiveProps> = memo(({
   const targetRef = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
-    offset: ["start 0.9", "start 0.05"], // Adjusted for smoother, longer reveal
+    offset: ["start 0.95", "start 0.2"], // Adjusted for smoother, longer reveal
   });
 
   if (typeof children !== "string") {
@@ -66,7 +66,7 @@ export const MobileTextReveal: FC<TextRevealResponsiveProps> = memo(({
   const targetRef = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
-    offset: ["start 0.7", "start 0.05"], // Adjusted to trigger earlier on mobile for smoother scroll
+    offset: ["start 0.9", "start 0.2"], // Adjusted to trigger earlier on mobile for smoother scroll
   });
 
   if (typeof children !== "string") {

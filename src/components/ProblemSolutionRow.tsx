@@ -24,7 +24,7 @@ const ProblemSolutionRow = ({
             className="flex items-center mb-4"
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.4 }}
           >
             <m.div
@@ -44,7 +44,7 @@ const ProblemSolutionRow = ({
             className="text-lg text-gray-800 font-manrope"
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.4, delay: 0.1 }}
           >
             {problem}
@@ -60,7 +60,7 @@ const ProblemSolutionRow = ({
             className="flex items-center mb-4"
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.4 }}
           >
             <m.div
@@ -80,7 +80,7 @@ const ProblemSolutionRow = ({
             className="text-lg text-gray-800 font-manrope"
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.4, delay: 0.1 }}
           >
             {solution}
