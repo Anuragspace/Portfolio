@@ -1,3 +1,4 @@
+
 import React, { memo } from "react";
 import { ExternalLink, ArrowUpRight } from "lucide-react";
 import { BorderBeam, RainbowButton, WhiteRainbowButton } from "@/features/shared/components/magic-ui";
@@ -134,7 +135,7 @@ const Projects = () => {
       id: "csedvit",
       title: "CSED VIT – Official Club Website",
       year: "2024",
-      description: "Designed and developed a modern, interactive, and standout UI with a clean visual hierarchy, smooth transitions, and responsive layouts. Created an engaging user experience to reflect the club’s identity, events, and initiatives across all devices.",
+      description: "Designed and developed a modern, interactive, and standout UI with a clean visual hierarchy, smooth transitions, and responsive layouts. Created an engaging user experience to reflect the club's identity, events, and initiatives across all devices.",
       image: "/images/csedm.webp",
       tags: ["UI Design", "UX Design", "Web Development"],
       link: "#",
