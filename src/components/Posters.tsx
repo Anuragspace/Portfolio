@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useCallback, useMemo, memo } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { useReducedAnimations } from "@/hooks/use-optimized-animation";
 import { OptimizedImage } from "./OptimizedImage";
 
@@ -171,7 +171,7 @@ const Posters = () => {
                   className={`embla__slide flex-[0_0_80%] sm:flex-[0_0_70%] md:flex-[0_0_38%] lg:flex-[0_0_28%] px-1 md:px-2`}
                 >
                   <AnimatePresence>
-                    <motion.div
+                    <m.div
                       layout={false} // Disable layout animations
                       initial={{ scale: 0.95, opacity: 0.5 }}
                       animate={{
@@ -201,7 +201,7 @@ const Posters = () => {
                           <p className="text-white/80 text-xs md:text-sm">{poster.description}</p>
                         </div>
                       </div>
-                    </motion.div>
+                    </m.div>
                   </AnimatePresence>
                 </div>
               ))}

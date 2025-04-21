@@ -1,5 +1,6 @@
+
 import { cn } from "@/lib/utils";
-import { motion, MotionStyle, Transition } from "framer-motion";
+import { m, Transition, Variants } from "framer-motion";
 
 interface BorderBeamProps {
   /**
@@ -58,7 +59,7 @@ export const BorderBeam = ({
 }: BorderBeamProps) => {
   return (
     <div className="pointer-events-none absolute inset-0 rounded-[inherit] border border-transparent [mask-clip:padding-box,border-box] [mask-composite:intersect] [mask-image:linear-gradient(transparent,transparent),linear-gradient(#000,#000)]">
-      <motion.div
+      <m.div
         className={cn(
           "absolute aspect-square",
           "bg-gradient-to-l from-[var(--color-from)] via-[var(--color-to)] to-transparent",
@@ -71,7 +72,7 @@ export const BorderBeam = ({
             "--color-from": colorFrom,
             "--color-to": colorTo,
             ...style,
-          } as MotionStyle
+          } as any
         }
         initial={{ offsetDistance: `${initialOffset}%` }}
         animate={{

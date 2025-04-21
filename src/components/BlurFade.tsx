@@ -1,7 +1,7 @@
 
 import {
   AnimatePresence,
-  motion,
+  m,
   useInView,
   UseInViewOptions,
   Variants,
@@ -64,7 +64,7 @@ export const BlurFade = memo(({
   
   return (
     <AnimatePresence mode="wait">
-      <motion.div
+      <m.div
         ref={ref}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
@@ -80,7 +80,7 @@ export const BlurFade = memo(({
         {...props}
       >
         {children}
-      </motion.div>
+      </m.div>
     </AnimatePresence>
   );
 });

@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { Heart } from 'lucide-react';
 
 interface HeartProps {
@@ -10,7 +10,7 @@ interface HeartProps {
 
 const BubblingHeart: React.FC<HeartProps> = ({ x, delay }) => {
   return (
-    <motion.div
+    <m.div
       className="absolute bottom-0 pointer-events-none"
       initial={{ x, y: 0, opacity: 0, scale: 0 }}
       animate={{ 
@@ -26,7 +26,7 @@ const BubblingHeart: React.FC<HeartProps> = ({ x, delay }) => {
       }}
     >
       <Heart className="text-red-500 fill-red-500" size={16} />
-    </motion.div>
+    </m.div>
   );
 };
 

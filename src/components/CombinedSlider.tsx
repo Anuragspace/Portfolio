@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence, useAnimation } from "framer-motion";
+import { m, AnimatePresence, useAnimation } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface CombinedSliderProps {
@@ -117,7 +117,7 @@ const CombinedSlider = ({
       <div className="relative z-10 mb-8 flex flex-col items-center">
         <h3 className="text-2xl md:text-4xl font-semibold text-center mb-4 font-manrope">{titles[currentIndex]}</h3>
         <div className="relative h-1 w-64 bg-gray-200 overflow-hidden rounded-full">
-          <motion.div 
+          <m.div 
             className="absolute top-0 left-0 h-full bg-[#3E40EF] origin-left"
             animate={progressControls}
             initial={{ scaleX: 0 }}
@@ -136,7 +136,7 @@ const CombinedSlider = ({
       >
         <div className="relative pb-[56.25%] w-full"> {/* 16:9 aspect ratio with padding bottom trick */}
           <AnimatePresence mode="wait">
-            <motion.img
+            <m.img
               key={currentIndex}
               src={images[currentIndex]}
               alt={`${titles[currentIndex]} slide ${currentIndex + 1}`}

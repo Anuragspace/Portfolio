@@ -6,7 +6,7 @@ import Hero from "@/components/Hero";
 import About from "@/components/about";
 import Skills from "@/components/Skills";
 import { usePerformanceOptimizations } from "@/hooks/use-performance-optimizations";
-import { LazyMotion, domAnimation } from "framer-motion";
+import { LazyMotion, domAnimation, m } from "framer-motion";
 import MetaHead from "@/components/MetaHead";
 
 // Lazy load non-critical components

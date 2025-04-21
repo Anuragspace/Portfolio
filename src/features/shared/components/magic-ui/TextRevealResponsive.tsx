@@ -1,6 +1,7 @@
+
 "use client";
 
-import { motion, MotionValue, useScroll, useTransform } from "framer-motion";
+import { m, MotionValue, useScroll, useTransform } from "framer-motion";
 import { ComponentPropsWithoutRef, FC, ReactNode, useRef, memo, useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -111,12 +112,12 @@ const Word: FC<WordProps> = memo(({ children, progress, range }) => {
 
   return (
     <span className="relative mx-[1px] md:mx-[3px] inline-flex">
-      <motion.span
+      <m.span
         style={{ opacity, color, y }}
         className="font-manrope font-semibold whitespace-pre text-base md:text-xl lg:text-2xl"
       >
         {children}{" "}
-      </motion.span>
+      </m.span>
     </span>
   );
 });

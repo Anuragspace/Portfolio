@@ -1,5 +1,6 @@
+
 import { cn } from "@/lib/utils";
-import { motion, Transition, Variants } from "framer-motion";
+import { m, Transition, Variants } from "framer-motion";
 
 import React, { CSSProperties, useState, useEffect } from "react";
 
@@ -103,7 +104,7 @@ export function SpinningText({
   };
 
   return (
-    <motion.div
+    <m.div
       id="spinning-text-container"
       className={cn("relative", className)}
       style={{
@@ -118,7 +119,7 @@ export function SpinningText({
       transition={finalTransition}
     >
       {letters.map((letter, index) => (
-        <motion.span
+        <m.span
           aria-hidden="true"
           key={`${index}-${letter}`}
           variants={itemVariants}
@@ -138,10 +139,10 @@ export function SpinningText({
           }
         >
           {letter}
-        </motion.span>
+        </m.span>
       ))}
       <span className="sr-only">{children}</span>
-    </motion.div>
+    </m.div>
   );
 }
 

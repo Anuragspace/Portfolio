@@ -1,6 +1,6 @@
 
 import { useState, useEffect, useRef, memo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { ArrowUp } from 'lucide-react';
 
 const HomeButton = memo(() => {
@@ -67,7 +67,7 @@ const HomeButton = memo(() => {
   return (
     <AnimatePresence>
       {visible && (
-        <motion.button
+        <m.button
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.5 }}
@@ -81,7 +81,7 @@ const HomeButton = memo(() => {
           }}
         >
           <ArrowUp className="w-5 h-5 text-gray-700 dark:text-gray-300" />
-        </motion.button>
+        </m.button>
       )}
     </AnimatePresence>
   );

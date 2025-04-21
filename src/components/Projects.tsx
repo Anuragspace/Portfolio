@@ -2,9 +2,9 @@ import React, { memo } from "react";
 import { ExternalLink, ArrowUpRight } from "lucide-react";
 import { BorderBeam, RainbowButton, WhiteRainbowButton } from "@/features/shared/components/magic-ui";
 import { AnimatedGridPattern } from "@/components/AnimatedGridPattern";
-import { motion, LazyMotion, domAnimation, useInView } from "framer-motion";
+import { m, LazyMotion, domAnimation, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
-import { OptimizedImage } from "./OptimizedImage"; // <-- Add this import
+import { OptimizedImage } from "./OptimizedImage";
 
 interface Project {
   id: string;
@@ -25,14 +25,14 @@ const ProjectCard = memo(({ project, index }: { project: Project; index: number 
   });
 
   return (
-    <motion.div
+    <m.div
       ref={ref}
       initial={{ opacity: 0, y: 20 }}
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
       transition={{ duration: 0.4, delay: index * 0.1 }}
       className="w-full"
     >
-      <motion.div 
+      <m.div 
         className="group overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-3 md:p-5 bg-white relative"
         whileHover={{ 
           scale: 1.01,
@@ -121,8 +121,8 @@ const ProjectCard = memo(({ project, index }: { project: Project; index: number 
             />
           </div>
         </div>
-      </motion.div>
-    </motion.div>
+      </m.div>
+    </m.div>
   );
 });
 
@@ -178,8 +178,6 @@ const Projects = () => {
           repeatDelay={2}
           className="absolute inset-x-[-20%] inset-y-[0%] w-[60%] h-[60%] skew-y-12 text-[#3E40EF]/80 [mask-image:radial-gradient(600px_circle_at_center,white,transparent)]"
         />
-
-        
 
         <div className="container-custom">
           <div className="mb-8 md:mb-12 text-center">
