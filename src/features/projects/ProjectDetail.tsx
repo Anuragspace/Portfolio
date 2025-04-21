@@ -8,15 +8,16 @@ import Footer from "@/components/Footer";
 import HomeButton from "@/components/HomeButton";
 import ProblemSolutionRow from "@/components/ProblemSolutionRow";
 import ProjectDetailsGrid from "@/components/ProjectDetailsGrid";
+import { OptimizedImage } from "@/components/OptimizedImage"; // <-- Add this import
 
 const projectsData = [
   // Mock data for projects
   {
-    id: "1",
+    id: "csedvit",
     title: "CSED VIT – Official Club Website",
     year: "2024",
     description: "I led the complete redesign of the official CSED VIT website to give the club a bold digital identity. The goal was to create a clean, modern, and standout UI that felt interactive and engaging across devices. I handled the full UX process—research, wireframing, prototyping, and final implementation—focusing on smooth transitions and intuitive navigation. The result is a responsive, scalable platform that effectively showcases our events, teams, and mission.",
-    image: "/images/csedh.png",
+    image: "/images/csedh.webp",
     tags: ["UI Design", "UX Design", "Web Development"],
     role: ["Lead Designer"],
     tools: ["Figma", "VantaJS", "HTML-CSS"],
@@ -26,16 +27,16 @@ const projectsData = [
     impact: "Increased user engagement by 150% and reduced project setup time by 60%",
     problem: "The current CSED website does not provide an intuitive, comprehensive platform to effectively showcase the club's diverse activities, projects, and events, making it challenging for users to engage and stay updated.",
     solution: "Design and develop a modern, user-friendly website that highlights CSED's initiatives, events, and projects. The solution will focus on seamless navigation, interactive features, and an attractive layout to enhance engagement.",
-    designProcess: ["/images/csedp.png"],
-    designElements: ["/images/csede.png"],
+    designProcess: ["/images/csedp.webp"],
+    designElements: ["/images/csede.webp"],
     finalDesign: ["/images/csedf.webp"]
   },
   {
-    id: "2",
+    id: "campusmart",
     title: "Campus Mart – Your College Marketplace",
     year: "2025",
     description: "Campus Mart is a student-centric web platform designed to simplify on-campus buying, selling, and exchanging of goods. Tailored for college communities, it offers a secure and intuitive space where students can list items, browse deals, and connect with peers. From textbooks and tech to bikes and everyday essentials, Campus Mart brings the campus marketplace online—making student life more affordable, convenient, and connected.",
-    image: "/images/campusm.png",
+    image: "/images/campusm.webp",
     tags: ["Product Design", "Mobile App", "Branding"],
     role: ["UI Designer"],
     tools: ["Figma"],
@@ -45,22 +46,17 @@ const projectsData = [
     impact: "Improved user retention by 75% and increased booking conversion rate by 45%",
     problem: "Students often struggle to find a reliable and convenient way to buy or sell second-hand items within the campus, leading to missed opportunities, wasted resources, and increased expenses.",
     solution: "Campus Mart provides a dedicated online marketplace for students to securely buy, sell, and exchange goods within their college community. It streamlines transactions, fosters peer connections, and promotes sustainable, affordable student living.",
-    designProcess: [
-      "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-    ],
+    designProcess: ["/images/campusp.webp"],
     designElements: [
-      "https://images.unsplash.com/photo-1506097425191-7ad538b29cef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80"
-    ],
-    finalDesign: [
-      "https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-    ]
+      "/images/campuse.webp"],
+    finalDesign: ["/images/campusf.webp"]
   },
   {
-    id: "3",
+    id: "cabsync",
     title: "CabSync – Ride Together",
     year: "2019",
     description: "CabSync is a student-focused cab pooling platform designed to simplify and secure transportation to and from campus. It connects students with similar routes and travel times, enabling them to share cabs efficiently. By fostering ride-sharing within the college community, CabSync helps reduce travel costs, ease planning, and promote eco-friendly commuting.",
-    image: "/images/cabm.png",
+    image: "/images/cabm.webp",
     tags: ["UX Research", "UI Design", "Prototyping"],
     role: ["UX Designer", "Researcher"],
     tools: ["Sketch", "Principle", "Maze"],
@@ -81,11 +77,11 @@ const projectsData = [
     ]
   },
   {
-    id: "4",
+    id: "imaginum",
     title: "Imaginum Website",
     year: "2023",
     description: "Corporate website design for a creative agency showcasing their portfolio and services with an immersive experience that helps visitors understand the company's values and capabilities.",
-    image: "/images/cabm.png",
+    image: "/images/imagim.webp",
     tags: ["Web Design", "Animation", "Development"],
     role: ["Lead Designer", "Front-end Developer"],
     tools: ["Webflow", "GSAP", "Figma"],
@@ -182,10 +178,9 @@ const ProjectDetail = () => {
           <div className="w-full max-w-7xl mx-auto">
             <div className="overflow-hidden rounded-lg relative shadow-xl w-full">
               <div className="h-[55vh] md:h-[70vh] lg:h-[75vh]">
-                <img 
-                  src={project.image} 
+                <OptimizedImage
+                  src={project.image}
                   alt={project.title}
-                  fetchPriority="high"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute bottom-0 left-0 p-6 md:p-8 bg-gradient-to-t from-black/80 to-transparent w-full">
@@ -253,8 +248,8 @@ const ProjectDetail = () => {
             <div>
               <h2 className="text-3xl font-bold mb-8 font-manrope text-center">Design Process</h2>
               <div className="aspect-video rounded-lg overflow-hidden w-full">
-                <img 
-                  src={project.designProcess[0]} 
+                <OptimizedImage
+                  src={project.designProcess[0]}
                   alt="Design Process"
                   className="w-full h-full object-cover"
                 />
@@ -264,8 +259,8 @@ const ProjectDetail = () => {
             <div>
               <h2 className="text-3xl font-bold mb-8 font-manrope text-center">Design Elements</h2>
               <div className="aspect-video rounded-lg overflow-hidden w-full">
-                <img 
-                  src={project.designElements[0]} 
+                <OptimizedImage
+                  src={project.designElements[0]}
                   alt="Design Elements"
                   className="w-full h-full object-cover"
                 />
@@ -275,8 +270,8 @@ const ProjectDetail = () => {
             <div>
               <h2 className="text-3xl font-bold mb-8 font-manrope text-center">Final Design</h2>
               <div className="rounded-lg overflow-hidden w-full">
-                <img 
-                  src={project.finalDesign[0]} 
+                <OptimizedImage
+                  src={project.finalDesign[0]}
                   alt="Final Design"
                   className="w-full h-auto object-contain"
                 />
