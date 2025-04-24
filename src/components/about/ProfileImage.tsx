@@ -1,10 +1,23 @@
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Globe } from "@/features/shared/components/magic-ui/Globe";
 import { SpinningText } from "@/features/shared/components/magic-ui/SpinningText";
 
 const ProfileImage = () => {
   const [showSpinText, setShowSpinText] = useState(false);
+  const [videoError, setVideoError] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    // Lazy load the video when component is mounted
+    if (videoRef.current) {
+      videoRef.current.load();
+    }
+  }, []);
+
+  const handleVideoError = () => {
+    setVideoError(true);
+  };
 
   return (
     <div 
@@ -16,13 +29,38 @@ const ProfileImage = () => {
         <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full group-hover:bg-white/10 transition-all duration-500"></div>
 
         <div className="flex-1 w-full flex items-center justify-center relative">
-          <Globe className="scale-[1.1] translate-y-[30%] -z-10" />
+          <Globe className="scale-[1.15] lg:scale-[1.1] translate-y-[50%] lg:translate-y-[30%] -z-10" />
         </div>
-        <img 
-          src="\images\anudev.webp" 
-          alt="Portrait" 
-          className="w-full h-full object-cover translate-y-[7%]"
-        />
+        
+        {/* Replaced img with video */}
+        {!videoError ? (
+          <video
+            ref={videoRef}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="none"
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[40%] w-[80%] lg:w-[70%] h-auto object-contain"
+            style={{ pointerEvents: 'none' }}
+            onError={handleVideoError}
+          >
+            <source src="/images/removed.webm" type="video/webm" />
+            {/* Fallback content */}
+            <img 
+              src="/images/anudev.webp" 
+              alt="Anurag Adarsh"
+              className="w-full h-full object-contain"
+            />
+          </video>
+        ) : (
+          <img 
+            src="/images/anudev.webp" 
+            alt="Anurag Adarsh"
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[40%] w-[80%] lg:w-[70%] h-auto object-contain"
+            loading="lazy"
+          />
+        )}
 
         {/* Spinning Text - Top Right */}
         {showSpinText && (
