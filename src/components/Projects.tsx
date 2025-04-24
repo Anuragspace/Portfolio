@@ -162,7 +162,7 @@ const Projects = () => {
       title: "Imaginum Website",
       year: "2023",
       description: "Corporate website design for a creative agency showcasing their portfolio and services with an immersive experience that helps visitors understand the company's values and capabilities.",
-      image: "/images/imagim.webp",
+      image: "/images/imagim.png",
       tags: ["Web Design", "Animation", "Development"],
       link: "#",
     },
