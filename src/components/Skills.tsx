@@ -232,7 +232,7 @@ const Skills = () => {
           </div>
           
           {/* Right column container */}
-          <div className="col-span-12 md:col-span-7 grid grid-rows-2 gap-5">
+          <div className="col-span-12 md:col-span-7 grid grid-rows-1 gap-5">
             {/* Interaction Design - Top right box */}
             <div className="bg-[#3E40EF] rounded-2xl shadow-md p-6 transform hover:scale-[1.02] transition-all duration-300 hover:shadow-lg group relative overflow-hidden">
               <div className="absolute -top-20 -right-20 w-40 h-40 bg-white/5 rounded-full group-hover:bg-white/10 transition-all duration-500"></div>
@@ -257,22 +257,22 @@ const Skills = () => {
             </div>
             
             {/* Bottom right container for Prototyping and Wireframing */}
-            <div className="grid grid-cols-2 gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {/* Prototyping - Bottom left of the right column */}
               <div className="bg-[#3E40EF] rounded-2xl shadow-md p-6 transform hover:scale-[1.02] transition-all duration-300 hover:shadow-lg group relative overflow-hidden">
                 <div className="absolute -top-10 -left-10 w-20 h-20 bg-white/5 rounded-full group-hover:bg-white/10 transition-all duration-500"></div>
                 
                 <div className="relative z-10 h-full flex flex-col">
-                  <div className="bg-white/10 w-12 h-12 rounded-xl flex items-center justify-center mb-3 group-hover:bg-white/20 transition-all duration-300">
-                    <Layers className="text-white h-6 w-6" />
+                  <div className="bg-white/10 w-14 h-14 rounded-xl flex items-center justify-center mb-4 group-hover:bg-white/20 transition-all duration-300">
+                    <Layers className="text-white h-7 w-7" />
                   </div>
-                  <h3 className="text-xl font-bold mb-2 text-white">Prototyping</h3>
-                  <p className="text-white/90 mb-3">Building interactive prototypes to test and validate design solutions.</p>
+                  <h3 className="text-2xl font-bold mb-3 text-white">Prototyping</h3>
+                  <p className="text-white/90 mb-4">Building interactive prototypes to test and validate design solutions.</p>
                   <div className="mt-auto flex flex-wrap gap-2">
                     {["High-fidelity", "Low-fidelity", "Interactive", "User Testing"].map((skill, index) => (
                       <span 
                         key={skill}
-                        className="px-3 py-1.5 bg-white/10 rounded-full text-xs font-medium group-hover:bg-white/15 transition-all duration-300 text-white"
+                        className="px-3 py-1.5 bg-white/10 rounded-full text-sm font-medium group-hover:bg-white/15 transition-all duration-300 text-white"
                       >
                         {skill}
                       </span>
@@ -281,14 +281,13 @@ const Skills = () => {
                 </div>
               </div>
               
-              {/* Wireframing - Bottom right - Redesigned */}
-              <div className="bg-[#3E40EF] rounded-2xl shadow-md p-6 transform hover:scale-[1.02] transition-all duration-300 hover:shadow-lg group relative overflow-hidden">
+              {/* Wireframing - Bottom right */}
+              <div className="bg-[#3E40EF] min-h-[280px] rounded-2xl shadow-md p-6 transform hover:scale-[1.02] transition-all duration-300 hover:shadow-lg group relative overflow-hidden">
                 <div className="absolute -top-20 -left-20 w-40 h-40 bg-white/5 rounded-full group-hover:bg-white/10 transition-all duration-500"></div>
                 
                 <div className="relative z-10 h-full flex flex-col items-center text-center">
-                  
-                  <p className="text-white/90 mb-2">Creating structural blueprints to establish hierarchy and layout.</p>
-                  <h3 className="text-xl font-bold mb-2 text-white">Wireframing</h3>
+                  <p className="text-white/90 mb-3">Creating structural blueprints to establish hierarchy and layout.</p>
+                  <h3 className="text-2xl font-bold mb-3 text-white">Wireframing</h3>
                   {/* Adjusted Globe position */}
                   <div className="flex-1 w-full flex items-center justify-center relative ">
                     <Globe className="scale-[1.25] translate-y-[4%]" />
