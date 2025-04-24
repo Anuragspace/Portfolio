@@ -81,7 +81,7 @@ const ProjectCard = memo(({ project, index }: { project: Project; index: number 
             
             {index === 0 || index === 2 ? (
               <div className="relative w-fit">
-                <RainbowButton className="mt-auto scale-90 origin-left">
+                <RainbowButton className="mt-5 scale-90 origin-left">
                   <Link to={`/projects/${project.id}`} className="flex items-center justify-center text-sm w-32">
                     View Project
                   </Link>
@@ -89,7 +89,7 @@ const ProjectCard = memo(({ project, index }: { project: Project; index: number 
               </div>
             ) : (
               <div className="relative w-fit">
-                <WhiteRainbowButton className="mt-auto scale-90 origin-left">
+                <WhiteRainbowButton className="mt-5 scale-90 origin-left">
                   <Link to={`/projects/${project.id}`} className="flex items-center justify-center text-sm w-32">
                     View Project
                   </Link>
