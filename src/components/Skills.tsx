@@ -154,16 +154,16 @@ const Skills = () => {
   ];
 
   return (
-    <section id="skills" className="section-padding bg-gray-50 overflow-hidden">
+    <section id="skills" className="section-padding bg-secondary/50 dark:bg-secondary/10 overflow-hidden">
       <div className="container-custom">
         <div className="mb-10">
-          <h2 className="mb-4">My Skills</h2>
+          <h2 className="mb-4 text-foreground">My Skills</h2>
           <div className="w-24 h-1 bg-accent"></div>
         </div>
         
         <div className="relative mb-12 py-6 overflow-hidden" id="skills-carousel">
-          <div className="absolute left-0 top-0 h-full w-[15%] bg-gradient-to-r from-gray-50 to-transparent z-10"></div>
-          <div className="absolute right-0 top-0 h-full w-[15%] bg-gradient-to-l from-gray-50 to-transparent z-10"></div>
+          <div className="absolute left-0 top-0 h-full w-[15%] bg-gradient-to-r from-secondary/50 dark:from-secondary/10 to-transparent z-10"></div>
+          <div className="absolute right-0 top-0 h-full w-[15%] bg-gradient-to-l from-secondary/50 dark:from-secondary/10 to-transparent z-10"></div>
           
           <div 
             ref={sliderRef}
@@ -180,13 +180,13 @@ const Skills = () => {
             {technicalSkills.concat(technicalSkills).map((skill, index) => (
               <div 
                 key={`${skill.name}-${index}`}
-                className="flex-none bg-white rounded-xl shadow-md p-4 flex items-center gap-3 transform hover:scale-105 transition-transform duration-200"
+                className="flex-none bg-card dark:bg-card/80 rounded-xl shadow-md dark:shadow-none border border-border p-4 flex items-center gap-3 transform hover:scale-105 transition-transform duration-200"
                 style={{ minWidth: '180px' }}
               >
-                <div className="bg-[#3E40EF]/10 p-2 rounded-lg">
+                <div className="bg-accent/10 p-2 rounded-lg">
                   {skill.icon}
                 </div>
-                <span className="font-medium">{skill.name}</span>
+                <span className="font-medium text-foreground">{skill.name}</span>
               </div>
             ))}
           </div>
