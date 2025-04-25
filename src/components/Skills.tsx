@@ -113,11 +113,11 @@ const Skills = () => {
       if (slider.scrollLeft >= (slider.scrollWidth - slider.clientWidth)) {
         slider.scrollLeft = 0;
       } else {
-        slider.scrollLeft += 1;
+        slider.scrollLeft += 2;
       }
     };
 
-    const scrollInterval = setInterval(infiniteScroll, 50);
+    const scrollInterval = setInterval(infiniteScroll, 30);
 
     return () => {
       clearInterval(scrollInterval);
@@ -169,23 +169,24 @@ const Skills = () => {
             ref={sliderRef}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            className="flex gap-4 overflow-x-auto scrollbar-hide pb-4 px-4 will-change-transform gpu-accelerated"
+            className="flex gap-4 overflow-x-auto scrollbar-hide pb-4 px-4 will-change-transform gpu-accelerated items-center"
             style={{
               scrollbarWidth: 'none',
               msOverflowStyle: 'none',
               WebkitOverflowScrolling: 'touch',
+              whiteSpace: 'nowrap'
             }}
           >
             {technicalSkills.concat(technicalSkills).map((skill, index) => (
               <div 
                 key={`${skill.name}-${index}`}
-                className="flex-none bg-white rounded-xl shadow-md p-4 flex flex-col items-center justify-center gap-3 transform hover:scale-105 transition-transform duration-200"
+                className="flex-none bg-white rounded-xl shadow-md p-4 flex items-center gap-3 transform hover:scale-105 transition-transform duration-200"
                 style={{ minWidth: '180px' }}
               >
                 <div className="bg-[#3E40EF]/10 p-2 rounded-lg">
                   {skill.icon}
                 </div>
-                <span className="font-medium text-center">{skill.name}</span>
+                <span className="font-medium">{skill.name}</span>
               </div>
             ))}
           </div>
