@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from "react";
 import { 
   Palette, 
@@ -27,18 +26,16 @@ const Skills = () => {
     once: true
   });
 
-  // For technical skills slider
   const sliderRef = useRef<HTMLDivElement>(null);
   const isDraggingRef = useRef(false);
   const startXRef = useRef(0);
   const scrollLeftRef = useRef(0);
   const [isPaused, setIsPaused] = useState(false);
-  
+
   useEffect(() => {
     const slider = sliderRef.current;
     if (!slider) return;
     
-    // Handle mouse and touch events for slider interactivity
     const handleMouseDown = (e: MouseEvent) => {
       if (!slider) return;
       isDraggingRef.current = true;
@@ -105,7 +102,31 @@ const Skills = () => {
       document.removeEventListener('touchmove', handleTouchMove);
     };
   }, []);
-  
+
+  useEffect(() => {
+    const slider = sliderRef.current;
+    if (!slider) return;
+
+    const infiniteScroll = () => {
+      if (isPaused || !slider) return;
+      
+      if (slider.scrollLeft >= (slider.scrollWidth - slider.clientWidth)) {
+        slider.scrollLeft = 0;
+      } else {
+        slider.scrollLeft += 1;
+      }
+    };
+
+    const scrollInterval = setInterval(infiniteScroll, 50);
+
+    return () => {
+      clearInterval(scrollInterval);
+    };
+  }, [isPaused]);
+
+  const handleMouseEnter = () => setIsPaused(true);
+  const handleMouseLeave = () => setIsPaused(false);
+
   const designSkills = [
     { name: "UI Design", level: 95 },
     { name: "UX Design", level: 90 },
@@ -140,32 +161,31 @@ const Skills = () => {
           <div className="w-24 h-1 bg-accent"></div>
         </div>
         
-        {/* Technical Skills Carousel - Fixed and Properly Implemented */}
         <div className="relative mb-12 py-6 overflow-hidden" id="skills-carousel">
           <div className="absolute left-0 top-0 h-full w-[15%] bg-gradient-to-r from-gray-50 to-transparent z-10"></div>
           <div className="absolute right-0 top-0 h-full w-[15%] bg-gradient-to-l from-gray-50 to-transparent z-10"></div>
           
-          {/* The actual slider container that was missing */}
           <div 
             ref={sliderRef}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
             className="flex gap-4 overflow-x-auto scrollbar-hide pb-4 px-4 will-change-transform gpu-accelerated"
             style={{
               scrollbarWidth: 'none',
               msOverflowStyle: 'none',
               WebkitOverflowScrolling: 'touch',
-              cursor: isDraggingRef.current ? 'grabbing' : 'grab'
             }}
           >
-            {technicalSkills.map((skill, index) => (
+            {technicalSkills.concat(technicalSkills).map((skill, index) => (
               <div 
-                key={index}
-                className="flex-none bg-white rounded-xl shadow-md p-4 flex items-center gap-3 transform hover:scale-105 transition-transform duration-200"
+                key={`${skill.name}-${index}`}
+                className="flex-none bg-white rounded-xl shadow-md p-4 flex flex-col items-center justify-center gap-3 transform hover:scale-105 transition-transform duration-200"
                 style={{ minWidth: '180px' }}
               >
                 <div className="bg-[#3E40EF]/10 p-2 rounded-lg">
                   {skill.icon}
                 </div>
-                <span className="font-medium">{skill.name}</span>
+                <span className="font-medium text-center">{skill.name}</span>
               </div>
             ))}
           </div>
