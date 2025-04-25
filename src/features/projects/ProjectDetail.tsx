@@ -29,7 +29,8 @@ const projectsData = [
     solution: "Design and develop a modern, user-friendly website that highlights CSED's initiatives, events, and projects. The solution will focus on seamless navigation, interactive features, and an attractive layout to enhance engagement.",
     designProcess: ["/images/csedp.webp"],
     designElements: ["/images/csede.webp"],
-    finalDesign: ["/images/csedf.webp"]
+    finalDesign: ["/images/csedf.webp"],
+    figmaEmbedUrl: "https://embed.figma.com/design/q1REgcRqi7YvprzjqT7nPj/CSED-Website?node-id=0-1&embed-host=share",
   },
   {
     id: "campusmart",
@@ -80,26 +81,22 @@ const projectsData = [
     id: "imaginum",
     title: "Imaginum Website",
     year: "2025",
-    description: "Corporate website design for a creative agency showcasing their portfolio and services with an immersive experience that helps visitors understand the company's values and capabilities.",
+    description: "The Imaginum website was crafted to reflect the studio’s creative and tech-driven identity. Designed with a clean, minimal aesthetic, it offers an immersive experience that captures the brand’s essence. The layout emphasizes clarity, storytelling, and smooth transitions to showcase services, team, and selected work. I led the product, UX strategy, and visual direction—ensuring the site feels both modern and purposeful. The result is a high-performance, responsive website that communicates value and builds trust through design",
     image: "/images/imagim.webp",
-    tags: ["Web Design", "Animation", "Development"],
+    tags: ["UI/UX", "Wireframe", "User Research"],
     role: ["Lead Designer"],
-    tools: ["Webflow", "GSAP", "Figma"],
-    category: "Website",
-    liveUrl: "https://example.com/imaginum",
+    tools: ["Saas WebDesign", "UI/UX", "Figma"],
+    category: "Website UI/UX Design",
+    liveUrl: "https://vercel.imaginum.app",
     githubUrl: "https://github.com/example/imaginum",
     impact: "Increased average session duration by 145% and reduced bounce rate by 35%",
-    problem: "The client needed a website that would stand out in a saturated market of creative agencies while effectively showcasing their unique approach and portfolio of work.",
-    solution: "Developed an interactive website with subtle animations, immersive scrolling experiences, and a thoughtful information architecture that guides visitors through the agency's story and work.",
-    designProcess: [
-      "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-    ],
-    designElements: [
-      "https://images.unsplash.com/photo-1618788372246-79faff0c3742?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=2027&q=80"
-    ],
-    finalDesign: [
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=2426&q=80"
-    ]
+    problem: "The team needed a bold digital presence to differentiate Imaginum in a competitive creative tech space, while effectively communicating its unique design-driven approach, values, and growing portfolio of innovative projects.",
+    solution: "Designed and developed a visually striking, interactive website using clean UI, smooth micro-interactions, and strategic content flow—creating an engaging user journey that showcases Imaginum’s expertise, story, and service offerings with clarity and flair",
+    designProcess: ["https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"],
+    designElements: ["https://images.unsplash.com/photo-1618788372246-79faff0c3742?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=2027&q=80"],
+    finalDesign: ["/images/imagif.webp"],
+    figmaEmbedUrl: "https://embed.figma.com/design/msCrgpYsRe3bsrGf4wJkld/Imaginum-Website-UI?node-id=0-1&embed-host=share",
+
   }
 ];
 
@@ -277,6 +274,18 @@ const ProjectDetail = () => {
                 />
               </div>
             </div>
+            {project.figmaEmbedUrl && (
+              <div>
+                <h2 className="text-3xl font-bold mb-8 font-manrope text-center">Figma File</h2>
+                <div className="w-full aspect-video rounded-lg overflow-hidden">
+                  <iframe
+                    src={project.figmaEmbedUrl}
+                    allowFullScreen
+                    className="w-full h-full border-0"
+                  ></iframe>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </section>
