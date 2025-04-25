@@ -40,6 +40,16 @@ html {
   will-change: transform, opacity;
 }
 
+/* Hide scrollbars but allow scrolling */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
 /* Reduce motion if user prefers */
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {

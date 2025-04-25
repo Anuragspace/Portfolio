@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from "react";
 import { 
   Palette, 
@@ -26,6 +27,7 @@ const Skills = () => {
     once: true
   });
 
+  // For technical skills slider
   const sliderRef = useRef<HTMLDivElement>(null);
   const isDraggingRef = useRef(false);
   const startXRef = useRef(0);
@@ -36,26 +38,13 @@ const Skills = () => {
     const slider = sliderRef.current;
     if (!slider) return;
     
-    const handleMouseEnter = () => {
-      setIsPaused(true);
-      slider.style.animationPlayState = 'paused';
-    };
-    
-    const handleMouseLeave = () => {
-      if (!isDraggingRef.current) {
-        setIsPaused(false);
-        slider.style.animationPlayState = 'running';
-      }
-    };
-    
+    // Handle mouse and touch events for slider interactivity
     const handleMouseDown = (e: MouseEvent) => {
       if (!slider) return;
       isDraggingRef.current = true;
       startXRef.current = e.pageX - slider.offsetLeft;
       scrollLeftRef.current = slider.scrollLeft;
       slider.classList.add('dragging');
-      slider.style.animationPlayState = 'paused';
-      setIsPaused(true);
       document.body.style.cursor = 'grabbing';
     };
     
@@ -71,7 +60,7 @@ const Skills = () => {
       if (!isDraggingRef.current || !slider) return;
       e.preventDefault();
       const x = e.pageX - slider.offsetLeft;
-      const walk = (x - startXRef.current) * 3;
+      const walk = (x - startXRef.current) * 2;
       slider.scrollLeft = scrollLeftRef.current - walk;
     };
     
@@ -81,17 +70,12 @@ const Skills = () => {
       startXRef.current = e.touches[0].pageX - slider.offsetLeft;
       scrollLeftRef.current = slider.scrollLeft;
       slider.classList.add('dragging');
-      slider.style.animationPlayState = 'paused';
-      setIsPaused(true);
     };
     
     const handleTouchEnd = () => {
       isDraggingRef.current = false;
       if (slider) {
         slider.classList.remove('dragging');
-        if (!isPaused) {
-          slider.style.animationPlayState = 'running';
-        }
       }
     };
     
@@ -99,12 +83,9 @@ const Skills = () => {
       if (!isDraggingRef.current || !slider || e.touches.length !== 1) return;
       e.preventDefault();
       const x = e.touches[0].pageX - slider.offsetLeft;
-      const walk = (x - startXRef.current) * 3;
+      const walk = (x - startXRef.current) * 2;
       slider.scrollLeft = scrollLeftRef.current - walk;
     };
-    
-    slider.addEventListener('mouseenter', handleMouseEnter);
-    slider.addEventListener('mouseleave', handleMouseLeave);
     
     slider.addEventListener('mousedown', handleMouseDown);
     document.addEventListener('mouseup', handleMouseUp);
@@ -115,9 +96,6 @@ const Skills = () => {
     document.addEventListener('touchmove', handleTouchMove, { passive: false });
     
     return () => {
-      slider.removeEventListener('mouseenter', handleMouseEnter);
-      slider.removeEventListener('mouseleave', handleMouseLeave);
-      
       slider.removeEventListener('mousedown', handleMouseDown);
       document.removeEventListener('mouseup', handleMouseUp);
       document.removeEventListener('mousemove', handleMouseMove);
@@ -126,7 +104,7 @@ const Skills = () => {
       document.removeEventListener('touchend', handleTouchEnd);
       document.removeEventListener('touchmove', handleTouchMove);
     };
-  }, [isPaused]);
+  }, []);
   
   const designSkills = [
     { name: "UI Design", level: 95 },
@@ -162,10 +140,35 @@ const Skills = () => {
           <div className="w-24 h-1 bg-accent"></div>
         </div>
         
+        {/* Technical Skills Carousel - Fixed and Properly Implemented */}
         <div className="relative mb-12 py-6 overflow-hidden" id="skills-carousel">
           <div className="absolute left-0 top-0 h-full w-[15%] bg-gradient-to-r from-gray-50 to-transparent z-10"></div>
-          
           <div className="absolute right-0 top-0 h-full w-[15%] bg-gradient-to-l from-gray-50 to-transparent z-10"></div>
+          
+          {/* The actual slider container that was missing */}
+          <div 
+            ref={sliderRef}
+            className="flex gap-4 overflow-x-auto scrollbar-hide pb-4 px-4 will-change-transform gpu-accelerated"
+            style={{
+              scrollbarWidth: 'none',
+              msOverflowStyle: 'none',
+              WebkitOverflowScrolling: 'touch',
+              cursor: isDraggingRef.current ? 'grabbing' : 'grab'
+            }}
+          >
+            {technicalSkills.map((skill, index) => (
+              <div 
+                key={index}
+                className="flex-none bg-white rounded-xl shadow-md p-4 flex items-center gap-3 transform hover:scale-105 transition-transform duration-200"
+                style={{ minWidth: '180px' }}
+              >
+                <div className="bg-[#3E40EF]/10 p-2 rounded-lg">
+                  {skill.icon}
+                </div>
+                <span className="font-medium">{skill.name}</span>
+              </div>
+            ))}
+          </div>
         </div>
         
         <div className="grid grid-cols-12 gap-5">
@@ -263,10 +266,9 @@ const Skills = () => {
                 <div className="absolute -top-20 -left-20 w-40 h-40 bg-white/5 rounded-full group-hover:bg-white/10 transition-all duration-500"></div>
                 
                 <div className="relative z-10 h-full flex flex-col items-center text-center">
-                  
                   <p className="text-white/90 mb-2">Creating structural blueprints to establish hierarchy and layout.</p>
                   <h3 className="text-xl font-bold mb-2 text-white">Wireframing</h3>
-                  <div className="flex-1 w-full flex items-center justify-center relative ">
+                  <div className="flex-1 w-full flex items-center justify-center relative">
                     <Globe className="scale-[1.25] translate-y-[4%]" />
                   </div>
                 </div>
