@@ -62,42 +62,46 @@ export function SocialDock() {
   const [visible, setVisible] = React.useState(true);
   const [prevScrollPos, setPrevScrollPos] = React.useState(0);
   const [menuOpen, setMenuOpen] = React.useState(false);
-  
+  const [bottom, setBottom] = React.useState('max(24px, env(safe-area-inset-bottom, 24px))');
+
   // Check if menu is open by monitoring body style
   React.useEffect(() => {
     const checkMenuState = () => {
       setMenuOpen(document.body.style.overflow === 'hidden');
     };
-    
-    // Run initial check
     checkMenuState();
-    
-    // Monitor body style changes (which happen when menu opens/closes)
     const bodyObserver = new MutationObserver(checkMenuState);
     bodyObserver.observe(document.body, { attributes: true, attributeFilter: ['style'] });
-    
     return () => bodyObserver.disconnect();
+  }, []);
+
+  // Responsive bottom position for mobile
+  React.useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 640) {
+        setBottom('70px'); // Move up on mobile
+      } else {
+        setBottom('max(24px, env(safe-area-inset-bottom, 24px))');
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    handleResize();
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   React.useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
       const viewportHeight = window.innerHeight;
-      
-      // Show dock when:
-      // 1. At the top of the page (first viewport)
-      // 2. Scrolling up
-      const isAtTop = currentScrollPos < viewportHeight * 0.1; // Top 10% of first viewport
+      // Change threshold from 0.1 (10%) to 0.3 (30%) for a more delayed hide
+      const isAtTop = currentScrollPos < viewportHeight * 0.2;
       const isScrollingUp = currentScrollPos < prevScrollPos;
-      
       setVisible(isAtTop || isScrollingUp);
       setPrevScrollPos(currentScrollPos);
     };
-    
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('resize', handleScroll);
-    handleScroll(); // Initial check
-    
+    handleScroll();
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleScroll);
@@ -110,7 +114,7 @@ export function SocialDock() {
         visible && !menuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8 pointer-events-none'
       }`}
       style={{
-        bottom: 'max(24px, env(safe-area-inset-bottom, 24px))'
+        bottom: bottom
       }}
     >
       <Dock 
