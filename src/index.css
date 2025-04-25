@@ -131,6 +131,10 @@ html {
   pointer-events: none;
 }
 
+.social-dock-bottom {
+  bottom: calc(env(safe-area-inset-bottom, 190px) + 190px);
+}
+
 /* Marquee animation for skills section */
 @keyframes marquee {
   0% {
