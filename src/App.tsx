@@ -7,9 +7,9 @@ import { ThemeProvider } from 'next-themes';
 
 function App() {
   return (
-    <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+    <ThemeProvider attribute="class" defaultTheme="light">
       <Router>
-        <div className="flex flex-col min-h-screen bg-background text-foreground">
+        <div className="flex flex-col min-h-screen">
           <main className="flex-grow">
             <Routes>
               <Route path="/" element={<Index />} />
