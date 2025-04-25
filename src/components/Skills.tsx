@@ -138,19 +138,19 @@ const Skills = () => {
 
   const technicalSkills = [
     { name: "Figma", icon: <Figma className="h-5 w-5" /> },
-    { name: "Adobe XD", icon: <DraftingCompass className="h-5 w-5" /> },
-    { name: "Sketch", icon: <Gem className="h-5 w-5" /> },
+    { name: "User Research", icon: <MousePointer className="h-5 w-5" /> },
+    { name: "Wireframing", icon: <Layout className="h-5 w-5" /> },
     { name: "Adobe Photoshop", icon: <Layers className="h-5 w-5" /> },
     { name: "Adobe Illustrator", icon: <Brush className="h-5 w-5" /> },
-    { name: "HTML/CSS", icon: <Code2 className="h-5 w-5" /> },
-    { name: "JavaScript", icon: <Sparkles className="h-5 w-5" /> },
-    { name: "React", icon: <Layout className="h-5 w-5" /> },
-    { name: "Webflow", icon: <Container className="h-5 w-5" /> },
-    { name: "Framer", icon: <MousePointer className="h-5 w-5" /> },
-    { name: "3D Design", icon: <ScanLine className="h-5 w-5" /> },
-    { name: "UI Systems", icon: <FlaskConical className="h-5 w-5" /> },
-    { name: "Web3", icon: <Cpu className="h-5 w-5" /> },
+    { name: "Prototyping", icon: <Code2 className="h-5 w-5" /> },
+    { name: "Interaction Design", icon: <Sparkles className="h-5 w-5" /> },
     { name: "Design Systems", icon: <Palette className="h-5 w-5" /> },
+    { name: "Information Architecture", icon: <Container className="h-5 w-5" /> },
+    { name: "User Testing", icon: <FlaskConical className="h-5 w-5" /> },
+    { name: "Visual Design", icon: <DraftingCompass className="h-5 w-5" /> },
+    { name: "Design Thinking", icon: <Gem className="h-5 w-5" /> },
+    { name: "Accessibility", icon: <ScanLine className="h-5 w-5" /> },
+    { name: "UI Animation", icon: <Cpu className="h-5 w-5" /> },
   ];
 
   return (
@@ -166,22 +166,33 @@ const Skills = () => {
           {/* Gradient overlay left */}
           <div className="absolute left-0 top-0 h-full w-[15%] bg-gradient-to-r from-gray-50 to-transparent z-10"></div>
           
-          {/* Instruction Hint removed since there's no group hover now */}
-          
           {/* Scrolling content */}
           <div 
             ref={sliderRef}
             className="flex gap-6 animate-marquee whitespace-nowrap cursor-grab active:cursor-grabbing skills-scroll-container relative"
             id="skills-slider"
-            style={{animationDuration: '12s'}} /* Faster animation */
+            style={{
+              animationDuration: '60s',
+              width: 'max-content'
+            }}
           >
-            {technicalSkills.concat(technicalSkills).map((skill, index) => (
+            {technicalSkills.map((skill, index) => (
               <div 
                 key={`${skill.name}-${index}`}
-                className="px-6 py-3 bg-white rounded-full shadow-md flex items-center gap-3 border border-gray-100 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 select-none"
+                className="px-6 py-3 bg-white rounded-full shadow-md flex items-center gap-3 border border-gray-100 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 select-none min-w-fit"
               >
                 <span className="text-[#3E40EF]">{skill.icon}</span>
-                <span className="font-medium text-gray-800">{skill.name}</span>
+                <span className="font-medium text-gray-800 whitespace-nowrap">{skill.name}</span>
+              </div>
+            ))}
+            {/* Duplicate set for seamless loop */}
+            {technicalSkills.map((skill, index) => (
+              <div 
+                key={`${skill.name}-duplicate-${index}`}
+                className="px-6 py-3 bg-white rounded-full shadow-md flex items-center gap-3 border border-gray-100 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 select-none min-w-fit"
+              >
+                <span className="text-[#3E40EF]">{skill.icon}</span>
+                <span className="font-medium text-gray-800 whitespace-nowrap">{skill.name}</span>
               </div>
             ))}
           </div>

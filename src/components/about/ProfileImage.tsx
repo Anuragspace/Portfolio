@@ -5,19 +5,39 @@ import { SpinningText } from "@/features/shared/components/magic-ui/SpinningText
 
 const ProfileImage = () => {
   const [showSpinText, setShowSpinText] = useState(false);
-  const [videoError, setVideoError] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    // Lazy load the video when component is mounted
     if (videoRef.current) {
       videoRef.current.load();
     }
-  }, []);
 
-  const handleVideoError = () => {
-    setVideoError(true);
-  };
+    // Handle visibility change
+    const handleVisibilityChange = () => {
+      if (videoRef.current) {
+        if (document.hidden) {
+          videoRef.current.pause();
+        } else {
+          // Try to play when becoming visible
+          const playPromise = videoRef.current.play();
+          if (playPromise !== undefined) {
+            playPromise.catch(() => {
+              // Auto-play was prevented, handle if needed
+              console.log("Video playback was prevented");
+            });
+          }
+        }
+      }
+    };
+
+    // Add visibility change listener
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    // Cleanup
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, []);
 
   return (
     <div 
@@ -32,35 +52,18 @@ const ProfileImage = () => {
           <Globe className="scale-[1.15] lg:scale-[1.1] translate-y-[50%] lg:translate-y-[30%] -z-10" />
         </div>
         
-        {/* Replaced img with video */}
-        {!videoError ? (
-          <video
-            ref={videoRef}
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="none"
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[40%] w-[80%] lg:w-[70%] h-auto object-contain"
-            style={{ pointerEvents: 'none' }}
-            onError={handleVideoError}
-          >
-            <source src="/images/removed.webm" type="video/webm" />
-            {/* Fallback content */}
-            <img 
-              src="/images/anudev.webp" 
-              alt="Anurag Adarsh"
-              className="w-full h-full object-contain"
-            />
-          </video>
-        ) : (
-          <img 
-            src="/images/anudev.webp" 
-            alt="Anurag Adarsh"
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[40%] w-[80%] lg:w-[70%] h-auto object-contain"
-            loading="lazy"
-          />
-        )}
+        <video
+          ref={videoRef}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="none"
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[40%] w-[80%] lg:w-[70%] h-auto object-contain"
+          style={{ pointerEvents: 'none' }}
+        >
+          <source src="/images/removed.webm" type="video/webm" />
+        </video>
 
         {/* Spinning Text - Top Right */}
         {showSpinText && (

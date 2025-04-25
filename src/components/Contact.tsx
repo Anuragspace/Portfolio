@@ -119,7 +119,7 @@ const Contact = () => {
             
             {/* Available For Card */}
             <div className="bg-[#3E40EF] rounded-2xl shadow-md p-4 md:p-5 border border-[#3E40EF]/20 text-white">
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
+              <div className="flex flex-row sm:items-center justify-between gap-3 mb-4">
                 <h4 className="text-xl font-bold text-white">Available For</h4>
                 <div className="flex items-center bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full self-start">
                   <div className="w-2.5 h-2.5 bg-green-400 rounded-full mr-2 animate-pulse"></div>
@@ -148,6 +148,7 @@ const Contact = () => {
               
               <Button 
                 className="w-full bg-white hover:bg-white/90 text-black font-semibold py-2.5 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg"
+                onClick={() => window.open('https://www.linkedin.com/in/adarshanurag/', '_blank')}
               >
                 <span className="text-black font-semibold">Let's Collaborate</span>
                 <ExternalLink size={16} className="ml-2" />
@@ -219,7 +220,7 @@ const Contact = () => {
                       
                       <div className="relative">
                         <div className={`absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none transition-opacity duration-300 ${formState.subject ? 'opacity-100' : 'opacity-70'}`}>
-                          <FileText className={`w-5 h-5 ${focusedField === 'subject' ? 'text-accent' : 'text-gray-400'}`} />
+                        <FileText className={`w-5 h-5 ${focusedField === 'subject' ? 'text-accent' : 'text-gray-400'}`} />
                         </div>
                         <input
                           type="text"
