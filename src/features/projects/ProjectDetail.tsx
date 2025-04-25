@@ -79,11 +79,11 @@ const projectsData = [
   {
     id: "imaginum",
     title: "Imaginum Website",
-    year: "2023",
+    year: "2025",
     description: "Corporate website design for a creative agency showcasing their portfolio and services with an immersive experience that helps visitors understand the company's values and capabilities.",
     image: "/images/imagim.webp",
     tags: ["Web Design", "Animation", "Development"],
-    role: ["Lead Designer", "Front-end Developer"],
+    role: ["Lead Designer"],
     tools: ["Webflow", "GSAP", "Figma"],
     category: "Website",
     liveUrl: "https://example.com/imaginum",

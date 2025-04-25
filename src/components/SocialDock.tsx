@@ -62,6 +62,7 @@ export function SocialDock() {
   const [visible, setVisible] = React.useState(true);
   const [prevScrollPos, setPrevScrollPos] = React.useState(0);
   const [menuOpen, setMenuOpen] = React.useState(false);
+  const [bottom, setBottom] = React.useState('max(24px, env(safe-area-inset-bottom, 24px))');
 
   // Check if menu is open by monitoring body style
   React.useEffect(() => {
@@ -74,11 +75,26 @@ export function SocialDock() {
     return () => bodyObserver.disconnect();
   }, []);
 
+  // Responsive bottom position for mobile
+  React.useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 640) {
+        setBottom('190px'); // 16px margin from the bottom on mobile
+      } else {
+        setBottom('max(24px, env(safe-area-inset-bottom, 24px))');
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    handleResize();
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   React.useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
       const viewportHeight = window.innerHeight;
-      const isAtTop = currentScrollPos < viewportHeight * 0.1;
+      // Change threshold from 0.1 (10%) to 0.3 (30%) for a more delayed hide
+      const isAtTop = currentScrollPos < viewportHeight * 0.01;
       const isScrollingUp = currentScrollPos < prevScrollPos;
       setVisible(isAtTop || isScrollingUp);
       setPrevScrollPos(currentScrollPos);
@@ -96,7 +112,10 @@ export function SocialDock() {
     <div 
       className={`fixed left-1/2 transform -translate-x-1/2 z-30 transition-all duration-300 ${
         visible && !menuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8 pointer-events-none'
-      } social-dock-bottom`}
+      }`}
+      style={{
+        bottom: bottom
+      }}
     >
       <Dock 
         direction="middle" 
