@@ -9,6 +9,7 @@ html {
 /* Optimize animations with will-change */
 .will-change-transform {
   will-change: transform;
+  backface-visibility: hidden;
 }
 
 .will-change-opacity {
@@ -21,26 +22,15 @@ html {
   backface-visibility: hidden;
 }
 
-/* Optimize images */
-img, video {
+/* Content visibility optimization */
+.content-visibility-auto {
   content-visibility: auto;
-}
-
-/* Lazy load animations */
-@media (prefers-reduced-motion: reduce) {
-  *, ::before, ::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+  contain-intrinsic-size: 1px 5000px;
 }
 
 /* Prevent layout shifts */
 .prevent-layout-shift {
-  content-visibility: auto;
-  contain-intrinsic-size: 0 500px;
-  contain: content;
+  contain: layout style;
 }
 
 /* Optimize scroll-triggered animations */
@@ -48,4 +38,24 @@ img, video {
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   will-change: transform, opacity;
+}
+
+/* Hide scrollbars but allow scrolling */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+/* Reduce motion if user prefers */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

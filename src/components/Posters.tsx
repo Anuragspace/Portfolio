@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
@@ -21,15 +20,9 @@ const Posters = () => {
     containScroll: "keepSnaps",
     startIndex: 1,
     duration: 20, // Faster animation for more responsive feel
-    watchDrag: true, // Improve touch responsiveness
   });
 
   const [activeIndex, setActiveIndex] = useState(1);
-  const [pointerDown, setPointerDown] = useState(false);
-
-  // Handle pointer events for better interaction
-  const handlePointerDown = () => setPointerDown(true);
-  const handlePointerUp = () => setPointerDown(false);
 
   // Handle active index and optimize loop behavior
   useEffect(() => {
@@ -46,14 +39,8 @@ const Posters = () => {
     // Set up event listeners
     emblaApi.on("select", onSelect);
     
-    // Force loop when user reaches either end
-    emblaApi.on("reInit", onSelect);
-    emblaApi.on("destroy", onSelect);
-    
     return () => {
       emblaApi.off("select", onSelect);
-      emblaApi.off("reInit", onSelect);
-      emblaApi.off("destroy", onSelect);
     };
   }, [emblaApi]);
 
@@ -96,28 +83,22 @@ const Posters = () => {
     },
   ];
 
-  // Update embla carousel configuration for smoother looping
+  // Modified auto-scroll logic for better performance
   useEffect(() => {
-    if (emblaApi) {
-      // Setup auto scroll every 4 seconds
-      const autoScrollInterval = setInterval(() => {
-        if (!emblaApi.canScrollNext()) {
-          emblaApi.scrollTo(0); // Force loop if at the end
-        } else {
-          emblaApi.scrollNext();
-        }
-      }, 4000);
-      
-      // Pause auto scroll when user is interacting with carousel
-      const handlePointerDown = () => clearInterval(autoScrollInterval);
-      const rootNode = emblaApi.rootNode();
-      rootNode.addEventListener('pointerdown', handlePointerDown);
-      
-      return () => {
-        clearInterval(autoScrollInterval);
-        rootNode?.removeEventListener('pointerdown', handlePointerDown);
-      };
-    }
+    if (!emblaApi) return;
+    
+    // Setup auto scroll with longer interval
+    const autoScrollInterval = setInterval(() => {
+      if (!emblaApi.canScrollNext()) {
+        emblaApi.scrollTo(0); // Force loop if at the end
+      } else {
+        emblaApi.scrollNext();
+      }
+    }, 5000); // Longer interval for smoother performance
+    
+    return () => {
+      clearInterval(autoScrollInterval);
+    };
   }, [emblaApi]);
   
   return (

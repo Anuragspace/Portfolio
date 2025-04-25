@@ -61,48 +61,12 @@ export const debounce = (func: Function, wait: number, immediate = false) => {
   };
 };
 
-// Enhanced scroll optimization with RAF for smoother animations
-// REMOVE or comment out this function and its usage!
-/*
-export const optimizeScrollHandlers = () => {
-  if (typeof window !== 'undefined') {
-    const originalAddEventListener = window.addEventListener;
-    let ticking = false;
-
-    window.addEventListener = function(type, listener, options) {
-      if (type === 'scroll') {
-        const optimizedListener = function(e: Event) {
-          if (!ticking) {
-            window.requestAnimationFrame(() => {
-              (listener as EventListener)(e);
-              ticking = false;
-            });
-            ticking = true;
-          }
-        };
-
-        return originalAddEventListener.call(this, type, optimizedListener as EventListener, 
-          { ...options, passive: true });
-      }
-
-      if (type === 'resize') {
-        const debouncedListener = debounce(listener as Function, 100);
-        return originalAddEventListener.call(this, type, debouncedListener as EventListener, options);
-      }
-
-      return originalAddEventListener.call(this, type, listener, options);
-    };
-  }
-};
-*/
-
 // Initialize all performance optimizations
 export const initPerformanceOptimizations = () => {
   if (typeof window !== 'undefined') {
     // Apply optimizations only in browser environment
     cacheDOMElements();
     optimizeImageLoading();
-    // optimizeScrollHandlers(); // <-- REMOVE or comment out this line
 
     // Add font display swap for better loading performance
     const style = document.createElement('style');

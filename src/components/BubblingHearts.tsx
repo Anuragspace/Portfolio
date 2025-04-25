@@ -11,16 +11,16 @@ interface HeartProps {
 const BubblingHeart: React.FC<HeartProps> = ({ x, delay }) => {
   return (
     <motion.div
-      className="absolute bottom-0 pointer-events-none"
+      className="absolute bottom-0 pointer-events-none will-change-transform"
       initial={{ x, y: 0, opacity: 0, scale: 0 }}
       animate={{ 
-        y: [-20, -80], 
+        y: -80,
         opacity: [0, 1, 0],
         scale: [0.5, 1, 0.5],
         x: x + Math.sin(Date.now() / 1000) * 20
       }}
       transition={{
-        duration: 2,
+        duration: 0.8,
         delay: delay,
         ease: "easeOut"
       }}
@@ -41,16 +41,15 @@ const BubblingHearts: React.FC<BubblingHeartsProps> = ({ isAnimating }) => {
     if (isAnimating) {
       const newHearts = Array.from({ length: 6 }, (_, i) => ({
         id: Date.now() + i,
-        x: Math.random() * 40 - 20,
-        delay: i * 0.1
+        x: (Math.random() - 0.5) * 40,
+        delay: i * 0.04
       }));
       
       setHearts(newHearts);
       
-      // Clean up hearts after animation
       const timer = setTimeout(() => {
         setHearts([]);
-      }, 3000);
+      }, 1000);
       
       return () => clearTimeout(timer);
     }

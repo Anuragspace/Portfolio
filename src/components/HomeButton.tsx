@@ -6,38 +6,44 @@ import { ArrowUp } from 'lucide-react';
 const HomeButton = () => {
   const [visible, setVisible] = useState(false);
   const footerRef = useRef<HTMLElement | null>(null);
+  const scrollTimeoutRef = useRef<number | null>(null);
 
   // Show button when user scrolls down and hide when reaching footer
   useEffect(() => {
-    // Find the footer element and keep it updated on each scroll
+    // Find the footer element once on mount
+    footerRef.current = document.querySelector('footer');
+    
     const toggleVisibility = () => {
-      // Re-find footer each time to ensure it exists on the current page
-      footerRef.current = document.querySelector('footer');
+      // Use debouncing to improve scroll performance
+      if (scrollTimeoutRef.current) {
+        window.cancelAnimationFrame(scrollTimeoutRef.current);
+      }
       
-      if (window.scrollY > 300) { // Show earlier
-        // Check if we've reached the footer
-        if (footerRef.current) {
-          const footerPosition = footerRef.current.getBoundingClientRect().top;
-          // Use a larger threshold to hide button before reaching footer
-          const hideThreshold = window.innerHeight - 150; // Increased margin from footer
-          if (footerPosition <= hideThreshold) {
-            setVisible(false);
+      scrollTimeoutRef.current = window.requestAnimationFrame(() => {
+        if (window.scrollY > 300) {
+          if (footerRef.current) {
+            const footerPosition = footerRef.current.getBoundingClientRect().top;
+            const hideThreshold = window.innerHeight - 150;
+            setVisible(footerPosition > hideThreshold);
           } else {
             setVisible(true);
           }
         } else {
-          setVisible(true);
+          setVisible(false);
         }
-      } else {
-        setVisible(false);
-      }
+      });
     };
 
     // Run once on mount to set initial state
     toggleVisibility();
     
-    window.addEventListener('scroll', toggleVisibility);
-    return () => window.removeEventListener('scroll', toggleVisibility);
+    window.addEventListener('scroll', toggleVisibility, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', toggleVisibility);
+      if (scrollTimeoutRef.current) {
+        window.cancelAnimationFrame(scrollTimeoutRef.current);
+      }
+    };
   }, []);
 
   const scrollToTop = () => {
@@ -51,10 +57,10 @@ const HomeButton = () => {
     <AnimatePresence>
       {visible && (
         <motion.button
-          initial={{ opacity: 0, scale: 0.5, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.5, y: 20 }}
-          transition={{ duration: 0.3 }}
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.5 }}
+          transition={{ duration: 0.2 }}
           onClick={scrollToTop}
           className="fixed left-6 bottom-6 z-50 flex items-center justify-center w-12 h-12 rounded-full bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-gray-100 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700"
           aria-label="Back to top"
