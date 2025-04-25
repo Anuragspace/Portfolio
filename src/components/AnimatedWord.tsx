@@ -9,24 +9,21 @@ interface AnimatedWordProps {
 const AnimatedWord: React.FC<AnimatedWordProps> = ({ word }) => {
   return (
     <motion.span
-      className="inline-block cursor-pointer"
+      className="inline-block cursor-pointer will-change-transform"
       whileHover={{
-        scale: 1.2,
-        // Use a simpler rotation that's compatible with spring animations
-        rotate: 5,
+        scale: 1.1,
+        rotate: 3,
         transition: {
-          duration: 0.3,
-          type: "spring",
-          stiffness: 300
+          type: "tween",
+          duration: 0.2,
+          ease: "easeOut"
         }
       }}
-      // Add a separate animation variant for more complex rotation
-      // that uses the tween animation type instead of spring
       whileTap={{
-        rotate: [0, -5, 5, -5, 0],
+        scale: 0.95,
         transition: {
-          duration: 0.5,
-          type: "tween" // Use tween instead of spring for multiple keyframes
+          type: "spring",
+          stiffness: 300
         }
       }}
     >

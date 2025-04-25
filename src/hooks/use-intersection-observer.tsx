@@ -8,7 +8,6 @@ interface IntersectionObserverOptions {
   once?: boolean;
 }
 
-// Hook for efficiently detecting when elements enter the viewport
 function useIntersectionObserver<T extends Element>({
   root = null,
   rootMargin = '0px',
@@ -17,32 +16,37 @@ function useIntersectionObserver<T extends Element>({
 }: IntersectionObserverOptions = {}): [boolean, RefObject<T>] {
   const [isIntersecting, setIsIntersecting] = useState(false);
   const ref = useRef<T>(null);
+  const observerRef = useRef<IntersectionObserver | null>(null);
   
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        const isElementIntersecting = entry.isIntersecting;
+    const currentRef = ref.current;
+    
+    if (!currentRef) return;
+    
+    // Cleanup previous observer
+    if (observerRef.current) {
+      observerRef.current.disconnect();
+    }
+    
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        const isElementIntersecting = entries[0].isIntersecting;
         
-        // Update state
         setIsIntersecting(isElementIntersecting);
         
-        // If once is true and element has intersected, unobserve
-        if (once && isElementIntersecting && ref.current) {
-          observer.unobserve(ref.current);
+        if (once && isElementIntersecting && currentRef) {
+          observerRef.current?.unobserve(currentRef);
         }
       },
       { root, rootMargin, threshold }
     );
     
-    const currentRef = ref.current;
-    
-    if (currentRef) {
-      observer.observe(currentRef);
-    }
+    observerRef.current.observe(currentRef);
     
     return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef);
+      if (observerRef.current && currentRef) {
+        observerRef.current.unobserve(currentRef);
+        observerRef.current.disconnect();
       }
     };
   }, [root, rootMargin, threshold, once]);
