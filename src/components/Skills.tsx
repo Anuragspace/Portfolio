@@ -16,7 +16,6 @@ import {
   Cpu,
   ScanLine
 } from "lucide-react";
-import { Skeleton } from "@/components/ui/skeleton";
 import { Globe } from "@/features/shared/components/magic-ui/Globe";
 import useIntersectionObserver from "@/hooks/use-intersection-observer";
 
@@ -146,6 +145,7 @@ const Skills = () => {
 
   return (
     <section id="skills" className="section-padding bg-gray-50 overflow-hidden">
+      
       <div className="container-custom">
         <div className="mb-10">
           <h2 className="mb-4">My Skills</h2>

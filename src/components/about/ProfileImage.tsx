@@ -8,16 +8,26 @@ const ProfileImage = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.load();
-      // Attempt to play the video immediately
-      const playPromise = videoRef.current.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(() => {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible" && videoRef.current) {
+        videoRef.current.play().catch(() => {
           console.log("Video playback was prevented");
         });
       }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    if (videoRef.current) {
+      videoRef.current.load();
+      videoRef.current.play().catch(() => {
+        console.log("Video playback was prevented");
+      });
     }
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
   }, []);
 
   return (
@@ -39,7 +49,7 @@ const ProfileImage = () => {
           loop
           muted
           playsInline
-          preload="none"
+          preload="auto"
           className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[40%] w-[80%] lg:w-[70%] h-auto object-contain"
           style={{ pointerEvents: 'none' }}
         >

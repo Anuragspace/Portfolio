@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
 import { motion } from "framer-motion";
+import { OptimizedImage } from "./OptimizedImage";
 
 interface Poster {
   id: number;
@@ -132,7 +133,7 @@ const Posters = () => {
                   transition={{ duration: 0.4 }}
                 >
                   <div className="group relative aspect-[3/4] rounded-lg md:rounded-xl overflow-hidden bg-white shadow-md hover:shadow-lg transition-all duration-500 mx-0.5 md:mx-1">
-                    <img
+                    <OptimizedImage
                       src={poster.image}
                       alt={poster.title}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"

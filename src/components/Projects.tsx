@@ -178,6 +178,15 @@ const Projects = () => {
           repeatDelay={2}
           className="absolute inset-x-[-20%] inset-y-[0%] w-[60%] h-[60%] skew-y-12 text-[#3E40EF]/80 [mask-image:radial-gradient(600px_circle_at_center,white,transparent)]"
         />
+        <AnimatedGridPattern
+          numSquares={24}
+          maxOpacity={0.08}
+          duration={4}
+          repeatDelay={2}
+          className="absolute inset-x-[60%] inset-y-[40%] w-[60%] h-[60%] -skew-y-12 text-[#3E40EF]/80 [mask-image:radial-gradient(600px_circle_at_center,white,transparent)]"
+        />
+
+        
 
         
 
