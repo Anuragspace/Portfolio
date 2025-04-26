@@ -1,6 +1,6 @@
 
 import React, { useEffect, useCallback, memo } from "react";
-import { Events, scrollSpy } from "react-scroll";
+import { Events, scrollSpy, scroller } from "react-scroll";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/about";
@@ -41,6 +41,14 @@ const Index = () => {
       window.removeEventListener('scroll', scrollSpy.update);
     };
   }, []);
+
+  const scrollToSection = (section: string) => {
+    scroller.scrollTo(section, {
+      duration: 800,
+      delay: 0,
+      smooth: "easeInOutQuart",
+    });
+  };
 
   return (
     <LazyMotion features={domAnimation}>

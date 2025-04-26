@@ -133,7 +133,7 @@ html {
 
 
 
-/* Marquee animation for skills section */
+/* Marquee animation ffor skills section */
 @keyframes marquee {
   0% {
     transform: translateX(0);

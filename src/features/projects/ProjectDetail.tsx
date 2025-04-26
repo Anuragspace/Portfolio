@@ -92,8 +92,8 @@ const projectsData = [
     impact: "Increased average session duration by 145% and reduced bounce rate by 35%",
     problem: "The team needed a bold digital presence to differentiate Imaginum in a competitive creative tech space, while effectively communicating its unique design-driven approach, values, and growing portfolio of innovative projects.",
     solution: "Designed and developed a visually striking, interactive website using clean UI, smooth micro-interactions, and strategic content flow—creating an engaging user journey that showcases Imaginum’s expertise, story, and service offerings with clarity and flair",
-    designProcess: ["https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"],
-    designElements: ["https://images.unsplash.com/photo-1618788372246-79faff0c3742?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=2027&q=80"],
+    designProcess: ["/images/imagip.webp"],
+    designElements: ["/images/imagie.webp"],
     finalDesign: ["/images/imagif.webp"],
     figmaEmbedUrl: "https://embed.figma.com/design/msCrgpYsRe3bsrGf4wJkld/Imaginum-Website-UI?node-id=0-1&embed-host=share",
 
