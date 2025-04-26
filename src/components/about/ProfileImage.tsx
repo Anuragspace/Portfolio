@@ -10,33 +10,14 @@ const ProfileImage = () => {
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.load();
-    }
-
-    // Handle visibility change
-    const handleVisibilityChange = () => {
-      if (videoRef.current) {
-        if (document.hidden) {
-          videoRef.current.pause();
-        } else {
-          // Try to play when becoming visible
-          const playPromise = videoRef.current.play();
-          if (playPromise !== undefined) {
-            playPromise.catch(() => {
-              // Auto-play was prevented, handle if needed
-              console.log("Video playback was prevented");
-            });
-          }
-        }
+      // Attempt to play the video immediately
+      const playPromise = videoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          console.log("Video playback was prevented");
+        });
       }
-    };
-
-    // Add visibility change listener
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-
-    // Cleanup
-    return () => {
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-    };
+    }
   }, []);
 
   return (

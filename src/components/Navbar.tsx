@@ -16,7 +16,6 @@ import {
   WhiteRainbowButton,
 } from "@/features/shared/components/magic-ui";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "react-scroll";
 
 const BehanceIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
@@ -72,6 +71,20 @@ const Navbar = () => {
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const offset = 30; // Adjust this value to match your navbar height
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = window.pageYOffset + elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    }
   };
 
   const navLinks = [
@@ -136,10 +149,11 @@ const Navbar = () => {
                 duration={7}
                 className="opacity-70"
               />
+              
               {navLinks.map((link) => (
-                <a
+                <button
                   key={link.name}
-                  href={link.href}
+                  onClick={() => scrollToSection(link.href.substring(1))}
                   className={`relative z-10 text-sm font-medium px-4 py-2.5 rounded-full transition-all duration-300 hover:text-[#3E40EF] ${
                     activeSection === link.href.substring(1)
                       ? "bg-[#3E40EF]/10 text-[#3E40EF]"
@@ -147,7 +161,7 @@ const Navbar = () => {
                   }`}
                 >
                   {link.name}
-                </a>
+                </button>
               ))}
             </div>
           </nav>
@@ -251,17 +265,19 @@ const Navbar = () => {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.1 + index * 0.05 }}
                     >
-                      <a
-                        href={link.href}
-                        className={`flex items-center py-3 px-4 text-lg font-medium rounded-lg transition-colors ${
+                      <button
+                        onClick={() => {
+                          toggleMenu();
+                          scrollToSection(link.href.substring(1));
+                        }}
+                        className={`flex items-center py-3 px-4 text-lg font-medium rounded-lg transition-colors w-full text-left ${
                           activeSection === link.href.substring(1)
                             ? "bg-white/10 text-white"
                             : "text-white/80 hover:bg-white/5 hover:text-white"
                         }`}
-                        onClick={toggleMenu}
                       >
                         {link.name}
-                      </a>
+                      </button>
                     </motion.div>
                   ))}
                 </nav>
@@ -339,10 +355,3 @@ const Navbar = () => {
 Navbar.displayName = "Navbar";
 
 export default Navbar;
-
-<nav>
-  <Link to="about" smooth={true} duration={600}>About</Link>
-  <Link to="skills" smooth={true} duration={600}>Skills</Link>
-  <Link to="projects" smooth={true} duration={600}>Projects</Link>
-  <Link to="contact" smooth={true} duration={600}>Contact</Link>
-</nav>

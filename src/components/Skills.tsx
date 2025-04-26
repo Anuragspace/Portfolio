@@ -36,44 +36,30 @@ const Skills = () => {
     const slider = sliderRef.current;
     if (!slider) return;
     
-    const handleMouseDown = (e: MouseEvent) => {
-      if (!slider) return;
+    const handleDragStart = (clientX: number) => {
       isDraggingRef.current = true;
-      startXRef.current = e.pageX - slider.offsetLeft;
+      startXRef.current = clientX - slider.offsetLeft;
       scrollLeftRef.current = slider.scrollLeft;
       slider.classList.add('dragging');
       document.body.style.cursor = 'grabbing';
     };
     
-    const handleMouseUp = () => {
+    const handleDragEnd = () => {
       isDraggingRef.current = false;
-      if (slider) {
-        slider.classList.remove('dragging');
-        document.body.style.cursor = 'default';
-      }
+      slider.classList.remove('dragging');
+      document.body.style.cursor = 'default';
     };
     
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!isDraggingRef.current || !slider) return;
-      e.preventDefault();
-      const x = e.pageX - slider.offsetLeft;
+    const handleDragMove = (clientX: number) => {
+      if (!isDraggingRef.current) return;
+      const x = clientX - slider.offsetLeft;
       const walk = (x - startXRef.current) * 2;
       slider.scrollLeft = scrollLeftRef.current - walk;
     };
     
     const handleTouchStart = (e: TouchEvent) => {
-      if (!slider || e.touches.length !== 1) return;
-      isDraggingRef.current = true;
-      startXRef.current = e.touches[0].pageX - slider.offsetLeft;
-      scrollLeftRef.current = slider.scrollLeft;
-      slider.classList.add('dragging');
-    };
-    
-    const handleTouchEnd = () => {
-      isDraggingRef.current = false;
-      if (slider) {
-        slider.classList.remove('dragging');
-      }
+      if (e.touches.length !== 1) return;
+      handleDragStart(e.touches[0].pageX);
     };
     
     const handleTouchMove = (e: TouchEvent) => {
@@ -84,21 +70,24 @@ const Skills = () => {
       slider.scrollLeft = scrollLeftRef.current - walk;
     };
     
-    slider.addEventListener('mousedown', handleMouseDown);
-    document.addEventListener('mouseup', handleMouseUp);
-    document.addEventListener('mousemove', handleMouseMove);
+    const mouseDownHandler = (e: MouseEvent) => handleDragStart(e.clientX);
+    const mouseMoveHandler = (e: MouseEvent) => handleDragMove(e.clientX);
+    
+    slider.addEventListener('mousedown', mouseDownHandler);
+    document.addEventListener('mouseup', handleDragEnd);
+    document.addEventListener('mousemove', mouseMoveHandler);
     
     slider.addEventListener('touchstart', handleTouchStart);
-    document.addEventListener('touchend', handleTouchEnd);
+    document.addEventListener('touchend', handleDragEnd);
     document.addEventListener('touchmove', handleTouchMove, { passive: false });
     
     return () => {
-      slider.removeEventListener('mousedown', handleMouseDown);
-      document.removeEventListener('mouseup', handleMouseUp);
-      document.removeEventListener('mousemove', handleMouseMove);
+      slider.removeEventListener('mousedown', mouseDownHandler);
+      document.removeEventListener('mouseup', handleDragEnd);
+      document.removeEventListener('mousemove', mouseMoveHandler);
       
       slider.removeEventListener('touchstart', handleTouchStart);
-      document.removeEventListener('touchend', handleTouchEnd);
+      document.removeEventListener('touchend', handleDragEnd);
       document.removeEventListener('touchmove', handleTouchMove);
     };
   }, []);
@@ -107,21 +96,23 @@ const Skills = () => {
     const slider = sliderRef.current;
     if (!slider) return;
 
+    // Create a clone of the skills for seamless scrolling
+    const content = slider.children[0] as HTMLElement; // Cast to HTMLElement
+    const clone = content.cloneNode(true);
+    slider.appendChild(clone);
+
     const infiniteScroll = () => {
       if (isPaused || !slider) return;
       
-      if (slider.scrollLeft >= (slider.scrollWidth - slider.clientWidth)) {
-        slider.scrollLeft = 0;
+      if (slider.scrollLeft >= content.offsetWidth) { // No error now
+        slider.scrollLeft = 0; // Reset to start when reaching the clone
       } else {
-        slider.scrollLeft += 2;
+        slider.scrollLeft += 2; // Slower, smoother scroll
       }
     };
 
-    const scrollInterval = setInterval(infiniteScroll, 30);
-
-    return () => {
-      clearInterval(scrollInterval);
-    };
+    const scrollInterval = setInterval(infiniteScroll, 20);
+    return () => clearInterval(scrollInterval);
   }, [isPaused]);
 
   const handleMouseEnter = () => setIsPaused(true);
@@ -169,7 +160,7 @@ const Skills = () => {
             ref={sliderRef}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            className="flex gap-4 overflow-x-auto scrollbar-hide pb-4 px-4 will-change-transform gpu-accelerated items-center"
+            className="flex gap-4 overflow-x-auto scrollbar-hide pb-4 px-4 will-change-transform gpu-accelerated items-center animate-marquee"
             style={{
               scrollbarWidth: 'none',
               msOverflowStyle: 'none',
@@ -177,18 +168,20 @@ const Skills = () => {
               whiteSpace: 'nowrap'
             }}
           >
-            {technicalSkills.map((skill, index) => (
-              <div 
-                key={`${skill.name}-${index}`}
-                className="flex-none bg-white rounded-xl shadow-md p-4 flex items-center gap-3 transform hover:scale-105 transition-transform duration-200"
-                style={{ minWidth: '180px' }}
-              >
-                <div className="bg-[#3E40EF]/10 p-2 rounded-lg">
-                  {skill.icon}
+            <div className="flex gap-4">
+              {technicalSkills.map((skill, index) => (
+                <div 
+                  key={`${skill.name}-${index}`}
+                  className="flex-none bg-white rounded-xl shadow-md p-4 flex items-center gap-3 transform hover:scale-105 transition-transform duration-200"
+                  style={{ minWidth: '180px' }}
+                >
+                  <div className="bg-[#3E40EF]/10 p-2 rounded-lg">
+                    {skill.icon}
+                  </div>
+                  <span className="font-medium">{skill.name}</span>
                 </div>
-                <span className="font-medium">{skill.name}</span>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
         
@@ -214,14 +207,16 @@ const Skills = () => {
                       <span className="font-medium text-white">{skill.name}</span>
                       <span className="text-white/70">{skill.level}%</span>
                     </div>
-                    <div className="w-full bg-white/10 rounded-full h-2.5">
+                    <div className="w-full bg-white/10 rounded-full h-2.5 overflow-hidden">
                       <div
-                        className="bg-white h-2.5 rounded-full transition-all"
+                        className="bg-white h-2.5 rounded-full transition-all transform-gpu"
                         style={{ 
                           width: isVisible ? `${skill.level}%` : '0%',
-                          transitionDuration: '1.5s',
-                          transitionDelay: `${index * 0.5}s`,
-                          transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)'
+                          transitionProperty: 'width, transform',
+                          transitionDuration: '2s',
+                          transitionDelay: `${index * 0.2}s`,
+                          transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+                          transform: isVisible ? 'translateX(0)' : 'translateX(-100%)'
                         }}
                       ></div>
                     </div>

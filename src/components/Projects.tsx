@@ -137,7 +137,7 @@ const Projects = () => {
       description: "Designed and developed a modern, interactive, and standout UI with a clean visual hierarchy, smooth transitions, and responsive layouts. Created an engaging user experience to reflect the club’s identity, events, and initiatives across all devices.",
       image: "/images/csedm.webp",
       tags: ["UI Design", "UX Design", "Web Development"],
-      link: "#",
+      link: "https://www.csedvit.com/",
     },
     {
       id: "campusmart",
@@ -160,7 +160,7 @@ const Projects = () => {
     {
       id: "imaginum",
       title: "Imaginum Website",
-      year: "2023",
+      year: "2025",
       description: "Portfolio-driven website for a tech-forward creative studio, built to highlight services, showcase work, and deliver a bold, engaging experience aligned with the studio’s vision and design philosophy.",
       image: "/images/imagim.webp",
       tags: ["UI/UX", "User Centric", "Saas WebDesign"],
