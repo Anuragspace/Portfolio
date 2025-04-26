@@ -1,4 +1,3 @@
-
 import React, { useEffect, useCallback, memo } from "react";
 import { Events, scrollSpy, scroller } from "react-scroll";
 import Navbar from "@/components/Navbar";
@@ -13,6 +12,7 @@ import Footer from "@/components/Footer";
 import MetaHead from "@/components/MetaHead";
 import { usePerformanceOptimizations } from "@/hooks/use-performance-optimizations";
 import { LazyMotion, domAnimation } from "framer-motion";
+import { Element } from "react-scroll";
 
 // Memoize components for better performance
 const MemoizedExperience = memo(Experience);
@@ -56,9 +56,9 @@ const Index = () => {
         <MetaHead />
         <Navbar />
         <Hero />
-        <About />
-        <Skills />
-        <Projects />
+        <Element name="about"><About /></Element>
+        <Element name="skills"><Skills /></Element>
+        <Element name="projects"><Projects /></Element>
         <MemoizedExperience />
         <section id="posters">
           <MemoizedPosters />

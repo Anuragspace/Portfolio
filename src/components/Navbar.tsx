@@ -16,6 +16,7 @@ import {
   WhiteRainbowButton,
 } from "@/features/shared/components/magic-ui";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-scroll";
 
 const BehanceIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
@@ -338,3 +339,10 @@ const Navbar = () => {
 Navbar.displayName = "Navbar";
 
 export default Navbar;
+
+<nav>
+  <Link to="about" smooth={true} duration={600}>About</Link>
+  <Link to="skills" smooth={true} duration={600}>Skills</Link>
+  <Link to="projects" smooth={true} duration={600}>Projects</Link>
+  <Link to="contact" smooth={true} duration={600}>Contact</Link>
+</nav>
