@@ -1,22 +1,25 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Index from './pages/Index';
 import ProjectDetail from './features/projects/ProjectDetail';
 import NotFound from './pages/NotFound';
 import { ThemeProvider } from 'next-themes';
 import { logPageView } from './analytics';
 import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+
+// Move useLocation and logPageView into a separate component
+function AnalyticsListener() {
+  const location = useLocation();
+  useEffect(() => {
+    logPageView();
+  }, [location]);
+  return null;
+}
 
 function App() {
-  const location = useLocation(); // Get the current route location
-
-  useEffect(() => {
-    logPageView(); // Log the pageview whenever the location changes
-  }, [location]); // Re-run when location changes (on route change)
-
   return (
     <ThemeProvider attribute="class" defaultTheme="light">
       <Router>
+        <AnalyticsListener />
         <div className="flex flex-col min-h-screen">
           <main className="flex-grow">
             <Routes>
