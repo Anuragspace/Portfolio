@@ -1,27 +1,25 @@
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useState } from 'react';
 
 /**
  * Custom hook to defer non-critical animations until after page load
  * This helps improve performance by reducing initial render load
  */
 export function useOptimizedAnimation() {
-  const isFirstRender = useRef(true);
-  
+  const [isFirstRender, setIsFirstRender] = useState(true);
+
   useEffect(() => {
-    // Flag to track if animations should run
-    if (isFirstRender.current) {
-      // Set a timeout to allow the main content to load and render first
+    if (isFirstRender) {
       const timeoutId = setTimeout(() => {
-        isFirstRender.current = false;
+        setIsFirstRender(false);
       }, 300);
-      
+
       return () => clearTimeout(timeoutId);
     }
-  }, []);
-  
+  }, [isFirstRender]);
+
   return {
-    shouldAnimate: !isFirstRender.current,
-    isFirstRender: isFirstRender.current
+    shouldAnimate: !isFirstRender,
+    isFirstRender
   };
 }
