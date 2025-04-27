@@ -86,7 +86,7 @@ const Footer = () => {
               
               <div className="flex flex-wrap gap-4 pb-12">
                 <a 
-                  href="#contact"
+                  href="/#contact"
                   className="inline-flex items-center justify-center w-36 px-5 py-2.5 bg-black text-white rounded-full font-medium hover:bg-gray-900 transition-colors"
                 >
                   Let's Talk <ArrowUp className="ml-2 rotate-45" size={16} />

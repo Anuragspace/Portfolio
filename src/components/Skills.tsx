@@ -106,7 +106,7 @@ const Skills = () => {
       if (slider.scrollLeft >= content.offsetWidth) { // No error now
         slider.scrollLeft = 0; // Reset to start when reaching the clone
       } else {
-        slider.scrollLeft += 2; // Slower, smoother scroll
+        slider.scrollLeft += 1.5; // Slower, smoother scroll
       }
     };
 
