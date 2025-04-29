@@ -1,8 +1,7 @@
 
 import React, { useEffect, useState } from "react";
-import { Briefcase, Calendar } from "lucide-react";
-import { BlurFade } from "./BlurFade";
-
+import { Calendar } from "lucide-react";
+import { FaLinkedin } from "react-icons/fa6"; 
 import { Card, CardContent } from "./ui/card";
 
 interface Experience {
@@ -13,6 +12,7 @@ interface Experience {
   description: string[];
   keywords: string[];
   theme: string;
+  linkedin?: string;
 }
 
 const Experience = () => {
@@ -24,14 +24,18 @@ const Experience = () => {
       setIsMobile(window.innerWidth < 768);
     };
     
-    // Initial check
+    // Throttle resize handler
+    let resizeTimeout: number | null = null;
+    const throttledResize = () => {
+      if (resizeTimeout) return;
+      resizeTimeout = window.setTimeout(() => {
+        checkMobile();
+        resizeTimeout = null;
+      }, 200);
+    };
     checkMobile();
-    
-    // Add resize listener
-    window.addEventListener('resize', checkMobile);
-    
-    // Cleanup
-    return () => window.removeEventListener('resize', checkMobile);
+    window.addEventListener('resize', throttledResize);
+    return () => window.removeEventListener('resize', throttledResize);
   }, []);
 
   const experiences: Experience[] = [
@@ -47,12 +51,13 @@ const Experience = () => {
         "Collaborating with stakeholders to align design with business objectives"
       ],
       keywords: ["Leadership", "Innovation", "Strategy", "User-centered"],
-      theme: "Strategy"
+      theme: "Strategy",
+      linkedin: "https://www.linkedin.com/company/imaginumorgg/"
     },
     {
       id: 2,
       role: "Tech & Design Head",
-      company: "CSED",
+      company: "CSED VITV",
       period: "Jan 2024 - Jan 2025",
       description: [
         "Revamped the department website resulting in 40% increase in student engagement",
@@ -61,7 +66,8 @@ const Experience = () => {
         "Mentored junior designers and provided constructive feedback"
       ],
       keywords: ["Mentorship", "Problem-solving", "Engagement", "Technical"],
-      theme: "Engagement"
+      theme: "Engagement",
+      linkedin: "https://www.linkedin.com/company/csedvit/"
     }
   ];
 
@@ -104,9 +110,20 @@ const Experience = () => {
                           </div>
                           
                           {/* Role and company */}
-                          <h3 className="text-lg md:text-2xl font-bold text-gray-900 group-hover:text-accent 
-                                       transition-colors">{exp.role}</h3>
-                          <p className="text-accent font-semibold text-base md:text-lg">{exp.company}</p>
+                          <div className="flex items-center gap-2">
+                            <p className="text-accent font-semibold text-base md:text-lg">{exp.company}</p>
+                            {exp.linkedin && (
+                              <a
+                                href={exp.linkedin}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-gray-800 hover:text-blue-700 transition-colors"
+                                aria-label={`LinkedIn for ${exp.company}`}
+                              >
+                                <FaLinkedin size={18} />
+                              </a>
+                            )}
+                          </div>
                         </div>
 
                         {/* Keywords with better styling - moved to mobile friendly position */}

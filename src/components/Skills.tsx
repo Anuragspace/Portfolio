@@ -20,11 +20,7 @@ import { Globe } from "@/features/shared/components/magic-ui/Globe";
 import useIntersectionObserver from "@/hooks/use-intersection-observer";
 
 const Skills = () => {
-  const [isVisible, skillsRef] = useIntersectionObserver<HTMLDivElement>({
-    threshold: 0.5,
-    once: true
-  });
-
+  const [isVisible, skillsRef] = useIntersectionObserver<HTMLDivElement>({ threshold: 0.1 });
   const sliderRef = useRef<HTMLDivElement>(null);
   const isDraggingRef = useRef(false);
   const startXRef = useRef(0);
@@ -112,7 +108,7 @@ const Skills = () => {
 
     const scrollInterval = setInterval(infiniteScroll, 20);
     return () => clearInterval(scrollInterval);
-  }, [isPaused]);
+  }, [isPaused, isVisible]);
 
   const handleMouseEnter = () => setIsPaused(true);
   const handleMouseLeave = () => setIsPaused(false);

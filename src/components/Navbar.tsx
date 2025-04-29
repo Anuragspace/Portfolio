@@ -137,11 +137,12 @@ const Navbar = () => {
           </div>
 
           <nav
-            className={`hidden md:flex items-center ${
-              isScrolled ? "fixed left-1/2 -translate-x-1/2 mt-4" : ""
+            className={`hidden md:flex items-center justify-center w-full transition-all duration-500 ${
+              isScrolled ? "fixed top-0 left-0 right-0 mt-4 z-50" : ""
             }`}
+            style={isScrolled ? { left: 0, right: 0 } : {}}
           >
-            <div className="relative bg-white shadow-sm rounded-full px-2 py-2.5 flex items-center gap-1">
+            <div className="relative bg-white shadow-sm rounded-full px-2 py-2.5 flex items-center gap-1 mx-auto">
               <BorderBeam
                 colorFrom="#3E40EF"
                 colorTo="#6366F1"
@@ -149,7 +150,6 @@ const Navbar = () => {
                 duration={7}
                 className="opacity-70"
               />
-              
               {navLinks.map((link) => (
                 <button
                   key={link.name}

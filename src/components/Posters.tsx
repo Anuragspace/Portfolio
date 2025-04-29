@@ -3,6 +3,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
 import { motion } from "framer-motion";
 import { OptimizedImage } from "./OptimizedImage";
+import useIntersectionObserver from "@/hooks/use-intersection-observer";
 
 interface Poster {
   id: number;
@@ -24,6 +25,7 @@ const Posters = () => {
   });
 
   const [activeIndex, setActiveIndex] = useState(1);
+  const [isVisible, postersRef] = useIntersectionObserver<HTMLDivElement>({ threshold: 0.1 });
 
   // Handle active index and optimize loop behavior
   useEffect(() => {
@@ -86,7 +88,7 @@ const Posters = () => {
 
   // Modified auto-scroll logic for better performance
   useEffect(() => {
-    if (!emblaApi) return;
+    if (!emblaApi || !isVisible) return;
     
     // Setup auto scroll with longer interval
     const autoScrollInterval = setInterval(() => {
@@ -100,10 +102,10 @@ const Posters = () => {
     return () => {
       clearInterval(autoScrollInterval);
     };
-  }, [emblaApi]);
+  }, [emblaApi, isVisible]);
   
   return (
-    <section className="relative bg-gradient-to-b from-white to-gray-50/50 py-8 md:py-16 overflow-hidden">
+    <section ref={postersRef} className="relative bg-gradient-to-b from-white to-gray-50/50 py-8 md:py-16 overflow-hidden">
       {/* Blur effects - extended to cover poster area fully */}
       <div className="absolute left-0 top-1/4 bottom-0 w-[50px] md:w-[80px] bg-gradient-to-r from-white via-white/90 to-transparent z-10" />
       <div className="absolute right-0 top-1/4 bottom-0 w-[50px] md:w-[80px] bg-gradient-to-l from-white via-white/90 to-transparent z-10" />

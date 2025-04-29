@@ -87,7 +87,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <p className="font-medium text-gray-500 text-sm">Email Address</p>
-                    <a href="mailto:hello@example.com" className="text-accent hover:underline font-medium">
+                    <a href="mailto:anuraglife2020@gmail.com" className="text-accent hover:underline font-medium">
                       anuraglife2020@gmail.com
                     </a>
                   </div>
@@ -99,7 +99,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <p className="font-medium text-gray-500 text-sm">Phone Number</p>
-                    <a href="tel:+1234567890" className="text-accent hover:underline font-medium">
+                    <a href="tel:+919142405639" className="text-accent hover:underline font-medium">
                       +91 9142405639
                     </a>
                   </div>
@@ -130,19 +130,19 @@ const Contact = () => {
               <ul className="space-y-3 mb-6">
                 <li className="flex items-center text-white/90 group">
                   <div className="w-2 h-2 bg-white rounded-full mr-3 group-hover:w-3 transition-all duration-300"></div>
-                  <span className="group-hover:text-white transition-colors duration-300">Freelance Projects</span>
+                  <span className="group-hover:text-white transition-colors duration-300">Summer Interships</span>
                 </li>
                 <li className="flex items-center text-white/90 group">
                   <div className="w-2 h-2 bg-white rounded-full mr-3 group-hover:w-3 transition-all duration-300"></div>
-                  <span className="group-hover:text-white transition-colors duration-300">UX/UI Consultation</span>
+                  <span className="group-hover:text-white transition-colors duration-300">Remote Opportinuties</span>
                 </li>
                 <li className="flex items-center text-white/90 group">
                   <div className="w-2 h-2 bg-white rounded-full mr-3 group-hover:w-3 transition-all duration-300"></div>
-                  <span className="group-hover:text-white transition-colors duration-300">Workshop & Speaking</span>
+                  <span className="group-hover:text-white transition-colors duration-300">Product Design Roles</span>
                 </li>
                 <li className="flex items-center text-white/90 group">
                   <div className="w-2 h-2 bg-white rounded-full mr-3 group-hover:w-3 transition-all duration-300"></div>
-                  <span className="group-hover:text-white transition-colors duration-300">Full-time Opportunities</span>
+                  <span className="group-hover:text-white transition-colors duration-300">User Research Roles</span>
                 </li>
               </ul>
               

@@ -11,6 +11,7 @@ import {
 } from "react";
 
 import { cn } from "@/lib/utils";
+import useIntersectionObserver from "@/hooks/use-intersection-observer";
 
 export interface AnimatedGridPatternProps
   extends ComponentPropsWithoutRef<"svg"> {
@@ -42,6 +43,7 @@ export function AnimatedGridPattern({
   const containerRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [squares, setSquares] = useState(() => generateSquares(numSquares));
+  const [isVisible, ref] = useIntersectionObserver<HTMLDivElement>({ threshold: 0.1 });
 
   function getPos() {
     return [

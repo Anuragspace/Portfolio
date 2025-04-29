@@ -5,6 +5,7 @@ import NotFound from './pages/NotFound';
 import { ThemeProvider } from 'next-themes';
 import { logPageView } from './analytics';
 import { useEffect } from 'react';
+import CustomCursor from "./components/CustomCursor";
 
 // Move useLocation and logPageView into a separate component
 function AnalyticsListener() {
@@ -17,20 +18,23 @@ function AnalyticsListener() {
 
 function App() {
   return (
-    <ThemeProvider attribute="class" defaultTheme="light">
-      <Router>
-        <AnalyticsListener />
-        <div className="flex flex-col min-h-screen">
-          <main className="flex-grow">
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/projects/:id" element={<ProjectDetail />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </main>
-        </div>
-      </Router>
-    </ThemeProvider>
+    <>
+      <CustomCursor />
+      <ThemeProvider attribute="class" defaultTheme="light">
+        <Router>
+          <AnalyticsListener />
+          <div className="flex flex-col min-h-screen">
+            <main className="flex-grow">
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/projects/:id" element={<ProjectDetail />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </main>
+          </div>
+        </Router>
+      </ThemeProvider>
+    </>
   );
 }
 

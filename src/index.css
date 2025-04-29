@@ -482,3 +482,8 @@ html {
   scrollbar-width: thin;
   scrollbar-color: #3E40EF transparent;
 }
+
+
+body, * {
+  cursor: none !important;
+}

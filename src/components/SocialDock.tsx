@@ -56,7 +56,7 @@ export function SocialDock() {
   const [visible, setVisible] = React.useState(true);
   const [prevScrollPos, setPrevScrollPos] = React.useState(0);
   const [menuOpen, setMenuOpen] = React.useState(false);
-  const [bottom, setBottom] = React.useState('max(24px, env(safe-area-inset-bottom, 24px))');
+  const [bottom, setBottom] = React.useState(24); // Default 24px
 
   // Check if menu is open by monitoring body style
   React.useEffect(() => {
@@ -73,9 +73,9 @@ export function SocialDock() {
   React.useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 640) {
-        setBottom('180px'); // 16px margin from the bottom on mobile
+        setBottom(80); // 90px from bottom on mobile (enough for safe area + margin)
       } else {
-        setBottom('max(24px, env(safe-area-inset-bottom, 24px))');
+        setBottom(24); // 24px from bottom on desktop
       }
     };
     window.addEventListener('resize', handleResize);
@@ -87,8 +87,7 @@ export function SocialDock() {
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
       const viewportHeight = window.innerHeight;
-      // Change threshold from 0.1 (10%) to 0.3 (30%) for a more delayed hide
-      const isAtTop = currentScrollPos < viewportHeight * 0.01;
+      const isAtTop = currentScrollPos < viewportHeight * 0.3;
       const isScrollingUp = currentScrollPos < prevScrollPos;
       setVisible(isAtTop || isScrollingUp);
       setPrevScrollPos(currentScrollPos);
@@ -108,12 +107,15 @@ export function SocialDock() {
         visible && !menuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8 pointer-events-none'
       }`}
       style={{
-        bottom: bottom
+        bottom: `${bottom}px`,
+        maxWidth: '100vw',
+        width: 'min(90vw, 360px)',
+        pointerEvents: visible && !menuOpen ? 'auto' : 'none'
       }}
     >
       <Dock 
         direction="middle" 
-        className="h-12 px-4 py-1.5 bg-white backdrop-blur-sm border border-gray-100 shadow-md rounded-xl mx-auto w-[90%] max-w-md"
+        className="h-12 px-4 py-1.5 bg-white backdrop-blur-sm border border-gray-100 shadow-md rounded-xl mx-auto w-full"
       >
         <DockIcon>
           <Button
