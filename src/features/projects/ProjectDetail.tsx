@@ -62,7 +62,6 @@ const projectsData = [
     tools: ["Figma"],
     category: "Mobile App UI/UX",
     liveUrl: "https://example.com/runon",
-    githubUrl: "https://github.com/example/runon",
     impact: "Increased landing page conversion by 120% and app downloads by 85% in the first quarter after launch",
     problem: "Students often face difficulty finding safe, affordable, and timely transportation options, especially during peak hours, late nights, or urgent travel situations.",
     solution: "CabSync offers a centralized platform for students to coordinate and share cabs with trusted peers. It ensures cost-effective, secure, and hassle-free travel, making daily commutes smarter and more sustainable.",
