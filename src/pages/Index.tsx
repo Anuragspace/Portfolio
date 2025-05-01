@@ -1,72 +1,40 @@
-import React, { useEffect, useCallback, memo } from "react";
-import { Events, scrollSpy, scroller } from "react-scroll";
-import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
+
+import React from "react";
 import About from "@/components/about";
-import Skills from "@/components/Skills";
+import Hero from "@/components/Hero";
 import Projects from "@/components/Projects";
+import Skills from "@/components/Skills";
 import Experience from "@/components/Experience";
 import Posters from "@/components/Posters";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
+import SocialDock from "@/components/SocialDock";
 import MetaHead from "@/components/MetaHead";
 import { usePerformanceOptimizations } from "@/hooks/use-performance-optimizations";
-import { LazyMotion, domAnimation } from "framer-motion";
-import { Element } from "react-scroll";
-
-// Memoize components for better performance
-const MemoizedExperience = memo(Experience);
-const MemoizedPosters = memo(Posters);
-const MemoizedContact = memo(Contact);
-const MemoizedFooter = memo(Footer);
 
 const Index = () => {
   // Apply performance optimizations
-  const { isOptimized } = usePerformanceOptimizations();
+  usePerformanceOptimizations();
   
-  // Optimize scrolling with react-scroll
-  useEffect(() => {
-    // Initialize scrollSpy for detecting active sections
-    Events.scrollEvent.register('begin', () => {});
-    Events.scrollEvent.register('end', () => {});
-    scrollSpy.update();
-    
-    // Register for scroll events with passive: true for better performance
-    window.addEventListener('scroll', scrollSpy.update, { passive: true });
-    
-    return () => {
-      // Clean up scroll events when component unmounts
-      Events.scrollEvent.remove('begin');
-      Events.scrollEvent.remove('end');
-      window.removeEventListener('scroll', scrollSpy.update);
-    };
-  }, []);
-
-  const scrollToSection = (section: string) => {
-    scroller.scrollTo(section, {
-      duration: 800,
-      delay: 0,
-      smooth: "easeInOutQuart",
-    });
-  };
-
   return (
-    <LazyMotion features={domAnimation}>
-      <div className="min-h-screen bg-white">
-        <MetaHead />
+    <>
+      <MetaHead />
+      <div className="min-h-screen flex flex-col bg-white dark:bg-gray-900 transition-colors duration-300 overscroll-none">
         <Navbar />
-        <Hero />
-        <Element name="about"><About /></Element>
-        <Element name="skills"><Skills /></Element>
-        <Element name="projects"><Projects /></Element>
-        <MemoizedExperience />
-        <section id="posters">
-          <MemoizedPosters />
-        </section>
-        <MemoizedContact />
-        <MemoizedFooter />
+        <main className="flex-grow relative z-10">
+          <Hero />
+          <About />
+          <Skills />
+          <Projects />
+          <Experience />
+          <Posters />
+          <Contact />
+        </main>
+        <SocialDock />
+        <Footer />
       </div>
-    </LazyMotion>
+    </>
   );
 };
 
