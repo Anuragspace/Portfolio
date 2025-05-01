@@ -9,7 +9,7 @@ import Posters from "@/components/Posters";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
-import SocialDock from "@/components/SocialDock";
+import { SocialDock } from "@/components/SocialDock";
 import MetaHead from "@/components/MetaHead";
 import { usePerformanceOptimizations } from "@/hooks/use-performance-optimizations";
 
