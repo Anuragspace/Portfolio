@@ -53,7 +53,7 @@ const ProfileImage = () => {
           className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[40%] w-[80%] lg:w-[70%] h-auto object-contain"
           style={{ pointerEvents: 'none' }}
         >
-          <source src="/images/removed.webm" type="video/webm" />
+          <source src="/images/removed.webm" type="video/webm"  />
         </video>
 
         {/* Spinning Text - Top Right */}

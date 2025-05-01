@@ -15,7 +15,7 @@ export const HeroImage = () => {
           
           <img 
             src="\images\anurag.webp" 
-            alt="Designer portrait" 
+            alt="Anurag Adarsh Potrailt image" 
             fetchPriority="high"
             className="w-full h-full object-cover z-20 relative hero-image"
           />
