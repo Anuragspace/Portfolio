@@ -35,7 +35,7 @@ export const HeroImage = () => {
           </div>
           <div className="text-left">
             <p className="font-bold text-gray-800">UI/UX Designer</p>
-            <p className="text-xs text-[#3E40EF]">Creativity</p>
+            <p className="text-xs text-[#3E40EF]">Intuitive Design</p>
           </div>
         </div>
       </div>

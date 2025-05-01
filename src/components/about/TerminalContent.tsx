@@ -25,11 +25,11 @@ const TerminalContent = () => {
         
         <div className="space-y-6 text-[#7e7e7e] font-display text-base leading-relaxed pr-2">
           <p className="text-gray-700">
-          Driven by a passion for design, I’m a UI/UX enthusiast crafting intuitive digital experiences. As a student, I bridge the gap between user needs and design solutions, ensuring projects are visually compelling and functional. Whether independently or with teams, I create designs that resonate with users, solving problems and delivering seamless interactions.
+          My design approach transforms complexity into intuitive digital experiences that users genuinely connect with. Through methodical research and creative problem-solving, I uncover core needs and translate them into seamless interfaces. Each design decision balances aesthetic appeal with functional purpose, creating solutions that feel natural and effortless.         
           </p>
           <p className="text-gray-700">
-          I lead product and design at Imaginum, overseeing strategy and execution of digital solutions. Previously, I was Tech & Design Head at CSED, shaping meaningful design for socially-driven tech. I’m passionate about solving real-world problems and bringing ideas to life with clarity and empathy.
-          </p>
+          At Imaginum, I've elevated products by prioritizing user engagement across touchpoints. My CSED work created design systems that amplified technology's social impact. I bridge human needs and technological possibilities through empathetic, purposeful design. 
+                   </p>
           
           {/* Interactive terminal with user input */}
           <div className="mt-2 mb-2 w-full max-w-full">

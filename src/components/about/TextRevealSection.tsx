@@ -15,10 +15,11 @@ const TextRevealSection = () => {
         <div className="w-full ">
           <h3 className="text-2xl md:text-4xl font-bold leading-relaxed md:leading-relaxed w-full">
             <DesktopTextReveal className="text-5xl md:text-6xl font-medium leading-relaxed text-gray-700">
-            As a UI/UX Designer, I craft user-centered digital experiences that blend aesthetics with functionality, elevating brand presence and driving innovation to create beautiful, intuitive products that resonate with users and enhance every interaction.            </DesktopTextReveal>
+            As a UI/UX Designer, I craft user-centered digital experiences that blend aesthetics with functionality, elevating brand presence and driving innovation to create beautiful, intuitive products that resonate with users and enhance every meaningful digital interaction.
+            </DesktopTextReveal>
             <MobileTextReveal className="text-lg md:text-4xl font-medium leading-relaxed text-gray-700">
-              I'm a UI/UX Designer with a passion for creating beautiful digital products creating user-centered digital experiences that elevate brand presence blend aesthetics with functionality and innovation in every project.
-            </MobileTextReveal>
+            As a UI/UX Designer, I craft user-centered digital experiences that blend aesthetics with functionality, elevating brand presence and driving innovation to create beautiful, intuitive products that resonate with users and enhance every meaningful digital interaction.
+           </MobileTextReveal>
           </h3>
 
       

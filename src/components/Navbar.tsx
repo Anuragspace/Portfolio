@@ -110,7 +110,7 @@ const Navbar = () => {
             }`}
           >
             <a
-              href="https://anuragadarsh.in"
+              href="/"
               className="text-xl font-bold group flex items-center gap-1"
             >
               <Sparkles className="h-4 w-4 text-[#3E40EF] mr-2" />

@@ -49,7 +49,8 @@ const projectsData = [
     solution: "Campus Mart provides a dedicated online marketplace for students to securely buy, sell, and exchange goods within their college community. It streamlines transactions, fosters peer connections, and promotes sustainable, affordable student living.",
     designProcess: ["/images/campusp.webp"],
     designElements: ["/images/campuse.webp"],
-    finalDesign: ["/images/campusf.webp"]
+    finalDesign: ["/images/campusf.webp"],
+    figmaEmbedUrl:"https://embed.figma.com/design/avUzpH48JMLJM6D6UQENzu/Campus-Mart-UI?node-id=0-1&embed-host=share",
   },
   {
     id: "cabsync",
@@ -65,15 +66,10 @@ const projectsData = [
     impact: "Increased landing page conversion by 120% and app downloads by 85% in the first quarter after launch",
     problem: "Students often face difficulty finding safe, affordable, and timely transportation options, especially during peak hours, late nights, or urgent travel situations.",
     solution: "CabSync offers a centralized platform for students to coordinate and share cabs with trusted peers. It ensures cost-effective, secure, and hassle-free travel, making daily commutes smarter and more sustainable.",
-    designProcess: [
-      "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-    ],
-    designElements: [
-      "https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=2093&q=80"
-    ],
-    finalDesign: [
-      "https://images.unsplash.com/photo-1551651653-c5dcb914d809?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-    ]
+    designProcess: ["/images/cabp.webp"],
+    designElements: ["/images/cabe.webp"],
+    finalDesign: ["/images/cabf.webp"],
+    figmaEmbedUrl:"https://embed.figma.com/design/9ntR9q4rd91iv22GhVrGnX/CAB-SYNC-UI?node-id=0-1&embed-host=share",
   },
   {
     id: "imaginum",

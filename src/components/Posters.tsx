@@ -50,15 +50,15 @@ const Posters = () => {
   const posters: Poster[] = [
     {
       id: 1,
-      title: "Tech Conference 2023",
-      description: "Event poster design with modern typographic layout",
+      title: "CSED Website Launch",
+      description: "Design and innovation come together in this launch poster.",
       image: "/images/1.webp",
     },
     {
       id: 2,
       title: "Summer Music Festival",
       description: "Vibrant poster design for annual music event",
-      image: "/images/3.jpg",
+      image: "/images/3.webp",
     },
     {
       id: 3,
@@ -70,12 +70,12 @@ const Posters = () => {
       id: 4,
       title: "Social Media Campaign",
       description: "Series of coordinated visuals for digital campaign",
-      image: "/images/accept letter.png",
+      image: "/images/accept letter.webp",
     },
     {
       id: 5,
-      title: "Annual Report",
-      description: "Corporate visual design with data visualization",
+      title: "Imaginum Flyers",
+      description: "Showcasing creativity, design, and innovative solutions.",
       image: "/images/IMG2.webp",
     },
     {
