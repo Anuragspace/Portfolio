@@ -6,12 +6,6 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Performance improvements for scrolling */
-.is-scrolling * {
-  animation-play-state: paused !important;
-  transition: none !important;
-}
-
 /* Optimize animations with will-change */
 .will-change-transform {
   will-change: transform;
@@ -56,18 +50,6 @@ html {
   display: none; /* Chrome, Safari and Opera */
 }
 
-/* Touch device optimizations */
-@media (pointer: coarse) {
-  a, button, [role="button"] {
-    min-height: 44px;
-    min-width: 44px;
-  }
-  
-  input, select, textarea {
-    font-size: 16px; /* Prevents iOS zoom on focus */
-  }
-}
-
 /* Reduce motion if user prefers */
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {
@@ -76,16 +58,4 @@ html {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-}
-
-/* Ensure elements aren't too small to tap on mobile */
-.tap-target {
-  min-width: 44px;
-  min-height: 44px;
-}
-
-/* Optimize positioning for fixed/sticky elements */
-.optimize-fixed {
-  transform: translateZ(0);
-  will-change: transform;
 }
