@@ -31,7 +31,7 @@ const InfoBoxes = () => {
             <h4 className="text-lg font-bold mb-2 text-[#3E40EF]">Location</h4>
             <p className="text-gray-700 text-sm">
               Based in India<br />
-              Available for remote work
+              Available for Summer Internships
             </p>
           </div>
         </div>
