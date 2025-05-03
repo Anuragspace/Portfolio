@@ -9,7 +9,7 @@ import Experience from "@/components/Experience";
 import Posters from "@/components/Posters";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import MetaHead from "@/components/MetaHead";
+
 import { usePerformanceOptimizations } from "@/hooks/use-performance-optimizations";
 import { LazyMotion, domAnimation } from "framer-motion";
 import { Element } from "react-scroll";
@@ -53,7 +53,7 @@ const Index = () => {
   return (
     <LazyMotion features={domAnimation}>
       <div className="min-h-screen bg-white">
-        <MetaHead />
+        
         <Navbar />
         <Hero />
         <Element name="about"><About /></Element>
