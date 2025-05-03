@@ -130,7 +130,7 @@ const Contact = () => {
               <ul className="space-y-3 mb-6">
                 <li className="flex items-center text-white/90 group">
                   <div className="w-2 h-2 bg-white rounded-full mr-3 group-hover:w-3 transition-all duration-300"></div>
-                  <span className="group-hover:text-white transition-colors duration-300">Summer Interships</span>
+                  <span className="group-hover:text-white transition-colors duration-300">Summer Internships</span>
                 </li>
                 <li className="flex items-center text-white/90 group">
                   <div className="w-2 h-2 bg-white rounded-full mr-3 group-hover:w-3 transition-all duration-300"></div>

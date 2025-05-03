@@ -60,10 +60,10 @@ const Experience = () => {
       company: "CSED VITV",
       period: "Jan 2024 - Jan 2025",
       description: [
-        "Revamped the department website resulting in 40% increase in student engagement",
-        "Led design sprints and workshops to solve complex UX challenges",
-        "Implemented responsive design principles for cross-device consistency",
-        "Mentored junior designers and provided constructive feedback"
+        "Led Tech & Design at CSED, enhancing collaboration and digital innovation.",
+        "Led creative direction and designed impactful visuals for events and social media.",
+        "Implemented responsive design principles for cross-device consistency.",
+        "Mentored juniors in design and web, building collaborative and creative solutions."
       ],
       keywords: ["Mentorship", "Problem-solving", "Engagement", "Technical"],
       theme: "Engagement",
