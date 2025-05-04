@@ -56,21 +56,21 @@ const Posters = () => {
     },
     {
       id: 2,
-      title: "Summer Music Festival",
-      description: "Vibrant poster design for annual music event",
-      image: "/images/3.webp",
+      title: "Portfolio Launch Poster",
+      description: "A clean and catchy design for portfolio launch poster",
+      image: "/images/poster1.webp",
     },
     {
       id: 3,
-      title: "Product Launch",
-      description: "Minimalist design highlighting new product features",
-      image: "/images/im3.jpg",
+      title: "Sustainalbe Evet Poster",
+      description: "Approaching problems with fun and creativity leads to unique and enjoyable solutions.",
+      image: "/images/poster4.webp",
     },
     {
       id: 4,
-      title: "Social Media Campaign",
-      description: "Series of coordinated visuals for digital campaign",
-      image: "/images/accept letter.webp",
+      title: "EVENT FLYERS",
+      description: "Code4Chnage Event poster for marketing.",
+      image: "/images/poster2.webp",
     },
     {
       id: 5,
@@ -80,9 +80,9 @@ const Posters = () => {
     },
     {
       id: 6,
-      title: "Sustainability Initiative",
+      title: "Event Announcement Poster",
       description: "Campaign promoting environmental awareness",
-      image: "/images/Instagram post - 5.png",
+      image: "/images/poster3.webp",
     },
   ];
 

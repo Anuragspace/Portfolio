@@ -3,6 +3,11 @@ import { Linkedin, Instagram, Twitter, Github, Heart, Share2, ArrowUp, ExternalL
 import { Globe } from "@/features/shared/components/magic-ui/Globe";
 import BubblingHearts from "./BubblingHearts";
 import AnimatedWord from "./AnimatedWord";
+import { FaGithub } from "react-icons/fa";
+import { IoLogoLinkedin } from "react-icons/io5";
+import { RiInstagramFill } from "react-icons/ri";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBehance } from "@fortawesome/free-brands-svg-icons";
 
 const Footer = () => {
   const year = new Date().getFullYear();
@@ -39,10 +44,10 @@ const Footer = () => {
   );
   
   const socialLinks = [
-    { name: "Behance", icon: BehanceIcon, href: "https://www.behance.net/anuragadarsh1" },
-    { name: "Github", icon: Github, href: "https://github.com/Anuragspace" },
-    { name: "LinkedIn", icon: Linkedin, href: "https://www.linkedin.com/in/adarshanurag/" },
-    { name: "Instagram", icon: Instagram, href: "https://www.instagram.com/anurag__adarsh/" },
+    { name: "Behance", icon: (props) => <FontAwesomeIcon icon={faBehance} {...props} />, href: "https://www.behance.net/anuragadarsh1" },
+    { name: "Github", icon: (props) => <FaGithub {...props} />, href: "https://github.com/Anuragspace" },
+    { name: "LinkedIn", icon: (props) => <IoLogoLinkedin {...props} />, href: "https://www.linkedin.com/in/adarshanurag/" },
+    { name: "Instagram", icon: (props) => <RiInstagramFill {...props} />, href: "https://www.instagram.com/anurag__adarsh/" },
   ];
 
   const scrollToTop = () => {
@@ -141,12 +146,9 @@ const Footer = () => {
                     className="px-4 py-2.5 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 hover:scale-105 transition-all duration-300 text-sm shadow-sm hover:shadow-md backdrop-blur-sm"
                     aria-label={social.name}
                   >
-                    {/* Ensure Behance icon is visible and sized */}
-                    {social.name === "Behance" ? (
-                      <social.icon className="mr-2" width={20} height={20} style={{ color: "white" }} />
-                    ) : (
-                      <social.icon className="mr-2" size={16} strokeWidth={2.5} />
-                    )}
+                    <span className="mr-2">
+                      {social.icon({ size: 20 })}
+                    </span>
                     {social.name}
                   </a>
                 ))}

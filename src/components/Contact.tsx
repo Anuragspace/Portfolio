@@ -167,18 +167,40 @@ const Contact = () => {
               />
               
               <div className="relative z-10 flex flex-col flex-grow">
-                <h3 className="text-2xl font-bold mb-4 text-gray-800">Send a Message</h3>
+                <h3 className="text-2xl font-bold mb-8 mt-8 text-gray-800 text-center">Say hi, share your thoughts.</h3>
                 
                 {isSubmitted ? (
-                  <div className="flex-grow flex flex-col items-center justify-center text-center py-8">
-                    <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                  <motion.div
+                    className="flex-grow flex flex-col items-center justify-center text-center py-8"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                  >
+                    <motion.div
+                      className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4"
+                      initial={{ scale: 0, rotate: -90 }}
+                      animate={{ scale: 1, rotate: 0 }}
+                      transition={{ type: "spring", stiffness: 300, damping: 20, delay: 0.2 }}
+                    >
                       <CheckCircle className="text-green-500" size={32} />
-                    </div>
-                    <h4 className="text-xl font-bold text-gray-800 mb-2">Message Sent!</h4>
-                    <p className="text-gray-600 max-w-md">
+                    </motion.div>
+                    <motion.h4
+                      className="text-xl font-bold text-gray-800 mb-2"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.4, duration: 0.4 }}
+                    >
+                      Message Sent!
+                    </motion.h4>
+                    <motion.p
+                      className="text-gray-600 max-w-md"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.6, duration: 0.4 }}
+                    >
                       Thank you for reaching out. I'll get back to you as soon as possible.
-                    </p>
-                  </div>
+                    </motion.p>
+                  </motion.div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-4 flex flex-col flex-grow">
                     <div className="space-y-4 flex-grow">
