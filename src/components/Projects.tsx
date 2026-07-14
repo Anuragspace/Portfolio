@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import { ExternalLink, ArrowUpRight } from "lucide-react";
-import { BorderBeam, RainbowButton, WhiteRainbowButton } from "@/features/shared/components/magic-ui";
+import { BorderBeam, RainbowButton, WhiteRainbowButton } from "@/components/magic-ui";
 import { AnimatedGridPattern } from "@/components/AnimatedGridPattern";
 import { motion, LazyMotion, domAnimation, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -170,7 +170,7 @@ const Projects = () => {
 
   return (
     <LazyMotion features={domAnimation}>
-      <section id="projects" className="section-padding py-14 md:py-16 bg-gray-50 relative overflow-hidden">
+      <section id="projects-section" className="section-padding py-14 md:py-16 bg-gray-50 relative overflow-hidden">
         <AnimatedGridPattern
           numSquares={24}
           maxOpacity={0.08}

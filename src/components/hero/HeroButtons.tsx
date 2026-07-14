@@ -1,6 +1,6 @@
 
 import React, { useState } from "react";
-import { RainbowButton, ShinyButton } from "@/features/shared/components/magic-ui";
+import { RainbowButton, ShinyButton } from "@/components/magic-ui";
 import confetti from "canvas-confetti";
 import { motion, AnimatePresence } from "framer-motion";
 

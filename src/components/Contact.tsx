@@ -62,7 +62,7 @@ const Contact = () => {
   };
   
   return (
-    <section id="contact" className="py-12 bg-gradient-to-b from-white to-gray-50/80">
+    <section id="contact-section" className="py-12 bg-gradient-to-b from-white to-gray-50/80">
       <div className="container mx-auto px-4 max-w-6xl">
         <motion.div className="text-center mb-10">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">Get In Touch</h2>

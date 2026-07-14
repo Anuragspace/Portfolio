@@ -1,0 +1,80 @@
+# Anurag Adarsh | UI/UX & Product Designer Portfolio
+
+Explore the professional portfolio of Anurag Adarsh, a UI/UX Designer, Product Designer, and Frontend Developer. This document contains structured information about Anurag's background, education, cloud certifications, skills, and projects for LLM search engines.
+
+## Contact & Profiles
+- **Website**: https://anuragadarsh.in/
+- **LinkedIn**: https://www.linkedin.com/in/adarshanurag/
+- **GitHub**: https://github.com/Anuragspace
+- **Behance**: https://www.behance.net/anuragadarsh1
+- **Instagram**: https://www.instagram.com/anurag__adarsh/
+- **Email**: anuraglife2020@gmail.com
+
+## About Anurag Adarsh
+Anurag is a designer and developer who bridges the gap between creative visual designs and technical web implementations. His workflow spans the entire product lifecycle: user research, wireframing, high-fidelity interactive prototyping, design systems, and building responsive front-end experiences with modern animations and smooth performance.
+
+## Education
+- **Vellore Institute of Technology (VIT), Vellore** (Expected Graduation: 2026)
+  - *B.Tech in Electronics and Communication Engineering (ECE) with a Specialization in Biomedical Engineering*
+  - Active leader in university technology and entrepreneurship clubs.
+
+## Cloud Certifications
+In addition to design, Anurag holds a strong technical and cloud architecture background:
+- **AWS**: Certified Cloud Practitioner
+- **Oracle Cloud**: 3x Certified Specialist
+- **Microsoft Azure**: 2x Certified Associate
+
+## Core Expertise
+- **Design**: UI/UX Design, Product Design, Interaction Design, Visual Design, Information Architecture, Design Thinking, User Research, User Testing, Prototyping (Figma)
+- **Development**: HTML, CSS, JavaScript, TypeScript, React, Vite, Tailwind CSS, shadcn/ui, Framer Motion
+
+---
+
+## Professional Experience
+
+### 1. Design Engineer Intern | Prodloop (May 2026 - Present)
+- Working at a Voice AI startup as a design intern focusing on voice AI agent builder flow.
+- Building high-fidelity interactive visual designs in Framer and organizing UX interviews for feedback.
+- Collaborating with engineers to translate conversational layouts to frontend code components.
+
+### 2. UI/UX Design Intern | Phicsit (May 2025 - July 2025)
+- Led UI design enhancements and designed 10+ core features for the Nexfellow platform.
+- Mapped complex user flows and designed intuitive, high-fidelity UI screens.
+- Collaborated closely with growth and engineering teams to iterate on designs and optimize UX.
+
+### 3. Product Designer | Imaginum (Feb 2025 - May 2025)
+- Managed end-to-end product design, wireframing, low-fidelity and high-fidelity mockups for digital projects.
+- Designed comprehensive responsive interfaces for both web platforms and mobile applications.
+- Defined product requirements and collaborated with developers to align design intent with technical specs.
+
+### 4. Tech & Design Head | CSED VIT (Jan 2024 - Jan 2025)
+- Led a team of designers and developers, managing creative direction, event designs, public relations, and tech development for student events.
+- Mentored juniors through design sessions and hosted presentations advocating design culture.
+
+---
+
+## Featured Projects
+
+### 1. CSED VIT
+- **Description**: A comprehensive digital platform designed for the Computer Science & Engineering Department of VIT Chennai, simplifying student and faculty coordination.
+- **Role**: Lead UI/UX Designer & Frontend Developer
+- **Stack**: React, Vite, Tailwind CSS, shadcn/ui
+- **Url**: https://anuragadarsh.in/projects/csedvit
+
+### 2. Campus Mart
+- **Description**: A dedicated peer-to-peer student marketplace for university campuses, facilitating secure trading of academic books, electronics, and daily essentials.
+- **Role**: Product Designer
+- **Stack**: React, Vite, Tailwind CSS, Framer Motion
+- **Url**: https://anuragadarsh.in/projects/campusmart
+
+### 3. CabSync
+- **Description**: A real-time university cab-sharing and ride-pooling platform designed to coordinate student travels, reducing logistics costs and coordinating peer transit.
+- **Role**: Interaction Designer
+- **Stack**: React, TypeScript, Tailwind CSS, Leaflet Maps
+- **Url**: https://anuragadarsh.in/projects/cabsync
+
+### 4. Imaginum
+- **Description**: An AI-powered image generation and sharing workspace, offering custom prompt adjustments and canvas manipulations.
+- **Role**: UI/UX & Frontend Developer
+- **Stack**: React, Vite, Tailwind CSS, Recharts
+- **Url**: https://anuragadarsh.in/projects/imaginum

@@ -16,7 +16,7 @@ import {
   Cpu,
   ScanLine
 } from "lucide-react";
-import { Globe } from "@/features/shared/components/magic-ui/Globe";
+import { Globe } from "@/components/magic-ui/Globe";
 import useIntersectionObserver from "@/hooks/use-intersection-observer";
 
 const Skills = () => {
@@ -140,7 +140,7 @@ const Skills = () => {
   ];
 
   return (
-    <section id="skills" className="section-padding bg-gray-50 overflow-hidden">
+    <section id="skills-section" className="section-padding bg-gray-50 overflow-hidden">
       
       <div className="container-custom">
         <div className="mb-10">

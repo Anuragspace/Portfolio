@@ -3,8 +3,8 @@ import React from "react";
 import { AnimatedGridPattern } from "@/components/AnimatedGridPattern";
 import { SocialDock } from "@/components/SocialDock";
 import confetti from "canvas-confetti";
-import { HeroContent } from "@/features/home/components/HeroContent";
-import { HeroImage } from "@/features/home/components/HeroImage";
+import { HeroContent } from "@/components/hero/HeroContent";
+import { HeroImage } from "@/components/hero/HeroImage";
 
 const Hero = () => {
   const triggerConfetti = () => {

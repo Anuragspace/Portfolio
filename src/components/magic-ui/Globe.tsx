@@ -101,6 +101,9 @@ export function Globe({ className, config = GLOBE_CONFIG }: GlobeProps) {
   };
 
   useEffect(() => {
+    let globe: any = null;
+    let isVisible = false;
+
     const onResize = () => {
       if (canvasRef.current) {
         width = canvasRef.current.offsetWidth;
@@ -112,7 +115,7 @@ export function Globe({ className, config = GLOBE_CONFIG }: GlobeProps) {
 
     // Dynamically import cobe to avoid issues with server-side rendering
     const loadGlobe = async () => {
-      if (!canvasRef.current) return;
+      if (!canvasRef.current || !isVisible) return null;
       
       try {
         // Import the package properly
@@ -120,7 +123,7 @@ export function Globe({ className, config = GLOBE_CONFIG }: GlobeProps) {
         const createGlobe = cobe.default;
         
         // Create the globe with our canvas reference
-        const globe = createGlobe(canvasRef.current, {
+        const g = createGlobe(canvasRef.current, {
           ...config,
           width: width * 2,
           height: width * 2,
@@ -139,22 +142,46 @@ export function Globe({ className, config = GLOBE_CONFIG }: GlobeProps) {
           }
         }, 0);
         
-        return globe;
+        return g;
       } catch (error) {
         console.error("Failed to load globe:", error);
         return null;
       }
     };
 
-    // Load the globe
-    let globe: any = null;
-    loadGlobe().then(g => {
-      globe = g;
-    });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            if (!globe) {
+              isVisible = true;
+              loadGlobe().then(g => {
+                globe = g;
+              });
+            }
+          } else {
+            if (globe) {
+              globe.destroy();
+              globe = null;
+              isVisible = false;
+              if (canvasRef.current) {
+                canvasRef.current.style.opacity = "0";
+              }
+            }
+          }
+        });
+      },
+      { threshold: 0.05 }
+    );
+
+    if (canvasRef.current) {
+      observer.observe(canvasRef.current);
+    }
     
     // Clean up function
     return () => {
       if (globe) globe.destroy();
+      observer.disconnect();
       window.removeEventListener("resize", onResize);
     };
   }, [rs, config]);

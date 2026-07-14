@@ -1,7 +1,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
-import { Globe } from "@/features/shared/components/magic-ui/Globe";
-import { SpinningText } from "@/features/shared/components/magic-ui/SpinningText";
+import { Globe } from "@/components/magic-ui/Globe";
+import { SpinningText } from "@/components/magic-ui/SpinningText";
 
 const ProfileImage = () => {
   const [showSpinText, setShowSpinText] = useState(false);
@@ -49,7 +49,7 @@ const ProfileImage = () => {
           loop
           muted
           playsInline
-          preload="auto"
+          preload="none"
           className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[40%] w-[80%] lg:w-[70%] h-auto object-contain"
           style={{ pointerEvents: 'none' }}
         >
@@ -68,7 +68,7 @@ const ProfileImage = () => {
                 className="text-white" 
                 duration={15}
                 radius={4}
-                followCursor={true}
+                followCursor={false}
               />
             </div>
           </div>

@@ -14,7 +14,7 @@ import {
   BorderBeam,
   RainbowButton,
   WhiteRainbowButton,
-} from "@/features/shared/components/magic-ui";
+} from "@/components/magic-ui";
 import { motion, AnimatePresence } from "framer-motion";
 
 const BehanceIcon = (props: React.SVGProps<SVGSVGElement>) => (

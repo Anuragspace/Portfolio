@@ -1,14 +1,16 @@
-import React, { useEffect, useCallback, memo } from "react";
+import React, { useEffect, useCallback, memo, lazy, Suspense } from "react";
 import { Events, scrollSpy, scroller } from "react-scroll";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/about";
-import Skills from "@/components/Skills";
-import Projects from "@/components/Projects";
-import Experience from "@/components/Experience";
-import Posters from "@/components/Posters";
-import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
+
+// Lazy load below-the-fold components
+const Skills = lazy(() => import("@/components/Skills"));
+const Projects = lazy(() => import("@/components/Projects"));
+const Experience = lazy(() => import("@/components/Experience"));
+const Posters = lazy(() => import("@/components/Posters"));
+const Contact = lazy(() => import("@/components/Contact"));
+const Footer = lazy(() => import("@/components/Footer"));
 
 import { usePerformanceOptimizations } from "@/hooks/use-performance-optimizations";
 import { LazyMotion, domAnimation } from "framer-motion";
@@ -53,18 +55,46 @@ const Index = () => {
   return (
     <LazyMotion features={domAnimation}>
       <div className="min-h-screen bg-white">
-        
         <Navbar />
         <Hero />
-        <Element name="about"><About /></Element>
-        <Element name="skills"><Skills /></Element>
-        <Element name="projects"><Projects /></Element>
-        <MemoizedExperience />
-        <section id="posters">
-          <MemoizedPosters />
-        </section>
-        <MemoizedContact />
-        <MemoizedFooter />
+        
+        <div id="about">
+          <Element name="about"><About /></Element>
+        </div>
+
+        <div id="skills" className="scroll-mt-16">
+          <Suspense fallback={<div className="min-h-[600px] animate-pulse bg-gray-50 flex items-center justify-center text-gray-400">Loading skills...</div>}>
+            <Element name="skills"><Skills /></Element>
+          </Suspense>
+        </div>
+
+        <div id="projects" className="scroll-mt-16">
+          <Suspense fallback={<div className="min-h-[800px] animate-pulse bg-gray-50 flex items-center justify-center text-gray-400">Loading projects...</div>}>
+            <Element name="projects"><Projects /></Element>
+          </Suspense>
+        </div>
+
+        <div id="experience" className="scroll-mt-16">
+          <Suspense fallback={<div className="min-h-[600px] animate-pulse bg-white flex items-center justify-center text-gray-400">Loading experience...</div>}>
+            <MemoizedExperience />
+          </Suspense>
+        </div>
+
+        <div id="posters" className="scroll-mt-16">
+          <Suspense fallback={<div className="min-h-[500px] animate-pulse bg-gradient-to-b from-white to-gray-50/50 flex items-center justify-center text-gray-400">Loading flyers...</div>}>
+            <MemoizedPosters />
+          </Suspense>
+        </div>
+
+        <div id="contact" className="scroll-mt-16">
+          <Suspense fallback={<div className="min-h-[600px] animate-pulse bg-white flex items-center justify-center text-gray-400">Loading contact...</div>}>
+            <MemoizedContact />
+          </Suspense>
+        </div>
+
+        <Suspense fallback={<div className="min-h-[300px] animate-pulse bg-gray-50 flex items-center justify-center text-gray-400">Loading footer...</div>}>
+          <MemoizedFooter />
+        </Suspense>
       </div>
     </LazyMotion>
   );

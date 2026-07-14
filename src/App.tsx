@@ -1,10 +1,11 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Index from './pages/Index';
-import ProjectDetail from './features/projects/ProjectDetail';
-import NotFound from './pages/NotFound';
 import { ThemeProvider } from 'next-themes';
 import { logPageView } from './analytics';
-import { useEffect } from 'react';
+import { useEffect, lazy, Suspense } from 'react';
+
+const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 // Move useLocation and logPageView into a separate component
 function AnalyticsListener() {
@@ -24,11 +25,13 @@ function App() {
           <AnalyticsListener />
           <div className="flex flex-col min-h-screen">
             <main className="flex-grow">
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/projects/:id" element={<ProjectDetail />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
+              <Suspense fallback={<div className="h-screen w-screen flex items-center justify-center bg-white text-gray-400">Loading...</div>}>
+                <Routes>
+                  <Route path="/" element={<Index />} />
+                  <Route path="/projects/:id" element={<ProjectDetail />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </Suspense>
             </main>
           </div>
         </Router>

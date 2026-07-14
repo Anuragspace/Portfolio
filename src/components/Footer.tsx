@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Linkedin, Instagram, Twitter, Github, Heart, Share2, ArrowUp, ExternalLink, Link, Globe as GlobeIcon } from "lucide-react";
-import { Globe } from "@/features/shared/components/magic-ui/Globe";
+import { Globe } from "@/components/magic-ui/Globe";
 import BubblingHearts from "./BubblingHearts";
 import AnimatedWord from "./AnimatedWord";
 import { FaGithub } from "react-icons/fa";

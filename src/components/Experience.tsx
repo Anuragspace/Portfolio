@@ -41,6 +41,20 @@ const Experience = () => {
   const experiences: Experience[] = [
     {
       id: 1,
+      role: "Design Engineer Intern",
+      company: "Design Engineer Intern | Prodloop",
+      period: "May 2026 - Present",
+      description: [
+        "Working at a Voice AI startup as a design intern on the voice AI agent builder flow.",
+        "Creating interactive, high-fidelity layouts in Framer and coordinating user experience (UX) interviews to drive product enhancements.",
+        "Designing features for the conversational agent builder platform and translating design assets to front-end implementations."
+      ],
+      keywords: ["Voice AI", "Framer", "Agent Builder", "UX Interviews"],
+      theme: "AI",
+      linkedin: "https://www.linkedin.com/company/prodloop/"
+    },
+    {
+      id: 2,
       role: "",
       company: "UI/UX Design Intern | Phicsit",
       period: "May 2025 - July 2025",
@@ -53,7 +67,7 @@ const Experience = () => {
       linkedin: "https://www.linkedin.com/company/phicsit/"
     },
     {
-      id: 2,
+      id: 3,
       role: "CPO & Head of Design",
       company: "Product Designer | Imaginum",
       period: "Jan 2025 - May 2025",
@@ -66,7 +80,7 @@ const Experience = () => {
       linkedin: "https://www.linkedin.com/company/imaginumorgg/"
     },
     {
-      id: 3,
+      id: 4,
       role: "Tech & Design Head",
       company: "Tech & Design Head | CSED VITV",
       period: "Jan 2024 - Jan 2025",
@@ -81,7 +95,7 @@ const Experience = () => {
   ];
 
   return (
-    <section id="experience" className="section-padding bg-white">
+    <section id="experience-section" className="section-padding bg-white">
       <div className="container-custom max-w-5xl">
         <div className="mb-12 md:mb-16 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Work Experience</h2>
