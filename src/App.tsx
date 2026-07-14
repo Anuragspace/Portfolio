@@ -4,6 +4,8 @@ import { ThemeProvider } from 'next-themes';
 import { logPageView } from './analytics';
 import { useEffect, lazy, Suspense } from 'react';
 
+import SmoothScroll from './components/SmoothScroll';
+
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
@@ -19,7 +21,7 @@ function AnalyticsListener() {
 function App() {
   return (
     <>
-      
+      <SmoothScroll />
       <ThemeProvider attribute="class" defaultTheme="light">
         <Router>
           <AnalyticsListener />

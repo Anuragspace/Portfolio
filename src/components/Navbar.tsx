@@ -76,14 +76,18 @@ const Navbar = () => {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      const offset = 30; // Adjust this value to match your navbar height
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = window.pageYOffset + elementPosition - offset;
+      if (window.lenis) {
+        window.lenis.scrollTo(element, { offset: -64 }); // Offset to match fixed navbar
+      } else {
+        const offset = 64; // Match the 64px scroll offset
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = window.pageYOffset + elementPosition - offset;
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth",
+        });
+      }
     }
   };
 

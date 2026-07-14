@@ -5,4 +5,5 @@
 
 interface Window {
   _cachedFooter?: HTMLElement | null;
+  lenis?: any;
 }

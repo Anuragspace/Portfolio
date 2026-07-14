@@ -35,9 +35,27 @@ export const HeroButtons = ({ triggerConfetti }: HeroButtonsProps) => {
     setCurrentWordIdx(0);
   };
 
+  const handleViewProjectsClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const element = document.getElementById("projects");
+    if (element) {
+      if (window.lenis) {
+        window.lenis.scrollTo(element, { offset: -64 });
+      } else {
+        const offset = 64;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = window.pageYOffset + elementPosition - offset;
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+      }
+    }
+  };
+
   return (
     <div className="flex flex-row w-full max-w-[480px] sm:gap-4 gap-2 mx-auto sm:mx-0">
-      <a href="#projects" className="w-[50%] sm:w-[40%]">
+      <a href="#projects" onClick={handleViewProjectsClick} className="w-[50%] sm:w-[40%]">
         <RainbowButton 
           className="w-full h-11 sm:h-12 text-sm sm:text-base transition-all duration-300 hover:transform hover:scale-105 hover:shadow-md px-8 rounded-xl whitespace-nowrap"
         >
