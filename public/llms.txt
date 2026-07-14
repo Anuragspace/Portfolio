@@ -1,14 +1,14 @@
 # Anurag Adarsh | UI/UX & Product Designer Portfolio
 
-Explore the professional portfolio of Anurag Adarsh, a UI/UX Designer, Product Designer, and Frontend Developer. This document contains structured information about Anurag's background, education, cloud certifications, skills, and projects for LLM search engines.
+Explore the professional portfolio of [Anurag Adarsh](https://anuragadarsh.in/), a UI/UX Designer, Product Designer, and Frontend Developer. This document contains structured information about Anurag's background, education, cloud certifications, skills, and projects for LLM search engines.
 
 ## Contact & Profiles
-- **Website**: https://anuragadarsh.in/
-- **LinkedIn**: https://www.linkedin.com/in/adarshanurag/
-- **GitHub**: https://github.com/Anuragspace
-- **Behance**: https://www.behance.net/anuragadarsh1
-- **Instagram**: https://www.instagram.com/anurag__adarsh/
-- **Email**: anuraglife2020@gmail.com
+- **Website**: [anuragadarsh.in](https://anuragadarsh.in/)
+- **LinkedIn**: [linkedin.com/in/adarshanurag](https://www.linkedin.com/in/adarshanurag/)
+- **GitHub**: [github.com/Anuragspace](https://github.com/Anuragspace)
+- **Behance**: [behance.net/anuragadarsh1](https://www.behance.net/anuragadarsh1)
+- **Instagram**: [instagram.com/anurag__adarsh](https://www.instagram.com/anurag__adarsh/)
+- **Email**: [anuraglife2020@gmail.com](mailto:anuraglife2020@gmail.com)
 
 ## About Anurag Adarsh
 Anurag is a designer and developer who bridges the gap between creative visual designs and technical web implementations. His workflow spans the entire product lifecycle: user research, wireframing, high-fidelity interactive prototyping, design systems, and building responsive front-end experiences with modern animations and smooth performance.
@@ -59,22 +59,22 @@ In addition to design, Anurag holds a strong technical and cloud architecture ba
 - **Description**: A comprehensive digital platform designed for the Computer Science & Engineering Department of VIT Chennai, simplifying student and faculty coordination.
 - **Role**: Lead UI/UX Designer & Frontend Developer
 - **Stack**: React, Vite, Tailwind CSS, shadcn/ui
-- **Url**: https://anuragadarsh.in/projects/csedvit
+- **Project URL**: [anuragadarsh.in/projects/csedvit](https://anuragadarsh.in/projects/csedvit)
 
 ### 2. Campus Mart
 - **Description**: A dedicated peer-to-peer student marketplace for university campuses, facilitating secure trading of academic books, electronics, and daily essentials.
 - **Role**: Product Designer
 - **Stack**: React, Vite, Tailwind CSS, Framer Motion
-- **Url**: https://anuragadarsh.in/projects/campusmart
+- **Project URL**: [anuragadarsh.in/projects/campusmart](https://anuragadarsh.in/projects/campusmart)
 
 ### 3. CabSync
 - **Description**: A real-time university cab-sharing and ride-pooling platform designed to coordinate student travels, reducing logistics costs and coordinating peer transit.
 - **Role**: Interaction Designer
 - **Stack**: React, TypeScript, Tailwind CSS, Leaflet Maps
-- **Url**: https://anuragadarsh.in/projects/cabsync
+- **Project URL**: [anuragadarsh.in/projects/cabsync](https://anuragadarsh.in/projects/cabsync)
 
 ### 4. Imaginum
 - **Description**: An AI-powered image generation and sharing workspace, offering custom prompt adjustments and canvas manipulations.
 - **Role**: UI/UX & Frontend Developer
 - **Stack**: React, Vite, Tailwind CSS, Recharts
-- **Url**: https://anuragadarsh.in/projects/imaginum
+- **Project URL**: [anuragadarsh.in/projects/imaginum](https://anuragadarsh.in/projects/imaginum)
