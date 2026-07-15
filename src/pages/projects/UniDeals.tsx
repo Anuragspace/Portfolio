@@ -557,8 +557,9 @@ const UniDeals = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/95 z-50 overflow-auto no-scrollbar p-4 md:p-8 cursor-zoom-out"
+              className="fixed inset-0 bg-black/95 z-50 overflow-y-auto no-scrollbar p-4 md:p-8 cursor-zoom-out"
               onClick={() => setActiveImage(null)}
+              data-lenis-prevent="true"
             >
               {/* Floating Header Actions (Fixed at the top right) */}
               <div className="fixed top-6 right-6 flex items-center gap-3 z-50">
@@ -596,7 +597,7 @@ const UniDeals = () => {
               
               {/* Zoom Content wrapper (allows standard vertical and horizontal scroll contexts) */}
               <div
-                className="min-h-full flex items-center justify-center py-10"
+                className="min-h-full flex items-start justify-center py-10 md:py-16"
                 onClick={() => setActiveImage(null)} // Click outside to close
               >
                 <motion.div
