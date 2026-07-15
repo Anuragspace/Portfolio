@@ -46,7 +46,7 @@ const Navbar = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
 
-      const sections = document.querySelectorAll("section[id]");
+      const sections = document.querySelectorAll("#about, #projects, #skills, #experience, #posters, #contact");
       let currentSection = "home";
 
       sections.forEach((section) => {

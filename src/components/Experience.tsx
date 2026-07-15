@@ -17,6 +17,7 @@ interface Experience {
 
 const Experience = () => {
   const [isMobile, setIsMobile] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
   
   // Check if we're on mobile on component mount and window resize
   useEffect(() => {
@@ -41,21 +42,21 @@ const Experience = () => {
   const experiences: Experience[] = [
     {
       id: 1,
-      role: "Design Engineer Intern",
-      company: "Design Engineer Intern | Prodloop",
-      period: "May 2026 - Present",
+      role: "Product Design Engineer",
+      company: "Product Design Engineer | Prodloop AI",
+      period: "Apr 2026 - Present",
       description: [
-        "Working at a Voice AI startup as a design intern on the voice AI agent builder flow.",
-        "Creating interactive, high-fidelity layouts in Framer and coordinating user experience (UX) interviews to drive product enhancements.",
-        "Designing features for the conversational agent builder platform and translating design assets to front-end implementations."
+        "Redesigned the Prodloop AI website by improving product positioning, information architecture, and user journeys using posthog analytics and user behavior insights to better communicate platform value.",
+        "Conducted user research and workflow analysis for an internal Agent Performance Dashboard, identifying usability gaps and designing improved experiences and new product pages to support operational workflows.",
+        "Designed and streamlined the end to end Voice Builder workflow, enabling users to build, test, manage, and deploy voice agents through an intuitive and scalable product experience."
       ],
-      keywords: ["Voice AI", "Framer", "Agent Builder", "UX Interviews"],
+      keywords: ["Product Design", "PostHog Analytics", "Voice AI", "Agent Dashboard"],
       theme: "AI",
       linkedin: "https://www.linkedin.com/company/prodloop/"
     },
     {
       id: 2,
-      role: "",
+      role: "UI/UX Design Intern",
       company: "UI/UX Design Intern | Phicsit",
       period: "May 2025 - July 2025",
       description: [
@@ -88,11 +89,13 @@ const Experience = () => {
         "Led a team of designers and developers to deliver the best experience for students connecting with the club. Designed and developed tech for events, driving innovation and engagement through creative event designs and marketing materials.",
         "Mentored juniors through design sessions and spoke on stage to spread the idea of design in startups. Managed PR, creative direction, and event designs to enhance the club's impact."
       ],
-      keywords: ["Leadership", "Mentorship", "Event Design", "Public Speaking"],
+      keywords: ["Leadership", "Leadership", "Event Design", "Public Speaking"],
       theme: "Engagement",
       linkedin: "https://www.linkedin.com/company/csedvit/"
     }
   ];
+
+  const visibleExperiences = isExpanded ? experiences : experiences.slice(0, 2);
 
   return (
     <section id="experience-section" className="section-padding bg-white">
@@ -107,7 +110,7 @@ const Experience = () => {
           {/* Single responsive timeline vertical line - fixed alignment */}
           <div className={`absolute left-0 md:left-0 top-0 bottom-0 w-[2px] bg-gradient-to-b from-accent/10 via-accent to-accent/10`}></div>
           
-          {experiences.map((exp, index) => (
+          {visibleExperiences.map((exp, index) => (
             <div key={exp.id} className="relative mb-8">
               {/* Timeline dot with pulse effect - better aligned */}
               <div className="absolute left-[-23px] md:left-[1px] top-0 transform -translate-x-1/2 z-10">
@@ -197,6 +200,17 @@ const Experience = () => {
             </div>
           ))}
         </div>
+
+        {experiences.length > 2 && (
+          <div className="text-center mt-12">
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#3E40EF]/5 text-[#3E40EF] border border-[#3E40EF]/10 hover:bg-[#3E40EF] hover:text-white rounded-full text-sm font-semibold transition-all duration-300 transform hover:scale-[1.02] cursor-pointer"
+            >
+              {isExpanded ? "Show Less" : "View More Experience"}
+            </button>
+          </div>
+        )}
       </div>
     </section>
 );

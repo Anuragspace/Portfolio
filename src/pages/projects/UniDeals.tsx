@@ -557,7 +557,7 @@ const UniDeals = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/95 z-50 overflow-y-auto no-scrollbar p-4 md:p-8 cursor-zoom-out"
+              className="fixed inset-0 bg-black/95 z-50 overflow-auto no-scrollbar p-4 md:p-8 cursor-zoom-out"
               onClick={() => setActiveImage(null)}
               data-lenis-prevent="true"
             >

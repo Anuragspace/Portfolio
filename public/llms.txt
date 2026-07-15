@@ -32,10 +32,10 @@ In addition to design, Anurag holds a strong technical and cloud architecture ba
 
 ## Professional Experience
 
-### 1. Design Engineer Intern | Prodloop (May 2026 - Present)
-- Working at a Voice AI startup as a design intern focusing on voice AI agent builder flow.
-- Building high-fidelity interactive visual designs in Framer and organizing UX interviews for feedback.
-- Collaborating with engineers to translate conversational layouts to frontend code components.
+### 1. Product Design Engineer | Prodloop AI (Apr 2026 - Present)
+- Redesigned the Prodloop AI website by improving product positioning, information architecture, and user journeys using posthog analytics and user behavior insights to better communicate platform value.
+- Conducted user research and workflow analysis for an internal Agent Performance Dashboard, identifying usability gaps and designing improved experiences and new product pages to support operational workflows.
+- Designed and streamlined the end to end Voice Builder workflow, enabling users to build, test, manage, and deploy voice agents through an intuitive and scalable product experience.
 
 ### 2. UI/UX Design Intern | Phicsit (May 2025 - July 2025)
 - Led UI design enhancements and designed 10+ core features for the Nexfellow platform.

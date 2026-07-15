@@ -86,21 +86,34 @@ const Posters = () => {
     },
   ];
 
-  // Modified auto-scroll logic for better performance
+  // Auto-scroll loop that pauses on user drag/interactions to prevent glitches
   useEffect(() => {
     if (!emblaApi || !isVisible) return;
     
-    // Setup auto scroll with longer interval
-    const autoScrollInterval = setInterval(() => {
-      if (!emblaApi.canScrollNext()) {
-        emblaApi.scrollTo(0); // Force loop if at the end
-      } else {
+    let intervalId: number;
+
+    const startAutoScroll = () => {
+      intervalId = window.setInterval(() => {
         emblaApi.scrollNext();
-      }
-    }, 5000); // Longer interval for smoother performance
+      }, 4500);
+    };
+
+    const stopAutoScroll = () => {
+      clearInterval(intervalId);
+    };
+
+    startAutoScroll();
+
+    // Event listeners to handle user interaction pause states
+    emblaApi.on("pointerDown", stopAutoScroll);
+    emblaApi.on("pointerUp", startAutoScroll);
     
     return () => {
-      clearInterval(autoScrollInterval);
+      stopAutoScroll();
+      if (emblaApi) {
+        emblaApi.off("pointerDown", stopAutoScroll);
+        emblaApi.off("pointerUp", startAutoScroll);
+      }
     };
   }, [emblaApi, isVisible]);
   
