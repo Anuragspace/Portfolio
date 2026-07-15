@@ -61,11 +61,11 @@ In addition to design, Anurag holds a strong technical and cloud architecture ba
 - **Stack**: React, Vite, Tailwind CSS, shadcn/ui
 - **Project URL**: [anuragadarsh.in/projects/csedvit](https://anuragadarsh.in/projects/csedvit)
 
-### 2. Campus Mart
+### 2. UniDeals
 - **Description**: A dedicated peer-to-peer student marketplace for university campuses, facilitating secure trading of academic books, electronics, and daily essentials.
-- **Role**: Product Designer
+- **Role**: Lead Product Designer & UX Researcher
 - **Stack**: React, Vite, Tailwind CSS, Framer Motion
-- **Project URL**: [anuragadarsh.in/projects/campusmart](https://anuragadarsh.in/projects/campusmart)
+- **Project URL**: [anuragadarsh.in/projects/unideals](https://anuragadarsh.in/projects/unideals)
 
 ### 3. CabSync
 - **Description**: A real-time university cab-sharing and ride-pooling platform designed to coordinate student travels, reducing logistics costs and coordinating peer transit.

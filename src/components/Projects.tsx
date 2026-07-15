@@ -140,13 +140,13 @@ const Projects = () => {
       link: "https://www.csedvit.com/",
     },
     {
-      id: "campusmart",
-      title: "Campus Mart – Your College Marketplace",
+      id: "unideals",
+      title: "UniDeals – Your College Marketplace",
       year: "2025",
-      description: "Discover a trusted marketplace built for students. Buy, sell, or exchange books, electronics, essentials, and more—all within your campus community. Easy to use, safe to connect, made for you.",
+      description: "A student-centric peer-to-peer marketplace designed to simplify campus trading, textbook exchanges, and student deals through an intuitive, minimal interface.",
       image: "/images/campusm.webp",
       tags: ["Product Design", "User Flow", "UI/UX"],
-      link: "#",
+      link: "/projects/unideals",
     },
     {
       id: "cabsync",

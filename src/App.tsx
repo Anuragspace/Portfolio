@@ -7,6 +7,7 @@ import { useEffect, lazy, Suspense } from 'react';
 import SmoothScroll from './components/SmoothScroll';
 
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
+const UniDeals = lazy(() => import('./pages/projects/UniDeals'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 // Move useLocation and logPageView into a separate component
@@ -30,6 +31,7 @@ function App() {
               <Suspense fallback={<div className="h-screen w-screen flex items-center justify-center bg-white text-gray-400">Loading...</div>}>
                 <Routes>
                   <Route path="/" element={<Index />} />
+                  <Route path="/projects/unideals" element={<UniDeals />} />
                   <Route path="/projects/:id" element={<ProjectDetail />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
