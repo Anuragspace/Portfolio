@@ -8,6 +8,7 @@ import SmoothScroll from './components/SmoothScroll';
 
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
 const UniDeals = lazy(() => import('./pages/projects/UniDeals'));
+const Nexfellow = lazy(() => import('./pages/projects/Nexfellow'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 function ScrollToTop() {
@@ -44,6 +45,7 @@ function App() {
                 <Routes>
                   <Route path="/" element={<Index />} />
                   <Route path="/projects/unideals" element={<UniDeals />} />
+                  <Route path="/projects/nexfellow" element={<Nexfellow />} />
                   <Route path="/projects/:id" element={<ProjectDetail />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>

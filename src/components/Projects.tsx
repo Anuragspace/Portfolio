@@ -79,7 +79,7 @@ const ProjectCard = memo(({ project, index }: { project: Project; index: number 
               </div>
             </div>
             
-            {index === 0 || index === 2 ? (
+            {index % 2 === 0 ? (
               <div className="relative w-fit">
                 <RainbowButton className="mt-5 scale-90 origin-left">
                   <Link to={`/projects/${project.id}`} className="flex items-center justify-center text-sm w-32">
@@ -149,13 +149,13 @@ const Projects = () => {
       link: "/projects/unideals",
     },
     {
-      id: "cabsync",
-      title: "CabSync – Ride Together",
+      id: "nexfellow",
+      title: "Nexfellow – Student Growth & Verification Platform",
       year: "2025",
-      description: "Easily find and share cabs with fellow students heading to the same destination. Save money, travel safely, and reduce your carbon footprint—all in one tap.",
-      image: "/images/cabm.webp",
-      tags: ["App UI/UX", "UI Design", "Prototyping"],
-      link: "#",
+      description: "Designed intuitive user flows, verification systems, gamified quiz templates, and administration dashboards as a UI/UX Design Intern to optimize student engagement.",
+      image: "/images/nexfellow/admin panel_nf8.png",
+      tags: ["UI/UX Design", "User Flow", "Product Intern"],
+      link: "/projects/nexfellow",
     },
     {
       id: "imaginum",
@@ -164,6 +164,15 @@ const Projects = () => {
       description: "Portfolio-driven website for a tech-forward creative studio, built to highlight services, showcase work, and deliver a bold, engaging experience aligned with the studio’s vision and design philosophy.",
       image: "/images/imagim.webp",
       tags: ["UI/UX", "User Centric", "Saas WebDesign"],
+      link: "#",
+    },
+    {
+      id: "cabsync",
+      title: "CabSync – Ride Together",
+      year: "2025",
+      description: "Easily find and share cabs with fellow students heading to the same destination. Save money, travel safely, and reduce your carbon footprint—all in one tap.",
+      image: "/images/cabm.webp",
+      tags: ["App UI/UX", "UI Design", "Prototyping"],
       link: "#",
     },
   ];
