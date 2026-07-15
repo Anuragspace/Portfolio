@@ -62,15 +62,15 @@ const Index = () => {
           <Element name="about"><About /></Element>
         </div>
 
-        <div id="skills" className="scroll-mt-16">
-          <Suspense fallback={<div className="min-h-[600px] animate-pulse bg-gray-50 flex items-center justify-center text-gray-400">Loading skills...</div>}>
-            <Element name="skills"><Skills /></Element>
-          </Suspense>
-        </div>
-
         <div id="projects" className="scroll-mt-16">
           <Suspense fallback={<div className="min-h-[800px] animate-pulse bg-gray-50 flex items-center justify-center text-gray-400">Loading projects...</div>}>
             <Element name="projects"><Projects /></Element>
+          </Suspense>
+        </div>
+
+        <div id="skills" className="scroll-mt-16">
+          <Suspense fallback={<div className="min-h-[600px] animate-pulse bg-gray-50 flex items-center justify-center text-gray-400">Loading skills...</div>}>
+            <Element name="skills"><Skills /></Element>
           </Suspense>
         </div>
 
