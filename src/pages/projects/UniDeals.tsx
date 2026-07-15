@@ -10,6 +10,7 @@ import { OptimizedImage } from "@/components/OptimizedImage";
 const UniDeals = () => {
   const [activeImage, setActiveImage] = useState<string | null>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [zoomLevel, setZoomLevel] = useState(1);
 
   const metadata = {
     title: "UniDeals",
@@ -90,6 +91,7 @@ const UniDeals = () => {
       if (window.lenis) {
         window.lenis.start();
       }
+      setZoomLevel(1); // Reset zoom level when modal is closed
     }
     return () => {
       document.body.style.overflow = "";
@@ -555,34 +557,74 @@ const UniDeals = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/95 z-50 overflow-auto no-scrollbar p-4 md:p-8 cursor-zoom-out"
               onClick={() => setActiveImage(null)}
-              className="fixed inset-0 bg-black/95 z-50 overflow-y-auto no-scrollbar cursor-zoom-out p-4 md:p-8 flex justify-center items-start"
             >
-              {/* Close Button (Fixed so it stays floating) */}
-              <button 
-                onClick={() => setActiveImage(null)}
-                className="fixed top-6 right-6 text-white/70 hover:text-white transition-colors p-2.5 bg-white/20 backdrop-blur-sm rounded-full hover:scale-110 duration-200 z-50 cursor-pointer"
-                aria-label="Close image zoom"
-              >
-                <X size={20} />
-              </button>
+              {/* Floating Header Actions (Fixed at the top right) */}
+              <div className="fixed top-6 right-6 flex items-center gap-3 z-50">
+                {/* Floating Zoom Magnification Pill */}
+                <div 
+                  className="flex items-center bg-white/10 backdrop-blur-md border border-white/10 rounded-full px-3 py-1.5 text-white text-xs font-semibold select-none gap-2"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <button 
+                    onClick={() => setZoomLevel(prev => Math.max(1, prev - 1))}
+                    disabled={zoomLevel === 1}
+                    className="p-1 hover:bg-white/10 rounded disabled:opacity-30 disabled:hover:bg-transparent cursor-pointer font-bold text-sm w-5 h-5 flex items-center justify-center transition-colors"
+                  >
+                    -
+                  </button>
+                  <span className="min-w-[20px] text-center">{zoomLevel}x</span>
+                  <button 
+                    onClick={() => setZoomLevel(prev => Math.min(3, prev + 1))}
+                    disabled={zoomLevel === 3}
+                    className="p-1 hover:bg-white/10 rounded disabled:opacity-30 disabled:hover:bg-transparent cursor-pointer font-bold text-sm w-5 h-5 flex items-center justify-center transition-colors"
+                  >
+                    +
+                  </button>
+                </div>
+
+                {/* Close Button */}
+                <button 
+                  onClick={() => setActiveImage(null)}
+                  className="text-white/70 hover:text-white transition-all p-2.5 bg-white/10 backdrop-blur-md border border-white/10 rounded-full hover:scale-110 duration-200 cursor-pointer"
+                  aria-label="Close image zoom"
+                >
+                  <X size={20} />
+                </button>
+              </div>
               
-              {/* Scrollable Container wrapper */}
-              <motion.div
-                initial={{ scale: 0.95, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.95, opacity: 0 }}
-                transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                className="relative w-full max-w-4xl my-auto py-8"
-                onClick={(e) => e.stopPropagation()} // Prevent modal close when clicking inside this area
+              {/* Zoom Content wrapper (allows standard vertical and horizontal scroll contexts) */}
+              <div
+                className="min-h-full flex items-center justify-center py-10"
+                onClick={() => setActiveImage(null)} // Click outside to close
               >
-                <img
-                  src={activeImage}
-                  alt="Zoomed product case study mockup screen"
-                  className="w-full h-auto object-contain rounded-xl select-none shadow-2xl border border-white/5 mx-auto cursor-zoom-out"
-                  onClick={() => setActiveImage(null)} // Click image to close it too
-                />
-              </motion.div>
+                <motion.div
+                  initial={{ scale: 0.95, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.95, opacity: 0 }}
+                  transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                  className="relative transition-all duration-300 ease-out"
+                  style={{
+                    width: zoomLevel === 1 ? "100%" : zoomLevel === 2 ? "180%" : "260%",
+                    maxWidth: zoomLevel === 1 ? "896px" : "none", // 896px = max-w-4xl
+                  }}
+                  onClick={(e) => {
+                    e.stopPropagation(); // Prevent close on clicking the image container
+                    // Toggle zoom on click between 1x and 2x
+                    setZoomLevel(prev => prev === 1 ? 2 : 1);
+                  }}
+                >
+                  <img
+                    src={activeImage}
+                    alt="Zoomed product mockup"
+                    className="w-full h-auto rounded-xl select-none shadow-2xl border border-white/5 mx-auto transition-all duration-300"
+                    style={{
+                      cursor: zoomLevel === 1 ? "zoom-in" : "zoom-out"
+                    }}
+                  />
+                </motion.div>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
