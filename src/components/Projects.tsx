@@ -144,7 +144,7 @@ const Projects = () => {
       title: "UniDeals – Your College Marketplace",
       year: "2025",
       description: "A student-centric peer-to-peer marketplace designed to simplify campus trading, textbook exchanges, and student deals through an intuitive, minimal interface.",
-      image: "/images/campusm.webp",
+      image: "/images/unideals/banner.png",
       tags: ["Product Design", "User Flow", "UI/UX"],
       link: "/projects/unideals",
     },

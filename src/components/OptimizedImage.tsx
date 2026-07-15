@@ -6,6 +6,7 @@ interface OptimizedImageProps {
   src: string;
   alt: string;
   className?: string;
+  imgClassName?: string;
   width?: number;
   height?: number;
 }
@@ -14,6 +15,7 @@ export const OptimizedImage = memo(({
   src, 
   alt, 
   className,
+  imgClassName,
   width,
   height
 }: OptimizedImageProps) => {
@@ -56,6 +58,7 @@ export const OptimizedImage = memo(({
           alt={alt}
           className={cn(
             "w-full h-full object-cover transition-opacity duration-300 gpu-accelerated will-change-opacity",
+            imgClassName,
             isLoaded ? "opacity-100" : "opacity-0"
           )}
           loading="lazy"

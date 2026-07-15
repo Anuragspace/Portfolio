@@ -10,6 +10,17 @@ const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
 const UniDeals = lazy(() => import('./pages/projects/UniDeals'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    if (window.lenis) {
+      window.lenis.scrollTo(0, { immediate: true });
+    }
+  }, [pathname]);
+  return null;
+}
+
 // Move useLocation and logPageView into a separate component
 function AnalyticsListener() {
   const location = useLocation();
@@ -25,6 +36,7 @@ function App() {
       <SmoothScroll />
       <ThemeProvider attribute="class" defaultTheme="light">
         <Router>
+          <ScrollToTop />
           <AnalyticsListener />
           <div className="flex flex-col min-h-screen">
             <main className="flex-grow">
