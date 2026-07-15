@@ -17,9 +17,9 @@ const UniDeals = () => {
     description: "A clean and trusted student ecosystem designed to exchange books, electronics, and daily essentials within university borders.",
     year: "2025",
     image: "/images/unideals/banner.png", // Full homepage banner for hero
-    liveUrl: "https://campus-mart-five.vercel.app/",
-    duration: "3 Months",
-    designer: "Anurag Adarsh (Lead Product Designer & UX Researcher)",
+    liveUrl: "https://unideals.in/",
+    duration: "4-6 Months",
+    designer: "Anurag Adarsh (Product Design Lead)",
     devTeam: "Sarthak & Kamal (Full Stack Developers)",
     category: "P2P Marketplace Web-App",
     tools: "Figma, React, Tailwind CSS"
@@ -556,30 +556,31 @@ const UniDeals = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setActiveImage(null)}
-              className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center backdrop-blur-md cursor-zoom-out p-4"
+              className="fixed inset-0 bg-black/95 z-50 overflow-y-auto no-scrollbar cursor-zoom-out p-4 md:p-8 flex justify-center items-start"
             >
-              {/* Close Button */}
+              {/* Close Button (Fixed so it stays floating) */}
               <button 
                 onClick={() => setActiveImage(null)}
-                className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors p-2.5 bg-white/20 rounded-full hover:scale-110 duration-200 z-50 cursor-pointer"
+                className="fixed top-6 right-6 text-white/70 hover:text-white transition-colors p-2.5 bg-white/20 backdrop-blur-sm rounded-full hover:scale-110 duration-200 z-50 cursor-pointer"
                 aria-label="Close image zoom"
               >
                 <X size={20} />
               </button>
               
-              {/* Scrollable Container (no scrollbars, locked viewport scroll) */}
+              {/* Scrollable Container wrapper */}
               <motion.div
                 initial={{ scale: 0.95, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.95, opacity: 0 }}
                 transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                className="relative w-full max-w-4xl max-h-[85vh] overflow-y-auto rounded-2xl p-2 bg-neutral-900/40 no-scrollbar"
-                onClick={(e) => e.stopPropagation()} // Prevent modal close when clicking inside the wrapper
+                className="relative w-full max-w-4xl my-auto py-8"
+                onClick={(e) => e.stopPropagation()} // Prevent modal close when clicking inside this area
               >
                 <img
                   src={activeImage}
                   alt="Zoomed product case study mockup screen"
-                  className="w-full h-auto object-contain rounded-xl select-none shadow-2xl border border-white/5"
+                  className="w-full h-auto object-contain rounded-xl select-none shadow-2xl border border-white/5 mx-auto cursor-zoom-out"
+                  onClick={() => setActiveImage(null)} // Click image to close it too
                 />
               </motion.div>
             </motion.div>
